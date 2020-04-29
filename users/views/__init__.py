@@ -1,2 +1,3 @@
 
-from .users import LoginView
+from .users import LoginUserView
+from .profiles import ProfileUserView

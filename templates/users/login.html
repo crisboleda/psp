@@ -8,7 +8,7 @@
         <div class="alert alert-danger">Username or email not match with password</div>
     {% endif %}
 
-    <form method="POST" class="mt-5" action="{% url "users:login_user" %}">
+    <form method="POST" class="mt-5" action="{% url "users:login" %}">
         {% csrf_token %}
 
         <div class="form-group">
