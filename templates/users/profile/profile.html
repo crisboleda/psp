@@ -1,0 +1,107 @@
+
+{% extends 'base/dashboard.html' %}
+
+{% block 'title' %}PSP | @{{ profile_user.username }}{% endblock %}
+
+{% block 'links' %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock %}
+
+{% block 'content' %}
+
+    <div class="row au-card m-1">
+        <div class="col-xl-3 col-md-3 col-sm-6 col-lg-6 text-center">
+            {% load static %}
+            <img src="{% static 'img/avatar_profile.png' %}" height="200" width="200" alt="Image of {{ profile_user.username }}">
+            <br/>
+            <div class="mt-3 mb-3">
+                <b class="text-success border border-success p-2 rounded">
+                    {% if profile_user.get_profile.type_user == 'director' %}
+                        <i class="fas fa-map-signs"></i>
+                    {% else %}
+                        <i class="fa fa-laptop" aria-hidden="true"></i>
+                    {% endif %}
+                    {{ profile_user.get_profile.type_user.upper }}
+                </b>
+            </div>
+        </div>
+        <div class="col-xl-9">
+            {{ form.errors }}
+            <form class="row" method="POST">
+
+                {% csrf_token %}
+
+                <div class="form-group col-xl-6">
+                    <label for="usernameInput">Nombre de usuario</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">@</div>
+                        </div>
+                        {{ form.username }}
+                    </div>
+                </div>
+                <div class="form-group col-xl-6">
+                    <label for="firstNameInput">Genero</label>
+                    <input disabled type="text" name="genere" value="{{ profile_user.last_name }}" class="form-control input-profile" id="firstNameInput" placeholder="Genero no actializado">
+                </div>
+                <div class="form-group col-xl-6">
+                    <label for="lastNameInput">Nombre</label>
+                    <input disabled type="text" name="first_name" value="{{ profile_user.first_name }}" class="form-control input-profile" id="lastNameInput" placeholder="Nombre no actualizado">
+                </div>
+                <div class="form-group col-xl-6">
+                    <label for="firstNameInput">Apellido</label>
+                    <input disabled type="text" name="last_name" value="{{ profile_user.last_name }}" class="form-control input-profile" id="firstNameInput" placeholder="Apellido no actializado">
+                </div>
+                <div class="form-group col-xl-6">
+                    <label for="firstNameInput">Email</label>
+                    {{ form.email }}
+                </div>
+                <div class="text-right col-xl-6">
+                    <br/>
+                    {% if profile_user == request.user %}
+                        <button type="button" class="btn btn-primary mt-2" id="btnEditProfile">Editar</button>
+                        <button class="btn btn-success mt-2 d-none" id="btnSaveProfile">Guardar</button>
+                        <button type="button" class="btn btn-danger mt-2 d-none" id="btnCancelProfile">Cancelar</button>
+                    {% endif %}
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-lg-5 p-3">
+            <div class="au-card">
+                <div class="row">
+                    <div class="col">
+                        <h3 class="float-left">Experencia en lenguajes</h3>
+                        {% if profile_user == request.user %}
+                            <i class="fas fa-plus-square h3 text-primary float-right"></i>
+                        {% endif %}
+                    </div>
+                </div>
+                <br/>
+                <br/>
+                <div class="row">
+                    {% for language in languages %}
+                        <div class="col-xl-4 col-md-4 col-sm-6 col-lg-6 text-center {% if request.user == profile_user %}delete-language{% endif %}">
+                            <img src="{{ language.picture.url }}" alt="Img {{ language.name }}" height="55" width="55">
+                            <p class="h5">{{ language.name }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-7 p-3">
+            <div class="au-card">
+                <h3>Experencia total</h3>
+            </div>
+        </div>
+    </div>
+
+    {% block 'scripts' %}
+        {% load static %}
+        <script src="{% static 'js/formProfile.js' %}"></script>
+    {% endblock %}
+
+{% endblock %}

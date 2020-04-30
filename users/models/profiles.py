@@ -1,6 +1,8 @@
 
 # Django
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 # Models
 from django.contrib.auth.models import User
@@ -8,7 +10,7 @@ from programs.models import ProgrammingLanguage
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='get_profile')
 
     picture = models.ImageField(
         upload_to='users/profile/', 
