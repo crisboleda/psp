@@ -9,7 +9,7 @@ class Project{
 class UI{
 
 
-    //Añadir nuevo proyecto
+
     addProject(project){
          const projectList = document.getElementById('project-list')
          const element = document.createElement('div');
@@ -25,7 +25,7 @@ class UI{
          `;
          projectList.appendChild(element);
          
-//resetear formulario
+
     
     }
     resetForm(){
@@ -34,7 +34,7 @@ class UI{
 
 
 
-//eliminar proyecto
+
 
     deleteProject(element){
         if(element.name === 'delete'){
@@ -46,7 +46,7 @@ class UI{
 
 
 
-//mostrar mensajes
+
 
     showMessage(message,cssClass){
         const div = document.createElement('div');
@@ -60,7 +60,7 @@ class UI{
         container.insertBefore(div, project);
         setTimeout(function(){
             document.querySelector('.alert').remove();
-        },2000);
+        },3000);
     }
 }
 
@@ -76,7 +76,7 @@ document.getElementById('project-form').addEventListener('submit', function(e){
     const project = new Project(name,languaje,manager)
     const ui = new UI();
 
-    if (name === '' || languaje === '' || mager === ''){
+    if (name === '' || languaje === '' || manager === ''){
         return ui.showMessage('!Error! Complete Fields Please','danger')
     }
     ui.addProject(project);
