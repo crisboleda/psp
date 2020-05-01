@@ -14,5 +14,7 @@ urlpatterns = [
     path('dashboard/', DashboardView.as_view(), name='dashboard'),
     # URL APP users
     path('users/', include(('users.urls', 'users'), namespace='users'))
+    
+    
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
