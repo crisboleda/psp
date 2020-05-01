@@ -25,7 +25,7 @@ class UserProfileView(FormView):
     template_name = 'users/profile/profile.html'
 
     def form_valid(self, form):
-        form.save(self.request.user)
+        self.user = form.save(self.request.user)
 
         return super().form_valid(form)
 
@@ -40,9 +40,9 @@ class UserProfileView(FormView):
 
         return initial
 
+
     def get_success_url(self):
-        user = User.objects.get(username=self.kwargs['slug'])
-        return reverse_lazy('users:profile_user', kwargs={'slug': self.request.user.username})
+        return reverse_lazy('users:profile_user', kwargs={'slug': self.user.username})
 
 
     def get_context_data(self, **kwargs):

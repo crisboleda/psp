@@ -1,0 +1,60 @@
+
+{% extends 'base/dashboard.html' %}
+
+{% block 'title' %}PSP | Proyectos{% endblock %}
+
+{% block 'links' %}{% endblock %}
+
+
+{% block 'content' %}
+    <div class="row">
+        <div class="col-xl-6 p-3">
+            <div class="au-card">
+                <label for="inputName"><b>Nombre del proyecto</b></label>
+                <input type="text" value="Veterinaria de personas" disabled class="form-control">
+                <br/>
+                <label for="inputDescription"><b>Descripción</b></label>
+                <textarea disabled id="" rows="3" class="form-control w-100" resize="false" style="resize: none;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam consequuntur laboriosam perferendis. Blanditiis sit dolore, magnam repudiandae cumque maxime ducimus unde autem deserunt aspernatur cupiditate dolorem nulla nostrum qui adipisci.</textarea>
+                <br/>
+                <div class="row">
+                    <div class="row col-xl-4">
+                        {% load static %}
+                        <img src="{% static 'img/avatar_profile.png' %}" class="ml-3" alt="" height="20" width="50">
+                        <div class="ml-2">
+                            <p><i>Project Manager</i></p>
+                            <a href="{% url 'users:profile_user' request.user.username %}">@Cristhian</a>
+                        </div>
+                    </div>
+                    <div class="col-xl-5">
+                        <table>
+                            <tr>
+                                <td class="pr-3"><b>Fecha inicio</b></td>
+                                <td>12 de agosto 2020</td>
+                            </tr>
+                            <tr>
+                                <td class="pr-3"><b>Fecha fin</b></td>
+                                <td>34 de agosto 2021</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="text-right">
+                            <button class="btn btn-primary mt-2" title="Edit project"><i class="fas fa-edit"></i></button>
+                            <button class="btn btn-dark mt-2" title="Ver modulos"><i class="fas fa-boxes"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6 p-3">
+            <div class="au-card">
+            
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block 'scripts' %}
+
+{% endblock %}

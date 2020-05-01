@@ -51,6 +51,8 @@ class UserUpdateForm(forms.ModelForm):
         user.last_name = data['last_name']
 
         user.save()
+
+        return user
         
 
     
