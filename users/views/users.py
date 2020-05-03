@@ -3,6 +3,7 @@
 from django.views.generic import ListView, FormView
 from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy, reverse
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Models
 from django.contrib.auth.models import User
@@ -19,7 +20,7 @@ class LoginUserView(LoginView):
 
 
 # View User data Updata
-class UserProfileView(FormView):
+class UserProfileView(LoginRequiredMixin, FormView):
     model = User
     form_class = UserUpdateForm
     template_name = 'users/profile/profile.html'
@@ -40,14 +41,17 @@ class UserProfileView(FormView):
 
         return initial
 
-
     def get_success_url(self):
         return reverse_lazy('users:profile_user', kwargs={'slug': self.user.username})
 
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
-        data['profile_user'] = User.objects.get(username=self.kwargs['slug'])
+        user = User.objects.get(username=self.kwargs['slug'])
+        
+        data['profile_user'] = user
+        data['generes'] = ['masculino', 'femenino', 'indefinido']
         data['languages'] = ProgrammingLanguage.objects.all()
+        data['profile_languages'] = user.get_profile.experience_languages.all()
 
         return data

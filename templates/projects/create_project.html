@@ -1,0 +1,36 @@
+
+{% extends 'base/dashboard.html' %}
+
+{% block 'title' %}PSP | Create Project{% endblock %}
+
+{% block 'content' %}
+    <div class="">
+        <div id="Project">
+            <div class="au-card">
+                <div class="card-header ml-3 mr-3">
+                    <h4>Crear un nuevo proyecto</h4>
+                </div>
+                <form id ="project-form" action="{% url 'projects:create_project' %}" method="post" class="card-body">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        {{ form.name }}
+                    </div>
+                    <div class="form-group">
+                        <textarea name="description" placeholder="Descripción" class="form-control w-100" rows="5" style="resize: none;"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputDate">Fecha de entrega</label>
+                        <input type="date" name="planning_date" id="" class="form-control datepicker" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
+                    </div>
+                    <input type="submit" value="Crear" class="btn btn-primary btn-block">
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block 'scripts' %}
+    <script src="../../static/js/create_project.js"></script>
+
+    
+{% endblock %}

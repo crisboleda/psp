@@ -34,8 +34,11 @@
 
 </head>
 <body>
+    {% if profile_user %}
+        {% include 'users/profile/modal_img_profile.html' %}
+        {% include 'users/profile/modal_languages.html' %}
+    {% endif %}
     <div class="page-wrapper">
-
         {% include 'menus/menu_mobile.html' %}
 
         {% include 'menus/menu_desktop.html' %}

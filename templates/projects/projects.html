@@ -3,7 +3,10 @@
 
 {% block 'title' %}PSP | Proyectos{% endblock %}
 
-{% block 'links' %}{% endblock %}
+{% block 'links' %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/projects.css' %}">
+{% endblock %}
 
 
 {% block 'content' %}
@@ -46,12 +49,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-xl-6 p-3">
-            <div class="au-card">
-            
-            </div>
-        </div>
     </div>
+    <a href="{% url 'projects:create_project' %}" class="btn-flotante" title="Crear proyecto"><i class="fas fa-plus"></i></a>
 {% endblock %}
 
 

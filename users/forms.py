@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 class UserUpdateForm(forms.ModelForm):
 
     genere = forms.CharField(max_length=12)
-    username = forms.CharField(max_length=10, min_length=4, widget=forms.TextInput(
+    username = forms.CharField(max_length=20, min_length=4, widget=forms.TextInput(
         attrs= {
             'class': 'form-control input-profile',
             'id': 'usernameInput',
@@ -44,13 +44,17 @@ class UserUpdateForm(forms.ModelForm):
 
     def save(self, user):
         data = self.cleaned_data
+        profile = user.get_profile
 
         user.username = data['username']
         user.email = data['email']
         user.first_name = data['first_name']
         user.last_name = data['last_name']
 
+        profile.genere = data['genere']
+
         user.save()
+        profile.save()
 
         return user
         

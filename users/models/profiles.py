@@ -12,6 +12,15 @@ from programs.models import ProgrammingLanguage
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='get_profile')
 
+    custom_choices_generes = (('masculino', 'Masculino'), ('femenino', 'Femenino'), ('indefinido', 'Indefinido'))
+
+    genere = models.CharField(
+        max_length=20,
+        choices=custom_choices_generes,
+        help_text='Genere of user',
+        default='indefinido'
+    )
+
     picture = models.ImageField(
         upload_to='users/profile/', 
         help_text="User profile picture", 
@@ -19,9 +28,9 @@ class Profile(models.Model):
         blank=True
     )
 
-    custom_choices_type_user = (('programmer', 'Programmer'), ('director', 'Director'))
+    custom_choices_type_user = (('programmer', 'Programmer'), ('administrador', 'Administrador'))
     type_user = models.CharField(
-        max_length=11, 
+        max_length=15, 
         choices=custom_choices_type_user, 
         help_text='User rank', 
         default='programmer'

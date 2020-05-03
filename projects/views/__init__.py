@@ -1,1 +1,1 @@
-from .projects import ListProjectView
+from .projects import ListProjectView, CreateProjectView
