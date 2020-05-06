@@ -4,6 +4,7 @@ from django.urls import reverse, reverse_lazy
 from django.http.response import Http404
 
 
+# Verifica si el usuario está autenticado y que además sea admin
 class AdminRequiredMixin:
 
     def dispatch(self, request, *args, **kwargs):

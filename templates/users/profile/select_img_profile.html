@@ -1,0 +1,14 @@
+{% load static %}
+{% if not request.user.get_profile.picture %}
+    {% with genere=request.user.get_profile.genere %}
+        {% if genere == 'masculino' %}
+            <img src="{% static 'img/avatar_profile.png' %}">
+        {% elif genere == 'femenino' %}
+            <img src="{% static 'img/avatar_profile_woman.png' %}">
+        {% else %}
+            <img src="{% static 'img/avatar_profile_indefinido.png' %}">
+        {% endif %}
+    {% endwith %}
+{% else %}
+    <img src="{{ request.user.get_profile.picture.url }}" class="rounded-circle h-100 w-100" width="45" alt="Image {{ request.user.username }}" />
+{% endif %}

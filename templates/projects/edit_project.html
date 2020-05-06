@@ -1,0 +1,96 @@
+
+{% extends 'base/dashboard.html' %}
+
+{% block 'title' %}PSP | Editar Proyecto{% endblock %}
+
+{% block 'links' %}{% endblock %}
+
+
+{% block 'content' %}
+    <div class="row">
+        <div class="col-xl-8 p-3">
+            <div class="au-card">
+                <div class="card-header">
+                    Editar Proyecto
+                </div>
+                <br/>
+                <div>
+                    {% if form.errors %}
+                        {{ form.errors }}
+                    {% endif %}
+                    <form method="post">{% csrf_token %}
+                        <div class="form-group">
+                            <label for="id_nombre">Nombre</label>
+                            {{ form.name }}
+                        </div>
+                        <div class="form-group">
+                            <label for="id_description">Descripción</label>
+                            {{ form.description }}
+                        </div>
+                        <div class="form-group">
+                            <label for="id_status">Estado</label>
+                            {{ form.status }}
+                        </div>
+                        <div class="form-group">
+                            <label for="id_planning_date">Fecha de entrega</label>
+                            <input type="date" name="planning_date" class="form-control" value="{{ project.planning_date|date:"yy-m-d" }}">
+                        </div>
+                        <br/>
+                        <button type="submit" class="btn btn-block btn-success">Actualizar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4 p-3">
+            <div class="au-card">
+                <div class="card-header">
+                    Programadores
+                </div>
+                <br/>
+                {% if not project.users.all %}
+                    <p class="text-center">No hay programadores en este proyecto</p>
+                {% else %}
+                    <table class="table table-striped table-hover text-center rounded-lg">
+                        <thead class="thead-dark text-center">
+                            <th>Username</th>
+                            <th>Acciones</th>
+                        </thead>
+                        
+                        <tbody>
+                            {% for programmer in project.users.all %}
+                                <tr>
+                                    <td><a href="{% url 'users:profile_user' request.user.username %}">@{{ programmer.username }}</a></td>
+                                    <td>
+                                        <a href="{% url 'projects:remove_programmer_to_project' project.pk programmer.username %}" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% endif %}
+            </div>
+            <br/>
+            <div class="au-card">
+                <div class="card-header">
+                    Agregar programador
+                </div>
+                <br/>
+                <form action="{% url 'projects:add_programmer_to_project' project.pk %}" method="post">
+                    {% csrf_token %}
+                    <select class="form-control" name="username_programmer">
+                        <option value="---">---</option>
+                        {% for programmer in programmers %}
+                            <option value="{{ programmer.username }}">{{ programmer.username }}</option>
+                        {% endfor %}
+                    </select>
+                    <br/>
+                    <input type="submit" value="Agregar" class="btn btn-dark float-right">
+                </form>
+            </div>
+        </div>
+        
+    </div>
+{% endblock %}
+
+
+{% block 'scripts' %}{% endblock %}

@@ -153,6 +153,7 @@ label{
     width: 200px;
     border-radius: 50%;
     cursor: pointer;
+    transition-duration: 3s;
 }
 
 .custom-img-profile {

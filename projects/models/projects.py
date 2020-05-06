@@ -5,17 +5,18 @@ from django.db import models
 # Models
 from django.contrib.auth.models import User
 
+# Estados que puede tener un proyecto
+from projects.utils import CHOICES_STATUS_PROJECT
+
 
 class Project(models.Model):
     name = models.CharField(max_length=100, help_text='Project name')
     description = models.CharField(max_length=250)
-    
-    choices_status_project = (('on_process', 'En progreso'), ('canceled', 'Cancelado'), ('paused', 'Pausado'), ('finished', 'Finalizado'))
 
     status = models.CharField(
         max_length=15,
-        choices=choices_status_project,
-        default='on_process',
+        choices=CHOICES_STATUS_PROJECT,
+        default='En proceso',
         help_text='This atributte allows to save the project status'
     )
     

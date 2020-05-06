@@ -27,3 +27,34 @@
 		right: 20px;
 	}
 } 
+
+
+.table-earning thead th {
+    background: #333;
+    font-size: 16px;
+    color: #fff;
+    vertical-align: middle;
+    font-weight: 400;
+    text-transform: capitalize;
+    line-height: 1;
+    padding: 22px 40px;
+}
+
+.table-earning thead th.text-right {
+    padding-left: 15px;
+    padding-right: 65px;
+}
+
+.table-earning tbody td {
+    color: #808080;
+    padding: 12px 40px;
+}
+
+.table-earning tbody tr:hover td {
+    color: #555;
+    cursor: pointer;
+}
+
+.td-actions {
+	flex-wrap: nowrap;
+}
