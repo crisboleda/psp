@@ -51,16 +51,23 @@
     </div>
     <div class="au-card col-xl-2">
         <h4>Programadores</h4>
-        <div class="row ml-1 mt-3">
-            {% load static %}
-            <img src="{% static 'img/avatar_profile.png' %}" height="45" width="45" alt="">
-            <p class="ml-2 mt-3"><a href="">@bycristhian</a></p>
-        </div>
-        <div class="row ml-1 mt-3">
-            {% load static %}
-            <img src="{% static 'img/avatar_profile.png' %}" height="45" width="45" alt="">
-            <p class="ml-2 mt-3"><a href="">@BillGates</a></p>
-        </div>
+        {% for programmer in project.users.all %}
+            <div class="row ml-1 mt-3">
+                {% if not programmer.get_profile.picture %}
+                    {% load static %}
+                    {% if programmer.get_profile.type_user == 'masculino' %}
+                        <img src="{% static 'img/avatar_profile.png' %}" height="45" width="45" alt="">
+                    {% elif programmer.get_profile.type_user == 'femenino' %}
+                        <img src="{% static 'img/avatar_profile_woman.png' %}" height="45" width="45" alt="">
+                    {% else %}
+                        <img src="{% static 'img/avatar_profile_indefinido.png' %}" height="45" width="45" alt="">
+                    {% endif %}
+                {% else %}
+                    <img src="{{ programmer.get_profile.picture.url }}" height="45" width="45" alt="">
+                {% endif %}
+                <p class="ml-2 mt-3"><a href="{% url 'users:profile_user' programmer.username %}">@{{ programmer.username }}</a></p>
+            </div>
+        {% endfor %}
     </div>
 {% endblock %}
 

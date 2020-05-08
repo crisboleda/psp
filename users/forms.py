@@ -35,6 +35,7 @@ class UserUpdateForm(forms.ModelForm):
                 raise forms.ValidationError('The username already exists')
         return username
 
+
     def clean_email(self):
         email = self.cleaned_data['email']
         if 'email' in self.changed_data:

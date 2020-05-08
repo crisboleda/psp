@@ -1,0 +1,59 @@
+
+{% extends 'base/dashboard.html' %}
+
+{% block 'title' %}PSP | Módulos{% endblock %}
+
+{% block 'links' %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/projects.css' %}">
+{% endblock %}
+
+{% block 'content' %}
+    <div>
+        <h2>Módulos</h2>
+        <br/>
+        {% if not modules %}
+            <p>No hay módulos en este proyecto todavía</p>
+        {% else %}
+            <div class="table-responsive">
+                <table class="table table-borderless table-striped table-earning">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Descripción</th>
+                            <th>Fecha inicio</th>
+                            <th>Fecha entrega</th>
+                            <th>Fecha fin</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for module in modules %}
+                            <tr>
+                                <td>{{ module.name }}</td>
+                                <td>{{ module.description }}</td>
+                                <td>{{ module.start_date|date }}</td>
+                                <td>{{ module.planning_date|date }}</td>
+                                <td>{{ module.finish_date|date }}</td>
+                                <td class="row td-actions">
+                                    {% if request.user.get_profile.type_user == 'administrador' %}
+                                        <a href="{% url 'projects:update_module' module.project.pk module.pk %}" class="btn btn-secondary m-1" title="Edit"><i class="fas fa-edit"></i></a>
+                                    {% endif %}
+                                    <a href="" class="btn btn-info m-1" title="Modules"><i class="fas fa-boxes"></i></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endif %}
+    </div>
+    
+    {% if request.user.get_profile.type_user == 'administrador' %}
+        <a href="{% url 'projects:create_module' pk_project %}" class="btn-flotante" title="Crear proyecto"><i class="fas fa-plus"></i></a>
+    {% endif %}
+{% endblock %}
+
+
+{% block 'scripts' %}
+{% endblock %}

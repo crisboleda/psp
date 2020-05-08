@@ -58,3 +58,8 @@
 .td-actions {
 	flex-wrap: nowrap;
 }
+
+.custom-alert {
+	text-align: center;
+	transition-duration: 1s;
+}

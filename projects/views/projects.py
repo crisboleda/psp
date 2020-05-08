@@ -14,13 +14,22 @@ from django.contrib.auth.models import User
 from projects.forms import CreateProjectModelForm, UpdateProjectModelForm, AddProgrammerProjectForm
 
 # Mixins
-from projects.mixins import AdminRequiredMixin
+from projects.mixins import AdminRequiredMixin, MemberProjectRequiredMixin
 
 
 class ListProjectView(ListView, LoginRequiredMixin):
-    queryset = Project.objects.all()
     context_object_name = 'projects'
     template_name = 'projects/projects.html'
+
+    def get_queryset(self):
+        type_user = self.request.user.get_profile.type_user
+
+        if type_user == 'administrador':
+            return Project.objects.all()
+
+        elif type_user == 'programmer':
+            return Project.objects.filter(users__id__exact=self.request.user.pk)
+            
 
 
 class CreateProjectView(AdminRequiredMixin, FormView):
@@ -33,14 +42,16 @@ class CreateProjectView(AdminRequiredMixin, FormView):
         return super().form_valid(form)
 
 
-class DetailProjectView(LoginRequiredMixin, DetailView):
+class DetailProjectView(MemberProjectRequiredMixin, DetailView):
     model = Project
     template_name = 'projects/detail_project.html'
     context_object_name = 'project'
+    pk_url_kwarg = 'pk_project'
 
 
 class UpdateProjectView(AdminRequiredMixin, UpdateView):
     model = Project
+    pk_url_kwarg = 'pk_project'
     form_class = UpdateProjectModelForm
     context_object_name = 'project'
     template_name = 'projects/edit_project.html'
@@ -53,7 +64,8 @@ class UpdateProjectView(AdminRequiredMixin, UpdateView):
         return context
 
 
-class UpdateProgrammerProjectView(AdminRequiredMixin, FormView):
+class AddProgrammerProjectView(AdminRequiredMixin, FormView):
+    form_class = AddProgrammerProjectForm
 
     def form_valid(self, form):
         try:
@@ -65,10 +77,6 @@ class UpdateProgrammerProjectView(AdminRequiredMixin, FormView):
     
     def get_success_url(self):
         return reverse_lazy('projects:edit_project', kwargs={'pk': self.project.pk})
-
-
-class AddProgrammerProjectView(UpdateProgrammerProjectView):
-    form_class = AddProgrammerProjectForm
 
 
 class RemoveProgrammerProjectView(AdminRequiredMixin, RedirectView):

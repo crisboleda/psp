@@ -11,7 +11,15 @@
 
 {% block 'content' %}
     <div>
-        <div class="">
+        <h2>Proyectos</h2>
+        <br/>
+        {% if not projects %}
+            {% if request.user.get_profile.type_user == 'programmer' %}
+                <p>No tienes proyectos asociados a tu cuenta :(</p>
+            {% else %}
+                <p>No se han creado proyectos hasta el momento</p>
+            {% endif %}
+        {% else %}
             <div class="table-responsive">
                 <table class="table table-borderless table-striped table-earning">
                     <thead>
@@ -51,14 +59,14 @@
                                     {% if request.user.get_profile.type_user == 'administrador' %}
                                         <a href="{% url 'projects:edit_project' project.pk %}" class="btn btn-secondary m-1" title="Edit"><i class="fas fa-edit"></i></a>
                                     {% endif %}
-                                    <button class="btn btn-info m-1" title="Modules"><i class="fas fa-boxes"></i></button>
+                                    <a href="{% url 'projects:list_modules' project.pk %}" class="btn btn-info m-1" title="Modules"><i class="fas fa-boxes"></i></a>
                                 </td>
                             </tr>
                         {% endfor %}
                     </tbody>
                 </table>
             </div>
-        </div>
+        {% endif %}
     </div>
     {% if request.user.get_profile.type_user == 'administrador' %}
         <a href="{% url 'projects:create_project' %}" class="btn-flotante" title="Crear proyecto"><i class="fas fa-plus"></i></a>

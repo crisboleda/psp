@@ -4,7 +4,7 @@ from django import forms
 from django.http.response import Http404
 
 # Models
-from projects.models import Project
+from projects.models import Project, Module
 from django.contrib.auth.models import User
 
 # Estados de un proyecto
@@ -79,3 +79,51 @@ class AddProgrammerProjectForm(forms.Form):
             project.users.add(self.programmer)
         else:
             raise Http404("The programmer already belongs to the project")
+
+
+
+class CreateModuleForm(forms.ModelForm):
+
+    class Meta:
+        model = Module
+        fields = ('name', 'description', 'planning_date')
+        widgets = {
+            'name': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Nombre'
+            }),
+            'description': forms.Textarea(attrs={
+                'class': 'form-control w-100',
+                'rows': '5',
+                'style': 'resize: none'
+            })
+        }
+
+    def save(self, project):
+        data = self.cleaned_data
+
+        Module.objects.create(
+            name=data['name'], 
+            description=data['description'],
+            project=project,
+            planning_date=data['planning_date']
+        )
+
+
+class UpdateModuleForm(forms.ModelForm):
+
+
+
+    class Meta:
+        model = Module
+        fields = ('name', 'description', 'planning_date', 'finish_date')
+        widgets = {
+            'name': forms.TextInput(attrs={
+                'class': 'form-control'
+            }),
+            'description': forms.Textarea(attrs={
+                'class': 'form-control w-100',
+                'rows': '5',
+                'style': 'resize: none'
+            })
+        }

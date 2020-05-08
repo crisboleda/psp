@@ -4,7 +4,7 @@ from django.db import models
 
 # Models
 from projects.models import Project
-
+from django.utils.datetime_safe import new_datetime
 
 class Module(models.Model):
     name = models.CharField(max_length=100, help_text='Module name')
@@ -13,7 +13,7 @@ class Module(models.Model):
 
     planning_date = models.DateField()
     start_date = models.DateTimeField(auto_now_add=True)
-    finish_date = models.DateTimeField()
+    finish_date = models.DateTimeField(null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

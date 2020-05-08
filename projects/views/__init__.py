@@ -1,1 +1,2 @@
 from .projects import ListProjectView, CreateProjectView, DetailProjectView, UpdateProjectView, AddProgrammerProjectView, RemoveProgrammerProjectView
+from .modules import ListModuleView, CreateModuleView, UpdateModuleView
