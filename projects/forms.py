@@ -112,7 +112,7 @@ class CreateModuleForm(forms.ModelForm):
 
 class UpdateModuleForm(forms.ModelForm):
 
-
+    finish_date = forms.DateTimeField(required=False)
 
     class Meta:
         model = Module

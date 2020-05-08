@@ -21,4 +21,5 @@ urlpatterns = [
     path('<int:pk_project>/modules/', ListModuleView.as_view(), name='list_modules'),
     path('<int:pk_project>/modules/create/', CreateModuleView.as_view(), name='create_module'),
     path('<int:pk_project>/modules/<int:pk_module>/', UpdateModuleView.as_view(), name='update_module'),
+
 ]
