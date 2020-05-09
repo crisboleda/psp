@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 class UserUpdateForm(forms.ModelForm):
 
     genere = forms.CharField(max_length=12)
-    username = forms.CharField(max_length=20, min_length=4, widget=forms.TextInput(
+    username = forms.CharField(max_length=15, min_length=4, widget=forms.TextInput(
         attrs= {
             'class': 'form-control input-profile',
             'id': 'usernameInput',

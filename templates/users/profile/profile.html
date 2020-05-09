@@ -46,7 +46,8 @@
             </div>
         </div>
         <div class="col-xl-9">
-            {{ form.errors }}
+            {% include 'base/form_errors.html' %}
+            
             <form class="row" method="POST">
 
                 {% csrf_token %}

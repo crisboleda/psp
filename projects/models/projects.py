@@ -8,10 +8,13 @@ from django.contrib.auth.models import User
 # Estados que puede tener un proyecto
 from projects.utils import CHOICES_STATUS_PROJECT
 
+# Validators
+from projects.validators import validate_min_length_description
+
 
 class Project(models.Model):
     name = models.CharField(max_length=100, help_text='Project name')
-    description = models.CharField(max_length=250)
+    description = models.CharField(max_length=250, validators=[validate_min_length_description])
 
     status = models.CharField(
         max_length=15,
