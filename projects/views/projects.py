@@ -14,7 +14,8 @@ from django.contrib.auth.models import User
 from projects.forms import CreateProjectModelForm, UpdateProjectModelForm, AddProgrammerProjectForm
 
 # Mixins
-from projects.mixins import AdminRequiredMixin, MemberProjectRequiredMixin
+from projects.mixins import MemberProjectRequiredMixin
+from psp.mixins import AdminRequiredMixin
 
 
 class ListProjectView(ListView, LoginRequiredMixin):

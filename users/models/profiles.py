@@ -9,6 +9,13 @@ from django.contrib.auth.models import User
 from programs.models import ProgrammingLanguage
 
 
+def remove_image_old(instance, filename):
+    instance_old = Profile.objects.get(pk=instance.pk)
+    instance_old.picture.delete()
+
+    return 'users/profile/{}'.format(filename)
+
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='get_profile')
 
@@ -22,7 +29,7 @@ class Profile(models.Model):
     )
 
     picture = models.ImageField(
-        upload_to='users/profile/', 
+        upload_to=remove_image_old, 
         help_text="User profile picture", 
         null=True, 
         blank=True

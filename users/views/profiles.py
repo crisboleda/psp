@@ -42,7 +42,7 @@ class DeleteImageProfile(AuthenticateOwnerProfileMixin, RedirectView):
 
     def get_redirect_url(self, pk):
         profile = self.get_object()
-        profile.picture = None
+        profile.picture.delete()
         profile.save()
         
         return reverse_lazy('users:profile_user', kwargs={'slug': self.request.user.username})

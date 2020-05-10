@@ -12,7 +12,8 @@ from projects.models import Module, Project
 from projects.forms import CreateModuleForm, UpdateModuleForm
 
 # Mixins
-from projects.mixins import AdminRequiredMixin, MemberProjectRequiredMixin
+from projects.mixins import MemberProjectRequiredMixin
+from psp.mixins import AdminRequiredMixin
 
 
 class ListModuleView(MemberProjectRequiredMixin, ListView):

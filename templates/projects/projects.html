@@ -11,7 +11,7 @@
 
 {% block 'content' %}
     <div>
-        <h2>Proyectos</h2>
+        <h2>Proyectos {% if request.user.get_profile.type_user == 'programmer' %}en los que estas{% endif %}</h2>
         <br/>
         {% if not projects %}
             {% if request.user.get_profile.type_user == 'programmer' %}
@@ -20,9 +20,9 @@
                 <p>No se han creado proyectos hasta el momento</p>
             {% endif %}
         {% else %}
-            <div class="table-responsive">
-                <table class="table table-borderless table-striped table-earning">
-                    <thead>
+            <div>
+                <table class="table table-borderless table-striped">
+                    <thead class="thead-dark">
                         <tr>
                             <th>Nombre</th>
                             <th>Estado</th>

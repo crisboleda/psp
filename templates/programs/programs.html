@@ -3,7 +3,21 @@
 
 {% block 'title' %}PSP | Programas{% endblock %}
 
+{% block 'links' %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/projects.css' %}">
+{% endblock %}
+
 {% block 'content' %}
-    <h1>Programas</h1>
+    <div>
+        <h2>Programas {% if request.user.get_profile.type_user == 'programmer' %}que tienes asignados{% endif %}</h2>
+        <br/>
+        <div>
+            
+        </div>
+    </div>
+    {% if request.user.get_profile.type_user == 'administrador' %}
+        <a href="{% url 'programs:create_program' 25 %}" class="btn-flotante" title="Crear programa"><i class="fas fa-plus"></i></a>
+    {% endif %}
 {% endblock 'content' %}
 
