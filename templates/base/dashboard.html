@@ -12,6 +12,7 @@
     <link href="{% static 'vendor/font-awesome-4.7/css/font-awesome.min.css' %}" rel="stylesheet" media="all">
     <link href="{% static 'vendor/font-awesome-5/css/fontawesome-all.min.css' %}" rel="stylesheet" media="all">
     <link href="{% static 'vendor/mdi-font/css/material-design-iconic-font.min.css' %}" rel="stylesheet" media="all">
+    <link href="https://fonts.googleapis.com/css2?family=Armata&display=swap" rel="stylesheet">
 
     <!-- Bootstrap CSS-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -36,13 +37,14 @@
 <body>
 
     <!-- Modals -->
-    {% if profile_user %}
-        {% include 'users/profile/modal_img_profile.html' %}
-        {% include 'users/profile/modal_languages.html' %}
-    {% endif %}
-    {% if projects %}
+        {% if profile_user %}
+            {% include 'users/profile/modal_img_profile.html' %}
+            {% include 'users/profile/modal_languages.html' %}
+        {% endif %}
         
-    {% endif %}
+        {% if program_opened %}
+            {% include 'logs/modal_create.html' %}
+        {% endif %}
     <!-- End Modals -->
     <div class="page-wrapper">
         {% include 'menus/menu_mobile.html' %}

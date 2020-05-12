@@ -8,5 +8,9 @@ class DashboardView(TemplateView, LoginRequiredMixin):
     template_name = 'base/dashboard.html'
 
 
-class HomeProgrammerView():
-    pass
+class HomeView(TemplateView):
+    template_name = 'home.html'
+
+
+class IndexView(TemplateView):
+    template_name = 'index.html'

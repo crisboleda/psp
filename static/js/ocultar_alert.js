@@ -1,5 +1,5 @@
 
-const customAlert = document.getElementsByClassName('custom-alert')
+const customAlert = document.getElementsByClassName('custom__alert')
 
 setTimeout(() => {
     customAlert[0].classList.add('d-none')

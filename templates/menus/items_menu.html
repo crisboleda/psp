@@ -1,5 +1,5 @@
 <!-- Items Menu -->
-    <li class="active has-sub">
+    {% comment %} <li class="active has-sub">
         <a class="js-arrow" href="#">
             <i class="fas fa-tachometer-alt"></i>Defectos
         </a>
@@ -8,30 +8,49 @@
                 <a href="index.html">Programadores</a>
             </li>
         </ul>
-    </li>
+    </li> {% endcomment %}
     {% if request.user.get_profile.type_user == 'administrador' %}
         <li>
             <a href="{% url 'projects:list_projects' %}">
                 <i class="fas fa-chart-bar"></i>Proyectos
             </a>
         </li>
+        <li>
+            <a href="{% url 'users:register' %}">
+                <i class="fas fa-user-plus"></i>Crear usuario
+            </a>
+        </li>
     {% endif %}
     <li>
-        <a href="">
+        <a href="{% url 'programs:programs_programmer' %}">
             <i class="fas fa-sitemap"></i>Programas
         </a>
     </li>
-    {% comment %} <li class="has-sub">
-        <a class="js-arrow" href="#">
-            <i class="fas fa-copy"></i>Crear usuario
-        </a>
-        <ul class="list-unstyled navbar-mobile-sub__list js-sub-list">
-            <li>
-                <a href="login.html">Login</a>
-            </li>
-            <li>
-                <a href="register.html">Register</a>
-            </li>
-        </ul>
-    </li> {% endcomment %}
+    {% if program_opened %}
+        <li class="has-sub">
+            <a class="js-arrow" href="#">
+                <i class="fas fa-folder-open"></i>Program directory
+            </a>
+            <ul class="list-unstyled navbar-mobile-sub__list js-sub-list">
+                <li>
+                    <a href="{% url 'logs:program_time_logs' program_opened.pk %}"><i class="far fa-clock"></i>Time Log</a>
+                </li>
+                <li>
+                    <a href=""><i class="fas fa-bug"></i>Defect Log</a>
+                </li>
+                <li>
+                    <a href=""><i class="fas fa-tag"></i>Defect Type Standard</a>   
+                </li>
+                <li>
+                    <a href=""><i class="fas fa-chart-line"></i>PIP</a>
+                </li>
+                <li>
+                    <a href=""><i class="fas fa-paper-plane"></i>Size Estimation template</a>
+                </li>
+                <li>
+                    <a href=""><i class="fas fa-crosshairs"></i>Test report</a>
+                </li>
+            </ul>
+        </li>
+    {% endif %}
 <!-- END Items Menu -->

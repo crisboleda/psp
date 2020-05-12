@@ -1,6 +1,6 @@
 
 # Django
-from django.views.generic import ListView, FormView
+from django.views.generic import ListView, FormView, TemplateView
 from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -10,13 +10,29 @@ from django.contrib.auth.models import User
 from programs.models import ProgrammingLanguage
 
 # Forms
-from users.forms import UserUpdateForm
+from users.forms import UserUpdateForm, CreateUserForm
+
+# Mixins
+from psp.mixins import AdminRequiredMixin
 
 
 # View User Login
 class LoginUserView(LoginView):
     redirect_authenticated_user = True
     template_name = 'users/login.html'
+
+
+class RegisterUserView(AdminRequiredMixin, FormView):
+    model = User
+    template_name = 'users/register.html'
+    form_class = CreateUserForm
+
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
+    
+    def get_success_url(self):
+        return reverse_lazy('users:register') + '?user_created'
 
 
 # View User data Updata
