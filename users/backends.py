@@ -27,10 +27,27 @@ class CustomUserAuthentication:
         return user
 
     def authenticate_username(self, username, password):
-        user = User.objects.get(username=username, password=password)
-        return user
+        try:
+            user = User.objects.get(username=username)
+            return self.check_password(user, password)
+        except User.DoesNotExist:
+            return None
 
     def authenticate_email(self, email, password):
-        user = User.objects.get(email=email, password=password)
-        return user
+        try:
+            user = User.objects.get(email=email)
+            return self.check_password(user, password)
+        except User.DoesNotExist:
+            return None
+
+    def check_password(self, user, password):
+        if user.check_password(password):
+            return user
+        return None
+
+    def get_user(self, user_id):
+        try:
+            return User.objects.get(pk=user_id)
+        except User.DoesNotExist:
+            return None
 

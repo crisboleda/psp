@@ -53,7 +53,11 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-METHOD_USER_AUTHETICATION = ['username', 'email']
+METHOD_USER_AUTHENTICATION = ('username', 'email')
+
+AUTHENTICATION_BACKENDS = [
+    'users.backends.CustomUserAuthentication'
+]
 
 ROOT_URLCONF = 'psp.urls'
 
