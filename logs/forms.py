@@ -3,12 +3,13 @@
 from django import forms
 
 # Models
-from logs.models import Phase
+from logs.models import Phase, TimeLog
 
 
 class CreateLogProgramForm(forms.Form):
 
     name_phase = forms.CharField(max_length=20)
+    comments = forms.CharField(max_length=100)
 
     def clean(self):
         try:
@@ -17,6 +18,6 @@ class CreateLogProgramForm(forms.Form):
             forms.ValidationError("The phase doesn't exists")
 
     
-    def save(self):
-        print("Hello world")
-        import pdb; pdb.set_trace()
+    def save(self, program):
+        data = self.cleaned_data
+        TimeLog.objects.create(phase=self.phase, program=program, comments=data['comments'])

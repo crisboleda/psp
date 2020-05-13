@@ -22,11 +22,11 @@ class TimeLog(models.Model):
     program = models.ForeignKey(Program, on_delete=models.CASCADE, related_name='program_log_time')
     phase = models.ForeignKey(Phase, on_delete=models.CASCADE, related_name='phase_log_time')
 
-    commentaries = models.CharField(max_length=255, null=True, blank=True)
+    comments = models.CharField(max_length=100, null=True, blank=True)
     start_date = models.DateTimeField(auto_now_add=True)
-    delta_time = models.IntegerField(null=True, blank=True)
+    delta_time = models.IntegerField(default=0)
     finish_date = models.DateTimeField(null=True)
-    is_pause = models.BooleanField(default=False)
+    is_paused = models.BooleanField(default=False)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

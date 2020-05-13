@@ -8,32 +8,43 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/time_log.css' %}">
     <link rel="stylesheet" href="{% static 'css/buttom_float.css' %}">
+    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
 {% endblock %}
 
 
 {% block 'content' %}
 
-    <div class="row">
-        <div class="col-xl-9">
-            <div class="au-card text-center">
-                <div class="container__time__log">
-                    <p><span>00</span> : <span>00</span> : <span>00</span></p>
-                </div>
-                <div class="row controllers__timer justify-content-center">
-                    <button class="btn btn-info mr-2 pl-4 pr-4"><i class="fas fa-play"></i></button>
-                    <button class="btn btn-danger pl-4 pr-4"><i class="fas fa-stop"></i></button>
-                </div>
-            </div>
-        </div>
+    {% if is_active_phase %}
+        <div class="row">
+            <div class="col-xl-9">
+                <div class="au-card text-center">
+                    <div class="container__time__log">
+                        <p><span id="time_hours">00</span> : <span id="time_mins">00</span> : <span id="time_seg">00</span></p>
+                    </div>
+                    <div class="row controllers__timer justify-content-center">
 
-        <div class="col-xl-3">
-            <div class="ml-3 au-card">
-                <p>Code</p>
+                        <!-- Button chronometer is running -->
+                        <button id="btn-pause-chronometer" class="btn btn-info mr-2 pl-4 pr-4 {% if time_log.is_paused %}d-none{% endif %}"><i class="fas fa-pause"></i></button>
+
+                        <!-- Button chronometer is paused -->
+                        <button id="btn-reset-chronometer" class="btn btn-info mr-2 pl-4 pr-4 {% if not time_log.is_paused %}d-none{% endif %}"><i class="fas fa-play"></i></button>
+
+                        <!-- Button stop phase and save time -->
+                        <button id="btn-stop-chronometer" class="btn btn-danger pl-4 pr-4"><i class="fas fa-stop"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-3">
+                <div class="ml-3 au-card">
+                    <p>Code</p>
+                </div>
             </div>
         </div>
-    </div>
-    <br/>
-    <br/>
+        <br/>
+        <br/>
+    {% endif %}
     <table class="table table-striped table-hover">
         <thead class="thead-dark">
             <tr>
@@ -45,18 +56,77 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>Planning</td>
-                <td>11/05/2020</td>
-                <td>25/05/2020</td>
-                <td>01:30:00</td>
-                <td>Ninguno</td>
-            </tr>
+            {% for time_log in program_opened.program_log_time.all %}
+                <tr>
+                    <td>{{ time_log.phase }}</td>
+                    <td>{{ time_log.start_date }}</td>
+                    <td>
+                        {% if not time_log.finish_date %}
+                            ---
+                        {% else %}
+                            {{ time_log.finish_date }}
+                        {% endif %}
+                    </td>
+                    <td>{{ time_log.delta_time }}</td>
+                    <td>{{ time_log.comments }}</td>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
 
-    <!-- Button trigger modal -->
-    <button type="button" class="btn-flotante" title="Nuevo tiempo" data-toggle="modal" data-target="#modalCreateTimeLog">
-        <i class="fas fa-plus"></i>
-    </button>
+    {% if not is_active_phase %}
+        <!-- Button trigger modal -->
+        <button type="button" class="btn-flotante" title="Nuevo tiempo" data-toggle="modal" data-target="#modalCreateTimeLog">
+            <i class="fas fa-plus"></i>
+        </button>
+    {% endif %}
+{% endblock %}
+
+
+{% block 'scripts' %}
+    {% load static %}
+    <script src="{% static 'js/count_words.js' %}"></script>
+    <script src="{% static 'js/ParseTime.js' %}"></script>
+    <script src="{% static 'js/ServiceChronometer.js' %}"></script>
+    <script src="{% static 'js/Chronometer.js' %}"></script>
+
+    <script>
+        const textTimeHours = document.getElementById('time_hours')
+        const textTimeMins = document.getElementById('time_mins')
+        const textTimeSeg = document.getElementById('time_seg')
+
+        const btnPauseChronometer = document.getElementById('btn-pause-chronometer')
+        const btnResetChronometer = document.getElementById('btn-reset-chronometer')
+        const btnStopChronometer = document.getElementById('btn-stop-chronometer')
+
+        var totalSeconds =  parseInt("{{ time_log.delta_time }}")
+        var idTimeLog = "{{ time_log.pk }}"
+
+
+        const chronometer = new Chronometer(textTimeHours, textTimeMins, textTimeSeg, totalSeconds, idTimeLog)
+        chronometer.updateValues()
+
+
+        btnPauseChronometer.addEventListener('click', () => {
+            chronometer.pause()
+
+            btnPauseChronometer.classList.add('d-none')
+            btnResetChronometer.classList.remove('d-none')
+        })
+
+        btnResetChronometer.addEventListener('click', () => {
+            chronometer.start()
+
+            btnPauseChronometer.classList.remove('d-none')
+            btnResetChronometer.classList.add('d-none')
+        })
+
+
+        {% if not time_log.is_paused %}
+            chronometer.start()
+            console.log(textTimeHours)
+        {% endif %}
+
+    </script>
+
 {% endblock %}
