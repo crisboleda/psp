@@ -15,7 +15,7 @@ class Chronometer {
         this.inputHours = inputHours
         this.inputMinutes = inputMinutes
         this.inputSeconds = inputSeconds
-        this.total_seconds = totalSeconds
+        this.totalSeconds = totalSeconds
 
         // ID time log
         this.idTimeLog = idTimeLog
@@ -41,9 +41,27 @@ class Chronometer {
         this.counter = setInterval(this.refreshTimer.bind(this), 1000)
     }
 
+    async restart(){
+
+        this.start()
+
+        const url = `http://localhost:8000/timelogs/${this.idTimeLog}/restart/`
+        const result = await this.serviceChronometer.put(url, {})
+
+        console.log(result)
+    }
+
     async pause(){
         if (this.counter) clearInterval(this.counter)
-        const result = await this.serviceChronometer.updateTime(this.totalSeconds, this.idTimeLog, 1)
+
+        const url = `http://localhost:8000/timelogs/${this.idTimeLog}/pause/`
+
+        const body = {
+            delta_time: this.totalSeconds,
+            is_paused: true
+        }
+
+        const result = await this.serviceChronometer.put(url, body)
 
         console.log(result)
     }

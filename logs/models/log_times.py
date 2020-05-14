@@ -1,6 +1,7 @@
 
 # Django
 from django.db import models
+from django.utils import timezone
 
 # Models
 from programs.models import Program
@@ -26,6 +27,8 @@ class TimeLog(models.Model):
     start_date = models.DateTimeField(auto_now_add=True)
     delta_time = models.IntegerField(default=0)
     finish_date = models.DateTimeField(null=True)
+
+    last_restart_time = models.DateTimeField(auto_now_add=True)
     is_paused = models.BooleanField(default=False)
 
     created_at = models.DateTimeField(auto_now_add=True)

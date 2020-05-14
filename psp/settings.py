@@ -37,10 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'programs',
     'users',
     'logs',
-    'projects',
+    'projects'
 ]
 
 MIDDLEWARE = [
@@ -51,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 ]
 
 METHOD_USER_AUTHENTICATION = ('username', 'email')
@@ -58,6 +60,12 @@ METHOD_USER_AUTHENTICATION = ('username', 'email')
 AUTHENTICATION_BACKENDS = [
     'users.backends.CustomUserAuthentication'
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+    ]
+}
 
 ROOT_URLCONF = 'psp.urls'
 

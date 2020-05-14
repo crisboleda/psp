@@ -8,8 +8,6 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/time_log.css' %}">
     <link rel="stylesheet" href="{% static 'css/buttom_float.css' %}">
-    
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
 {% endblock %}
 
 
@@ -17,7 +15,7 @@
 
     {% if is_active_phase %}
         <div class="row">
-            <div class="col-xl-9">
+            <div class="col-xl-9 mt-3">
                 <div class="au-card text-center">
                     <div class="container__time__log">
                         <p><span id="time_hours">00</span> : <span id="time_mins">00</span> : <span id="time_seg">00</span></p>
@@ -36,8 +34,8 @@
                 </div>
             </div>
 
-            <div class="col-xl-3">
-                <div class="ml-3 au-card">
+            <div class="col-xl-3 pl-3 mt-3">
+                <div class="au-card">
                     <p>Code</p>
                 </div>
             </div>
@@ -59,12 +57,19 @@
             {% for time_log in program_opened.program_log_time.all %}
                 <tr>
                     <td>{{ time_log.phase }}</td>
-                    <td>{{ time_log.start_date }}</td>
+                    <td>
+                        {% load tz %}
+                        {% timezone "America/Bogota" %}
+                            {{ time_log.start_date }}
+                        {% endtimezone %}
+                    </td>
                     <td>
                         {% if not time_log.finish_date %}
                             ---
                         {% else %}
-                            {{ time_log.finish_date }}
+                            {% timezone "America/Bogota" %}
+                                {{ time_log.finish_date }}
+                            {% endtimezone %}
                         {% endif %}
                     </td>
                     <td>{{ time_log.delta_time }}</td>
@@ -99,32 +104,37 @@
         const btnResetChronometer = document.getElementById('btn-reset-chronometer')
         const btnStopChronometer = document.getElementById('btn-stop-chronometer')
 
-        var totalSeconds =  parseInt("{{ time_log.delta_time }}")
-        var idTimeLog = "{{ time_log.pk }}"
+        var totalSeconds = parseInt("{{ total_time }}")
+
+        {% if time_log %}
+            var idTimeLog = "{{ time_log.pk }}"
+
+            const chronometer = new Chronometer(textTimeHours, textTimeMins, textTimeSeg, totalSeconds, idTimeLog)
+            chronometer.updateValues()
 
 
-        const chronometer = new Chronometer(textTimeHours, textTimeMins, textTimeSeg, totalSeconds, idTimeLog)
-        chronometer.updateValues()
+            btnPauseChronometer.addEventListener('click', () => {
+                chronometer.pause()
 
+                btnPauseChronometer.classList.add('d-none')
+                btnResetChronometer.classList.remove('d-none')
+            })
 
-        btnPauseChronometer.addEventListener('click', () => {
-            chronometer.pause()
+            btnResetChronometer.addEventListener('click', () => {
+                chronometer.restart()
 
-            btnPauseChronometer.classList.add('d-none')
-            btnResetChronometer.classList.remove('d-none')
-        })
+                btnPauseChronometer.classList.remove('d-none')
+                btnResetChronometer.classList.add('d-none')
+            })
 
-        btnResetChronometer.addEventListener('click', () => {
-            chronometer.start()
+            window.addEventListener('beforeunload', () => {
+                chronometer.pause()
+            })
 
-            btnPauseChronometer.classList.remove('d-none')
-            btnResetChronometer.classList.add('d-none')
-        })
+            {% if not time_log.is_paused %}
+                chronometer.start()
+            {% endif %}
 
-
-        {% if not time_log.is_paused %}
-            chronometer.start()
-            console.log(textTimeHours)
         {% endif %}
 
     </script>
