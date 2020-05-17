@@ -7,7 +7,7 @@ from datetime import datetime
 class ConvertTime:
 
     @staticmethod
-    def seconds_to_time(time_log):
+    def calculate_total_time(time_log):
         total_time = 0
         total_time += time_log.delta_time
 

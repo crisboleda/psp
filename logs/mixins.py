@@ -13,3 +13,12 @@ class IsUserOwnerProgram(BasePermission):
         if obj.program.programmer == request.user:
             return True
         return False
+
+
+class TimeLogNotStop(BasePermission):
+
+    def has_object_permission(self, request, view, obj):
+
+        if not obj.finish_date:
+            return True
+        return False

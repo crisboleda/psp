@@ -3,7 +3,8 @@
 from django.urls import path
 
 # Views
-from logs.views import ListProgramTimeLogView, CreateTimeLogView, UpdateCurrentTimeLog, RestartTimeLog
+from logs.views import (ListProgramTimeLogView, CreateTimeLogView, UpdateCurrentTimeLog, RestartTimeLog,
+                        DetailTimeLogView, StopCurrentTimeLogView, ListDefectLogView)
 
 
 urlpatterns = [
@@ -12,4 +13,11 @@ urlpatterns = [
 
     path('timelogs/<int:pk_time_log>/pause/', UpdateCurrentTimeLog.as_view(), name='update_time_log'),
     path('timelogs/<int:pk_time_log>/restart/', RestartTimeLog.as_view(), name='restart_time_log'),
+    path('timelogs/<int:pk_time_log>/stop/', StopCurrentTimeLogView.as_view(), name='stop_time_log'),
+
+    path('programs/<int:pk_program>/timelogs/timer/', DetailTimeLogView.as_view(), name='current_time_log'),
+
+
+    # URL LOG DEFECTS
+    path('programs/<int:pk_program>/defect_logs/', ListDefectLogView.as_view(), name='program_defect_logs'),
 ]

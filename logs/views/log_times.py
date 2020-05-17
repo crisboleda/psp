@@ -1,22 +1,25 @@
 
 # Django
-from django.views.generic import ListView, FormView
+from django.views.generic import ListView, FormView, DetailView
 from django.http.response import JsonResponse
 from django.http.response import Http404, HttpResponseBadRequest
 from django.urls import reverse_lazy
 from django.utils import timezone
 
 # Django REST Framework
-from rest_framework.generics import UpdateAPIView
+from rest_framework.generics import UpdateAPIView, CreateAPIView
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.viewsets import GenericViewSet
+from rest_framework.decorators import action
 
 # Logic
 from logs.logic.convert_time import ConvertTime
 
 # Serializers
-from logs.serializers import UpdateTimeLogModelSerializer
+from logs.serializers import UpdateTimeLogModelSerializer, TimeLogModelSerializer, CreateTimeLogModelSerializer
 
 # Models
 from logs.models import TimeLog, Phase
@@ -27,7 +30,7 @@ from logs.forms import CreateLogProgramForm
 
 # Mixins
 from psp.mixins import MemberUserProgramRequiredMixin
-from logs.mixins import IsUserOwnerProgram
+from logs.mixins import IsUserOwnerProgram, TimeLogNotStop
 
 
 class ListProgramTimeLogView(MemberUserProgramRequiredMixin, ListView):
@@ -46,13 +49,13 @@ class ListProgramTimeLogView(MemberUserProgramRequiredMixin, ListView):
 
         if context["is_active_phase"]:
             context["time_log"] = self.program.program_log_time.get(finish_date=None)
-            context["total_time"] = ConvertTime.seconds_to_time(context['time_log'])
         return context
 
 
-class CreateTimeLogView(MemberUserProgramRequiredMixin, FormView):
-    form_class = CreateLogProgramForm
-
+class CreateTimeLogView(MemberUserProgramRequiredMixin, CreateAPIView):
+    queryset = TimeLog.objects.all()
+    serializer_class = CreateTimeLogModelSerializer
+    
     def dispatch(self, request, *args, **kwargs):
         self.program = Program.objects.get(pk=kwargs['pk_program'])
         self.is_active_phase = self.program.program_log_time.filter(finish_date=None).exists()
@@ -61,25 +64,49 @@ class CreateTimeLogView(MemberUserProgramRequiredMixin, FormView):
             return HttpResponseBadRequest(reason='There is a phase active')
 
         return super().dispatch(request, *args, **kwargs)
+    
 
-    def form_valid(self, form):
-        form.save(self.program)
-        return super().form_valid(form)
+    def create(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid():
+            time_log = serializer.save(self.program)
+            return Response(data=TimeLogModelSerializer(instance=time_log).data, status=status.HTTP_201_CREATED)
+        return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def get_success_url(self):
-        return reverse_lazy('logs:program_time_logs', kwargs={'pk_program': self.program.pk})
 
-
-
+# Pause time log
 class UpdateCurrentTimeLog(UpdateAPIView):
     queryset = TimeLog.objects.all()
-    permission_classes = [IsUserOwnerProgram]
+    permission_classes = [IsUserOwnerProgram, TimeLogNotStop]
     lookup_url_kwarg = 'pk_time_log'
     serializer_class = UpdateTimeLogModelSerializer
 
 
+class StopCurrentTimeLogView(UpdateAPIView):
+    queryset = TimeLog.objects.all()
+    permission_classes = [IsUserOwnerProgram, TimeLogNotStop]
+    lookup_url_kwarg = 'pk_time_log'
+    serializer_class = UpdateTimeLogModelSerializer
+
+    def update(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid():
+            
+            data = serializer.validated_data
+            time_log = self.get_object()
+
+            time_log.delta_time = data['delta_time']
+            time_log.is_paused = data['is_paused']
+            time_log.finish_date = timezone.now()
+            time_log.save()
+
+            return Response(data=TimeLogModelSerializer(instance=time_log).data, status=status.HTTP_200_OK)
+        return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+# Restart time log
 class RestartTimeLog(APIView):
-    permission_classes = [IsUserOwnerProgram]
+    permission_classes = [IsUserOwnerProgram, TimeLogNotStop]
 
     def dispatch(self, request, *args, **kwargs):
         try:
@@ -94,7 +121,17 @@ class RestartTimeLog(APIView):
         self.time_log.last_restart_time = timezone.now()
         self.time_log.save()
         
-        return Response(data={'time_log_updated': 'yes'}, status=status.HTTP_200_OK)
+        return Response(data=TimeLogModelSerializer(instance=self.time_log).data, status=status.HTTP_200_OK)
 
 
-    
+class DetailTimeLogView(MemberUserProgramRequiredMixin, DetailView):
+    model = TimeLog
+    template_name = 'logs/timer_time_log.html'
+    context_object_name = 'time_log'
+
+    def get_object(self):
+        if self.program.program_log_time.filter(finish_date=None).exists():
+            return self.program.program_log_time.get(finish_date=None)
+        return None
+
+        

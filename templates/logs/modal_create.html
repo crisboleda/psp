@@ -9,7 +9,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="{% url 'logs:create_time_log' program_opened.pk %}" method="post">
+        <form id="form-create-time-log" method="post">
             {% csrf_token %}
 
             <div class="form-group">

@@ -66,5 +66,18 @@ class Chronometer {
         console.log(result)
     }
 
+    async stop(){
+        if (this.counter) clearInterval(this.counter)
+
+        const url = `http://localhost:8000/timelogs/${this.idTimeLog}/stop/`
+
+        const body = {
+            delta_time: this.totalSeconds,
+            is_paused: true
+        }
+
+        return await this.serviceChronometer.put(url, body)
+    }
+
 }
 

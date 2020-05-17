@@ -36,7 +36,7 @@
                     <a href="{% url 'logs:program_time_logs' program_opened.pk %}"><i class="far fa-clock"></i>Time Log</a>
                 </li>
                 <li>
-                    <a href=""><i class="fas fa-bug"></i>Defect Log</a>
+                    <a href="{% url 'logs:program_defect_logs' program_opened.pk %}"><i class="fas fa-bug"></i>Defect Log</a>
                 </li>
                 <li>
                     <a href=""><i class="fas fa-tag"></i>Defect Type Standard</a>   
