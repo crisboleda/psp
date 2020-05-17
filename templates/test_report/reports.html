@@ -1,0 +1,69 @@
+{% extends 'base/dashboard.html' %}
+
+{% block 'title' %}PSP | Reportes{% endblock %}
+
+{% block 'links' %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/projects.css' %}">
+    <link rel="stylesheet" href="{% static 'css/buttom_float.css' %}">
+{% endblock %}
+
+{% block 'content' %}
+    <div>
+        <h2>Reportes</h2>
+        <br/>
+        {% if not  %}
+            <p>No hay reportes en este programa todavía</p>
+        {% else %}
+            <div class="table-responsive">
+                <table class="table table-borderless table-striped table-earning">
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Nombre</th>
+                            <th>Objetivo</th>
+                            <th>Descripcion</th>
+                            <th>Condiciones</th>
+                            <th>Resulatdos esperados</th>
+                            <th>Resultados obtenidos</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for  in  %}
+                            <tr>
+                                <td>{{ .date }}</td>
+                                <td>{{ .name }}</td>
+                                <td>{{ .objetive }}</td>
+                                <td>{{ .description }}</td>
+                                <td>{{ .conditions }}</td>
+                                <td>{{ .espected_result }}</td>
+                                <td>{{ .actual_result }}</td>
+                                <td>
+                                    {% if not module.finish_date %}
+                                        ---
+                                    {% else %}
+                                        {{ module.finish_date|date }}
+                                    {% endif %}
+                                </td>
+                                <td class="row td-actions">
+                                    {% if request.user.get_profile.type_user == 'administrador' %}
+                                        <a href="{% url 'projects:update_module' module.project.pk module.pk %}" class="btn btn-secondary m-1" title="Edit"><i class="fas fa-edit"></i></a>
+                                    {% endif %}
+                                    <a href="{% url 'programs:list_programs' module.pk %}" class="btn btn-info m-1" title="Programas"><i class="fas fa-sitemap"></i></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endif %}
+    </div>
+    
+    {% if request.user.get_profile.type_user == 'administrador' %}
+        <a href="{% url 'projects:create_module' pk_project %}" class="btn-flotante" title="Crear proyecto"><i class="fas fa-plus"></i></a>
+    {% endif %}
+{% endblock %}
+
+
+{% block 'scripts' %}
+{% endblock %}
