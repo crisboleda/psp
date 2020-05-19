@@ -1,0 +1,130 @@
+
+{% extends 'base/dashboard.html' %}
+
+{% block 'title' %}PSP | Defect logs{% endblock %}
+
+{% block 'links' %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/timer_time_defect.css' %}">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+{% endblock %}
+
+{% block 'content' %}
+    <h2>Defect Log</h2>
+    <br/>
+    <div class="au-card">
+        <div class="timer-defect-log">
+            <div class="text-center">
+                <div class="container__time__defect">
+                    <p><span id="time_hours">00</span> : <span id="time_mins">00</span> : <span id="time_seg">00</span></p>
+                </div>
+                <div class="row controllers__timer justify-content-center">
+
+                    <!-- Button chronometer is running -->
+                    <button id="btn-pause-chronometer" class="btn btn-info mr-2 pl-4 pr-4 {% if time_log.is_paused %}d-none{% endif %}"><i class="fas fa-pause"></i></button>
+
+                    <!-- Button chronometer is paused -->
+                    <button id="btn-reset-chronometer" class="btn btn-info mr-2 pl-4 pr-4 {% if not time_log.is_paused %}d-none{% endif %}"><i class="fas fa-play"></i></button>
+
+                    <!-- Button stop phase and save time -->
+                    <button id="btn-stop-chronometer" class="btn btn-danger pl-4 pr-4"><i class="fas fa-stop"></i></button>
+                </div>
+            </div>
+        </div>
+        <br/>
+        <hr/>
+        <br/>
+        <div>
+            <form action="" method="">
+                <div class="form-row">
+                    <div class="form-group col-xl-3">
+                        <label for="id_date">Date</label>
+                        <input id="flatpickr" type="date" id="id_date" class="form-control bg-white" placeholder="YYYY-MM-DD">
+                    </div>
+                    <div class="form-group col-xl-3">
+                        <label for="id_defect_type">Type</label>
+                        <select class="form-control" id="id_defect_type">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-xl-2">
+                        <label for="id_phase_injected">Phase injected</label>
+                        <select class="form-control" name="phase_injected" id="id_phase_injected">
+                            <option value="">1</option>
+                            <option value="">2</option>
+                            <option value="">3</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-xl-2">
+                        <label for="id_phase_removed">Phase removed</label>
+                        <select class="form-control" name="phase_removed" id="id_phase_removed">
+                            <option value="">1</option>
+                            <option value="">2</option>
+                            <option value="">3</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-xl-2">
+                        <label for="id_chained_defect">Cousing defect</label>
+                        <select name="cousing_defect" id="" class="form-control">
+                            <option value="">1</option>
+                            <option value="">2</option>
+                            <option value="">3</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-xl-6">
+                        <label for="id_description">Description</label>
+                        <textarea style="resize: none;" class="form-control w-100" name="description" id="id_description" rows="4" placeholder="Enter description"></textarea>
+                        <p>Characters <b><span>0</span>/200</b></p>
+                    </div>
+                    <div class="form-group col-xl-6">
+                        <label for="id_solution">Solution</label>
+                        <textarea style="resize: none;" class="form-control w-100" name="solution" id="id_solution" rows="4" placeholder="Enter solution"></textarea>
+                        <p>Characters <b><span>0</span>/200</b></p>
+                    </div>
+                </div>
+                <br/>
+                <input type="submit" value="Create defect" class="btn btn-secondary btn-block">
+            </form>
+        </div>
+    </div>
+    <br/>
+    {% if log_defects %}
+        <br/>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Type</th>
+                    <th>Phase injected</th>
+                    <th>Phase removed</th>
+                    <th>Total time</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th></th>
+                </tr>
+            </tbody>
+        </table>
+    {% else %}
+        <br/>
+        <p class="text-center"><b>No se ha creado ningun registro de defectos</b></p>
+    {% endif %}
+
+{% endblock %}
+
+
+{% block 'scripts' %}
+    <script>
+        var example = flatpickr('#flatpickr');
+    </script>
+{% endblock %}

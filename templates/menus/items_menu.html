@@ -39,7 +39,7 @@
                     <a href="{% url 'logs:program_defect_logs' program_opened.pk %}"><i class="fas fa-bug"></i>Defect Log</a>
                 </li>
                 <li>
-                    <a href=""><i class="fas fa-tag"></i>Defect Type Standard</a>   
+                    <a href="{% url 'logs:list_defects_type' program_opened.pk %}"><i class="fas fa-tag"></i>Defect Type Standard</a>   
                 </li>
                 <li>
                     <a href=""><i class="fas fa-chart-line"></i>PIP</a>

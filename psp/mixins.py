@@ -21,11 +21,10 @@ class AdminRequiredMixin:
         return super().dispatch(request, *args, **kwargs)
 
 
-
 class MemberUserProgramRequiredMixin(object):
 
     def dispatch(self, request, *args, **kwargs):
-        
+
         if not request.user.is_authenticated:
             return HttpResponseRedirect(reverse_lazy('users:login'))
 

@@ -16,7 +16,7 @@ from projects.mixins import MemberProjectRequiredMixin
 from psp.mixins import AdminRequiredMixin
 
 
-class ListModuleView(MemberProjectRequiredMixin, ListView):
+class ListModuleView(AdminRequiredMixin, ListView):
     template_name = 'modules/modules.html'
     context_object_name = 'modules'
 
@@ -54,13 +54,14 @@ class CreateModuleView(AdminRequiredMixin, FormView):
     def get_success_url(self):
         return reverse_lazy('projects:list_modules', kwargs={'pk_project': self.project.pk})
 
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["pk_project"] = self.project.pk
         return context
     
         
-class UpdateModuleView(UpdateView):
+class UpdateModuleView(AdminRequiredMixin, UpdateView):
     model = Module
     template_name = 'modules/edit_module.html'
     context_object_name = 'module'

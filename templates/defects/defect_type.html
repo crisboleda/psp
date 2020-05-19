@@ -1,0 +1,25 @@
+
+{% extends 'base/dashboard.html' %}
+
+{% block 'title' %}PSP | Defect type Standart {% endblock %}
+
+{% block 'content' %}
+    <table class="table table-striped table-hover shadow-sm">
+        <thead class="thead-dark">
+            <tr>
+                <th>Type</th>
+                <th>Name</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for type_defect in type_defects %}
+                <tr>
+                    <td>{{ type_defect.number }}</td>
+                    <td>{{ type_defect.name }}</td>
+                    <td>{{ type_defect.description }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

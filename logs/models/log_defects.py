@@ -8,7 +8,7 @@ from logs.models import Phase
 
 
 class DefectType(models.Model):
-    _type = models.CharField(max_length=55)
+    number = models.IntegerField(null=False, blank=False, unique=True)
     name = models.CharField(max_length=20)
     description = models.TextField()
 
@@ -22,18 +22,20 @@ class DefectType(models.Model):
 class DefectLog(models.Model):
     program = models.ForeignKey(Program, on_delete=models.CASCADE)
     defect = models.ForeignKey(DefectType, on_delete=models.CASCADE)
-    date = models.DateTimeField(auto_now_add=True)
-    time_reparation = models.TimeField()
+    date = models.DateTimeField()
 
-    phase_found = models.ForeignKey(Phase, on_delete=models.CASCADE, related_name='phase_defect_found')
+    time_reparation = models.IntegerField(default=0)
+
+    phase_injected = models.ForeignKey(Phase, on_delete=models.CASCADE, related_name='phase_defect_found')
     phase_removed = models.ForeignKey(Phase, on_delete=models.CASCADE, related_name='phase_defect_removed')
 
     description = models.TextField()
     solution = models.TextField()
 
-    updated_at = models.DateTimeField(auto_now=True)
+    cousing_defect = models.ForeignKey('DefectLog', null=True, on_delete=models.CASCADE, related_name='cousing_defect_defect')
 
-    # TODO Queda pendiente ver los defectos en cadena anteriormente
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return "{} had defect {}".format(self.program, self.defect)

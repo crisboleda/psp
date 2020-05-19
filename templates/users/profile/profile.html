@@ -113,13 +113,18 @@
                 </div>
                 <br/>
                 <br/>
-                <div class="row">
-                    {% for language in profile_languages %}
-                        <div class="col-xl-4 col-md-4 col-sm-6 col-lg-6 text-center {% if request.user == profile_user %}delete-language{% endif %}">
-                            <img src="{{ language.picture.url }}" alt="Img {{ language.name }}" height="55" width="55">
-                            <p class="h5">{{ language.name }}</p>
-                        </div>
-                    {% endfor %}
+                <div id="content-main-languages">
+                    <div class="d-none spinner-border text-info" role="status" id="loader-languages">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <div id="container-languages" class="row">
+                        {% for language in profile_languages %}
+                            <div class="col-xl-4 col-md-4 col-sm-6 col-lg-6 text-center {% if request.user == profile_user %}delete-language{% endif %}">
+                                <img src="{{ language.picture.url }}" alt="Img {{ language.name }}" height="55" width="55">
+                                <p class="h5">{{ language.name }}</p>
+                            </div>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
         </div>
@@ -137,6 +142,9 @@
         <script>
             const btnSave = document.getElementById('btnUpdateProfileLanguages')
             const inputsLanguages = document.getElementsByName('languageCheck')
+            const loader = document.getElementById('loader-languages')
+            const containerLanguages = document.getElementById('container-languages')
+            const contentMain = document.getElementById('content-main-languages')
 
             var languages = []
 
@@ -155,11 +163,15 @@
                 }
 
                 data = data.slice(0, data.length - 1)
-
                 const url = "{% url 'users:update_languages' %}" + `?languages=${data}`
-                fetch(url, {'credentials': 'include'})
 
-                location.reload()
+                containerLanguages.classList.add('d-none')
+                contentMain.classList.add('text-center')
+                loader.classList.remove('d-none')
+
+                fetch(url, {'credentials': 'include'}).then(() => {
+                    location.reload()
+                })
             })
         </script>
 

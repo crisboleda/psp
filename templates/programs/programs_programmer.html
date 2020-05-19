@@ -21,14 +21,14 @@
                         {{ program.description }}
                     </div>
                     <div class="descrip-project-module">
-                        <div class="shadow-sm p-3 m-2 rounded">
+                        <a href="{% url 'projects:detail_project' program.module.project.pk %}" class="shadow-sm p-3 m-2 rounded w-100 mr-4">
                             <p><b>Proyecto: </b>{{ program.module.project.name }}</p>
-                        </div>
-                        <div class="shadow-sm p-3 m-2 mb-4 rounded">
+                        </a>
+                        <div class="shadow-sm p-3 m-2 mb-4 rounded w-100 mr-4">
                             <p><b>Módulo: </b> {{ program.module.name }}</p>
                         </div>
                     </div>
-                    <a href="{% url 'programs:detail_program' program.pk %}" class="text-center"><i class="fas fa-folder-open mr-2"></i>Abrir programa</a>
+                    <a href="{% url 'programs:detail_program' program.pk %}" class="text-center btn-open-program"><i class="fas fa-folder-open mr-2"></i>Abrir programa</a>
                 </div>
                 <footer>
                     <table class="w-100">

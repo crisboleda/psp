@@ -60,7 +60,7 @@ body {
   cursor: pointer;
 }
 
-.program-container a {
+.program-container .btn-open-program {
   width: 80%;
   font-size: 20px;
   padding: 3px;
@@ -75,7 +75,7 @@ body {
   transition: all 200ms ease-in-out;
 }
 
-.program-container a:hover {
+.program-container .btn-open-program:hover {
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
   transform: translateY(2px);
   -webkit-animation: gradientBG 1.5s ease-in-out forwards;
@@ -83,7 +83,7 @@ body {
   cursor: pointer;
 }
 
-.program-container a:active {
+.program-container .btn-open-program:active {
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
   transform: translateY(4px);
 }
@@ -124,6 +124,12 @@ body {
   border-right: 4px solid white;
   padding-right: 10px;
 }
+
+.descrip-project-module a {
+  text-decoration: none;
+  color: black;
+}
+
 
 @-webkit-keyframes gradientBG {
   0% {

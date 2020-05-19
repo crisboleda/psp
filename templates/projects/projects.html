@@ -6,6 +6,7 @@
 {% block 'links' %}
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/projects.css' %}">
+    <link rel="stylesheet" href="{% static 'css/buttom_float.css' %}">
 {% endblock %}
 
 
@@ -69,7 +70,7 @@
         {% endif %}
     </div>
     {% if request.user.get_profile.type_user == 'administrador' %}
-        <a href="{% url 'projects:create_project' %}" class="btn-flotante" title="Crear proyecto"><i class="fas fa-plus"></i></a>
+        <a href="{% url 'projects:create_project' %}" type="button" class="btn-flotante" title="Crear proyecto"><i class="fas fa-plus"></i></a>
     {% endif %}
 {% endblock %}
 

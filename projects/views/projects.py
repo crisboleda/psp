@@ -18,19 +18,10 @@ from projects.mixins import MemberProjectRequiredMixin
 from psp.mixins import AdminRequiredMixin
 
 
-class ListProjectView(ListView, LoginRequiredMixin):
+class ListProjectView(AdminRequiredMixin, ListView):
+    queryset = Project.objects.all()
     context_object_name = 'projects'
     template_name = 'projects/projects.html'
-
-    def get_queryset(self):
-        type_user = self.request.user.get_profile.type_user
-
-        if type_user == 'administrador':
-            return Project.objects.all()
-
-        elif type_user == 'programmer':
-            return Project.objects.filter(users__id__exact=self.request.user.pk)
-            
 
 
 class CreateProjectView(AdminRequiredMixin, FormView):
