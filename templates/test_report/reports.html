@@ -15,7 +15,7 @@
         {% if not  %}
             <p>No hay reportes en este programa todavía</p>
         {% else %}
-            <div class="table-responsive">
+            <div id="report-list"class="table-responsive">
                 <table class="table table-borderless table-striped table-earning">
                     <thead>
                         <tr>
@@ -66,4 +66,36 @@
 
 
 {% block 'scripts' %}
+<script src="App.js"></script>
+<script>
+function pruebaDivAPdf() {
+var pdf = new jsPDF('p', 'pt', 'letter');
+source = $('#report-list')[0];
+
+specialElementHandlers = {
+    '#bypassme': function (element, renderer) {
+        return true
+    }
+};
+margins = {
+    top: 80,
+    bottom: 60,
+    left: 40,
+    width: 522
+};
+
+pdf.fromHTML(
+    source, 
+    margins.left, // x coord
+    margins.top, { // y coord
+        'width': margins.width, 
+        'elementHandlers': specialElementHandlers
+    },
+
+    function (dispose) {
+        pdf.save('Prueba.pdf');
+    }, margins
+);
+}
+</script>
 {% endblock %}
