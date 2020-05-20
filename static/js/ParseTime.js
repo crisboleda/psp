@@ -13,9 +13,4 @@ class ParseTime {
 
         return [hours, minutes, seconds]
     }
-
-    static calculateTimeDifference(){
-        
-    }
-
 }

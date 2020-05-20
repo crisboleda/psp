@@ -1,25 +1,38 @@
 
 # Django
-from django.views.generic import ListView
+from django.views.generic import ListView, FormView
+from django.urls import reverse_lazy
 
 # Models
-from logs.models import DefectLog, DefectType
+from logs.models import DefectLog, DefectType, Phase
+
+# Forms
+from logs.forms import CreateDefectLogForm
 
 # Mixins
 from psp.mixins import MemberUserProgramRequiredMixin
 
 
-class ListDefectLogView(MemberUserProgramRequiredMixin, ListView):
+class CreateDefectLogView(MemberUserProgramRequiredMixin, FormView):
+    form_class = CreateDefectLogForm
     template_name = 'defects/defects.html'
-    context_object_name = 'log_defects'
+    
+    def form_valid(self, form):
+        form.save(self.program)
+        return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["program_opened"] = self.program 
+        context["phases"] = Phase.objects.all()
+        context["type_defects"] = DefectType.objects.all().values('number', 'name')
+        context["defect_logs"] = DefectLog.objects.filter(program=self.program)
         return context
 
-    def get_queryset(self):
-        return DefectLog.objects.filter(program=self.program)
+    def get_success_url(self):
+        return reverse_lazy('logs:program_defect_logs', kwargs={'pk_program': self.program.pk})
+    
+
 
 
 class ListDefectTypeStandardView(MemberUserProgramRequiredMixin, ListView):

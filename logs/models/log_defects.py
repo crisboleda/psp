@@ -16,11 +16,11 @@ class DefectType(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return "Type: {}  Name: {}".format(self._type, self.name)
+        return "Type: {}  Name: {}".format(self.number, self.name)
 
 
 class DefectLog(models.Model):
-    program = models.ForeignKey(Program, on_delete=models.CASCADE)
+    program = models.ForeignKey(Program, on_delete=models.CASCADE, related_name='get_defects')
     defect = models.ForeignKey(DefectType, on_delete=models.CASCADE)
     date = models.DateTimeField()
 
@@ -29,8 +29,8 @@ class DefectLog(models.Model):
     phase_injected = models.ForeignKey(Phase, on_delete=models.CASCADE, related_name='phase_defect_found')
     phase_removed = models.ForeignKey(Phase, on_delete=models.CASCADE, related_name='phase_defect_removed')
 
-    description = models.TextField()
-    solution = models.TextField()
+    description = models.TextField(max_length=500)
+    solution = models.TextField(max_length=500)
 
     cousing_defect = models.ForeignKey('DefectLog', null=True, on_delete=models.CASCADE, related_name='cousing_defect_defect')
 

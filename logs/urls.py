@@ -4,7 +4,8 @@ from django.urls import path
 
 # Views
 from logs.views import (ListProgramTimeLogView, CreateTimeLogView, UpdateCurrentTimeLog, RestartTimeLog,
-                        DetailTimeLogView, StopCurrentTimeLogView, ListDefectLogView, ListDefectTypeStandardView)
+                        DetailTimeLogView, StopCurrentTimeLogView, ListDefectTypeStandardView,
+                        CreateDefectLogView)
 
 
 urlpatterns = [
@@ -19,7 +20,7 @@ urlpatterns = [
 
 
     # URL LOG DEFECTS
-    path('programs/<int:pk_program>/defect_logs/', ListDefectLogView.as_view(), name='program_defect_logs'),
+    path('programs/<int:pk_program>/defect_logs/', CreateDefectLogView.as_view(), name='program_defect_logs'),
 
 
     # Type defects standard

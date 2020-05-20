@@ -1,8 +1,14 @@
 
-const input = document.getElementById('id_comments')
-const countWords = document.getElementById('count_words_comment_time_log')
+class CounterInputValue {
 
+    static showCountValue(input, countWords){
+        input.addEventListener('keyup', (e) =>  {
+            countWords.textContent = input.value.length
+        })
 
-input.addEventListener('keyup', (e) =>  {
-    countWords.textContent = input.value.length
-})
+        input.addEventListener('keydown', (e) => {
+            countWords.textContent = input.value.length
+        })
+    }
+
+}

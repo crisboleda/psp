@@ -17,3 +17,7 @@
 .current_phase {
     font-size: 35px;
 }
+
+.tip-help {
+    cursor: pointer;
+}

@@ -80,6 +80,14 @@
     <script src="{% static 'js/count_words.js' %}"></script>
     <script src="{% static 'js/WindowPopup.js' %}"></script>
     <script src="{% static 'js/Cookie.js' %}"></script>
+
+    <script>
+        const input = document.getElementById('id_comments')
+        const countWords = document.getElementById('count_words_comment_time_log')
+
+        CounterInputValue.showCountValue(input, countWords)
+
+    </script>
     
     <script>
         const form = document.getElementById('form-create-time-log')
