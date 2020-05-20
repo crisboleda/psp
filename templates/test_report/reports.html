@@ -55,6 +55,7 @@
                         {% endfor %}
                     </tbody>
                 </table>
+                <a href="javascript:pruebaDivAPdf()" class="btn btn-danger" >Descargar pdf</a>
             </div>
         {% endif %}
     </div>
@@ -66,7 +67,10 @@
 
 
 {% block 'scripts' %}
-<script src="App.js"></script>
+<script type="text/javascript" src="jquery.min.js"></script>
+<script src="jspdf/dist/jspdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+
 <script>
 function pruebaDivAPdf() {
 var pdf = new jsPDF('p', 'pt', 'letter');
