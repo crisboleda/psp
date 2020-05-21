@@ -23,6 +23,11 @@
         {% if program_opened %}
             {% include 'logs/modal_create.html' %}
         {% endif %}
+
+        {% if defect_logs %}
+            {% include 'defects/modal_defect_details.html' %}
+        {% endif %}
+
     <!-- End Modals -->
     <div class="page-wrapper">
         {% include 'menus/menu_mobile.html' %}

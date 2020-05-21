@@ -15,103 +15,123 @@
     <h2>Defect Log</h2>
     <br/>
     {{ form.errors }}
-    <div class="au-card">
-        <div class="timer-defect-log">
-            <div class="text-center">
-                <div class="container__time__defect">
-                    <p><span id="time_hours">00</span> : <span id="time_mins">00</span> : <span id="time_seg">00</span></p>
-                </div>
-                <div class="row controllers__timer justify-content-center">
 
-                    <!-- Button chronometer is running -->
-                    <button id="btn-pause-chronometer" class="btn btn-info mr-2 pl-4 pr-4 d-none"><i class="fas fa-pause"></i></button>
+    <div class="au-card rounded-pill card__new__defect__log p-0" id="containerFormDefectLog">
+        <div class="card__new__defect__log__header row">
+            <div class="col">
+                <span class="float-left p-3 text-secondary">
+                    <h3>Create new defect log</h3>
+                </span>
 
-                    <!-- Button chronometer is paused -->
-                    <button id="btn-reset-chronometer" class="btn btn-info mr-2 pl-4 pr-4"><i class="fas fa-play"></i></button>
-
-                    <!-- Button stop phase and save time -->
-                    <button id="btn-stop-chronometer" class="btn btn-danger pl-4 pr-4"><i class="fas fa-stop"></i></button>
-                </div>
+                <span class="float-right p-2">
+                    <button id="btnClosePanelCreateDefect" class="btn rounded-circle btn-primary d-none"><h3 class="text-white"><i class="fas fa-minus"></i></h3></button>
+                    <button id="btnOpenPanelCreateDefect" class="btn rounded-circle btn-primary"><h3 class="text-white"><i class="fas fa-plus"></i></h3></button>
+                </span>
             </div>
         </div>
-        <br/>
-        <hr/>
-        <br/>
         <div>
-            <form action="{% url 'logs:program_defect_logs' program_opened.pk %}" method="POST">
-                {% csrf_token %}
-
-                <div class="form-row">
-                    <div class="form-group col-xl-3">
-                        <label for="id_date">Date</label>
-                        <div class="input-group mb-2 mr-sm-2">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
-                            </div>
-                            <input type="date" name="date" class="form-control bg-white" id="flatpickr" placeholder="YYYY-MM-DD">
+            <div class="au-card">
+                <div class="timer-defect-log">
+                    <div class="text-center">
+                        <div class="container__time__defect">
+                            <p><span id="time_hours">00</span> : <span id="time_mins">00</span> : <span id="time_seg">00</span></p>
                         </div>
-                    </div>
+                        <div class="row controllers__timer justify-content-center">
 
-                    <input type="number" name="time_reparation" class="d-none" id="time_defect_log">
+                            <!-- Button chronometer is running -->
+                            <button id="btn-pause-chronometer" class="btn btn-info mr-2 pl-4 pr-4 d-none"><i class="fas fa-pause"></i></button>
 
-                    <div class="form-group col-xl-3">
-                        <label for="id_defect_type">Type</label>
-                        <select class="form-control" name="defect_type" id="id_defect_type">
-                            {% for defect_type in type_defects %}
-                                <option value="{{ defect_type.number }}">{{ defect_type.number }} - {{ defect_type.name }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
+                            <!-- Button chronometer is paused -->
+                            <button id="btn-reset-chronometer" class="btn btn-info mr-2 pl-4 pr-4"><i class="fas fa-play"></i></button>
 
-                    <div class="form-group col-xl-2">
-                        <label for="id_phase_injected">Phase injected</label>
-                        <select class="form-control" name="phase_injected" id="id_phase_injected">
-                            {% for phase in phases %}
-                                <option value="{{ phase.abbreviation }}">{{ phase.abbreviation }} ({{ phase.name }})</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-
-                    <div class="form-group col-xl-2">
-                        <label for="id_phase_removed">Phase removed</label>
-                        <select class="form-control" name="phase_removed" id="id_phase_removed">
-                            {% for phase in phases %}
-                                <option value="{{ phase.abbreviation }}">{{ phase.abbreviation }} ({{ phase.name }})</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-
-                    <div class="form-group col-xl-2">
-                        <label for="id_chained_defect">Cousing defect</label><i class="far fa-question-circle float-right tip-help" id="tip-help-cousing-input"></i>
-                        <select name="cousing_defect" id="input-cousing" class="form-control">
-                            <option value="">None</option>
-                            {% for defect in defect_logs %}
-                                <option value="{{ defect.pk }}">Defect <b> #{{ forloop.counter }}</b></option>
-                            {% endfor %}
-                        </select>
-                        <div class="bg-light p-2 shadow-sm d-none" id="tip-help-cousing-defect">
-                            <p>Si este defecto fue ocasionado por otro defecto, se debe especificar el <b>indice</b> del defecto que lo ocasionó</p>
+                            <!-- Button stop phase and save time -->
+                            <button id="btn-stop-chronometer" class="btn btn-danger pl-4 pr-4"><i class="fas fa-stop"></i></button>
                         </div>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-xl-6">
-                        <label for="id_description">Description</label>
-                        <textarea style="resize: none;" maxlength="500" class="form-control w-100" name="description" id="id_description" rows="4" placeholder="Enter description"></textarea>
-                        <p>Characters <b><span id="counterDescription">0</span>/500</b></p>
-                    </div>
-                    <div class="form-group col-xl-6">
-                        <label for="id_solution">Solution</label>
-                        <textarea style="resize: none;" maxlength="500" class="form-control w-100" name="solution" id="id_solution" rows="4" placeholder="Enter solution"></textarea>
-                        <p>Characters <b><span id="counterSolution">0</span>/500</b></p>
                     </div>
                 </div>
                 <br/>
-                
-                <input id="btnCreateDefect" type="submit" value="Create defect" disabled class="btn btn-dark btn-block">
-            </form>
+                <hr/>
+                <br/>
+                <div>
+                    <form action="{% url 'logs:program_defect_logs' program_opened.pk %}" method="POST">
+                        {% csrf_token %}
+
+                        <div class="form-row">
+                            <div class="form-group col-xl-3">
+                                <label for="id_date">Date</label>
+                                <div class="input-group mb-2 mr-sm-2">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
+                                    </div>
+                                    <input type="date" name="date" class="form-control bg-white" id="flatpickr" placeholder="YYYY-MM-DD">
+                                </div>
+                            </div>
+
+                            <input type="number" name="time_reparation" class="d-none" id="time_defect_log">
+
+                            <div class="form-group col-xl-3">
+                                <label for="id_defect_type">Type</label>
+                                <select class="form-control" name="defect_type" id="id_defect_type">
+                                    {% for defect_type in type_defects %}
+                                        <option value="{{ defect_type.number }}">{{ defect_type.number }} - {{ defect_type.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <div class="form-group col-xl-2">
+                                <label for="id_phase_injected">Phase injected</label>
+                                <select class="form-control" name="phase_injected" id="id_phase_injected">
+                                    {% for phase in phases %}
+                                        <option value="{{ phase.abbreviation }}">{{ phase.abbreviation }} ({{ phase.name }})</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <div class="form-group col-xl-2">
+                                <label for="id_phase_removed">Phase removed</label>
+                                <select class="form-control" name="phase_removed" id="id_phase_removed">
+                                    {% for phase in phases %}
+                                        <option value="{{ phase.abbreviation }}">{{ phase.abbreviation }} ({{ phase.name }})</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+                            <div class="form-group col-xl-2">
+                                <label for="id_chained_defect">Cousing defect</label><i class="far fa-question-circle float-right tip-help" id="tip-help-cousing-input"></i>
+                                <select name="cousing_defect" id="input-cousing" class="form-control">
+                                    <option value="">None</option>
+                                    {% for defect in defect_logs %}
+                                        <option value="{{ defect.pk }}">Defect <b> #{{ forloop.counter }}</b></option>
+                                    {% endfor %}
+                                </select>
+                                <div class="bg-light p-2 shadow-sm d-none" id="tip-help-cousing-defect">
+                                    <p>Si este defecto fue ocasionado por otro defecto, se debe especificar el <b>indice</b> del defecto que lo ocasionó</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-xl-6">
+                                <label for="id_description">Description</label>
+                                <textarea style="resize: none;" maxlength="500" class="form-control w-100" name="description" id="id_description" rows="4" placeholder="Enter description"></textarea>
+                                <p>Characters <b><span id="counterDescription">0</span>/500</b></p>
+                            </div>
+                            <div class="form-group col-xl-6">
+                                <label for="id_solution">Solution</label>
+                                <textarea style="resize: none;" maxlength="500" class="form-control w-100" name="solution" id="id_solution" rows="4" placeholder="Enter solution"></textarea>
+                                <p>Characters <b><span id="counterSolution">0</span>/500</b></p>
+                            </div>
+                        </div>
+                        <br/>
+                        
+                        <input id="btnCreateDefect" type="submit" value="Create defect" disabled class="btn btn-dark btn-block">
+                    </form>
+                </div>
+            </div>        
         </div>
     </div>
+
+    <br/>
+
     <br/>
 
     {% if defect_logs %}
@@ -134,7 +154,12 @@
                     {% for defect in defect_logs %}
                         <tr>
                             <td>{{ forloop.counter }}</td>
-                            <td>{{ defect.date }}</td>
+                            <td>
+                                {% load tz %}
+                                {% timezone "America/Bogota" %}
+                                    {{ defect.date|date }}
+                                {% endtimezone %}
+                            </td>
                             <td>{{ defect.defect.number }} - {{ defect.defect.name }}</td>
                             <td>{{ defect.phase_injected }}</td>
                             <td>{{ defect.phase_removed }}</td>
@@ -152,7 +177,7 @@
                                 {% endif %}
                             </td>
                             <td class="text-center">
-                                <button class="btn btn-primary"><i class="fas fa-info-circle"></i></button>
+                                <button value='{ "number": "{{ forloop.counter }}", "description": "{{ defect.description }}", "solution": "{{ defect.solution }}"}' data-target="#detailDefectModal" data-toggle="modal" class="btn btn-primary btnOpenModalDetails"><i class="fas fa-info-circle"></i></button>
                             </td>
                         </tr>
                     {% endfor %}
@@ -171,9 +196,10 @@
     {% load static %}
     <script src="{% static 'js/count_words.js' %}"></script>
     <script src="{% static 'js/ParseTime.js' %}"></script>
-    <script src="{% static 'js/ChronometerDefectLog.js' %}"></script>
-    <script src="{% static 'js/timer_defect_log.js' %}"></script>
-    <script src="{% static 'js/log_defects.js' %}"></script>
+    <script src="{% static 'js/defects/ChronometerDefectLog.js' %}"></script>
+    <script src="{% static 'js/defects/timer_defect_log.js' %}"></script>
+    <script src="{% static 'js/defects/log_defects.js' %}"></script>
+    <script src="{% static 'js/defects/modal_details.js' %}"></script>
 
     <script>
         // Inputs && counters
@@ -187,6 +213,29 @@
         CounterInputValue.showCountValue(inputSolution, counterSolution)
 
         var example = flatpickr('#flatpickr');
+        
+        const btnOpenPanelCreateDefect = document.getElementById('btnOpenPanelCreateDefect')
+        const btnClosePanelCreateDefect = document.getElementById('btnClosePanelCreateDefect')
+        const containerFormDefectLog = document.getElementById('containerFormDefectLog')
+
+        btnOpenPanelCreateDefect.addEventListener('click', (e) => {
+
+            btnClosePanelCreateDefect.classList.remove('d-none')
+            btnOpenPanelCreateDefect.classList.add('d-none')
+
+            containerFormDefectLog.classList.remove('rounded-pill')
+            containerFormDefectLog.classList.remove('animation_min_height')
+            containerFormDefectLog.classList.add('animation_max_height')
+
+        })
+
+        btnClosePanelCreateDefect.addEventListener('click', (e) => {
+            btnClosePanelCreateDefect.classList.add('d-none')
+            btnOpenPanelCreateDefect.classList.remove('d-none')
+
+            containerFormDefectLog.classList.add('rounded-pill')
+            containerFormDefectLog.classList.remove('animation_max_height')
+        })
 
     </script>
 {% endblock %}
