@@ -13,6 +13,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/', HomeView.as_view(), name='dashboard'),
     path('', IndexView.as_view(), name='index'),
+    
 
     # URL APP users
     path('users/', include(('users.urls', 'users'), namespace='users')),
