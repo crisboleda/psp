@@ -6,6 +6,7 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/projects.css' %}">
     <link rel="stylesheet" href="{% static 'css/buttom_float.css' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
 {% endblock %}
 
 {% block 'content' %}
@@ -67,39 +68,40 @@
 
 
 {% block 'scripts' %}
-<script type="text/javascript" src="jquery.min.js"></script>
-<script src="jspdf/dist/jspdf.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+    {% load static %}
+        <script src="{% static'jspdf/dist/jspdf.min.js'%}"></script>
+    {% endblock %}
 
-<script>
-function pruebaDivAPdf() {
-var pdf = new jsPDF('p', 'pt', 'letter');
-source = $('#report-list')[0];
 
-specialElementHandlers = {
-    '#bypassme': function (element, renderer) {
-        return true
-    }
-};
-margins = {
-    top: 80,
-    bottom: 60,
-    left: 40,
-    width: 522
-};
+    <script>
+        function pruebaDivAPdf() {
+            var pdf = new jsPDF('p', 'pt', 'letter');
+            source = $('#report-list')[0];
 
-pdf.fromHTML(
-    source, 
-    margins.left, // x coord
-    margins.top, { // y coord
-        'width': margins.width, 
-        'elementHandlers': specialElementHandlers
-    },
+            specialElementHandlers = {
+                '#bypassme': function (element, renderer) {
+                    return true
+            }
+        };
+        margins = {
+            top: 80,
+            bottom: 60,
+            left: 40,
+            width: 522
+        };
 
-    function (dispose) {
-        pdf.save('Prueba.pdf');
-    }, margins
-);
-}
-</script>
+        pdf.fromHTML(
+            source, 
+            margins.left, // x coord
+            margins.top, { // y coord
+                'width': margins.width, 
+                'elementHandlers': specialElementHandlers
+            },
+
+            function (dispose) {
+                pdf.save('Prueba.pdf');
+            }, margins
+        );
+        }
+    </script>
 {% endblock %}
