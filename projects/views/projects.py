@@ -68,7 +68,7 @@ class AddProgrammerProjectView(AdminRequiredMixin, FormView):
         return super().form_valid(form)
     
     def get_success_url(self):
-        return reverse_lazy('projects:edit_project', kwargs={'pk': self.project.pk})
+        return reverse_lazy('projects:edit_project', kwargs={'pk_project': self.project.pk})
 
 
 class RemoveProgrammerProjectView(AdminRequiredMixin, RedirectView):
@@ -92,5 +92,5 @@ class RemoveProgrammerProjectView(AdminRequiredMixin, RedirectView):
         return super().dispatch(request, *args, **kwargs)
 
     def get_redirect_url(self, pk_project, username_programmer):
-        return reverse_lazy('projects:edit_project', kwargs={'pk': pk_project })
+        return reverse_lazy('projects:edit_project', kwargs={'pk_project': pk_project })
 

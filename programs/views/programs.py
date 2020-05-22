@@ -30,6 +30,12 @@ class AdminListProgramView(AdminRequiredMixin, ListView):
     def get_queryset(self):
         return Program.objects.filter(module=self.module)
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["module"] = self.module 
+        return context
+    
+
 
 # Vista que muestra todos los programas que tiene un programador
 class ProgrammerListProgramView(LoginRequiredMixin, ListView):

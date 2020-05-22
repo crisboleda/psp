@@ -1,6 +1,7 @@
 
 # Ignore development environment
 .env/
+.venv/
 
 # Ignore Visual Studio Code Configuration
 .vscode/
@@ -10,9 +11,6 @@ __pycache__
 
 # Ignore django migrations
 migrations/
-
-# Ignore data media
-media/users/
 
 # Ignore database SQLite
 *.sqlite3

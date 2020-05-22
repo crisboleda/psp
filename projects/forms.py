@@ -65,7 +65,7 @@ class UpdateProjectModelForm(forms.ModelForm):
 
 class AddProgrammerProjectForm(forms.Form):
 
-    username_programmer = forms.CharField(max_length=20)
+    username_programmer = forms.CharField(max_length=50)
 
     def clean(self):
         try:
