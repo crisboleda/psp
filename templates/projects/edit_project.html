@@ -52,7 +52,12 @@
                     <div class="row">
                         <div class="col">
                             <div class="p-0 pr-2 col-xl-9 float-left mt-2">
-                                <input type="text" name="username_programmer" placeholder="Nombre de usuario" class="form-control">
+                                <input type="text" name="username_programmer" list="programmers" placeholder="Nombre de usuario" class="form-control">
+                                <datalist id="programmers">
+                                    {% for programmer in programmers %}
+                                        <option value="{{ programmer.username }}">{{ programmer.username }}</option>
+                                    {% endfor %}
+                                </datalist>
                             </div>
                             <input type="submit" value="Agregar" class="btn btn-info float-right col-xl-3 mt-2">
                         </div>

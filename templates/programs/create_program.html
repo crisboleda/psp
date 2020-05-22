@@ -1,11 +1,14 @@
 
 {% extends 'base/dashboard.html' %}
 
+{% block 'title' %}PSP | Create Program{% endblock %}
+
 {% block 'links' %}
 {% endblock %}
 
 
 {% block 'content' %}
+
     <div class="au-card">
         <div class="card-header ml-3 mr-3">
             <h4>Crear un nuevo programa</h4>
@@ -56,6 +59,7 @@
                     <label for="programming_language">Lenguage de programación</label>
                     <select name="name_programming_language" id="programming_language" class="form-control">
                         {% for language in programming_languages %}
+                            <img height="16" width="16" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1200px-Python-logo-notext.svg.png"/>
                             <option value="{{ language.name }}">{{ language.name|capfirst }}</option>
                         {% endfor %}
                     </select>

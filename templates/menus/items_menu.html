@@ -21,11 +21,13 @@
             </a>
         </li>
     {% endif %}
-    <li>
-        <a href="{% url 'programs:programs_programmer' %}">
-            <i class="fas fa-sitemap"></i>Programas
-        </a>
-    </li>
+    {% if request.user.get_profile.type_user == 'programmer' %}
+        <li>
+            <a href="{% url 'programs:programs_programmer' %}">
+                <i class="fas fa-sitemap"></i>Programs
+            </a>
+        </li>
+    {% endif %}
     {% if program_opened %}
         <li class="has-sub">
             <a class="js-arrow" href="#">
