@@ -7,6 +7,7 @@ body {
 
 .program-container {
   height: auto;
+  margin-right: 50px;
   width: 350px;
   border-radius: 5px;
   background: #fffffb;
@@ -72,6 +73,7 @@ body {
   background: linear-gradient(45deg, #ff6b6c, #ffc145, #ffc145, #ff6b6c);
   background-size: 300% 300%;
   outline: none;
+  margin-bottom: 30px;
   transition: all 200ms ease-in-out;
 }
 
@@ -89,6 +91,7 @@ body {
 }
 
 .program-container footer {
+  position: absolute;
   display: flex;
   justify-content: space-between;
   align-items: center;

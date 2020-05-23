@@ -2,6 +2,8 @@
 # Django
 from django import forms
 
+from django.contrib.sessions.models import Session
+
 # Models
 from programs.models import Program, ProgrammingLanguage
 from django.contrib.auth.models import User
