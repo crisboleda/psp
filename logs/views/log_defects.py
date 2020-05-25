@@ -2,6 +2,7 @@
 # Django
 from django.views.generic import ListView, FormView
 from django.urls import reverse_lazy
+from django.http import HttpResponse
 
 # Models
 from logs.models import DefectLog, DefectType, Phase
@@ -16,9 +17,10 @@ from psp.mixins import MemberUserProgramRequiredMixin
 class CreateDefectLogView(MemberUserProgramRequiredMixin, FormView):
     form_class = CreateDefectLogForm
     template_name = 'defects/defects.html'
-    
+
     def form_valid(self, form):
         form.save(self.program)
+        self.request.session['defect_created'] = True
         return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
@@ -31,8 +33,6 @@ class CreateDefectLogView(MemberUserProgramRequiredMixin, FormView):
 
     def get_success_url(self):
         return reverse_lazy('logs:program_defect_logs', kwargs={'pk_program': self.program.pk})
-    
-
 
 
 class ListDefectTypeStandardView(MemberUserProgramRequiredMixin, ListView):

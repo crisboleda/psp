@@ -1,1 +1,101 @@
-<h1>Hello from parts base</h1>
+
+<br/>
+
+<div class="p-4 border shadow-sm">
+    <h4 class="text-center">ADD BASE PART</h4>
+    <br/>
+
+    <form action="{% url 'programs:create_part_program' 2 %}?type_part=base" method="POST">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="id_base_program">Base program</label>
+            <select name="base_program" id="id_base_program" class="form-control">
+                {% for base_program in base_programs %}
+                    <option value="{{ base_program.pk }}">{{ base_program.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-xl-3">
+                <label for="id_planning_base_lines">Planning base lines</label>
+                <input type="number" value="0" class="form-control" name="base_lines" placeholder="0" id="id_planning_base_lines">
+            </div>
+
+            <div class="form-group col-xl-3">
+                <label for="id_planning_added_lines">Planning added lines</label>
+                <input type="number" value="0" class="form-control" name="added_lines" placeholder="0" id="id_planning_added_lines">
+            </div>
+
+            <div class="form-group col-xl-3">
+                <label for="id_planning_edited_lines">Planning edited lines</label>
+                <input type="number" value="0" class="form-control" name="edited_lines" placeholder="0" id="id_planning_edited_lines">
+            </div>
+            
+            <div class="form-group col-xl-3">
+                <label for="id_planning_deleted_lines">Planning deleted lines</label>
+                <input type="number" value="0" class="form-control" name="deleted_lines" placeholder="0" id="id_planning_deleted_lines">
+            </div>
+        </div>
+        <br/>
+        <div class="text-right">
+            <button type="submit" class="btn btn-primary">Add</button>
+        </div>
+    </form>
+</div>
+
+<br/>
+<br/>
+<br/>
+
+<h4 class="ml-4"><b>Total Base Parts</b></h4>
+
+<div class="row base-programs">
+    <div class="col-xl-4 p-4">
+        <div class="shadow p-4">
+            <div class="row">
+                <div class="col-xl-8">
+                    <h3>Carrito de compras</h3>
+                </div>
+                <div class="col-xl-4 text-right">
+                    <button class="btn btn-info"><i class="fas fa-pencil-alt"></i></button>
+                </div>
+            </div>
+
+            <br/>
+            <div class="table-responsive-md p-1">
+                <table class="table shadow-sm text-center">
+                    <thead class="thead-dark">
+                        <th>Lines</th>
+                        <th>Planning</th>
+                        <th>Current</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th class="bg-light">Base</th>
+                            <td>1000</td>
+                            <td>500</td>
+                        </tr>
+                        <tr>
+                            <th class="bg-light">Deleted</th>
+                            <td>5</td>
+                            <td>100</td>
+                        </tr>
+                        <tr>
+                            <th class="bg-light">Added</th>
+                            <td>200</td>
+                            <td>300</td>
+                        </tr>
+                        <tr>
+                            <th class="bg-light">Edited</th>
+                            <td>500</td>
+                            <td>1000</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

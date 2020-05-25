@@ -5,9 +5,8 @@
   position: relative;
   background: white;
   padding: 50px;
-  padding-bottom: 80px;
   width: 100%;
-  height: 250px;
+  height: auto;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   border-radius: 5px;
   min-width: 240px;
@@ -16,12 +15,12 @@
   display: none;
 }
 .tabs .content section h2,
-.tabs ul li label {
+.tabs .tabs-items ul li label {
   font-weight: bold;
   font-size: 18px;
   color: #428BFF;
 }
-.tabs ul {
+.tabs .tabs-items ul {
   list-style-type: none;
   padding-left: 0;
   display: -webkit-box;
@@ -36,7 +35,7 @@
           align-items: flex-end;
   flex-wrap: wrap;
 }
-.tabs ul li {
+.tabs .tabs-items ul li {
   box-sizing: border-box;
   -webkit-box-flex: 1;
           flex: 1;
@@ -44,7 +43,7 @@
   padding: 0 10px;
   text-align: center;
 }
-.tabs ul li label {
+.tabs .tabs-items ul li label {
   -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
   color: #929daf;
@@ -62,10 +61,12 @@
   -ms-user-select: none;
   user-select: none;
 }
-.tabs ul li label br {
+
+.tabs .tabs-items ul li label br {
   display: none;
 }
-.tabs ul li label svg {
+
+.tabs .tabs-items ul li label svg {
   fill: #929daf;
   height: 1.2em;
   vertical-align: bottom;
@@ -73,11 +74,13 @@
   -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
 }
-.tabs ul li label:hover, .tabs ul li label:focus, .tabs ul li label:active {
+
+.tabs .tabs-items ul li label:hover, .tabs .tabs-items ul li label:focus, .tabs .tabs-items ul li label:active {
   outline: 0;
   color: #bec5cf;
 }
-.tabs ul li label:hover svg, .tabs ul li label:focus svg, .tabs ul li label:active svg {
+
+.tabs .tabs-items ul li label:hover svg, .tabs .tabs-items ul li label:focus svg, .tabs .tabs-items ul li label:active svg {
   fill: #bec5cf;
 }
 .tabs .slider {
@@ -227,22 +230,22 @@
   }
 }
 @media (max-width: 1000px) {
-  .tabs ul li label {
+  .tabs .tabs-items ul li label {
     white-space: initial;
   }
-  .tabs ul li label br {
+  .tabs .tabs-items ul li label br {
     display: initial;
   }
-  .tabs ul li label svg {
+  .tabs .tabs-items ul li label svg {
     height: 1.5em;
   }
 }
 @media (max-width: 600px) {
-  .tabs ul li label {
+  .tabs .tabs-items ul li label {
     padding: 5px;
     border-radius: 5px;
   }
-  .tabs ul li label span {
+  .tabs .tabs-items ul li label span {
     display: none;
   }
   .tabs .slider {

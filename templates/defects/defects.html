@@ -6,6 +6,7 @@
 {% block 'links' %}
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/timer_time_defect.css' %}">
+    <link rel="stylesheet" href="{% static 'css/alert_hidden.css' %}">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
@@ -15,6 +16,14 @@
     <h2 class="text-center">DEFECT LOG</h2>
     <br/>
     {{ form.errors }}
+
+    {% if request.session.defect_created %}
+        {% load custom_tags %}
+        {% show_alert_success "The defect was created success" %}
+        {{ request.session|clear_session_data:"defect_created" }}
+
+        <br/>
+    {% endif %}
 
     <div class="au-card rounded-pill card__new__defect__log p-0" id="containerFormDefectLog">
         <div class="card__new__defect__log__header row">
@@ -197,6 +206,8 @@
     <script src="{% static 'js/defects/timer_defect_log.js' %}"></script>
     <script src="{% static 'js/defects/log_defects.js' %}"></script>
     <script src="{% static 'js/defects/modal_details.js' %}"></script>
+    <script src="{% static 'js/hidden_alert.js' %}"></script>
+    <script src="{% static 'js/defects/global.js' %}"></script>
 
     <script>
         // Inputs && counters

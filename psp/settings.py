@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'programs',
     'users',
     'logs',
-    'projects'
+    'projects',
+    'utils',
 ]
 
 MIDDLEWARE = [

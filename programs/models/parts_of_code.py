@@ -25,15 +25,15 @@ class BasePart(models.Model):
     program = models.ForeignKey(Program, on_delete=models.CASCADE, related_name='program_base_part')
     program_base = models.ForeignKey(Program, on_delete=models.CASCADE, related_name='base_part')
 
-    lines_planned_base = models.IntegerField()
-    lines_planned_deleted = models.IntegerField()
-    lines_planned_edited = models.IntegerField()
-    lines_planned_added = models.IntegerField()
+    lines_planned_base = models.IntegerField(default=0)
+    lines_planned_deleted = models.IntegerField(default=0)
+    lines_planned_edited = models.IntegerField(default=0)
+    lines_planned_added = models.IntegerField(default=0)
 
-    lines_current_base = models.IntegerField()
-    lines_current_deleted = models.IntegerField()
-    lines_current_edited = models.IntegerField()
-    lines_current_added = models.IntegerField()
+    lines_current_base = models.IntegerField(null=True)
+    lines_current_deleted = models.IntegerField(null=True)
+    lines_current_edited = models.IntegerField(null=True)
+    lines_current_added = models.IntegerField(null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     created_at = models.DateTimeField(auto_now=True)
