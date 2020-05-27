@@ -1,0 +1,10 @@
+
+.item-base-program {
+    cursor: pointer;
+    box-shadow: 0 .140rem .50rem rgba(0,0,0,.1)!important;
+}
+
+.item-base-program:hover {
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+    transition: 0.7s;
+}

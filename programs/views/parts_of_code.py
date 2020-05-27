@@ -1,11 +1,20 @@
 
 # Django
-from django.views.generic import ListView, DetailView, FormView, View
+from django.views.generic import ListView, DetailView, FormView, View, UpdateView, RedirectView
 from django.urls import reverse_lazy
-from django.http.response import HttpResponseRedirect, Http404
+from django.http.response import HttpResponseRedirect, Http404, HttpResponseForbidden
+from django.contrib import messages
+
+# Django REST Framework
+from rest_framework.generics import UpdateAPIView
+
+# Serializers
+from programs.serializers import UpdateBaseProgramSerializer
 
 # Mixins
 from psp.mixins import MemberUserProgramRequiredMixin
+from programs.mixins import IsOwnerProgram
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Models
 from programs.models import Program, BasePart, ReusedPart, NewPart
@@ -42,9 +51,18 @@ class CreatePartProgramView(MemberUserProgramRequiredMixin, FormView):
 
     def form_valid(self, form):
         form.save(self.program)
-        self.request.session['part_created'] = "The {} part was created successfully".format(self.type_part)
+
+        messages.success(self.request, "The {} part was created successfully".format(self.type_part))
         return super().form_valid(form)
 
 
     def get_success_url(self):
         return reverse_lazy('programs:create_part_program', kwargs={'pk_program': self.program.pk}) + "?type_part={}".format(self.type_part)
+
+
+
+class UpdateBaseProgramView(LoginRequiredMixin, UpdateAPIView):
+    permission_classes = [IsOwnerProgram]
+    queryset = BasePart.objects.all()
+    lookup_url_kwarg = 'pk_base_part'
+    serializer_class = UpdateBaseProgramSerializer

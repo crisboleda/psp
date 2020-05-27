@@ -1,0 +1,41 @@
+<div class="modal fade" id="editBasePartModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel">Edit Base Part</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="alertErrorEditBasePart" class="m-2 alert alert-danger d-none"></div>
+            <div class="modal-body">
+                <form id="form-edit-base-program">
+                    <div class="form-group">
+                        <label for="baseCurrentLines" class="col-form-label">Base Current Lines</label>
+                        <input type="number" value="0" name="lines_current_base" class="form-control" id="baseCurrentLines">
+                    </div>
+                    <div class="form-group">
+                        <label for="addedCurrentLines" class="col-form-label">Added Current Lines</label>
+                        <input type="number" value="0" name="lines_current_added" class="form-control" id="addedCurrentLines">
+                    </div>
+                    <div class="form-group">
+                        <label for="editedCurrentLines" class="col-form-label">Edited Current Lines</label>
+                        <input type="number" value="0" name="lines_current_edited" class="form-control" id="editedCurrentLines">
+                    </div>
+                    <div class="form-group">
+                        <label for="deletedCurrentLines" class="col-form-label">Deleted Current Lines</label>
+                        <input type="number" value="0" name="lines_current_deleted" class="form-control" id="deletedCurrentLines">
+                    </div>
+
+                    <br/>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Update Part</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

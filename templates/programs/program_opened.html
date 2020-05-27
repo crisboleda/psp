@@ -10,16 +10,7 @@
     <div class="row">
         <div class="col-xl-6">
             <div class="au-card">
-                <table class="table">
-                    <thead>
-                        <tr>
-                        
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr></tr>
-                    </tbody>
-                </table>
+                <canvas id="chartTotalDefects" height="200"></canvas>
             </div>
         </div>
         <div class="col-xl-6">
@@ -28,4 +19,56 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+
+{% block 'scripts' %}
+    <script>
+        var ctx = document.getElementById('chartTotalDefects').getContext('2d')
+
+        var chartDefects = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Planning', 'Design', 'Codification', 'Compilation', 'Unit Test', 'Postmortem'],
+                datasets: [{
+                    label: 'number of defects injected per phase',
+                    data: [
+                        "{{ number_defects_planning }}",
+                        "{{ number_defects_design }}",
+                        "{{ number_defects_codification }}",
+                        "{{ number_defects_compilation }}",
+                        "{{ number_defects_unit_test }}",
+                        "{{ number_defects_postmortem }}"
+                    ],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1.5
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        })
+
+    </script>
 {% endblock %}

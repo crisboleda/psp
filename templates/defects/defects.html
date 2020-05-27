@@ -15,15 +15,10 @@
 {% block 'content' %}
     <h2 class="text-center">DEFECT LOG</h2>
     <br/>
+
+    {% include 'base/custom_alert.html' %}
+    
     {{ form.errors }}
-
-    {% if request.session.defect_created %}
-        {% load custom_tags %}
-        {% show_alert_success "The defect was created success" %}
-        {{ request.session|clear_session_data:"defect_created" }}
-
-        <br/>
-    {% endif %}
 
     <div class="au-card rounded-pill card__new__defect__log p-0" id="containerFormDefectLog">
         <div class="card__new__defect__log__header row">

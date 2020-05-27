@@ -13,15 +13,10 @@
 
 {% block 'content' %}
 
-    {% if request.session.part_created %}
-        {% load custom_tags %}
-        {% show_alert_success request.session.part_created %}
-        {{ request.session|clear_session_data:"part_created" }}
-
-        <br/>
-    {% endif %}
+    {% include 'base/custom_alert.html' %}
 
     {{ form.errors }}
+    
     <div class="tabs">
         <input type="radio" id="tab1" name="tab-control" checked>
         <input type="radio" id="tab2" name="tab-control">
@@ -80,6 +75,9 @@
 {% block 'scripts' %}
     {% load static %}
     <script src="{% static 'js/hidden_alert.js' %}"></script>
+    <script src="{% static 'js/Cookie.js' %}"></script>
+    <script src="{% static 'js/APIService.js' %}"></script>
+    <script src="{% static 'js/parts_of_code/parts_base.js' %}"></script>
     <script src="{% static 'js/parts_of_code/global.js' %}"></script>
 {% endblock %}
 

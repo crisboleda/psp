@@ -28,6 +28,10 @@
             {% include 'defects/modal_defect_details.html' %}
         {% endif %}
 
+        {% if base_programs %}
+            {% include 'parts_of_code/modal_edit_base_part.html' %}
+        {% endif %}
+
     <!-- End Modals -->
     <div class="page-wrapper">
         {% include 'menus/menu_mobile.html' %}
