@@ -1,4 +1,16 @@
 
+// INPUTS
+const inputBaseCurrentLines = document.getElementById('baseCurrentLines')
+const inputAddedCurrentLines = document.getElementById('addedCurrentLines')
+const inputEditedCurrentLines = document.getElementById('editedCurrentLines')
+const inputDeletedCurrentLines = document.getElementById('deletedCurrentLines')
+
+const inputBasePlannedLines = document.getElementById('basePlannedLines')
+const inputAddedPlannedLines = document.getElementById('addedPlannedLines')
+const inputEditedPlannedtLines = document.getElementById('editedPlannedLines')
+const inputDeletedPlannedLines = document.getElementById('deletedPlannedLines')
+
+
 // Buttons Edit Base program
 const buttonsEditBaseProgram = document.getElementsByClassName('btn-edit-base-program')
 const modalEditBaseProgram = document.getElementById('editBasePartModal')
@@ -17,11 +29,27 @@ for (let i = 0; i < buttonsEditBaseProgram.length; i++) {
 
 const setIdFormAction = (e) => {
     if (modalEditBaseProgram){
-        let idBaseProgram = e.target.value
-        if (idBaseProgram == undefined){
-            idBaseProgram = e.target.parentElement.value
+        let basePart = e.target.value
+        if (basePart == undefined){
+            basePart = e.target.parentElement.value
         }
-        formEditBaseProgram.setAttribute('action', `/base_parts/${idBaseProgram}/update/`)
+
+        basePart = JSON.parse(basePart)
+
+        console.log(basePart)
+
+        formEditBaseProgram.setAttribute('action', `/base_parts/${basePart.id}/update/`)
+        
+        inputBasePlannedLines.value = basePart.plBase
+        inputAddedPlannedLines.value = basePart.plAdded
+        inputDeletedPlannedLines.value = basePart.plDeleted
+        inputEditedPlannedtLines.value = basePart.plEdited
+        
+        inputBaseCurrentLines.value = basePart.currentBase
+        inputAddedCurrentLines.value = basePart.currentAdded
+        inputDeletedCurrentLines.value = basePart.currentDeleted
+        inputEditedCurrentLines.value = basePart.currentEdited
+        
     }
 }
 
@@ -29,6 +57,10 @@ const setIdFormAction = (e) => {
 formEditBaseProgram.addEventListener('submit', (e) => {
 
     data = {
+        lines_planned_base: e.target.basePlannedLines.value,
+        lines_planned_added: e.target.addedPlannedLines.value,
+        lines_planned_edited: e.target.editedPlannedLines.value,
+        lines_planned_deleted: e.target.deletedPlannedLines.value,
         lines_current_base: e.target.baseCurrentLines.value,
         lines_current_added: e.target.addedCurrentLines.value,
         lines_current_edited: e.target.editedCurrentLines.value,

@@ -13,10 +13,12 @@
 
 {% block 'content' %}
 
-    {% include 'base/custom_alert.html' %}
-
     {{ form.errors }}
     
+    <h2>Parts of the program</h2>
+    <br/>
+    {% include 'base/custom_alert.html' %}
+
     <div class="tabs">
         <input type="radio" id="tab1" name="tab-control" checked>
         <input type="radio" id="tab2" name="tab-control">
@@ -78,6 +80,8 @@
     <script src="{% static 'js/Cookie.js' %}"></script>
     <script src="{% static 'js/APIService.js' %}"></script>
     <script src="{% static 'js/parts_of_code/parts_base.js' %}"></script>
+    <script src="{% static 'js/parts_of_code/parts_reused.js' %}"></script>
+    <script src="{% static 'js/UtilUrl.js' %}"></script>
     <script src="{% static 'js/parts_of_code/global.js' %}"></script>
 {% endblock %}
 

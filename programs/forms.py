@@ -5,7 +5,7 @@ from django import forms
 from django.contrib.sessions.middleware import SessionMiddleware
 
 # Models
-from programs.models import Program, ProgrammingLanguage, BasePart
+from programs.models import Program, ProgrammingLanguage, BasePart, ReusedPart, NewPart
 from django.contrib.auth.models import User
 
 
@@ -58,11 +58,11 @@ class CreateBasePartForm(forms.Form):
 
     base_lines = forms.IntegerField(min_value=1)
 
-    edited_lines = forms.IntegerField()
+    edited_lines = forms.IntegerField(max_value=2000000000)
 
-    deleted_lines = forms.IntegerField()
+    deleted_lines = forms.IntegerField(max_value=2000000000)
 
-    added_lines = forms.IntegerField()
+    added_lines = forms.IntegerField(max_value=2000000000)
 
 
     def clean_base_program(self):
@@ -72,6 +72,12 @@ class CreateBasePartForm(forms.Form):
             return Program.objects.get(pk=int(pk_program))
         except Program.DoesNotExist:
             raise forms.ValidationError("The program doesn't exists")
+
+    def clean(self):
+        data = self.cleaned_data
+
+        return data
+    
 
     def save(self, program):
         data = self.cleaned_data
@@ -86,6 +92,34 @@ class CreateBasePartForm(forms.Form):
         )
 
 
+
+class CreateReusedPartForm(forms.Form):
+
+    reused_program = forms.IntegerField()
+
+    lines_planning = forms.IntegerField(min_value=1, max_value=2000000000)
+
+    lines_current = forms.IntegerField(required=False, max_value=2000000000)
+
+    
+    def clean_reused_program(self):
+        pk_program = self.cleaned_data['reused_program']
+
+        try:
+            return Program.objects.get(pk=pk_program)
+        except Program.DoesNotExist:
+            raise forms.ValidationError("The program doesn't exists")
+    
+
+    def save(self, program):
+        data = self.cleaned_data
+
+        ReusedPart.objects.create(
+            program=program,
+            program_reused_part=data['reused_program'],
+            planned_lines=data['lines_planning'],
+            current_lines=data['lines_current']
+        )
 
 
     

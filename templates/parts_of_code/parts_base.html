@@ -58,17 +58,16 @@
 <div class="row base-programs">
     {% if base_parts %}
         {% for base_part in base_parts %}
-            <div class="col-xl-4 p-4">
+            <div class="col-xl-6 p-4 col-md-12">
                 <div class="shadow p-4">
                     <div class="row">
                         <div class="col-xl-8">
                             <h3>{{ base_part.program_base.name }}</h3>
                         </div>
                         <div class="col-xl-4 text-right">
-                            <button value="{{ base_part.pk }}" type="button" class="btn btn-info btn-edit-base-program" data-toggle="modal" data-target="#editBasePartModal"><i class="fas fa-pencil-alt"></i></button>
+                            <button value='{"id": "{{ base_part.pk }}", "plBase": "{{ base_part.lines_planned_base }}", "plDeleted": "{{ base_part.lines_planned_deleted }}", "plAdded": "{{ base_part.lines_planned_added }}", "plEdited": "{{ base_part.lines_planned_edited }}", "currentBase": "{{ base_part.lines_current_base }}", "currentDeleted": "{{ base_part.lines_current_deleted }}", "currentAdded": "{{ base_part.lines_current_added }}", "currentEdited": "{{ base_part.lines_current_edited }}"}' type="button" class="btn btn-info btn-edit-base-program" data-toggle="modal" data-target="#editBasePartModal"><i class="fas fa-pencil-alt"></i></button>
                         </div>
                     </div>
-
                     <br/>
                     <div class="table-responsive-md p-1">
                         <table class="table shadow-sm text-center">

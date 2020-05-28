@@ -43,6 +43,9 @@ class Profile(models.Model):
         default='programmer'
     )
 
+    url_account_github = models.CharField(max_length=200, null=True, blank=True)
+    url_account_linkedin = models.CharField(max_length=200, null=True, blank=True)
+
     experience_languages = models.ManyToManyField(ProgrammingLanguage, related_name='experience_languages')
 
     years_development = models.IntegerField(default=0, help_text='Years of development experience')

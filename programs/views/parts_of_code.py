@@ -1,6 +1,6 @@
 
 # Django
-from django.views.generic import ListView, DetailView, FormView, View, UpdateView, RedirectView
+from django.views.generic import ListView, DetailView, FormView, TemplateView, UpdateView, RedirectView
 from django.urls import reverse_lazy
 from django.http.response import HttpResponseRedirect, Http404, HttpResponseForbidden
 from django.contrib import messages
@@ -9,7 +9,7 @@ from django.contrib import messages
 from rest_framework.generics import UpdateAPIView
 
 # Serializers
-from programs.serializers import UpdateBaseProgramSerializer
+from programs.serializers import UpdateBaseProgramSerializer, UpdateReusedPartSerializer
 
 # Mixins
 from psp.mixins import MemberUserProgramRequiredMixin
@@ -20,7 +20,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from programs.models import Program, BasePart, ReusedPart, NewPart
 
 # Models 
-from programs.forms import CreateBasePartForm
+from programs.forms import CreateBasePartForm, CreateReusedPartForm
 
     
 
@@ -32,6 +32,8 @@ class CreatePartProgramView(MemberUserProgramRequiredMixin, FormView):
         if self.type_part and (self.type_part == 'base' or self.type_part == 'reused' or self.type_part == 'new'):
             if self.type_part == 'base':
                 return CreateBasePartForm
+            elif self.type_part == 'reused':
+                return CreateReusedPartForm
         else:
             raise Http404("The URL doesn't valid")
     
@@ -66,3 +68,11 @@ class UpdateBaseProgramView(LoginRequiredMixin, UpdateAPIView):
     queryset = BasePart.objects.all()
     lookup_url_kwarg = 'pk_base_part'
     serializer_class = UpdateBaseProgramSerializer
+
+
+class UpdateReusedPartView(LoginRequiredMixin, UpdateAPIView):
+    permission_classes = [IsOwnerProgram]
+    queryset = ReusedPart.objects.all()
+    lookup_url_kwarg = 'pk_reused_part'
+    serializer_class = UpdateReusedPartSerializer
+

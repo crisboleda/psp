@@ -64,8 +64,6 @@ class DetailProgramView(MemberUserProgramRequiredMixin, DetailView):
 
         for phase in number_defects_injected_phase:
             context["number_defects_{}".format((phase['name'].replace(' ', '_')).lower())] = phase['total']
-        
-        import pdb; pdb.set_trace()
 
         return context
     

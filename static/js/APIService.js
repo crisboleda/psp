@@ -1,4 +1,9 @@
 
+/** 
+ * @param String url
+ * @param Object body
+ * @param String method
+**/
 
 class APIService {
 
