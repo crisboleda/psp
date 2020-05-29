@@ -8,8 +8,15 @@ from programs.models import BasePart, ReusedPart, NewPart
 
 class UpdateBaseProgramSerializer(serializers.ModelSerializer):
 
-    lines_current_base = serializers.IntegerField(min_value=1)
-    lines_planned_base = serializers.IntegerField(min_value=1)
+    lines_current_base = serializers.IntegerField(min_value=0, max_value=2000000000)
+    lines_current_added = serializers.IntegerField(min_value=0, max_value=2000000000)
+    lines_current_edited = serializers.IntegerField(min_value=0, max_value=2000000000)
+    lines_current_deleted = serializers.IntegerField(min_value=0, max_value=2000000000)
+
+    lines_planned_base = serializers.IntegerField(min_value=1, max_value=2000000000)
+    lines_planned_added = serializers.IntegerField(min_value=0, max_value=2000000000)
+    lines_planned_edited = serializers.IntegerField(min_value=0, max_value=2000000000)
+    lines_planned_deleted = serializers.IntegerField(min_value=0, max_value=2000000000)
 
     class Meta:
         model = BasePart
@@ -18,8 +25,23 @@ class UpdateBaseProgramSerializer(serializers.ModelSerializer):
         )
 
     def validate(self, data):
-        print("Hello world")
-        import pdb; pdb.set_trace()
+        self.validate_lines(
+            data['lines_planned_base'],
+            data['lines_planned_edited'],
+            data['lines_planned_deleted']
+        )
+        
+        self.validate_lines(
+            data['lines_current_base'],
+            data['lines_current_edited'],
+            data['lines_current_deleted']
+        )
+
+        return data
+
+    def validate_lines(self, base_lines, edited_lines, deleted_lines):
+        if base_lines < deleted_lines or edited_lines > (base_lines - deleted_lines):
+            raise serializers.ValidationError("The base lines doesn't enogth")
 
 
 class UpdateReusedPartSerializer(serializers.ModelSerializer):

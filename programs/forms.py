@@ -56,13 +56,13 @@ class CreateBasePartForm(forms.Form):
 
     base_program = forms.IntegerField()
 
-    base_lines = forms.IntegerField(min_value=1)
+    base_lines = forms.IntegerField(min_value=1, max_value=2000000000)
 
-    edited_lines = forms.IntegerField(max_value=2000000000)
+    edited_lines = forms.IntegerField(min_value=0, max_value=2000000000, required=False)
 
-    deleted_lines = forms.IntegerField(max_value=2000000000)
+    deleted_lines = forms.IntegerField(min_value=0, max_value=2000000000, required=False)
 
-    added_lines = forms.IntegerField(max_value=2000000000)
+    added_lines = forms.IntegerField(min_value=0, max_value=2000000000, required=False)
 
 
     def clean_base_program(self):
@@ -73,8 +73,25 @@ class CreateBasePartForm(forms.Form):
         except Program.DoesNotExist:
             raise forms.ValidationError("The program doesn't exists")
 
+    def clean_edited_lines(self) -> int:
+        return self.is_null(self.cleaned_data['edited_lines'])
+
+    def clean_deleted_lines(self) -> int:
+        return self.is_null(self.cleaned_data['deleted_lines'])
+
+    def clean_added_lines(self) -> int:
+        return self.is_null(self.cleaned_data['added_lines'])
+
+    def is_null(self, value) -> int:
+        if value == None:
+            return 0
+        return value
+
+
     def clean(self):
         data = self.cleaned_data
+        if data['deleted_lines'] > data['base_lines'] or data['edited_lines'] > (data['base_lines'] - data['deleted_lines']):
+            raise forms.ValidationError("There is no base lines")
 
         return data
     
@@ -99,7 +116,7 @@ class CreateReusedPartForm(forms.Form):
 
     lines_planning = forms.IntegerField(min_value=1, max_value=2000000000)
 
-    lines_current = forms.IntegerField(required=False, max_value=2000000000)
+    lines_current = forms.IntegerField(required=False, min_value=0, max_value=2000000000)
 
     
     def clean_reused_program(self):

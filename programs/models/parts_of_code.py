@@ -30,10 +30,10 @@ class BasePart(models.Model):
     lines_planned_edited = models.IntegerField(default=0)
     lines_planned_added = models.IntegerField(default=0)
 
-    lines_current_base = models.IntegerField(null=True)
-    lines_current_deleted = models.IntegerField(null=True)
-    lines_current_edited = models.IntegerField(null=True)
-    lines_current_added = models.IntegerField(null=True)
+    lines_current_base = models.IntegerField(default=0)
+    lines_current_deleted = models.IntegerField(default=0)
+    lines_current_edited = models.IntegerField(default=0)
+    lines_current_added = models.IntegerField(default=0)
 
     created_at = models.DateTimeField(auto_now_add=True)
     created_at = models.DateTimeField(auto_now=True)
