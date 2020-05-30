@@ -45,7 +45,7 @@ class Chronometer {
 
         this.start()
 
-        const url = `http://localhost:8000/timelogs/${this.idTimeLog}/restart/`
+        const url = `/timelogs/${this.idTimeLog}/restart/`
         const result = await this.serviceChronometer.put(url, {})
 
         console.log(result)
@@ -54,7 +54,7 @@ class Chronometer {
     async pause(){
         if (this.counter) clearInterval(this.counter)
 
-        const url = `http://localhost:8000/timelogs/${this.idTimeLog}/pause/`
+        const url = `/timelogs/${this.idTimeLog}/pause/`
 
         const body = {
             delta_time: this.totalSeconds,
@@ -69,7 +69,7 @@ class Chronometer {
     async stop(){
         if (this.counter) clearInterval(this.counter)
 
-        const url = `http://localhost:8000/timelogs/${this.idTimeLog}/stop/`
+        const url = `/timelogs/${this.idTimeLog}/stop/`
 
         const body = {
             delta_time: this.totalSeconds,

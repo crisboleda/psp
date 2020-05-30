@@ -44,9 +44,9 @@ class CreatePartProgramView(MemberUserProgramRequiredMixin, FormView):
         context["program_opened"] = self.program
         context["base_programs"] = Program.objects.exclude(pk=self.program.pk).filter(programmer=self.request.user)
 
-        context["base_parts"] = BasePart.objects.filter(program=self.program)
-        context["reused_parts"] = ReusedPart.objects.filter(program=self.program)
-        context["new_parts"] = NewPart.objects.filter(program=self.program)
+        context["base_parts"] = BasePart.objects.filter(program=self.program).order_by('created_at')
+        context["reused_parts"] = ReusedPart.objects.filter(program=self.program).order_by('created_at')
+        context["new_parts"] = NewPart.objects.filter(program=self.program).order_by('created_at')
 
         return context
     

@@ -2,6 +2,8 @@
 
 <div class="shadow-sm border p-3">
 
+    <div id="alert-error-create-reused-part" class="alert alert-danger text-center d-none p-2 mt-3 mb-3 w-100"></div>
+
     <form id="form-create-reused-part" action="{% url 'programs:create_part_program' program_opened.pk %}?type_part=reused" method="post">
         {% csrf_token %}
         <div class="form-row">
@@ -51,7 +53,7 @@
                         <td>{{ reused_part.planned_lines }}</td>
                         <td>{{ reused_part.current_lines }}</td>
                         <td>
-                            <button id="btnEditReusedPart" value='{"id": "{{ reused_part.pk }}", "plannedLines": "{{ reused_part.planned_lines }}", "currentLines": "{{ reused_part.current_lines }}"}' type="button" class="btn btn-primary" data-toggle="modal" data-target="#editReusedPart"><i class="fas fa-pencil-alt"></i></button>
+                            <button value='{"id": "{{ reused_part.pk }}", "plannedLines": "{{ reused_part.planned_lines }}", "currentLines": "{{ reused_part.current_lines }}"}' type="button" class="btn btn-primary buttonsEditReusedPart" data-toggle="modal" data-target="#editReusedPart"><i class="fas fa-pencil-alt"></i></button>
                         </td>
                     </tr>
                 {% endfor %}

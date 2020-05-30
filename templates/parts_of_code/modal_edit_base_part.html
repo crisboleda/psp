@@ -9,7 +9,12 @@
             </div>
             <div id="alertErrorEditBasePart" class="text-center m-2 alert alert-danger d-none"></div>
             <div class="modal-body">
-                <form id="form-edit-base-program">
+                <div id="loader-edit-base-part" class="text-center d-none">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+                <div id="form-edit-base-program">
 
                     <div class="form-row">
                         <div class="form-group col-xl-6">
@@ -55,10 +60,10 @@
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Update Part</button>
+                        <button type="button" id="btnUpdateBasePart" class="btn btn-primary">Update Part</button>
                     </div>
 
-                </form>
+                </div>
             </div>
         </div>
     </div>

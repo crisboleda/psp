@@ -11,7 +11,7 @@ class ReusedPart(models.Model):
     program_reused_part = models.ForeignKey(Program, on_delete=models.CASCADE, related_name='reused_part')
 
     planned_lines = models.IntegerField(default=0)
-    current_lines = models.IntegerField(null=True, blank=True)
+    current_lines = models.IntegerField(default=0, null=True, blank=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

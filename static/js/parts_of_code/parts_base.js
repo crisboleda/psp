@@ -16,6 +16,8 @@ const inputAddedPlannedLines = document.getElementById('addedPlannedLines')
 const inputEditedPlannedtLines = document.getElementById('editedPlannedLines')
 const inputDeletedPlannedLines = document.getElementById('deletedPlannedLines')
 
+// Button Update Base Part
+const btnUpdateBasePart = document.getElementById('btnUpdateBasePart')
 
 // Buttons Edit Base program
 const buttonsEditBaseProgram = document.getElementsByClassName('btn-edit-base-program')
@@ -26,12 +28,13 @@ const alertErrorEditBaseProgram = document.getElementById('alertErrorEditBasePar
 const apiService = new APIService()
 
 
-for (let i = 0; i < buttonsEditBaseProgram.length; i++) {
-    buttonsEditBaseProgram[i].addEventListener('click', (e) => {
-        setIdFormAction(e)
-    })
+if (buttonsEditBaseProgram){
+    for (let i = 0; i < buttonsEditBaseProgram.length; i++) {
+        buttonsEditBaseProgram[i].addEventListener('click', (e) => {
+            setIdFormAction(e)
+        })
+    }
 }
-
 
 const setIdFormAction = (e) => {
     if (modalEditBaseProgram){
@@ -60,57 +63,47 @@ const setIdFormAction = (e) => {
 }
 
 
-formEditBaseProgram.addEventListener('submit', (e) => {
+btnUpdateBasePart.addEventListener('click', (e) => {
 
-    let basePlannedLines = e.target.basePlannedLines.value
-    let addedPlannedLines = e.target.addedPlannedLines.value
-    let editedPlannedLines = e.target.editedPlannedLines.value
-    let deletedPlannedLines = e.target.deletedPlannedLines.value
-    let baseCurrentLines = e.target.baseCurrentLines.value
-    let addedCurrentLines = e.target.addedCurrentLines.value
-    let editedCurrentLines = e.target.editedCurrentLines.value
-    let deletedCurrentLines = e.target.deletedCurrentLines.value
+    let basePlannedLines = parseInt(Tag.get('id', 'basePlannedLines').value)
+    let addedPlannedLines = parseInt(Tag.get('id', 'addedPlannedLines').value)
+    let editedPlannedLines = parseInt(Tag.get('id', 'addedPlannedLines').value)
+    let deletedPlannedLines = parseInt(Tag.get('id', 'deletedPlannedLines').value)
+    let baseCurrentLines = parseInt(Tag.get('id', 'baseCurrentLines').value)
+    let addedCurrentLines = parseInt(Tag.get('id', 'addedCurrentLines').value)
+    let editedCurrentLines = parseInt(Tag.get('id', 'editedCurrentLines').value)
+    let deletedCurrentLines = parseInt(Tag.get('id', 'deletedCurrentLines').value)
 
-    validateLines(basePlannedLines, deletedPlannedLines, editedPlannedLines, e, alertErrorEditBaseProgram)
-    validateLines(baseCurrentLines, deletedCurrentLines, editedCurrentLines, e, alertErrorEditBaseProgram)
 
-    isLessCero([addedPlannedLines, editedPlannedLines, deletedPlannedLines, baseCurrentLines, addedCurrentLines, editedCurrentLines, deletedCurrentLines], e, alertErrorEditBaseProgram)
+    let isValidFirst = validateLines(basePlannedLines, deletedPlannedLines, editedPlannedLines, formEditBaseProgram, alertErrorEditBaseProgram)
+    let isValidSecond = validateLines(baseCurrentLines, deletedCurrentLines, editedCurrentLines, formEditBaseProgram, alertErrorEditBaseProgram)
+    let isValidLessCero =  isLessCero([addedPlannedLines, editedPlannedLines, deletedPlannedLines, baseCurrentLines, addedCurrentLines, editedCurrentLines, deletedCurrentLines], formEditBaseProgram, alertErrorEditBaseProgram)
+
+    console.log(isValidFirst)
+    console.log(isValidSecond)
+    console.log(isValidLessCero)
 
     if (basePlannedLines < 1) {
         alertErrorEditBaseProgram.classList.remove('d-none') 
         alertErrorEditBaseProgram.textContent = "The base planned lines can't be less to 1"
 
         AlertManager.hidden(alertErrorEditBaseProgram)
-    }
 
-    let data = {
-        lines_planned_base: basePlannedLines,
-        lines_planned_added: addedPlannedLines,
-        lines_planned_edited: editedPlannedLines,
-        lines_planned_deleted: deletedPlannedLines,
-        lines_current_base: baseCurrentLines,
-        lines_current_added: addedCurrentLines,
-        lines_current_edited: editedCurrentLines,
-        lines_current_deleted: deletedCurrentLines
-    }
+    } else if (isValidFirst && isValidSecond && isValidLessCero){
 
-    apiService.request(e.target.action, data, 'PATCH').then(async (response) => {
-        if (response.status == 200){
-            location.reload()
-
-        }else {
-            let data = await response.json()
-            alertErrorEditBaseProgram.classList.remove('d-none')
-            
-            for (let j = 0; j < data.lines_current_base.length; j++) {
-                alertErrorEditBaseProgram.textContent += data.lines_current_base[j]
-
-                AlertManager.hidden(alertErrorEditBaseProgram)
-            }
+        let data = {
+            lines_planned_base: basePlannedLines,
+            lines_planned_added: addedPlannedLines,
+            lines_planned_edited: editedPlannedLines,
+            lines_planned_deleted: deletedPlannedLines,
+            lines_current_base: baseCurrentLines,
+            lines_current_added: addedCurrentLines,
+            lines_current_edited: editedCurrentLines,
+            lines_current_deleted: deletedCurrentLines
         }
-    })
 
-    e.preventDefault()
+        updateBasePart(data, formEditBaseProgram)
+    }
 })
 
 
@@ -134,27 +127,66 @@ formCreateBasePart.addEventListener('submit', (e) => {
     }
 })
 
+function updateBasePart(data, form){
+
+    form.classList.add('d-none')
+
+    const loader = Tag.get('id', 'loader-edit-base-part')
+    loader.classList.remove('d-none')
+
+    apiService.request(form.getAttribute('action'), data, 'PATCH').then(async (response) => {
+        if (response.status == 200){
+            location.reload()
+
+        }else {
+            let data = await response.json()
+
+            loader.classList.add('d-none')
+            form.classList.remove('d-none')
+            
+            alertErrorEditBaseProgram.classList.remove('d-none')
+            
+            for (let j = 0; j < data.lines_current_base.length; j++) {
+                alertErrorEditBaseProgram.textContent += data.lines_current_base[j]
+
+                AlertManager.hidden(alertErrorEditBaseProgram)
+            }
+        }
+    })
+}
+
 
 function validateLines(baseLines, deletedLines, editedLines, form, alert){
+
+    console.log(baseLines, deletedLines, editedLines)
+    
+
     if ((deletedLines > baseLines) || (editedLines > (baseLines - deletedLines))){
         alert.classList.remove('d-none')
         alert.textContent = "The base lines aren't enough"
 
         AlertManager.hidden(alert)
+        
+        if (form != formEditBaseProgram) form.preventDefault()
 
-        form.preventDefault()
+        return false
     }
+    return true
 }
 
 function isLessCero(values, form, alert){
     for (let i = 0; i < values.length; i++) {
         if (values[i] < 0){
-            form.preventDefault()
+
+            if (form != formEditBaseProgram) form.preventDefault()
 
             alert.classList.remove('d-none')
             alert.textContent = "The inputs can't be less to 0"
 
             AlertManager.hidden(alert)
+
+            return false
         }
     }
+    return true
 }

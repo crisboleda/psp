@@ -126,6 +126,12 @@ class CreateReusedPartForm(forms.Form):
             return Program.objects.get(pk=pk_program)
         except Program.DoesNotExist:
             raise forms.ValidationError("The program doesn't exists")
+
+    
+    def clean_lines_current(self):
+        if self.cleaned_data['lines_current'] == None:
+            return 0
+        return self.cleaned_data['lines_current']
     
 
     def save(self, program):

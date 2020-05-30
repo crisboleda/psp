@@ -44,7 +44,7 @@
                     <a href="{% url 'logs:list_defects_type' program_opened.pk %}"><i class="fas fa-tag"></i>Defect Type Standard</a>   
                 </li>
                 <li>
-                    <a href=""><i class="fas fa-chart-line"></i>PIP</a>
+                    <a href="{% url 'programs:list_pip_program' program_opened.pk %}"><i class="fas fa-chart-line"></i>PIP</a>
                 </li>
                 <li>
                     <a href="{% url 'programs:create_part_program' program_opened.pk %}?type_part=base"><i class="fas fa-paper-plane"></i>Parts of the program</a>
