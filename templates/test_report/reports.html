@@ -10,98 +10,41 @@
 {% endblock %}
 
 {% block 'content' %}
-    <div>
-        <h2>Reportes</h2>
-        <br/>
-        {% if not  %}
-            <p>No hay reportes en este programa todavía</p>
-        {% else %}
-            <div id="report-list"class="table-responsive">
-                <table class="table table-borderless table-striped table-earning">
-                    <thead>
-                        <tr>
-                            <th>Fecha</th>
-                            <th>Nombre</th>
-                            <th>Objetivo</th>
-                            <th>Descripcion</th>
-                            <th>Condiciones</th>
-                            <th>Resulatdos esperados</th>
-                            <th>Resultados obtenidos</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for  in  %}
-                            <tr>
-                                <td>{{ .date }}</td>
-                                <td>{{ .name }}</td>
-                                <td>{{ .objetive }}</td>
-                                <td>{{ .description }}</td>
-                                <td>{{ .conditions }}</td>
-                                <td>{{ .espected_result }}</td>
-                                <td>{{ .actual_result }}</td>
-                                <td>
-                                    {% if not module.finish_date %}
-                                        ---
-                                    {% else %}
-                                        {{ module.finish_date|date }}
-                                    {% endif %}
-                                </td>
-                                <td class="row td-actions">
-                                    {% if request.user.get_profile.type_user == 'administrador' %}
-                                        <a href="{% url 'projects:update_module' module.project.pk module.pk %}" class="btn btn-secondary m-1" title="Edit"><i class="fas fa-edit"></i></a>
-                                    {% endif %}
-                                    <a href="{% url 'programs:list_programs' module.pk %}" class="btn btn-info m-1" title="Programas"><i class="fas fa-sitemap"></i></a>
-                                </td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
+<div>
+    <div class="container">
+        <button type="submit" class="btn btn-primary btn-lg">Crear Reportes</button>
+        <br>
+        <br>
+
+		<div class="row">
+			<div class="col">
+				<table class="table table-striped table-bordered table-hover">
+					<thead>
+						<tr>
+							<th>Test number</th>
+							<th>Date</th>
+                            <th>Name</th>
+                            <th>Objetive</th>
+                            <th>Description</th>
+                            <th>Conditions</th>
+                            <th>Espected Results</th>
+                            <th>Actual Results</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>1</td>
+							<td>11/mayo/2020</td>
+                            <td>Test1</td>
+                            <td>M</td>
+                            <td>x</td>
+                            <td>y</td>
+                            <td>100</td>
+                            <td>50</td>
+						</tr>
+					</tbody>
                 </table>
-                <a href="javascript:pruebaDivAPdf()" class="btn btn-danger" >Descargar pdf</a>
-            </div>
-        {% endif %}
-    </div>
-    
-    {% if request.user.get_profile.type_user == 'administrador' %}
-        <a href="{% url 'projects:create_module' pk_project %}" class="btn-flotante" title="Crear proyecto"><i class="fas fa-plus"></i></a>
-    {% endif %}
-{% endblock %}
-
-
-{% block 'scripts' %}
-    {% load static %}
-        <script src="{% static 'libraries/jspdf/dist/jspdf.min.js' %}"></script>
-    {% endblock %}
-
-
-    <script>
-        function pruebaDivAPdf() {
-            var pdf = new jsPDF('p', 'pt', 'letter');
-            source = $('#report-list')[0];
-
-            specialElementHandlers = {
-                '#bypassme': function (element, renderer) {
-                    return true
-            }
-        };
-        margins = {
-            top: 80,
-            bottom: 60,
-            left: 40,
-            width: 522
-        };
-
-        pdf.fromHTML(
-            source, 
-            margins.left, // x coord
-            margins.top, { // y coord
-                'width': margins.width, 
-                'elementHandlers': specialElementHandlers
-            },
-
-            function (dispose) {
-                pdf.save('Prueba.pdf');
-            }, margins
-        );
-        }
-    </script>
+			</div>
+		</div>
+</div>
 {% endblock %}
