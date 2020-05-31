@@ -1,15 +1,17 @@
 
 # Django
 from django.views.generic import ListView, DetailView, FormView, TemplateView, UpdateView, RedirectView
+from django.http.response import JsonResponse
 from django.urls import reverse_lazy
 from django.http.response import HttpResponseRedirect, Http404, HttpResponseForbidden
 from django.contrib import messages
 
 # Django REST Framework
-from rest_framework.generics import UpdateAPIView
+from rest_framework.generics import UpdateAPIView, ListAPIView
+from rest_framework.response import Response
 
 # Serializers
-from programs.serializers import UpdateBaseProgramSerializer, UpdateReusedPartSerializer
+from programs.serializers import UpdateBaseProgramSerializer, UpdateReusedPartSerializer, EstimationModelSerializer
 
 # Mixins
 from psp.mixins import MemberUserProgramRequiredMixin
@@ -17,12 +19,14 @@ from programs.mixins import IsOwnerProgram
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Models
-from programs.models import Program, BasePart, ReusedPart, NewPart
+from programs.models import Program, BasePart, ReusedPart, NewPart, Estimation, TypePart, SizeEstimation
 
-# Models 
-from programs.forms import CreateBasePartForm, CreateReusedPartForm
+# Forms 
+from programs.forms import CreateBasePartForm, CreateReusedPartForm, CreateNewPartForm
 
-    
+# Utils
+import json
+
 
 class CreatePartProgramView(MemberUserProgramRequiredMixin, FormView):
     template_name = 'parts_of_code/parts.html'
@@ -34,6 +38,8 @@ class CreatePartProgramView(MemberUserProgramRequiredMixin, FormView):
                 return CreateBasePartForm
             elif self.type_part == 'reused':
                 return CreateReusedPartForm
+            else:
+                return CreateNewPartForm
         else:
             raise Http404("The URL doesn't valid")
     
@@ -48,6 +54,12 @@ class CreatePartProgramView(MemberUserProgramRequiredMixin, FormView):
         context["reused_parts"] = ReusedPart.objects.filter(program=self.program).order_by('created_at')
         context["new_parts"] = NewPart.objects.filter(program=self.program).order_by('created_at')
 
+        context["type_parts"] = TypePart.objects.all()
+        context["sizes_estimations"] = SizeEstimation.objects.all()
+
+        serializer_estimations = EstimationModelSerializer(instance=Estimation.objects.all(), many=True)
+        context["estimations"] = str(json.dumps(serializer_estimations.data, sort_keys=True))
+        print(context["estimations"])
         return context
     
 
@@ -75,4 +87,3 @@ class UpdateReusedPartView(LoginRequiredMixin, UpdateAPIView):
     queryset = ReusedPart.objects.all()
     lookup_url_kwarg = 'pk_reused_part'
     serializer_class = UpdateReusedPartSerializer
-

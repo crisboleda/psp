@@ -8,6 +8,11 @@
     <link rel="stylesheet" href="{% static 'css/parts_of_code/menu_tap.css' %}">
     <link rel="stylesheet" href="{% static 'css/parts_of_code/parts_base.css' %}">
     <link rel="stylesheet" href="{% static 'css/alert_hidden.css' %}">
+
+    <script>
+        var estimations = JSON.parse('{{estimations}}'.replace(/&quot;/g,'"'))
+    </script>
+
 {% endblock %}
 
 
@@ -82,6 +87,7 @@
     <script src="{% static 'js/APIService.js' %}"></script>
     <script src="{% static 'js/parts_of_code/parts_base.js' %}"></script>
     <script src="{% static 'js/parts_of_code/parts_reused.js' %}"></script>
+    <script src="{% static 'js/parts_of_code/new_part.js' %}"></script>
     <script src="{% static 'js/UtilUrl.js' %}"></script>
     <script src="{% static 'js/parts_of_code/global.js' %}"></script>
 {% endblock %}

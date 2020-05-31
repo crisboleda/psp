@@ -47,11 +47,11 @@ class NewPart(models.Model):
     program = models.ForeignKey(Program, on_delete=models.CASCADE, related_name='new_part_program')
     estimation = models.ForeignKey(Estimation, on_delete=models.CASCADE, related_name='estimation_part')
 
-    planning_methods = models.IntegerField()
-    planning_lines = models.IntegerField()
+    planning_methods = models.IntegerField(null=False, blank=False)
+    planning_lines = models.IntegerField(null=False, blank=False)
 
-    current_methods = models.IntegerField()
-    current_lines = models.IntegerField()
+    current_methods = models.IntegerField(default=0)
+    current_lines = models.IntegerField(default=0)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

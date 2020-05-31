@@ -15,15 +15,15 @@ class APIService {
             "Accept": "application/json",
             "Content-Type": "application/json"
         },
-        body: {}
+        body: undefined
     }
 
     async request(url, body = {}, method){
+        if (method.toUpperCase() != 'GET') this.init.body = JSON.stringify(body)
+
         this.init.method = method
-        this.init.body = JSON.stringify(body)
 
         const response = await fetch(url, this.init)
         return response
     }
-
 }

@@ -1,1 +1,114 @@
-<h1>Hello from new parts!!</h1>
+
+
+<div class="shadow-sm border p-4">
+    <form action="{% url 'programs:create_part_program' program_opened.pk %}?type_part=new" method="POST">
+        {% csrf_token %}
+        <div class="form-row">
+
+            <div class="form-group col-xl-6">
+                <label for="">Name of the part</label>
+                <input type="text" name="name_part" id="" placeholder="Enter name of the part" class="form-control {% if form.name_part.errors %}is-invalid{% endif %}">
+                <div class="invalid-feeback">
+                    {% for error in form.name_part.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="form-group col-xl-6">
+                <label for="">Type part</label>
+                <select name="type_part" id="typeNewPart" class="form-control">
+                    {% for type_part in type_parts %}
+                        <option value="{{ type_part.name }}">{{ type_part.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+        </div>
+
+        <div class="form-row">
+
+            <div class="form-group col-xl-3">
+                <label for="">Planned methods</label>
+                <input type="number" name="planning_methods" id="plannedItemsNewPart" placeholder="Enter items" class="form-control {% if form.planning_methods.errors %}is-invalid{% endif %}">
+                <div class="invalid-feedback">
+                    {% for error in form.planning_methods.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="form-group col-xl-2">
+                <label for="">Planned Size estimation</label>
+                <select name="size_estimation" id="inputSizeEstimation" class="form-control">
+                    {% for size_estimation in sizes_estimations %}
+                        <option value="{{ size_estimation.name }}">{{ size_estimation.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group col-xl-2">
+                <label for="">Lines estimation</label>
+                <input disabled type="text" id="inputLinesEstimation" class="form-control" value="0">
+            </div>
+
+            <div class="form-group col-xl-3">
+                <label for="">Current methods</label>
+                <input type="number" name="current_methods" id="" placeholder="Enter items" class="form-control {% if form.current_methods.errors %}is-invalid{% endif %}">
+                <div class="invalid-feedback">
+                    {% for error in form.current_methods.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="form-group col-xl-2">
+                <label for="">Current Size estimation</label>
+                <input type="number" name="current_lines" id="" placeholder="Current lines" class="form-control {% if form.current_lines.errors %}is-invalid{% endif %}">
+                <div class="invalid-feedback">
+                    {% for error in form.current_lines.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+
+        <div class="text-right">
+            <input type="submit" value="Add" class="btn btn-primary">
+        </div>
+    </form>
+</div>
+
+<br/><br/>
+
+<div class="table-reponsive-md shadow-sm text-center">
+    <table class="table table-hover table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>Part name</th>
+                <th>Type part</th>
+                <th>Planned methods</th>
+                <th>Size estimation</th>
+                <th>Planned lines</th>
+                <th>Current methods</th>
+                <th>Current lines</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for new_part in new_parts %}
+                <tr>
+                    <td>{{ new_part.name }}</td>
+                    <td>{{ new_part.estimation.type_part.name }}</td>
+                    <td>{{ new_part.planning_methods }}</td>
+                    <td>{{ new_part.estimation.size_estimation.name }}</td>
+                    <td>{{ new_part.planning_lines }}</td>
+                    <td>{{ new_part.current_methods }}</td>
+                    <td>{{ new_part.current_lines }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+</div>

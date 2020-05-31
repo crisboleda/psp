@@ -7,6 +7,7 @@ from programs.views import (AdminListProgramView, CreateProgramView, ProgrammerL
                             DetailProgramView, CreatePartProgramView, UpdateBaseProgramView, 
                             UpdateReusedPartView, ListPIPView)
 
+
 urlpatterns = [
     path('modules/<int:pk_module>/programs/', AdminListProgramView.as_view(), name='list_programs'),
     path('modules/<int:pk_module>/programs/create/', CreateProgramView.as_view(), name='create_program'),
@@ -19,5 +20,5 @@ urlpatterns = [
     path('base_parts/<int:pk_base_part>/update/', UpdateBaseProgramView.as_view(), name='update_base_part'),
     path('reused_parts/<int:pk_reused_part>/update/', UpdateReusedPartView.as_view(), name='update_reused_part'),
 
-    path('programs/<int:pk_program>/pip/', ListPIPView.as_view(), name='list_pip_program')
+    path('programs/<int:pk_program>/pip/', ListPIPView.as_view(), name='list_pip_program'),
 ]

@@ -3,7 +3,7 @@
 from rest_framework import serializers
 
 # Models
-from programs.models import BasePart, ReusedPart, NewPart
+from programs.models import BasePart, ReusedPart, NewPart, Estimation, TypePart, SizeEstimation
 
 
 class UpdateBaseProgramSerializer(serializers.ModelSerializer):
@@ -51,3 +51,27 @@ class UpdateReusedPartSerializer(serializers.ModelSerializer):
     class Meta:
         model = ReusedPart
         fields = ('planned_lines', 'current_lines')
+
+
+class TypePartModelSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = TypePart
+        fields = ('pk', 'name', 'description')
+
+
+class SizeEstimationModelSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = SizeEstimation
+        fields = ('pk', 'name', 'description')
+
+
+class EstimationModelSerializer(serializers.ModelSerializer):
+
+    type_part = TypePartModelSerializer()
+    size_estimation = SizeEstimationModelSerializer()
+
+    class Meta:
+        model = Estimation
+        fields = ('type_part', 'size_estimation', 'lines_of_code', 'created_at', 'updated_at')
