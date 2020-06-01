@@ -5,9 +5,8 @@ from django.urls import path
 # Views
 from programs.views import (AdminListProgramView, CreateProgramView, ProgrammerListProgramView,
                             DetailProgramView, CreatePartProgramView, UpdateBaseProgramView, 
-                            UpdateReusedPartView, ListPIPView, ReportView, CreateReport, 
+                            UpdateReusedPartView, ListPIPView, PIPView, ReportView, CreateReport, 
                             UpdateNewPartView)
-
 
 urlpatterns = [
     path('modules/<int:pk_module>/programs/', AdminListProgramView.as_view(), name='list_programs'),
@@ -23,6 +22,7 @@ urlpatterns = [
     path('new_parts/<int:pk_new_part>/update/', UpdateNewPartView.as_view(), name='update_new_part'),
 
     path('programs/<int:pk_program>/pip/', ListPIPView.as_view(), name='list_pip_program'),
+    path('programs/<int:pk_program>/pipViews/', PIPView.as_view(), name='pip_program_view'),
     path('programs/<int:pk_>/reports/', ReportView.as_view(), name='reports_view'),
     path('programs/<int:pk_>/create_reports/', CreateReport.as_view(), name='create_reports'),
 ]
