@@ -13,20 +13,9 @@
 {% endblock %}
 
 
-{% block 'scripts' %}
-    {% load static %}
-        <script type="text/javascript">
-            $(document).ready(function() {
-                
-                $('#list_pip').DataTable();
-            } );
-        </script> 
-{% endblock %}
+
 
 {% block 'content' %}
-
-
-
     <div class="container">
         <div class="mx-auto col-sm-8 main-section" id="myTab" role="tablist">
             <ul class="nav nav-tabs justify-content-end">
@@ -42,7 +31,7 @@
                     <div class="card">
 	                    <div class="card-header">
                             <div class="table responsive">
-                                <table class="table  table-hover shadow table-bordered " id="list_pip">
+                                <table class="table  table-hover shadow table-bordered" id="list">
 
                                     <thead class="thead-dark">
                                         <tr>
@@ -56,19 +45,17 @@
                                     <tbody>
                                         <tr>
                                         <th scope="row">1</th>
-                                        <td>1</td>
                                         <td>Mayo 11,2020</td>
                                         <td>test</td>
+                                        <td>4</td>
                                         <td>1</td>
-                                       
                                         </tr>
                                         <tr>
                                         <th scope="row">2</th>
-                                        <td>2</td>
                                         <td>Abril 20,2020</td>
                                         <td>test</td>
+                                        <td>9</td>
                                         <td>6</td>
-                                        
                                         </tr>
                                     </tbody>
                                 </table>
@@ -115,3 +102,11 @@
     </div> 
 {% endblock 'content' %}
 
+{% block 'scripts' %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            
+            $('#userList').DataTable();
+        } );
+    </script> 
+{% endblock %}
