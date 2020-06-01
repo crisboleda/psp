@@ -5,6 +5,6 @@ from .programs import (AdminListProgramView, CreateProgramView, ProgrammerListPr
 from .parts_of_code import (CreatePartProgramView, UpdateBaseProgramView, UpdateReusedPartView
                             )
 
-from .pip import (ListPIPView)
+from .pip import (ListPIPView, PIPViews)
 
 from .report import (ReportView, CreateReport)

@@ -44,13 +44,18 @@
                     <a href="{% url 'logs:list_defects_type' program_opened.pk %}"><i class="fas fa-tag"></i>Defect Type Standard</a>   
                 </li>
                 <li>
-                    <a href="{% url 'programs:List_pip_program' program_opened.pk %}"><i class="fas fa-chart-line"></i>PIP</a>
+                    <a href="{% url 'programs:list_pip_program' program_opened.pk %}"><i class="fas fa-chart-line"></i>PIP</a>
+                    <ul class="list-unstyled navbar-mobile-sub__list js-sub-list">
+                    <li>
+                        <a href="{% url 'programs:pip_program_view' program_opened.pk %}"><i class="fas fa-list"></i>List pip</a>
+                    </li>
+                    </ul>
                 </li>
                 <li>
-                    <a href="{% url 'programs:create_part_program' program_opened.pk %}?type_part=base"><i class="fas fa-paper-plane"></i>Parts of the program</a>
+                    <a href="{% url 'programs:create_part_program' program_opened.pk %}?type_part=base"><i class="fas fa-puzzle-piece"></i>Parts of the program</a>
                 </li>
                 <li>
-                    <a href="{% url 'programs:reports_view' program_opened.pk %}"><i class="fas fa-crosshairs"></i>Test report</a>
+                    <a href="{% url 'programs:reports_view' program_opened.pk %}"><i class="fas fa-file-alt"></i>Test report</a>
                 </li>
                 <li>
                     <a href="{% url 'programs:detail_program' program_opened.pk %}"><i class="fas fa-crosshairs"></i>Summary</a>
