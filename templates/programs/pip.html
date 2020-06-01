@@ -3,7 +3,30 @@
 
 {% block 'title' %}PSP | PIP{% endblock %}
 
+{% block 'links' %}
+    {% load static %}
+        <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">	
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+
+{% endblock %}
+
+
+{% block 'scripts' %}
+    {% load static %}
+        <script type="text/javascript">
+            $(document).ready(function() {
+                
+                $('#list_pip').DataTable();
+            } );
+        </script> 
+{% endblock %}
+
 {% block 'content' %}
+
+
+
     <div class="container">
         <div class="mx-auto col-sm-8 main-section" id="myTab" role="tablist">
             <ul class="nav nav-tabs justify-content-end">
@@ -15,11 +38,11 @@
                 </li>
             </ul>
             <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade show active" id="list" role="tabpanel" aria-labelledby="list-tab">
+                <div class="tab-pane fade show active"  role="tabpanel" aria-labelledby="list-tab">
                     <div class="card">
 	                    <div class="card-header">
-                            <div>
-                                <table class="table  table-hover shadow">
+                            <div class="table responsive">
+                                <table class="table  table-hover shadow table-bordered " id="list_pip">
 
                                     <thead class="thead-dark">
                                         <tr>
@@ -37,7 +60,7 @@
                                         <td>Mayo 11,2020</td>
                                         <td>test</td>
                                         <td>1</td>
-                                        <td>2</td>
+                                       
                                         </tr>
                                         <tr>
                                         <th scope="row">2</th>
@@ -45,7 +68,7 @@
                                         <td>Abril 20,2020</td>
                                         <td>test</td>
                                         <td>6</td>
-                                        <td>5</td>
+                                        
                                         </tr>
                                     </tbody>
                                 </table>
@@ -89,5 +112,6 @@
             </div>
         </div>
     </div>
-    </div>  
+    </div> 
 {% endblock 'content' %}
+
