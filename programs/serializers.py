@@ -75,3 +75,76 @@ class EstimationModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = Estimation
         fields = ('type_part', 'size_estimation', 'lines_of_code', 'created_at', 'updated_at')
+
+
+class UpdateNewPartSerializer(serializers.Serializer):
+
+    name_part = serializers.CharField(max_length=150)
+
+    type_part = serializers.CharField(max_length=30)
+
+    size_estimation = serializers.CharField(max_length=2)
+
+    planning_methods = serializers.IntegerField(max_value=2000000000, min_value=1)
+
+    current_methods = serializers.IntegerField(max_value=2000000000, min_value=0, required=False)
+    current_lines = serializers.IntegerField(max_value=2000000000, min_value=0, required=False)
+
+
+    def validate_type_part(self, type_part):
+        try:
+            return TypePart.objects.get(name=type_part)
+        except TypePart.DoesNotExist:
+            raise serializers.ValidationError("The type part doesn't exists")
+    
+    
+    def validate_current_methods(self, current_methods):
+        if current_methods == None:
+            return 0
+        return current_methods
+
+    
+    def validate_current_lines(self, current_lines):
+        if current_lines == None:
+            return 0
+        return current_lines
+
+    
+    def validate_size_estimation(self, size_estimation):
+        try:
+            return SizeEstimation.objects.get(name=size_estimation)
+        except SizeEstimation.DoesNotExist:
+            raise serializers.ValidationError("The size estimation doesn't exists")
+
+
+    def validate(self, data):
+        try:
+            self.estimation = Estimation.objects.get(type_part=data['type_part'], size_estimation=data['size_estimation'])
+            self.planning_lines = data['planning_methods'] * self.estimation.lines_of_code
+        except Estimation.DoesNotExist:
+            raise serializers.ValidationError("The estimation doesn't exists")
+
+        return data
+
+    def save(self, part):
+        data = self.validated_data
+        
+        part.name = data['name_part']
+        part.estimation = self.estimation
+        part.planning_methods = data['planning_methods']
+        part.planning_lines = self.planning_lines
+        part.current_methods = data['current_methods']
+        part.current_lines = data['current_lines']
+
+        part.save()
+
+        return part
+
+
+class NewPartModelSerializer(serializers.ModelSerializer):
+
+    estimation = EstimationModelSerializer()
+
+    class Meta:
+        model = NewPart
+        fields = ('name', 'estimation', 'planning_methods', 'planning_lines', 'current_methods', 'current_lines')

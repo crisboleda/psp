@@ -195,7 +195,6 @@ class CreateNewPartForm(forms.Form):
         try:
             self.estimation = Estimation.objects.get(type_part=data['type_part'], size_estimation=data['size_estimation'])
             self.planning_lines = data['planning_methods'] * self.estimation.lines_of_code
-
         except Estimation.DoesNotExist:
             raise forms.ValidationError("The estimation doesn't exists")
 

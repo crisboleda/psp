@@ -82,7 +82,7 @@
 
 <br/><br/>
 
-<div class="table-reponsive-md shadow-sm text-center">
+<div class="table-responsive-md shadow-sm text-center">
     <table class="table table-hover table-striped">
         <thead class="thead-dark">
             <tr>
@@ -93,6 +93,7 @@
                 <th>Planned lines</th>
                 <th>Current methods</th>
                 <th>Current lines</th>
+                <th>Actions</th>
             </tr>
         </thead>
 
@@ -106,9 +107,20 @@
                     <td>{{ new_part.planning_lines }}</td>
                     <td>{{ new_part.current_methods }}</td>
                     <td>{{ new_part.current_lines }}</td>
+                    <td>
+                        <button value='{"id": "{{ new_part.pk }}", "name": "{{ new_part.name }}", "typePart": "{{ new_part.estimation.type_part.name }}", "planningMethods": "{{ new_part.planning_methods }}", "sizeEstimation": "{{ new_part.estimation.size_estimation.name }}", "planningLines": "{{ new_part.planning_lines }}", "currentMethods": "{{ new_part.current_methods }}", "currentLines": "{{ new_part.current_lines }}"}' type="button" class="btn btn-info btnEditNewPart" data-toggle="modal" data-target="#modalEditNewPart"><i class="fas fa-pencil-alt"></i></button>
+                    </td>
                 </tr>
             {% endfor %}
+            <tr>
+                <td colspan="4">
+                    <b>Total</b>
+                </td>
+                <td><b>{{ total_new_parts.planning }}</b></td>
+                <td></td>
+                <td><b>{{ total_new_parts.current }}</b></td>
+                <td></td>
+            </tr>
         </tbody>
-
     </table>
 </div>

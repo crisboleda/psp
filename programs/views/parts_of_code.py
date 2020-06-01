@@ -5,13 +5,17 @@ from django.http.response import JsonResponse
 from django.urls import reverse_lazy
 from django.http.response import HttpResponseRedirect, Http404, HttpResponseForbidden
 from django.contrib import messages
+from django.db.models import Sum
 
 # Django REST Framework
 from rest_framework.generics import UpdateAPIView, ListAPIView
 from rest_framework.response import Response
+from rest_framework import status
 
 # Serializers
-from programs.serializers import UpdateBaseProgramSerializer, UpdateReusedPartSerializer, EstimationModelSerializer
+from programs.serializers import (UpdateBaseProgramSerializer, UpdateReusedPartSerializer, 
+                                  EstimationModelSerializer, UpdateNewPartSerializer,
+                                  NewPartModelSerializer)
 
 # Mixins
 from psp.mixins import MemberUserProgramRequiredMixin
@@ -51,15 +55,19 @@ class CreatePartProgramView(MemberUserProgramRequiredMixin, FormView):
         context["base_programs"] = Program.objects.exclude(pk=self.program.pk).filter(programmer=self.request.user)
 
         context["base_parts"] = BasePart.objects.filter(program=self.program).order_by('created_at')
+
         context["reused_parts"] = ReusedPart.objects.filter(program=self.program).order_by('created_at')
+        context["total_reused_parts"] = ReusedPart.objects.filter(program=self.program).aggregate(planning=Sum('planned_lines'), current=Sum('current_lines'))
+
         context["new_parts"] = NewPart.objects.filter(program=self.program).order_by('created_at')
+        context["total_new_parts"] = NewPart.objects.filter(program=self.program).aggregate(planning=Sum('planning_lines'), current=Sum('current_lines'))
 
         context["type_parts"] = TypePart.objects.all()
         context["sizes_estimations"] = SizeEstimation.objects.all()
 
         serializer_estimations = EstimationModelSerializer(instance=Estimation.objects.all(), many=True)
-        context["estimations"] = str(json.dumps(serializer_estimations.data, sort_keys=True))
-        print(context["estimations"])
+        context["estimations"] = json.dumps(serializer_estimations.data, sort_keys=True)
+
         return context
     
 
@@ -87,3 +95,20 @@ class UpdateReusedPartView(LoginRequiredMixin, UpdateAPIView):
     queryset = ReusedPart.objects.all()
     lookup_url_kwarg = 'pk_reused_part'
     serializer_class = UpdateReusedPartSerializer
+
+
+class UpdateNewPartView(LoginRequiredMixin, UpdateAPIView):
+    permission_classes = [IsOwnerProgram]
+    queryset = NewPart.objects.all()
+    lookup_url_kwarg = 'pk_new_part'
+    serializer_class = UpdateNewPartSerializer
+
+    def patch(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data)
+
+        if serializer.is_valid():
+            new_part = self.get_object()
+            part = serializer.save(new_part)
+            
+            return Response(data=NewPartModelSerializer(instance=part).data, status=status.HTTP_200_OK)
+        return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)

@@ -30,29 +30,43 @@
     {% endif %}
     {% if program_opened %}
         <li class="has-sub">
-            <a class="js-arrow" href="#">
+            <a class="js-arrow open" href="#">
                 <i class="fas fa-folder-open"></i>Program directory
             </a>
-            <ul class="list-unstyled navbar-mobile-sub__list js-sub-list">
-                <li>
+            <ul class="list-unstyled navbar-mobile-sub__list js-sub-list" style="display: block;">
+
+                {% url 'logs:program_time_logs' program_opened.pk as url_program_time_logs %}
+                <li class="{% if url_program_time_logs == request.path %} active {% endif %}">
                     <a href="{% url 'logs:program_time_logs' program_opened.pk %}"><i class="far fa-clock"></i>Time Log</a>
                 </li>
-                <li>
+
+                {% url 'logs:program_defect_logs' program_opened.pk as url_program_defect_logs %}
+                <li class="{% if url_program_defect_logs == request.path %} active {% endif %}">
                     <a href="{% url 'logs:program_defect_logs' program_opened.pk %}"><i class="fas fa-bug"></i>Defect Log</a>
                 </li>
-                <li>
+
+                {% url 'logs:list_defects_type' program_opened.pk as url_list_defects_type %}
+                <li class="{% if url_list_defects_type == request.path %} active {% endif %}">
                     <a href="{% url 'logs:list_defects_type' program_opened.pk %}"><i class="fas fa-tag"></i>Defect Type Standard</a>   
                 </li>
-                <li>
-                    <a href="{% url 'programs:List_pip_program' program_opened.pk %}"><i class="fas fa-chart-line"></i>PIP</a>
+
+                {% url 'programs:list_pip_program' program_opened.pk as url_list_pip_program %}
+                <li class="{% if url_list_pip_program == request.path %} active {% endif %}">
+                    <a href="{% url 'programs:list_pip_program' program_opened.pk %}"><i class="fas fa-chart-line"></i>PIP</a>
                 </li>
-                <li>
+
+                {% url 'programs:create_part_program' program_opened.pk as url_create_part_program %}
+                <li class="{% if url_create_part_program == request.path %} active {% endif %}">
                     <a href="{% url 'programs:create_part_program' program_opened.pk %}?type_part=base"><i class="fas fa-paper-plane"></i>Parts of the program</a>
                 </li>
+
+
                 <li>
                     <a href="{% url 'programs:reports_view' program_opened.pk %}"><i class="fas fa-crosshairs"></i>Test report</a>
                 </li>
-                <li>
+
+                {% url 'programs:detail_program' program_opened.pk as url_detail_program %}
+                <li class="{% if url_detail_program == request.path %} active {% endif %}">
                     <a href="{% url 'programs:detail_program' program_opened.pk %}"><i class="fas fa-crosshairs"></i>Summary</a>
                 </li>
             </ul>

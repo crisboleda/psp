@@ -52,11 +52,17 @@
                         <td>{{ reused_part.program_reused_part.name }}</td>
                         <td>{{ reused_part.planned_lines }}</td>
                         <td>{{ reused_part.current_lines }}</td>
-                        <td>
-                            <button value='{"id": "{{ reused_part.pk }}", "plannedLines": "{{ reused_part.planned_lines }}", "currentLines": "{{ reused_part.current_lines }}"}' type="button" class="btn btn-primary buttonsEditReusedPart" data-toggle="modal" data-target="#editReusedPart"><i class="fas fa-pencil-alt"></i></button>
+                        <td class="">
+                            <button value='{"id": "{{ reused_part.pk }}", "plannedLines": "{{ reused_part.planned_lines }}", "currentLines": "{{ reused_part.current_lines }}"}' type="button" class="btn btn-info buttonsEditReusedPart" data-toggle="modal" data-target="#editReusedPart"><i class="fas fa-pencil-alt"></i></button>
+                            <button value='{"id": "{{ reused_part.pk }}", "typePart": "reused"}' class="btn btn-danger btnDeletePart" data-toggle="modal" data-target="#deletePartConfirmation"><i class="fas fa-trash"></i></button>
                         </td>
                     </tr>
                 {% endfor %}
+                <tr>
+                    <td><b>Total</b></td>
+                    <td><b>{{ total_reused_parts.planning }}</b></td>
+                    <td><b>{{ total_reused_parts.current }}</b></td>
+                </tr>
             </tbody>
         </table>
     </div>
