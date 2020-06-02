@@ -1,7 +1,7 @@
 
 
 const inputPlannedLinesNewPart = document.getElementById('plannedItemsNewPart')
-const inputTypePart = document.getElementById('typeNewPart')
+const inputTypePart = document.getElementById('typeNewPartFormCreate')
 const inputSizeEstimation = document.getElementById('inputSizeEstimation')
 const inputLinesEstimation = document.getElementById('inputLinesEstimation')
 const buttonsEditNewPart = document.getElementsByClassName('btnEditNewPart')

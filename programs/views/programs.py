@@ -43,10 +43,11 @@ class AdminListProgramView(AdminRequiredMixin, ListView):
 class ProgrammerListProgramView(LoginRequiredMixin, ListView):
     template_name = 'programs/programs_programmer.html'
     context_object_name = 'programs'
+    paginate_by = 6
 
     def get_queryset(self):
         return Program.objects.filter(programmer=self.request.user)
-
+    
 
 # Vista que se responde cuando se abre un programa
 class DetailProgramView(MemberUserProgramRequiredMixin, DetailView):

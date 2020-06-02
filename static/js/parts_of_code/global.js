@@ -44,7 +44,40 @@ for (let i = 0; i < buttonsDeletePart.length; i++) {
 
 
 btnDeletePartConfirmation.addEventListener('click', (e) => {
-    console.log(partDelete)
+    let myAPIService = new APIService()
+    let endpoint = ""
+
+    switch (partDelete.typePart) {
+        case 'reused':
+            endpoint = `/reused_parts/${partDelete.id}/delete/`
+            break;
+        
+        case 'new':
+            endpoint = `/new_parts/${partDelete.id}/delete/`
+            break;
+
+        default:
+            break;
+    }
+
+    if (endpoint != ""){
+
+        Tag.get('id', 'loaderDeletePart').classList.remove('d-none')
+        Tag.get('id', 'contentModalDeleteConfirmation').classList.add('d-none')
+        Tag.get('id', 'modalFooterDeleteConfirmation').classList.add('d-none')
+
+        myAPIService.request(endpoint, {}, 'DELETE').then(response => {
+
+            if (response.status == 204){
+                location.reload()
+            } else {
+                Tag.get('id', 'loaderDeletePart').classList.add('d-none')
+                Tag.get('id', 'contentModalDeleteConfirmation').classList.remove('d-none')
+                Tag.get('id', 'contentModalDeleteConfirmation').textContent = "ERROR!!!"
+                Tag.get('id', 'modalFooterDeleteConfirmation').classList.remove('d-none')
+            }
+        })
+    }
 })
 
 

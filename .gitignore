@@ -5,6 +5,7 @@
 
 # Ignore Visual Studio Code Configuration
 .vscode/
+.vs/
 
 # Ignore python caché
 __pycache__
@@ -14,3 +15,5 @@ migrations/
 
 # Ignore database SQLite
 *.sqlite3
+
+

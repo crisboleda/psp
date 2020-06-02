@@ -7,7 +7,7 @@
 
             <div class="form-group col-xl-6">
                 <label for="">Name of the part</label>
-                <input type="text" name="name_part" id="" placeholder="Enter name of the part" class="form-control {% if form.name_part.errors %}is-invalid{% endif %}">
+                <input type="text" name="name_part" placeholder="Enter name of the part" class="form-control {% if form.name_part.errors %}is-invalid{% endif %}">
                 <div class="invalid-feeback">
                     {% for error in form.name_part.errors %}
                         {{ error }}
@@ -17,7 +17,7 @@
 
             <div class="form-group col-xl-6">
                 <label for="">Type part</label>
-                <select name="type_part" id="typeNewPart" class="form-control">
+                <select name="type_part" id="typeNewPartFormCreate" class="form-control">
                     {% for type_part in type_parts %}
                         <option value="{{ type_part.name }}">{{ type_part.name }}</option>
                     {% endfor %}
@@ -54,7 +54,7 @@
 
             <div class="form-group col-xl-3">
                 <label for="">Current methods</label>
-                <input type="number" name="current_methods" id="" placeholder="Enter items" class="form-control {% if form.current_methods.errors %}is-invalid{% endif %}">
+                <input type="number" name="current_methods" placeholder="Enter items" class="form-control {% if form.current_methods.errors %}is-invalid{% endif %}">
                 <div class="invalid-feedback">
                     {% for error in form.current_methods.errors %}
                         {{ error }}
@@ -64,7 +64,7 @@
 
             <div class="form-group col-xl-2">
                 <label for="">Current Size estimation</label>
-                <input type="number" name="current_lines" id="" placeholder="Current lines" class="form-control {% if form.current_lines.errors %}is-invalid{% endif %}">
+                <input type="number" name="current_lines" placeholder="Current lines" class="form-control {% if form.current_lines.errors %}is-invalid{% endif %}">
                 <div class="invalid-feedback">
                     {% for error in form.current_lines.errors %}
                         {{ error }}
@@ -75,7 +75,7 @@
         </div>
 
         <div class="text-right">
-            <input type="submit" value="Add" class="btn btn-primary">
+            <input type="submit" value="Add" class="btn btn-info">
         </div>
     </form>
 </div>
@@ -98,7 +98,7 @@
         </thead>
 
         <tbody>
-            {% for new_part in new_parts %}
+            {% for new_part in new_parts.object_list %}
                 <tr>
                     <td>{{ new_part.name }}</td>
                     <td>{{ new_part.estimation.type_part.name }}</td>
@@ -109,6 +109,7 @@
                     <td>{{ new_part.current_lines }}</td>
                     <td>
                         <button value='{"id": "{{ new_part.pk }}", "name": "{{ new_part.name }}", "typePart": "{{ new_part.estimation.type_part.name }}", "planningMethods": "{{ new_part.planning_methods }}", "sizeEstimation": "{{ new_part.estimation.size_estimation.name }}", "planningLines": "{{ new_part.planning_lines }}", "currentMethods": "{{ new_part.current_methods }}", "currentLines": "{{ new_part.current_lines }}"}' type="button" class="btn btn-info btnEditNewPart" data-toggle="modal" data-target="#modalEditNewPart"><i class="fas fa-pencil-alt"></i></button>
+                        <button value='{"id": "{{ new_part.pk }}", "typePart": "new"}' class="btn btn-danger btnDeletePart" data-toggle="modal" data-target="#deletePartConfirmation"><i class="fas fa-trash"></i></button>
                     </td>
                 </tr>
             {% endfor %}
@@ -124,3 +125,28 @@
         </tbody>
     </table>
 </div>
+
+{% if pagination_new_parts.num_pages > 1 %}
+    <nav aria-label="Page navigation example">
+        <br/>
+        <br/>
+        <ul class="pagination justify-content-center">
+
+            {% if new_parts.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?type_part=new&page={{ new_parts.previous_page_number }}" tabindex="-1" aria-disabled="true"><i class="fas fa-chevron-left"></i></a>
+                </li>
+            {% endif %}
+
+            {% for page in pagination_new_parts.page_range %}
+                <li class="page-item {% if new_parts.number == page %}active{% endif %}"><a class="page-link" href="?type_part=new&page={{ page }}">{{ page }}</a></li>
+            {% endfor %}
+
+            {% if new_parts.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?type_part=new&page={{ new_parts.next_page_number }}"><i class="fas fa-chevron-right"></i></a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+{% endif %}

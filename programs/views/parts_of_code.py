@@ -6,9 +6,10 @@ from django.urls import reverse_lazy
 from django.http.response import HttpResponseRedirect, Http404, HttpResponseForbidden
 from django.contrib import messages
 from django.db.models import Sum
+from django.core.paginator import Paginator
 
 # Django REST Framework
-from rest_framework.generics import UpdateAPIView, ListAPIView
+from rest_framework.generics import UpdateAPIView, ListAPIView, DestroyAPIView
 from rest_framework.response import Response
 from rest_framework import status
 
@@ -50,16 +51,25 @@ class CreatePartProgramView(MemberUserProgramRequiredMixin, FormView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        
+
+        if 'page' not in self.request.GET:
+            self.page = 1
+        else:
+            self.page = self.request.GET['page']
+
         context["program_opened"] = self.program
         context["base_programs"] = Program.objects.exclude(pk=self.program.pk).filter(programmer=self.request.user)
 
+        # Context Base Parts
         context["base_parts"] = BasePart.objects.filter(program=self.program).order_by('created_at')
 
+        # Context Reused parts
         context["reused_parts"] = ReusedPart.objects.filter(program=self.program).order_by('created_at')
         context["total_reused_parts"] = ReusedPart.objects.filter(program=self.program).aggregate(planning=Sum('planned_lines'), current=Sum('current_lines'))
 
-        context["new_parts"] = NewPart.objects.filter(program=self.program).order_by('created_at')
+        # Context New parts
+        context["pagination_new_parts"] = Paginator(NewPart.objects.filter(program=self.program).order_by('created_at'), 5)
+        context["new_parts"] = context["pagination_new_parts"].page(self.page)
         context["total_new_parts"] = NewPart.objects.filter(program=self.program).aggregate(planning=Sum('planning_lines'), current=Sum('current_lines'))
 
         context["type_parts"] = TypePart.objects.all()
@@ -112,3 +122,17 @@ class UpdateNewPartView(LoginRequiredMixin, UpdateAPIView):
             
             return Response(data=NewPartModelSerializer(instance=part).data, status=status.HTTP_200_OK)
         return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class DeleteReusedPartView(LoginRequiredMixin, DestroyAPIView):
+    permission_classes = [IsOwnerProgram]
+    queryset = ReusedPart.objects.all()
+    lookup_url_kwarg = 'pk_reused_part'
+    serializer_class = UpdateReusedPartSerializer
+
+
+class DeleteNewPartView(LoginRequiredMixin, DestroyAPIView):
+    permission_classes = [IsOwnerProgram]
+    queryset = NewPart.objects.all()
+    lookup_url_kwarg = 'pk_new_part'
+    serializer_class = NewPartModelSerializer

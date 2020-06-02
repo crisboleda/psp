@@ -6,21 +6,25 @@ from django.urls import path
 from programs.views import (AdminListProgramView, CreateProgramView, ProgrammerListProgramView,
                             DetailProgramView, CreatePartProgramView, UpdateBaseProgramView, 
                             UpdateReusedPartView, ListPIPView, ReportView, CreateReport, 
-                            UpdateNewPartView)
+                            UpdateNewPartView, DeleteReusedPartView, DeleteNewPartView)
 
 urlpatterns = [
+
+    # Programs
     path('modules/<int:pk_module>/programs/', AdminListProgramView.as_view(), name='list_programs'),
     path('modules/<int:pk_module>/programs/create/', CreateProgramView.as_view(), name='create_program'),
     path('programs/', ProgrammerListProgramView.as_view(), name='programs_programmer'),
     path('programs/<int:pk_program>/', DetailProgramView.as_view(), name='detail_program'),
 
     # PARTS OF CODE
-
     path('programs/<int:pk_program>/parts/', CreatePartProgramView.as_view(), name='create_part_program'),
     path('base_parts/<int:pk_base_part>/update/', UpdateBaseProgramView.as_view(), name='update_base_part'),
     path('reused_parts/<int:pk_reused_part>/update/', UpdateReusedPartView.as_view(), name='update_reused_part'),
     path('new_parts/<int:pk_new_part>/update/', UpdateNewPartView.as_view(), name='update_new_part'),
+    path('reused_parts/<int:pk_reused_part>/delete/', DeleteReusedPartView.as_view(), name='delete_reused_part'),
+    path('new_parts/<int:pk_new_part>/delete/', DeleteNewPartView.as_view(), name='delete_new_part'),
 
+    # PIP
     path('programs/<int:pk_program>/pip/', ListPIPView.as_view(), name='list_pip_program'),
     path('programs/<int:pk_>/reports/', ReportView.as_view(), name='reports_view'),
     path('programs/<int:pk_>/create_reports/', CreateReport.as_view(), name='create_reports'),
