@@ -56,6 +56,10 @@ btnDeletePartConfirmation.addEventListener('click', (e) => {
             endpoint = `/new_parts/${partDelete.id}/delete/`
             break;
 
+        case 'base':
+            endpoint = `/base_parts/${partDelete.id}/delete/`;
+            break;
+
         default:
             break;
     }

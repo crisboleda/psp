@@ -58,7 +58,9 @@ class CreatePartProgramView(MemberUserProgramRequiredMixin, FormView):
             self.page = self.request.GET['page']
 
         context["program_opened"] = self.program
+
         context["base_programs"] = Program.objects.exclude(pk=self.program.pk).filter(programmer=self.request.user)
+        context["total_base_parts"] = BasePart.objects.filter(program=self.program).aggregate(total_planned_base_lines=Sum('lines_planned_base'), total_planned_deleted_lines=Sum('lines_planned_deleted'), total_planned_edited_lines=Sum('lines_planned_edited'), total_planned_added_lines=Sum('lines_planned_added'), total_current_base_lines=Sum('lines_current_base'), total_current_deleted_lines=Sum('lines_current_deleted'), total_current_edited_lines=Sum('lines_current_edited'), total_current_added_lines=Sum('lines_current_added'))
 
         # Context Base Parts
         context["base_parts"] = BasePart.objects.filter(program=self.program).order_by('created_at')
@@ -136,3 +138,10 @@ class DeleteNewPartView(LoginRequiredMixin, DestroyAPIView):
     queryset = NewPart.objects.all()
     lookup_url_kwarg = 'pk_new_part'
     serializer_class = NewPartModelSerializer
+
+
+class DeleteBasePartView(LoginRequiredMixin, DestroyAPIView):
+    permission_classes = [IsOwnerProgram]
+    queryset = BasePart.objects.all()
+    lookup_url_kwarg = 'pk_base_part'
+    serializer_class = UpdateBaseProgramSerializer

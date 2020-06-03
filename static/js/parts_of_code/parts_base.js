@@ -190,3 +190,17 @@ function isLessCero(values, form, alert){
     }
     return true
 }
+
+
+Tag.get('id', 'btnShowTotalLinesBasePart').addEventListener('click', (e) => {
+    Tag.get('id', 'btnShowTotalLinesBasePart').classList.add('d-none')
+    Tag.get('id', 'btnHiddeTotalLinesBasePart').classList.remove('d-none')
+    Tag.get('id', 'totalLinesBaseParts').classList.remove('d-none')
+})
+
+
+Tag.get('id', 'btnHiddeTotalLinesBasePart').addEventListener('click', (e) => {
+    Tag.get('id', 'btnHiddeTotalLinesBasePart').classList.add('d-none')
+    Tag.get('id', 'btnShowTotalLinesBasePart').classList.remove('d-none')
+    Tag.get('id', 'totalLinesBaseParts').classList.add('d-none')
+})

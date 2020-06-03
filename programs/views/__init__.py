@@ -3,7 +3,8 @@ from .programs import (AdminListProgramView, CreateProgramView, ProgrammerListPr
                         DetailProgramView)
 
 from .parts_of_code import (CreatePartProgramView, UpdateBaseProgramView, UpdateReusedPartView,
-                            UpdateNewPartView, DeleteReusedPartView, DeleteNewPartView)
+                            UpdateNewPartView, DeleteReusedPartView, DeleteNewPartView,
+                            DeleteBasePartView)
 
 from .pip import (ListPIPView,)
 

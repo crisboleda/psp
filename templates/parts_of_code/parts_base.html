@@ -54,7 +54,20 @@
 {% if not base_parts %}
     <p class="ml-4 text-center">--- This program doesn't have base parts ---</p>
 {% else %}
-    <h4 class="ml-4"><b>Total Base Parts</b></h4>
+    <div class="row">
+        <div class="col">
+            <span class="float-left"><h4 class="ml-4"><b>Base Parts</b></h4></span>
+            <span class="float-right">
+                <button id="btnHiddeTotalLinesBasePart" class="btn btn-danger d-none"><i class="fas fa-times"></i></button>
+                <button id="btnShowTotalLinesBasePart" class="btn btn-primary"><i class="fas fa-calculator"></i></button>
+            </span>
+        </div>
+    </div>
+
+    <br/>
+
+    {% include 'parts_of_code/calculate_base_part_lines.html' %}
+
 {% endif %}
 
 <div class="row base-programs">
@@ -68,6 +81,7 @@
                         </div>
                         <div class="col-xl-4 text-right">
                             <button value='{"id": "{{ base_part.pk }}", "plBase": "{{ base_part.lines_planned_base }}", "plDeleted": "{{ base_part.lines_planned_deleted }}", "plAdded": "{{ base_part.lines_planned_added }}", "plEdited": "{{ base_part.lines_planned_edited }}", "currentBase": "{{ base_part.lines_current_base }}", "currentDeleted": "{{ base_part.lines_current_deleted }}", "currentAdded": "{{ base_part.lines_current_added }}", "currentEdited": "{{ base_part.lines_current_edited }}"}' type="button" class="btn btn-info btn-edit-base-program" data-toggle="modal" data-target="#editBasePartModal"><i class="fas fa-pencil-alt"></i></button>
+                            <button value='{"id": "{{ base_part.pk }}", "typePart": "base"}' class="btn btn-danger btnDeletePart" data-toggle="modal" data-target="#deletePartConfirmation"><i class="fas fa-trash"></i></button>
                         </div>
                     </div>
                     <br/>

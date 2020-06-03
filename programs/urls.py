@@ -6,7 +6,8 @@ from django.urls import path
 from programs.views import (AdminListProgramView, CreateProgramView, ProgrammerListProgramView,
                             DetailProgramView, CreatePartProgramView, UpdateBaseProgramView, 
                             UpdateReusedPartView, ListPIPView, ReportView, CreateReport, 
-                            UpdateNewPartView, DeleteReusedPartView, DeleteNewPartView)
+                            UpdateNewPartView, DeleteReusedPartView, DeleteNewPartView,
+                            DeleteBasePartView)
 
 urlpatterns = [
 
@@ -23,6 +24,7 @@ urlpatterns = [
     path('new_parts/<int:pk_new_part>/update/', UpdateNewPartView.as_view(), name='update_new_part'),
     path('reused_parts/<int:pk_reused_part>/delete/', DeleteReusedPartView.as_view(), name='delete_reused_part'),
     path('new_parts/<int:pk_new_part>/delete/', DeleteNewPartView.as_view(), name='delete_new_part'),
+    path('base_parts/<int:pk_base_part>/delete/', DeleteBasePartView.as_view(), name='delete_base_part'),
 
     # PIP
     path('programs/<int:pk_program>/pip/', ListPIPView.as_view(), name='list_pip_program'),

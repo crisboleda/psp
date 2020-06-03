@@ -172,7 +172,7 @@
                                 {% else %}
                                     {% for cousing_defect in defect_logs %}
                                         {% if cousing_defect == defect.cousing_defect %}
-                                            Defect #{{ forloop.counter }}
+                                            Defect <b>#{{ forloop.counter }}</b>
                                         {% endif %}
                                     {% endfor %}
                                 {% endif %}
