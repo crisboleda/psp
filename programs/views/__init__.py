@@ -7,4 +7,4 @@ from .parts_of_code import (CreatePartProgramView, UpdateBaseProgramView, Update
 
 from .pip import (ListPIPView,)
 
-from .report import (ReportView, CreateReport)
+from .report import (ReportView,)

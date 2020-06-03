@@ -10,41 +10,101 @@
 {% endblock %}
 
 {% block 'content' %}
-<div>
     <div class="container">
-        <button type="submit" class="btn btn-primary btn-lg">Crear Reportes</button>
-        <br>
-        <br>
+        <div class="" id="myTab" role="tablist">
+            <ul class="nav nav-tabs justify-content-end">
+                <li class="nav-item">
+                    <a class="nav-link active" id="list-tab" data-toggle="tab" href="#Report_list" role="tab" aria-controls="list" aria-selected="false">List report</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="form-tab" data-toggle="tab" href="#form" role="tab" aria-controls="form" aria-selected="true">Add report</a>				   	
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="Report_list" role="tabpanel" aria-labelledby="list-tab">
+                    <div class="card">
+	                    <div class="card-header">
+                            <div class ="table-responsive">
+                                <table class="table  table-bordered  table-hover shadow">
 
-		<div class="row">
-			<div class="col">
-				<table class="table table-striped table-bordered table-hover">
-					<thead>
-						<tr>
-							<th>Test number</th>
-							<th>Date</th>
-                            <th>Name</th>
-                            <th>Objetive</th>
-                            <th>Description</th>
-                            <th>Conditions</th>
-                            <th>Espected Results</th>
-                            <th>Actual Results</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>1</td>
-							<td>11/mayo/2020</td>
-                            <td>Test1</td>
-                            <td>M</td>
-                            <td>x</td>
-                            <td>y</td>
-                            <td>100</td>
-                            <td>50</td>
-						</tr>
-					</tbody>
-                </table>
-			</div>
-		</div>
-</div>
+                                    <thead class="thead-dark">
+                                        <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Objetive</th>
+                                        <th scope="col">Description</th>
+                                        <th scope="col">Conditions</th>
+                                        <th scope="col">Espected results</th>
+                                        <th scope="col">Actual results</th>
+                                        
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                        <th scope="row">1</th>
+                                        <td>Mayo 11,2020</td>
+                                        <td>Test psp</td>
+                                        <td>t</td>
+                                        <td>a</td>
+                                        <td>s</td>
+                                        <td>s</td>
+                                        <td>s</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+	                    </div>  
+	                <div class="card-body">
+		
+	            </div>
+            </div>
+                </div>
+                    <div class="tab-pane fade" id="form" role="tabpanel" aria-labelledby="form-tab">
+                        <div class="card">
+                            <div class="card-header">
+                                    <form>
+                                        <nav class="navbar navbar-light bg-light  ">
+                                            <a class="navbar-brand" href="#">PSP  Procces Improvent Proposal</a>
+                                        </nav> <br>
+                                        <div class="form-group">
+                                            <label for="formGroupExampleInput">Date</label>
+                                            <input type="date" class="form-control" id="date" placeholder="">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="formGroupExampleInput2">Name</label>
+                                            <input type="text" class="form-control" id="name" placeholder="Test name">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="formGroupExampleInput2">Objetive</label>
+                                            <input type="text" class="form-control" id="objetive" placeholder="">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="formGroupExampleInput2">Description</label>
+                                            <input type="text" class="form-control" id="description" placeholder="">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="formGroupExampleInput2">Conditions</label>
+                                            <input type="text" class="form-control" id="conditions" placeholder="">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="formGroupExampleInput2">Espected Results</label>
+                                            <input type="text" class="form-control" id="espected_results" placeholder="">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="formGroupExampleInput2">Actual results</label>
+                                            <input type="text" class="form-control" id="actual_results" placeholder="">
+                                        </div>
+                                        <button type="button" class="btn btn-primary btn-lg" title=" Guardar Report">Save</button>
+                                    </form>
+                            </div>
+                        <div class="card-body">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div> 
 {% endblock %}
