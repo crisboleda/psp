@@ -3,7 +3,7 @@
 from django.contrib import admin
 
 # Models
-from programs.models import ProgrammingLanguage, Estimation, SizeEstimation, TypePart, Report
+from programs.models import ProgrammingLanguage, Estimation, SizeEstimation, TypePart, Report, Pip
 
 
 
@@ -35,3 +35,10 @@ class TypePartAdmin(admin.ModelAdmin):
 class ListReports(admin.ModelAdmin):
     list_display =('program','name','date','objetive','description','conditions','expect_results','current_results')
     search_fields =('name',)
+
+@admin.register(Pip)
+class ListPip(admin.ModelAdmin):
+    list_display=('program','name','date','problems','proposal','comment')
+    search_fields = ('name',)
+
+    

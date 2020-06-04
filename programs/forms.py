@@ -5,7 +5,7 @@ from django import forms
 from django.contrib.sessions.middleware import SessionMiddleware
 
 # Models
-from programs.models import Program, ProgrammingLanguage, BasePart, ReusedPart, NewPart, TypePart, SizeEstimation, Estimation, Report
+from programs.models import Program, ProgrammingLanguage, BasePart, ReusedPart, NewPart, TypePart, SizeEstimation, Estimation, Report ,Pip
 from django.contrib.auth.models import User
 
 
@@ -228,3 +228,16 @@ class CreateReportModelForm(forms.ModelForm):
         data['program'] = program
 
         Report.objects.create(**data)
+
+
+class CreateListPip(forms.ModelForm):
+
+    class Meta:
+        model =Pip
+        fields = ('name','date','problems','proposal','comment')
+
+    def save(self, program):
+        data = self.cleaned_data
+        data['program'] = program
+
+        Pip.objects.create(**data)
