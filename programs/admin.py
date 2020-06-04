@@ -3,7 +3,8 @@
 from django.contrib import admin
 
 # Models
-from programs.models import ProgrammingLanguage, Estimation, SizeEstimation, TypePart
+from programs.models import ProgrammingLanguage, Estimation, SizeEstimation, TypePart, Report
+
 
 
 @admin.register(ProgrammingLanguage)
@@ -30,4 +31,7 @@ class TypePartAdmin(admin.ModelAdmin):
     list_display = ('name', 'description')
     search_fields = ('name',)
 
-
+@admin.register(Report)
+class ListReports(admin.ModelAdmin):
+    list_display =('program','name','date','objetive','description','conditions','expect_results','current_results')
+    search_fields =('name',)

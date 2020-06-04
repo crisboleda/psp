@@ -43,18 +43,22 @@ class PIP(models.Model):
         return self.description
 
 
-class REPORT(models.Model):
+class Report(models.Model):
     program = models.ForeignKey(Program, on_delete=models.CASCADE, related_name='reports_view')
+    name = models.CharField(max_length=100, help_text='Report name')
+    date = models.DateTimeField()
+    objetive = models.TextField()
     description = models.TextField()
-    date = models.DateTimeField(auto_now_add=True)
-    problems = models.TextField()
-    proposal = models.TextField()
-    comment = models.TextField()
+    conditions = models.TextField()
+    expect_results = models.TextField()
+    current_results = models.TextField()
+    create = models.DateTimeField(auto_now_add=True)
+
 
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.description
+        return self.name
     
 
 

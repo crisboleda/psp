@@ -10,6 +10,7 @@
 {% endblock %}
 
 {% block 'content' %}
+    {{ form.errors }}
     <div class="container">
         <div class="" id="myTab" role="tablist">
             <ul class="nav nav-tabs justify-content-end">
@@ -29,7 +30,7 @@
 
                                     <thead class="thead-dark">
                                         <tr>
-                                        <th scope="col">ID</th>
+                                        <th scope="col">Number</th>
                                         <th scope="col">Date</th>
                                         <th scope="col">Name</th>
                                         <th scope="col">Objetive</th>
@@ -42,16 +43,18 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mayo 11,2020</td>
-                                        <td>Test psp</td>
-                                        <td>t</td>
-                                        <td>a</td>
-                                        <td>s</td>
-                                        <td>s</td>
-                                        <td>s</td>
-                                        </tr>
+                                        {% for report in  reports %}
+                                            <tr>
+                                                <td>{{ forloop.counter }}</td>
+                                                <td>{{ report.date }}</td>
+                                                <td>{{ report.name }}</td>
+                                                <td>{{ report.objetive }}</td>
+                                                <td>{{ report.description }}</td>
+                                                <td>{{ report.conditions }}</td>
+                                                <td>{{ report.expect_results }}</td>
+                                                <td>{{ report.current_results }}</td>
+                                            </tr>
+                                        {% endfor %}
                                     </tbody>
                                 </table>
                             </div>
@@ -64,39 +67,40 @@
                     <div class="tab-pane fade" id="form" role="tabpanel" aria-labelledby="form-tab">
                         <div class="card">
                             <div class="card-header">
-                                    <form>
+                                    <form method="POST">
+                                        {% csrf_token %}
                                         <nav class="navbar navbar-light bg-light  ">
                                             <a class="navbar-brand" href="#">PSP  Procces Improvent Proposal</a>
                                         </nav> <br>
                                         <div class="form-group">
                                             <label for="formGroupExampleInput">Date</label>
-                                            <input type="date" class="form-control" id="date" placeholder="">
+                                            <input type="date" name="date" class="form-control" id="date" placeholder="">
                                         </div>
                                         <div class="form-group">
                                             <label for="formGroupExampleInput2">Name</label>
-                                            <input type="text" class="form-control" id="name" placeholder="Test name">
+                                            <input type="text" class="form-control" name="name" id="name" placeholder="Test name">
                                         </div>
                                         <div class="form-group">
                                             <label for="formGroupExampleInput2">Objetive</label>
-                                            <input type="text" class="form-control" id="objetive" placeholder="">
+                                            <input type="text" class="form-control" name="objetive" id="objetive" placeholder="">
                                         </div>
                                         <div class="form-group">
                                             <label for="formGroupExampleInput2">Description</label>
-                                            <input type="text" class="form-control" id="description" placeholder="">
+                                            <input type="text" class="form-control" name="description" id="description" placeholder="">
                                         </div>
                                         <div class="form-group">
                                             <label for="formGroupExampleInput2">Conditions</label>
-                                            <input type="text" class="form-control" id="conditions" placeholder="">
+                                            <input type="text" class="form-control" name="conditions" id="conditions" placeholder="">
                                         </div>
                                         <div class="form-group">
                                             <label for="formGroupExampleInput2">Espected Results</label>
-                                            <input type="text" class="form-control" id="espected_results" placeholder="">
+                                            <input type="text" class="form-control" name="expect_results" id="espected_results" placeholder="">
                                         </div>
                                         <div class="form-group">
                                             <label for="formGroupExampleInput2">Actual results</label>
-                                            <input type="text" class="form-control" id="actual_results" placeholder="">
+                                            <input type="text" class="form-control" name="current_results" id="current_results" placeholder="">
                                         </div>
-                                        <button type="button" class="btn btn-primary btn-lg" title=" Guardar Report">Save</button>
+                                        <button type="submit" class="btn btn-primary btn-lg" title=" Guardar Report">Save</button>
                                     </form>
                             </div>
                         <div class="card-body">
@@ -107,4 +111,6 @@
         </div>
     </div>
     </div> 
+
+    {{ reports }}
 {% endblock %}
