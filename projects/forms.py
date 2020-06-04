@@ -42,9 +42,11 @@ class CreateProjectModelForm(forms.ModelForm):
 
 class UpdateProjectModelForm(forms.ModelForm):
 
+    finish_date = forms.DateTimeField(required=False)
+
     class Meta:
         model = Project
-        fields = ('name', 'description', 'status', 'planning_date')
+        fields = ('name', 'description', 'status', 'planning_date', 'finish_date')
         widgets = {
             'name': forms.TextInput(attrs={
                 'class': 'form-control'

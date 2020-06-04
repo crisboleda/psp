@@ -106,7 +106,7 @@
 
                     <!-- Button to Open the Modal -->
                     {% if profile_user == request.user %}
-                        <button type="button" class="btn btn-primary btn-modal-languages" data-toggle="modal" title="Editar proyecto" data-target="#modalLanguages">
+                        <button type="button" class="btn btn-secondary btn-modal-languages" data-toggle="modal" title="Editar proyecto" data-target="#modalLanguages">
                             <i class="fas fa-edit"></i>
                         </button>
                     {% endif %}
@@ -130,56 +130,111 @@
         </div>
         <div class="col-lg-7 p-3">
             <div class="au-card">
-                <h3>Experencia total</h3>
+
+                <div class="row">
+                    <div class="col">
+                        <span class="float-left"><h3>Total experience in years</h3></span>
+                        <span class="float-right">
+                            <button value='{"id": "{{ profile_user.get_profile.pk }}"}' id="btnEditExperencieYears" class="btn btn-secondary" data-toggle="modal" data-target="#modalEditExperienceYears"><i class="fas fa-edit"></i></button>
+                        </span>
+                    </div>
+                </div>
+                <br/>
+
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <i class="fas fa-code pr-3"></i>Developing
+                                </td>
+                                <td>{{ profile_user.get_profile.years_development }}</td>
+                            </tr>
+
+                            <tr>
+                                <td><i class="fas fa-cog pr-3"></i>Configuration</td>
+                                <td>{{ profile_user.get_profile.years_configuration }}</td>
+                            </tr>
+
+                            <tr>
+                                <td><i class="fas fa-server pr-3"></i>Integration</td>
+                                <td>{{ profile_user.get_profile.years_integration }}</td>
+                            </tr>
+
+                            <tr>
+                                <td><i class="fas fa-puzzle-piece pr-3"></i>Requirements</td>
+                                <td>{{ profile_user.get_profile.years_requirements }}</td>
+                            </tr>
+
+                            <tr>
+                                <td><i class="fas fa-magic pr-3"></i>Designing</td>
+                                <td>{{ profile_user.get_profile.years_design }}</td>
+                            </tr>
+
+                            <tr>
+                                <td><i class="fas fa-search pr-3"></i>Testing</td>
+                                <td>{{ profile_user.get_profile.years_tests }}</td>
+                            </tr>
+
+                            <tr>
+                                <td><i class="far fa-question-circle pr-3"></i>Support</td>
+                                <td>{{ profile_user.get_profile.years_support }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
 
-    {% block 'scripts' %}
-        {% load static %}
-        <script src="{% static 'js/formProfile.js' %}"></script>
+{% endblock %}
 
-        <script>
-            const btnSave = document.getElementById('btnUpdateProfileLanguages')
-            const inputsLanguages = document.getElementsByName('languageCheck')
-            const loader = document.getElementById('loader-languages')
-            const containerLanguages = document.getElementById('container-languages')
-            const contentMain = document.getElementById('content-main-languages')
+{% block 'scripts' %}
+    {% load static %}
+    <script src="{% static 'js/formProfile.js' %}"></script>
 
-            var languages = []
+    <script>
+        const btnSaveExperencieLanguages = document.getElementById('btnUpdateProfileLanguages')
+        const inputsLanguages = document.getElementsByName('languageCheck')
+        const loader = document.getElementById('loader-languages')
+        const containerLanguages = document.getElementById('container-languages')
+        const contentMain = document.getElementById('content-main-languages')
 
-            btnSave.addEventListener('click', () => {
-                languages = []
-                for (let j = 0; j < inputsLanguages.length; j++) {
-                    if (inputsLanguages[j].checked){
-                        languages.push(inputsLanguages[j].value)
-                    }
+        var languages = []
+
+        btnSaveExperencieLanguages.addEventListener('click', () => {
+            languages = []
+            for (let j = 0; j < inputsLanguages.length; j++) {
+                if (inputsLanguages[j].checked){
+                    languages.push(inputsLanguages[j].value)
                 }
+            }
 
-                let data = ""
+            let data = ""
 
-                for (let i = 0; i < languages.length; i++) {
-                    data += `${languages[i]},`
-                }
+            for (let i = 0; i < languages.length; i++) {
+                data += `${languages[i]},`
+            }
 
-                data = data.slice(0, data.length - 1)
-                const url = "{% url 'users:update_languages' %}" + `?languages=${data}`
+            data = data.slice(0, data.length - 1)
+            const url = "{% url 'users:update_languages' %}" + `?languages=${data}`
 
-                containerLanguages.classList.add('d-none')
-                contentMain.classList.add('text-center')
-                loader.classList.remove('d-none')
+            containerLanguages.classList.add('d-none')
+            contentMain.classList.add('text-center')
+            loader.classList.remove('d-none')
 
-                fetch(url, {'credentials': 'include'}).then(() => {
-                    location.reload()
-                })
+            fetch(url, {'credentials': 'include'}).then(() => {
+                location.reload()
             })
-        </script>
+        })
+    </script>
 
-        {% load static %}
-        <script src="{% static 'js/update_img_profile.js' %}"></script>
+    {% load static %}
+    <script src="{% static 'js/Cookie.js' %}"></script>
+    <script src="{% static 'js/APIService.js' %}"></script>
+    <script src="{% static 'js/update_img_profile.js' %}"></script>
+    <script src="{% static 'js/profile/index.js' %}"></script>
 
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    {% endblock %}
-
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 {% endblock %}

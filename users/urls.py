@@ -5,7 +5,8 @@ from django.contrib.auth.views import LogoutView
 
 # Views
 from users.views import (LoginUserView, UserProfileView, update_experencie_languages, 
-                        UpdateImageProfile, DeleteImageProfile, RegisterUserView)
+                        UpdateImageProfile, DeleteImageProfile, RegisterUserView,
+                        ListUpdateExperencieProfileView)
 
 
 urlpatterns = [
@@ -17,7 +18,9 @@ urlpatterns = [
     path('<str:slug>/profile/', UserProfileView.as_view(), name='profile_user'),
     path('update/languages/', update_experencie_languages, name='update_languages'),
     path('profile/<int:pk>/', UpdateImageProfile.as_view(), name='update_image_profile'),
-    path('profile/<int:pk>/delete/', DeleteImageProfile.as_view(), name='delete_image_profile')
+    path('profile/<int:pk>/delete/', DeleteImageProfile.as_view(), name='delete_image_profile'),
+
+    path('profiles/<int:pk_profile_user>/total-experencie/', ListUpdateExperencieProfileView.as_view(), name='update_total_experencie'),
 ]
 
 

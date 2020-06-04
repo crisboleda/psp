@@ -5,13 +5,19 @@ from django.http.response import JsonResponse, Http404
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+# Django REST Framework
+from rest_framework.generics import RetrieveUpdateAPIView
+
+# Serializers
+from users.serializers import ProfileExperencieSerializer
+
 # Models
 from django.contrib.auth.models import User
 from users.models import Profile
 from programs.models import ProgrammingLanguage
 
 # Mixins
-from users.mixins import AuthenticateOwnerProfileMixin
+from users.mixins import AuthenticateOwnerProfileMixin, IsOwnerProfilePermission
 
 
 
@@ -56,5 +62,10 @@ class DeleteImageProfile(AuthenticateOwnerProfileMixin, RedirectView):
 
 
 
+class ListUpdateExperencieProfileView(RetrieveUpdateAPIView):
+    permission_classes = [IsOwnerProfilePermission]
+    queryset = Profile.objects.all()
+    lookup_url_kwarg = 'pk_profile_user'
+    serializer_class = ProfileExperencieSerializer
 
         

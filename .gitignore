@@ -6,6 +6,7 @@
 # Ignore Visual Studio Code Configuration
 .vscode/
 .vs/
+.idea/
 
 # Ignore python caché
 __pycache__
