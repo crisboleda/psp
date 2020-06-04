@@ -5,7 +5,7 @@ from django.urls import path
 # Views
 from programs.views import (AdminListProgramView, CreateProgramView, ProgrammerListProgramView,
                             DetailProgramView, CreatePartProgramView, UpdateBaseProgramView, 
-                            UpdateReusedPartView, ListPIPView, ReportView, CreateReport, 
+                            UpdateReusedPartView, ListPIPView, ReportView, 
                             UpdateNewPartView, DeleteReusedPartView, DeleteNewPartView,
                             DeleteBasePartView)
 
@@ -28,6 +28,6 @@ urlpatterns = [
 
     # PIP
     path('programs/<int:pk_program>/pip/', ListPIPView.as_view(), name='list_pip_program'),
-    path('programs/<int:pk_>/reports/', ReportView.as_view(), name='reports_view'),
-    path('programs/<int:pk_>/create_reports/', CreateReport.as_view(), name='create_reports'),
+    path('programs/<int:pk_program>/reports/', ReportView.as_view(), name='reports_view'),
+
 ]

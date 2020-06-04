@@ -29,10 +29,10 @@ class Program(models.Model):
         return self.name
 
 
-class PIP(models.Model):
-    program = models.ForeignKey(Program, on_delete=models.CASCADE, related_name='pip_program')
-    description = models.TextField()
-    date = models.DateTimeField(auto_now_add=True)
+class Pip(models.Model):
+    program = models.ForeignKey(Program, on_delete=models.CASCADE, related_name='list_pip_program')
+    name = models.CharField(max_length=100, help_text='Pip name')
+    date = models.DateTimeField()
     problems = models.TextField()
     proposal = models.TextField()
     comment = models.TextField()
@@ -40,7 +40,25 @@ class PIP(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.description
+        return self.name
+
+
+class Report(models.Model):
+    program = models.ForeignKey(Program, on_delete=models.CASCADE, related_name='reports_view')
+    name = models.CharField(max_length=100, help_text='Report name')
+    date = models.DateTimeField()
+    objetive = models.TextField()
+    description = models.TextField()
+    conditions = models.TextField()
+    expect_results = models.TextField()
+    current_results = models.TextField()
+    create = models.DateTimeField(auto_now_add=True)
+
+
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name
     
 
 
