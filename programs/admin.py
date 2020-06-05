@@ -31,10 +31,12 @@ class TypePartAdmin(admin.ModelAdmin):
     list_display = ('name', 'description')
     search_fields = ('name',)
 
+
 @admin.register(Report)
 class ListReports(admin.ModelAdmin):
     list_display =('program','name','date','objetive','description','conditions','expect_results','current_results')
     search_fields =('name',)
+
 
 @admin.register(Pip)
 class ListPip(admin.ModelAdmin):

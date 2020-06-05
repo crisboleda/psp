@@ -135,7 +135,9 @@
                     <div class="col">
                         <span class="float-left"><h3>Total experience in years</h3></span>
                         <span class="float-right">
-                            <button value='{"id": "{{ profile_user.get_profile.pk }}"}' id="btnEditExperencieYears" class="btn btn-secondary" data-toggle="modal" data-target="#modalEditExperienceYears"><i class="fas fa-edit"></i></button>
+                            {% if profile_user == request.user %}
+                                <button value='{"id": "{{ profile_user.get_profile.pk }}"}' id="btnEditExperencieYears" class="btn btn-secondary" data-toggle="modal" data-target="#modalEditExperienceYears"><i class="fas fa-edit"></i></button>
+                            {% endif %}
                         </span>
                     </div>
                 </div>

@@ -41,7 +41,7 @@
 
                         <div class="form-group">
                             <label for="id_finish_date">Fecha final</label>
-                            <input type="date" value="{{ module.finish_date|date:"yy-m-d" }}" id="id_finish_date" name="finish_date" class="form-control datepicker {% if form.finish_date.errors %}is-invalid{% endif %}" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
+                            <input type="date" value="{{ project.finish_date|date:"yy-m-d" }}" id="id_finish_date" name="finish_date" class="form-control datepicker {% if form.finish_date.errors %}is-invalid{% endif %}" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
                             {% if form.finish_date.errors %}
                                 <div class="invalid-feedback">
                                     {% for error in form.finish_date.errors %}

@@ -37,6 +37,7 @@ class Pip(models.Model):
     proposal = models.TextField()
     comment = models.TextField()
 
+    created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
@@ -47,14 +48,14 @@ class Report(models.Model):
     program = models.ForeignKey(Program, on_delete=models.CASCADE, related_name='reports_view')
     name = models.CharField(max_length=100, help_text='Report name')
     date = models.DateTimeField()
-    objetive = models.TextField()
-    description = models.TextField()
-    conditions = models.TextField()
-    expect_results = models.TextField()
-    current_results = models.TextField()
-    create = models.DateTimeField(auto_now_add=True)
 
+    objetive = models.TextField(max_length=350)
+    description = models.TextField(max_length=350)
+    conditions = models.TextField(max_length=350)
+    expect_results = models.TextField(max_length=350)
+    current_results = models.TextField(max_length=350, null=True, blank=True)
 
+    created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):

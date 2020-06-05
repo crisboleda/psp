@@ -4,18 +4,18 @@
 
 {% block 'links' %}
     {% load static %}
+    <link rel="stylesheet" href="{% static 'css/reports.css' %}">
     <link rel="stylesheet" href="{% static 'css/projects.css' %}">
     <link rel="stylesheet" href="{% static 'css/buttom_float.css' %}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
 {% endblock %}
 
 {% block 'content' %}
-    {{ form.errors }}
-    <div class="container">
+    <div class="">
         <div class="" id="myTab" role="tablist">
             <ul class="nav nav-tabs justify-content-end">
                 <li class="nav-item">
-                    <a class="nav-link active" id="list-tab" data-toggle="tab" href="#Report_list" role="tab" aria-controls="list" aria-selected="false">List report</a>
+                    <a class="nav-link active" id="list-tab" data-toggle="tab" href="#Report_list" role="tab" aria-controls="list" aria-selected="false">List reports</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="form-tab" data-toggle="tab" href="#form" role="tab" aria-controls="form" aria-selected="true">Add report</a>				   	
@@ -23,94 +23,163 @@
             </ul>
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="Report_list" role="tabpanel" aria-labelledby="list-tab">
-                    <div class="card">
-	                    <div class="card-header">
-                            <div class ="table-responsive">
-                                <table class="table  table-bordered  table-hover shadow">
-
+                    <div class="card">  
+	                    <div class="card-body">
+		                    <div class ="table-responsive">
+                                <table class="table table-borderless table-striped shadow">
                                     <thead class="thead-dark">
                                         <tr>
-                                        <th scope="col">Number</th>
-                                        <th scope="col">Date</th>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Objetive</th>
-                                        <th scope="col">Description</th>
-                                        <th scope="col">Conditions</th>
-                                        <th scope="col">Espected results</th>
-                                        <th scope="col">Actual results</th>
-                                        
-
+                                            <th scope="col">#</th>
+                                            <th scope="col">Date</th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Objetive</th>
+                                            <th scope="col">Description</th>
+                                            <th scope="col">Conditions</th>
+                                            <th scope="col">Espected results</th>
+                                            <th scope="col">Actual results</th>
+                                            <th scope="col">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {% for report in  reports %}
                                             <tr>
-                                                <td>{{ forloop.counter }}</td>
+                                                <td><b>{{ forloop.counter }}</b></td>
                                                 <td>{{ report.date }}</td>
-                                                <td>{{ report.name }}</td>
-                                                <td>{{ report.objetive }}</td>
-                                                <td>{{ report.description }}</td>
-                                                <td>{{ report.conditions }}</td>
-                                                <td>{{ report.expect_results }}</td>
-                                                <td>{{ report.current_results }}</td>
+                                                <td>{{ report.name|truncatechars:25 }}</td>
+                                                <td>{{ report.objetive|truncatechars:25 }}</td>
+                                                <td>{{ report.description|truncatechars:25 }}</td>
+                                                <td>{{ report.conditions|truncatechars:25 }}</td>
+                                                <td>{{ report.expect_results|truncatechars:25 }}</td>
+                                                <td>{{ report.current_results|truncatechars:25 }}</td>
+                                                <td>
+                                                    <button class="btn btn-info"><i class="fas fa-eye"></i></button>
+                                                    <button class="btn btn-secondary"><i class="fas fa-pencil-alt"></i></button>
+                                                    <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                                                </td>
                                             </tr>
                                         {% endfor %}
                                     </tbody>
                                 </table>
                             </div>
-	                    </div>  
-	                <div class="card-body">
-		
-	            </div>
-            </div>
+	                    </div>
+                    </div>
                 </div>
-                    <div class="tab-pane fade" id="form" role="tabpanel" aria-labelledby="form-tab">
-                        <div class="card">
-                            <div class="card-header">
-                                    <form method="POST">
-                                        {% csrf_token %}
-                                        <nav class="navbar navbar-light bg-light  ">
-                                            <a class="navbar-brand" href="#">PSP  Procces Improvent Proposal</a>
-                                        </nav> <br>
-                                        <div class="form-group">
-                                            <label for="formGroupExampleInput">Date</label>
-                                            <input type="date" name="date" class="form-control" id="date" placeholder="">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="formGroupExampleInput2">Name</label>
-                                            <input type="text" class="form-control" name="name" id="name" placeholder="Test name">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="formGroupExampleInput2">Objetive</label>
-                                            <input type="text" class="form-control" name="objetive" id="objetive" placeholder="">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="formGroupExampleInput2">Description</label>
-                                            <input type="text" class="form-control" name="description" id="description" placeholder="">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="formGroupExampleInput2">Conditions</label>
-                                            <input type="text" class="form-control" name="conditions" id="conditions" placeholder="">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="formGroupExampleInput2">Espected Results</label>
-                                            <input type="text" class="form-control" name="expect_results" id="espected_results" placeholder="">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="formGroupExampleInput2">Actual results</label>
-                                            <input type="text" class="form-control" name="current_results" id="current_results" placeholder="">
-                                        </div>
-                                        <button type="submit" class="btn btn-primary btn-lg" title=" Guardar Report">Save</button>
-                                    </form>
-                            </div>
+                <div class="tab-pane fade" id="form" role="tabpanel" aria-labelledby="form-tab">
+                    <div class="card">
                         <div class="card-body">
+                            <form method="POST">
+                                {% csrf_token %}
+                                <nav class="navbar navbar-light bg-light  ">
+                                    <a class="navbar-brand" href="#">Procces Improvent Proposal</a>
+                                </nav> <br>
 
+                                <div class="form-group">
+                                    <label for="formGroupExampleInput">Date</label>
+                                    <input type="date" name="date" class="form-control {% if form.date.errors %}is-invalid{% endif %}" id="date" placeholder="">
+                                    <div class="invalid-feedback">
+                                        {% for error in form.date.errors %}
+                                            {{ error }}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group col-xl-6">
+                                        <label for="textareaNameReport">Name</label>
+                                        <textarea placeholder="Enter the name of report" maxlength="100" style="resize: none;" name="name" id="textareaNameReport" rows="3" class="{% if form.name.errors %}is-invalid{% endif %} form-control pb-4 text-input-scroll"></textarea>
+                                        <p class="counter__words text-right"><span id="counterNameReport">0</span>/100</p>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.name.errors %}
+                                                {{ error }}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-xl-6">
+                                        <label for="textareaObjetiveReport">Objetive</label>
+                                        <textarea placeholder="Enter the objetive of report" maxlength="350" style="resize: none;" name="objetive" id="textareaObjetiveReport" rows="3" class="{% if form.objetive.errors %}is-invalid{% endif %} form-control pb-4 text-input-scroll"></textarea>
+                                        <p class="counter__words text-right"><span id="counterObjetiveReport">0</span>/350</p>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.objetive.errors %}
+                                                {{ error }}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-row">
+                                    <div class="form-group col-xl-6">
+                                        <label for="textareaDescriptionReport">Description</label>
+                                        <textarea placeholder="Enter the description of report" maxlength="350" style="resize: none;" name="description" id="textareaDescriptionReport" rows="3" class="{% if form.description.errors %}is-invalid{% endif %} form-control pb-4 text-input-scroll"></textarea>
+                                        <p class="counter__words text-right"><span id="counterDescriptionReport">0</span>/350</p>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.description.errors %}
+                                                {{ error }}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-xl-6">
+                                        <label for="textareaConditionsReport">Conditions</label>
+                                        <textarea placeholder="Enter the conditions of report" maxlength="350" style="resize: none;" name="conditions" id="textareaConditionsReport" rows="3" class="{% if form.conditions.errors %}is-invalid{% endif %} form-control pb-4 text-input-scroll"></textarea>
+                                        <p class="counter__words text-right"><span id="counterConditionsReport">0</span>/350</p>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.conditions.errors %}
+                                                {{ error }}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group col-xl-6">
+                                        <label for="textareaEspectedResultsReport">Expected Results</label>
+                                        <textarea placeholder="Enter the expected results of report" maxlength="350" style="resize: none;" name="expect_results" id="textareaEspectedResultsReport" rows="3" class="{% if form.expect_results.errors %}is-invalid{% endif %} form-control pb-4 text-input-scroll"></textarea>
+                                        <p class="counter__words text-right"><span id="counterEspectedResultsReport">0</span>/350</p>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.expect_results.errors %}
+                                                {{ error }}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-xl-6">
+                                        <label for="textareaCurrentResultsReport">Actual results</label>
+                                        <textarea placeholder="Enter the current results of report" maxlength="350" style="resize: none;" name="current_results" id="textareaCurrentResultsReport" rows="3" class="{% if form.current_results.errors  %}is-invalid{% endif %} form-control pb-4 text-input-scroll"></textarea>
+                                        <p class="counter__words text-right"><span id="counterCurrentResultsReport">0</span>/350</p>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.current_results.errors %}
+                                                {{ error }}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                                <button type="submit" class="btn btn-primary btn-lg" title=" Guardar Report">Save</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    </div> 
-
-    
 {% endblock %}
+
+
+{% block 'scripts' %}
+    {% load static %}
+    <script src="{% static 'js/reports/index.js' %}"></script>
+    <script src="{% static 'js/count_words.js' %}"></script>
+    <script src="{% static 'js/Tag.js' %}"></script>
+
+    <script>
+
+        CounterInputValue.showCountValue(Tag.get('id', 'textareaNameReport'), Tag.get('id', 'counterNameReport'))
+        CounterInputValue.showCountValue(Tag.get('id', 'textareaObjetiveReport'), Tag.get('id', 'counterObjetiveReport'))
+        CounterInputValue.showCountValue(Tag.get('id', 'textareaDescriptionReport'), Tag.get('id', 'counterDescriptionReport'))
+        CounterInputValue.showCountValue(Tag.get('id', 'textareaConditionsReport'), Tag.get('id', 'counterConditionsReport'))
+        CounterInputValue.showCountValue(Tag.get('id', 'textareaEspectedResultsReport'), Tag.get('id', 'counterEspectedResultsReport'))
+        CounterInputValue.showCountValue(Tag.get('id', 'textareaCurrentResultsReport'), Tag.get('id', 'counterCurrentResultsReport'))
+
+    </script>
+{% endblock 'scripts' %}

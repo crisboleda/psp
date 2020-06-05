@@ -60,8 +60,8 @@
                     <a href="{% url 'programs:create_part_program' program_opened.pk %}?type_part=base"><i class="fas fa-paper-plane"></i>Parts of the program</a>
                 </li>
 
-
-                <li>
+                {% url 'programs:reports_view' program_opened.pk as url_reports_view %}
+                <li class="{% if url_reports_view == request.path %} active {% endif %}">
                     <a href="{% url 'programs:reports_view' program_opened.pk %}"><i class="fas fa-file-alt"></i>Test report</a>
                 </li>
 
