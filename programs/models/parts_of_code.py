@@ -3,7 +3,7 @@
 from django.db import models
 
 # Models
-from programs.models import Program, ProgrammingLanguage
+from programs.models import Program, ProgrammingLanguage, Estimation
 
 
 class ReusedPart(models.Model):
@@ -11,7 +11,7 @@ class ReusedPart(models.Model):
     program_reused_part = models.ForeignKey(Program, on_delete=models.CASCADE, related_name='reused_part')
 
     planned_lines = models.IntegerField(default=0)
-    current_lines = models.IntegerField(default=0)
+    current_lines = models.IntegerField(default=0, null=True, blank=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -25,15 +25,15 @@ class BasePart(models.Model):
     program = models.ForeignKey(Program, on_delete=models.CASCADE, related_name='program_base_part')
     program_base = models.ForeignKey(Program, on_delete=models.CASCADE, related_name='base_part')
 
-    lines_planned_base = models.IntegerField()
-    lines_planned_deleted = models.IntegerField()
-    lines_planned_edited = models.IntegerField()
-    lines_planned_added = models.IntegerField()
+    lines_planned_base = models.IntegerField(default=0)
+    lines_planned_deleted = models.IntegerField(default=0)
+    lines_planned_edited = models.IntegerField(default=0)
+    lines_planned_added = models.IntegerField(default=0)
 
-    lines_current_base = models.IntegerField()
-    lines_current_deleted = models.IntegerField()
-    lines_current_edited = models.IntegerField()
-    lines_current_added = models.IntegerField()
+    lines_current_base = models.IntegerField(default=0)
+    lines_current_deleted = models.IntegerField(default=0)
+    lines_current_edited = models.IntegerField(default=0)
+    lines_current_added = models.IntegerField(default=0)
 
     created_at = models.DateTimeField(auto_now_add=True)
     created_at = models.DateTimeField(auto_now=True)
@@ -42,27 +42,16 @@ class BasePart(models.Model):
         return "Program '{}' has as base program '{}'".format(self.program, self.program_base)
 
 
-class SizePart(models.Model):
-    name = models.CharField(max_length=50, help_text='Size new part')
-
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return self.name
-    
-
 class NewPart(models.Model):
     name = models.CharField(max_length=150)
     program = models.ForeignKey(Program, on_delete=models.CASCADE, related_name='new_part_program')
-    language = models.ForeignKey(ProgrammingLanguage, on_delete=models.CASCADE, related_name='new_part_language')
+    estimation = models.ForeignKey(Estimation, on_delete=models.CASCADE, related_name='estimation_part')
 
-    planning_lines = models.IntegerField()
-    planning_methods = models.IntegerField()
-    planning_size = models.ForeignKey(SizePart, on_delete=models.CASCADE, related_name='planning_size_new_part')
+    planning_methods = models.IntegerField(null=False, blank=False)
+    planning_lines = models.IntegerField(null=False, blank=False)
 
-    current_lines = models.IntegerField()
-    current_methods = models.IntegerField()
+    current_methods = models.IntegerField(default=0)
+    current_lines = models.IntegerField(default=0)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

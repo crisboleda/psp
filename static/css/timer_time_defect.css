@@ -1,0 +1,53 @@
+
+
+.container__time__defect {
+    font-size: 60px;
+    font-family: 'Armata', sans-serif;
+}
+
+.controllers__timer {
+    font-size: 100px;
+}
+
+.controllers__timer i {
+    font-size: 30px;
+    text-align: center;
+}
+
+.current_phase {
+    font-size: 35px;
+}
+
+.tip-help {
+    cursor: pointer;
+}
+
+.card__new__defect__log__header {
+    height: 58px;
+}
+
+.card__new__defect__log {
+    height: 58px;
+}
+
+.animation_max_height {
+    animation: height-animation;
+    animation-duration: 550ms;
+    animation-timing-function: linear;
+    animation-fill-mode: backwards;
+    animation-iteration-count: 1;
+    transition-property: height;
+    height: auto;
+    transition-property: height;
+    transition-delay: 550ms;
+}
+
+
+@keyframes height-animation {
+    0% {
+        clip-path: polygon(0% 0%, 100% 0.00%, 100% 0%, 0% 0%);
+    }
+    100% {
+        clip-path: polygon(0% 0%, 100% 0.00%, 100% 100%, 0% 100%);
+    }
+}

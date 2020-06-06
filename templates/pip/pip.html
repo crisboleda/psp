@@ -1,0 +1,172 @@
+
+{% extends 'base/dashboard.html' %}
+
+{% block 'title' %}PSP | PIP{% endblock %}
+
+{% block 'links' %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/alert_hidden.css' %}">
+    <link rel="stylesheet" href="{% static 'css/pip.css' %}">
+{% endblock %}
+
+
+{% block modals_page %}
+    {% include 'pip/modal_detail_pip.html' %}
+    {% include 'pip/modal_delete_confirmation.html' %}
+{% endblock %}
+
+
+{% block 'content' %}
+
+    {% include 'base/custom_alert.html' %}
+
+    <div class="">
+        <div class="" id="myTab" role="tablist">
+            <ul class="nav nav-tabs justify-content-end">
+                <li class="nav-item">
+                    <a class="nav-link active" id="list-tab" data-toggle="tab" href="#pip_list" role="tab" aria-controls="list" aria-selected="false">List PIP</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="form-tab" data-toggle="tab" href="#pip_form" role="tab" aria-controls="form" aria-selected="true">Add PIP</a>				   	
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="pip_list" role="tabpanel" aria-labelledby="list-tab">
+                    <div class="card">
+	                    <div class="card-body">
+                            <div class ="table-responsive">
+                                <table class="table table-borderless table-striped table-hover shadow">
+
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Date</th>
+                                            <th scope="col">Problem Description</th>
+                                            <th scope="col">Proposal Description</th>
+                                            <th scope="col">Other Nothes and Comments</th>
+                                            <th scope="col">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for pip in all_pip %}
+                                            <tr>
+                                                <td><b>{{ forloop.counter }}</b></td>
+                                                <td>{{ pip.name|truncatechars:25 }}</td>
+                                                <td>{{ pip.date|date }}</td>
+                                                <td>{{ pip.problems|truncatechars:25 }}</td>
+                                                <td>{{ pip.proposal|truncatechars:25 }}</td>
+                                                <td>{{ pip.comment|truncatechars:25 }}</td>
+                                                <td>
+                                                    <button value='{"idPIP": "{{ pip.pk }}"}' data-toggle="modal" data-target="#modalDetailPIP" class="btn btn-info btnPreviewDetailPIP"><i class="fas fa-eye"></i></button>
+                                                    <a href="{% url 'programs:update_pip' pk_program=program_opened.pk pk_pip=pip.pk %}" class="btn btn-secondary"><i class="fas fa-pencil-alt"></i></a>
+                                                    <button value='{"idPIP": "{{ pip.pk }}"}' data-toggle="modal" data-target="#deletePIPConfirmation" class="btn btn-danger btnDeletePIP"><i class="fas fa-trash"></i></button>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+	                    </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="pip_form" role="tabpanel" aria-labelledby="form-tab">
+                    <div class="card">
+                        <div class="card-body">
+                            <form method="POST">
+                                {% csrf_token %}
+
+                                <nav class="navbar navbar-light bg-light  ">
+                                    <a class="navbar-brand" href="#">PSP | Procces Improvent Proposal</a>
+                                </nav> <br>
+
+                                <div class="form-group">
+                                    <label for="inputDatePIP">Date</label>
+                                    <input type="date" class="form-control {% if form.date.errors %}is-invalid{% endif %}" name="date" id="inputDatePIP" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
+                                    <div class="invalid-feedback">
+                                        {% for error in form.date.errors %}
+                                            {{ error }}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                
+                                <div class="form-row">
+                                    <div class="form-group col-xl-6">
+                                        <label for="inputNamePIP">Name</label>
+                                        <textarea maxlength="100" style="resize: none;" class="pb-4 text-input-scroll form-control {% if form.name.errors %}is-invalid{% endif %}" name="name" id="inputNamePIP" rows="4" placeholder="Enter the name"></textarea>
+                                        <p class="counter__words text-right"><span id="counterNamePIP">0</span>/100</p>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.name.errors %}
+                                                {{ error }}
+                                            {% endfor %}
+                                        </div>
+                                    </div>   
+                                
+                                    <div class="form-group col-xl-6">
+                                        <label for="inputProblemsPIP">Problem Description</label>
+                                        <textarea maxlength="350" style="resize: none;" class="pb-4 text-input-scroll form-control {% if form.problems.errors %}is-invalid{% endif %}" name="problems" id="inputProblemsPIP" rows="4" placeholder="Describes the problem encountered"></textarea>
+                                        <p class="counter__words text-right"><span id="counterProblemPIP">0</span>/350</p>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.problems.errors %}
+                                                {{ error }}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group col-xl-6">
+                                        <label for="inputProposalPIP">Proposonal Description</label>
+                                        <textarea maxlength="350" style="resize: none;" class="pb-4 text-input-scroll form-control {% if form.proposal.errors %}is-invalid{% endif %}" name="proposal" id="inputProposalPIP" rows="4" placeholder="Describe the improvements you've proposed"></textarea>
+                                        <p class="counter__words text-right"><span id="counterProposalPIP">0</span>/350</p>
+                                        <div class="invalid-feeback">
+                                            {% for error in form.proposal.errors %}
+                                                {{ error }}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-xl-6">
+                                        <label for="inputCommentPIP">Notes and Comments</label>
+                                        <textarea maxlength="350" style="resize: none;" class="pb-4 text-input-scroll form-control {% if form.comment.errors %}is-invalid{% endif %}" name="comment" id="inputCommentPIP" rows="4" placeholder="Note any other comments or observations that describe your experiences or improvement ideas"></textarea>
+                                        <p class="counter__words text-right"><span id="counterCommentPIP">0</span>/350</p>
+                                        <div class="invalid-feeback">
+                                            {% for error in form.comment.errors %}
+                                                {{ error }}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <br/>
+                                <br/>
+                                <button type="submit" class="btn btn-primary btn-block text-center" title="Guardar PIP">Save</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+{% endblock 'content' %}
+
+
+{% block 'scripts' %}
+    {% load static %}
+    <script src="{% static 'js/Cookie.js' %}"></script>
+    <script src="{% static 'js/APIService.js' %}"></script>
+    <script src="{% static 'js/hidden_alert.js' %}"></script>
+    <script src="{% static 'js/Tag.js' %}"></script>
+    <script src="{% static 'js/count_words.js' %}"></script>
+    <script src="{% static 'js/pip/index.js' %}"></script>
+
+    <script>
+        CounterInputValue.showCountValue(Tag.get('id', 'inputNamePIP'), Tag.get('id', 'counterNamePIP'))
+        CounterInputValue.showCountValue(Tag.get('id', 'inputProblemsPIP'), Tag.get('id', 'counterProblemPIP'))
+        CounterInputValue.showCountValue(Tag.get('id', 'inputProposalPIP'), Tag.get('id', 'counterProposalPIP'))
+        CounterInputValue.showCountValue(Tag.get('id', 'inputCommentPIP'), Tag.get('id', 'counterCommentPIP'))
+    </script>
+
+{% endblock 'scripts' %}
+
+

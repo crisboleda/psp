@@ -1,0 +1,140 @@
+
+{% extends 'base/dashboard.html' %}
+
+{% block 'title' %}PSP | Time log{% endblock %}
+
+{% block 'links' %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/buttom_float.css' %}">
+{% endblock %}
+
+{% block modals_page %}
+    {% include 'logs/modal_create.html' %}
+{% endblock %}
+
+{% block 'content' %}
+    {% if program_opened.program_log_time.all %}
+        <table class="table table-striped table-hover shadow">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Phase</th>
+                    <th scope="col">Start Date and Time</th>
+                    <th scope="col">Stop Date and Time</th>
+                    <th scope="col">Total time</th>
+                    <th scope="col">Comments</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for time_log in program_opened.program_log_time.all %}
+                    <tr>
+                        <td>{{ time_log.phase }}</td>
+                        <td>
+                            {% load tz %}
+                            {% timezone "America/Bogota" %}
+                                {{ time_log.start_date }}
+                            {% endtimezone %}
+                        </td>
+                        <td>
+                            {% if not time_log.finish_date %}
+                                ---
+                            {% else %}
+                                {% timezone "America/Bogota" %}
+                                    {{ time_log.finish_date }}
+                                {% endtimezone %}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if not time_log.finish_date %}
+                                In progress...
+                            {% else %}
+                                {% load convert_time %}
+                                {{ time_log.delta_time|seconds_to_time }}
+                            {% endif %}
+                        </td>
+                        <td>{{ time_log.comments }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No se han registrado fases hasta el momento</p>
+    {% endif %}
+
+    {% if time_log %}
+        <!-- Button Current Timer of time log -->
+        <a tyle="font-size: 25px;" href="javascript:WindowPopup.showWindow('{% url 'logs:current_time_log' time_log.program.pk %}')" type="button" class="btn-flotante" title="Timer">
+            <i class="far fa-clock"></i>
+        </a>
+    {% endif %}
+
+    {% if not is_active_phase %}
+        <!-- Button trigger modal -->
+        <button type="button" class="btn-flotante" title="Nuevo tiempo" data-toggle="modal" data-target="#modalCreateTimeLog">
+            <i class="fas fa-plus"></i>
+        </button>
+    {% endif %}
+
+{% endblock %}
+
+
+{% block 'scripts' %}
+
+    {% load static %}
+    <script src="{% static 'js/count_words.js' %}"></script>
+    <script src="{% static 'js/WindowPopup.js' %}"></script>
+    <script src="{% static 'js/Cookie.js' %}"></script>
+
+    <script>
+        const input = document.getElementById('id_comments')
+        const countWords = document.getElementById('count_words_comment_time_log')
+
+        CounterInputValue.showCountValue(input, countWords)
+
+    </script>
+    
+    <script>
+        const form = document.getElementById('form-create-time-log')
+        const inputPhase = document.getElementById('id_phase')
+        const inputComments = document.getElementById('id_comments')
+
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault()
+            createTimeLog(inputPhase.value, inputComments.value)
+        })
+
+        async function createTimeLog(namePhase, comments){
+            
+            let body = {
+                name_phase: namePhase,
+                comments: comments
+            }
+
+            let init = {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    "X-CSRFToken": Cookie.getValueCookie('csrftoken'),
+                    "Accept": "application/json",
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(body)
+            }
+
+            document.getElementById('modalCreateTimeLog').classList.add('d-none')
+            const response = await fetch("{% url 'logs:create_time_log' program_opened.pk %}", init)
+            const data = await response.json()
+
+            if (response.status == 201){
+                window.location.reload()
+                WindowPopup.showWindow("{% url 'logs:current_time_log' program_opened.pk %}")
+            }
+        }
+
+        function popupClosed(){
+            window.location.reload()
+        }
+
+    </script>
+
+{% endblock %}

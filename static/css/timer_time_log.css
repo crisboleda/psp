@@ -1,0 +1,22 @@
+
+body {
+    background-color: #e5e5e5;
+}
+
+.container__time__log {
+    font-size: 70px;
+    font-family: 'Armata', sans-serif;
+}
+
+.controllers__timer {
+    font-size: 100px;
+}
+
+.controllers__timer i {
+    font-size: 30px;
+    text-align: center;
+}
+
+.current_phase {
+    font-size: 35px;
+}

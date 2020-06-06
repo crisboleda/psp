@@ -1,0 +1,94 @@
+
+{% extends 'base/dashboard.html' %}
+
+{% block 'title' %}PSP | Create Program{% endblock %}
+
+{% block 'links' %}
+{% endblock %}
+
+
+{% block 'content' %}
+
+    <div class="au-card">
+        <div class="card-header ml-3 mr-3">
+            <h4>Crear un nuevo programa</h4>
+        </div>
+        <form action="{% url 'programs:create_program' pk_module %}" method="post" class="card-body">
+            {% csrf_token %}
+
+            <div class="form-row">
+                <div class="form-group col-xl-6">
+                    <label for="id_name">Nombre</label>
+                    <input type="text" name="name" value="{% if form.name.value %}{{ form.name.value }}{% endif %}" placeholder="Ingrese el nombre del programa" id="id_name" class="form-control {% if form.name.errors %}is-invalid{% endif %}">
+                    {% if form.name.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.name.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="form-group col-xl-6">
+                    <label for="id_planning_date">Fecha de entrega</label>
+                    <input type="date" name="planning_date" id="id_planning_date" class="form-control datepicker {% if form.planning_date.errors %}is-invalid{% endif %}" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
+                    {% if form.planning_date.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.planning_date.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="id_description">Descripción</label>
+                <textarea style="resize: none;" name="description" id="id_description" placeholder="Ingrese la descripción del programa" class="form-control w-100 {% if form.description.errors %}is-invalid{% endif %}" rows="5">{% if form.description.value %}{{ form.description.value }}{% endif %}</textarea>
+                {% if form.description.errors %}
+                    <div class="invalid-feedback">
+                        {% for error in form.description.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-xl-6">
+                    <label for="programming_language">Lenguage de programación</label>
+                    <select name="name_programming_language" id="programming_language" class="form-control">
+                        {% for language in programming_languages %}
+                            <img height="16" width="16" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1200px-Python-logo-notext.svg.png"/>
+                            <option value="{{ language.name }}">{{ language.name|capfirst }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group col-xl-6">
+                    <label for="id_programmer">Programador</label>
+                    <input type="text" class="form-control {% if form.username_programmer.errors %}is-invalid{% endif %}" id="id_programmer" name="username_programmer" list="programmers">
+                    <datalist id="programmers">
+                        {% for programmer in programmers %}
+                            <option value="{{ programmer.username }}">{{ programmer.username }}</option>
+                        {% endfor %}
+                    </datalist>
+                    {% if form.username_programmer.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.username_programmer.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <br/>
+            <input type="submit" value="Crear" class="btn btn-primary btn-block">
+        </form>
+    </div>
+{% endblock %}
+
+
+{% block 'scripts' %}
+{% endblock %}

@@ -1,0 +1,19 @@
+
+.btn-update-project {
+    background-color: #4272d7;
+    color: white;
+}
+
+.btn-update-project:hover {
+    color: white;
+}
+
+.my-custom-scrollbar {
+    position: relative;
+    height: 300px;
+    overflow: auto;
+}
+
+.table-wrapper-scroll-y {
+    display: block;
+}

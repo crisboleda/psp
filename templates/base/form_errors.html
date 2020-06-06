@@ -1,0 +1,16 @@
+{% if form.errors %}
+    <!-- Error messaging -->
+    <div class="alert alert-danger">
+        <p>No se pudo actualizar tú perfil debido a:</p>
+        {{ form.non_field_errors }}
+        <ul>
+            {% for field in form %}
+                {% if field.errors %}
+                    <li>{{ field.label }}: {{ field.errors|striptags }}</li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+    <!-- /Error messaging -->
+    <br/>
+{% endif %}

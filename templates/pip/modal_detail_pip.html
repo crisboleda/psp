@@ -1,0 +1,47 @@
+
+<!-- Modal -->
+<div class="modal fade" id="modalDetailPIP" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel">Detail PIP</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div id="loaderDetailPIP" class="text-center mt-4 mb-4">
+                <div class="spinner-border text-secondary" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+
+            <div class="modal-body d-none" id="containerDetailPIP">
+                <p><b>Name</b></p>
+                <p id="modalDetailNamePIP"></p>
+                <br/>
+
+                <p><b>Date</b></p>
+                <p id="modalDetailDatePIP"></p>
+                <br/>
+
+                <p><b>Problems</b></p>
+                <p id="modalDetailProblemsPIP"></p>
+                <br/>
+
+                <p><b>Proposal</b></p>
+                <p id="modalDetailProposalPIP"></p>
+                <br/>
+
+                <p><b>Comments</b></p>
+                <p id="modalDetailCommentsPIP"></p>
+                <br/>
+
+            </div>
+
+            <div class="modal-footer d-none">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

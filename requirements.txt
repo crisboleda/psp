@@ -4,3 +4,9 @@ Django==3.0.5
 
 # Pillow
 Pillow==7.1.1
+
+# Connection to PostgreSQL
+psycopg2-binary==2.8.5
+
+# Django REST Framework
+djangorestframework==3.11.0

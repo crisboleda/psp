@@ -1,0 +1,197 @@
+{% extends 'base/dashboard.html' %}
+
+{% block 'title' %}PSP | Reports{% endblock %}
+
+{% block 'links' %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/reports.css' %}">
+    <link rel="stylesheet" href="{% static 'css/projects.css' %}">
+    <link rel="stylesheet" href="{% static 'css/buttom_float.css' %}">
+    <link rel="stylesheet" href="{% static 'css/alert_hidden.css' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+{% endblock %}
+
+{% block modals_page %}
+    {% include 'test_report/modal_detail_report.html' %}
+    {% include 'test_report/modal_delete_confirmation.html' %}
+{% endblock %}
+
+{% block 'content' %}
+
+    {% include 'base/custom_alert.html' %}
+
+    <div class="">
+        <div class="" id="myTab" role="tablist">
+            <ul class="nav nav-tabs justify-content-end">
+                <li class="nav-item">
+                    <a class="nav-link active" id="list-tab" data-toggle="tab" href="#Report_list" role="tab" aria-controls="list" aria-selected="false">List reports</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="form-tab" data-toggle="tab" href="#form" role="tab" aria-controls="form" aria-selected="true">Add report</a>				   	
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="Report_list" role="tabpanel" aria-labelledby="list-tab">
+                    <div class="card">  
+	                    <div class="card-body">
+		                    <div class ="table-responsive">
+                                <table class="table table-borderless table-striped shadow">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Date</th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Objetive</th>
+                                            <th scope="col">Description</th>
+                                            <th scope="col">Conditions</th>
+                                            <th scope="col">Expected results</th>
+                                            <th scope="col">Actual results</th>
+                                            <th scope="col">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for report in  reports %}
+                                            <tr>
+                                                <td><b>{{ forloop.counter }}</b></td>
+                                                <td>{{ report.date|date }}</td>
+                                                <td>{{ report.name|truncatechars:25 }}</td>
+                                                <td>{{ report.objetive|truncatechars:25 }}</td>
+                                                <td>{{ report.description|truncatechars:25 }}</td>
+                                                <td>{{ report.conditions|truncatechars:25 }}</td>
+                                                <td>{{ report.expect_results|truncatechars:25 }}</td>
+                                                <td>{{ report.current_results|truncatechars:25 }}</td>
+                                                <td>
+                                                    <button value='{"idReport": "{{ report.pk }}"}' data-toggle="modal" data-target="#modalDetailReport" class="btn btn-info btnPreviewDetailReport"><i class="fas fa-eye"></i></button>
+                                                    <a href="{% url 'programs:update_report' pk_program=program_opened.pk pk_report=report.pk %}" class="btn btn-secondary"><i class="fas fa-pencil-alt"></i></a>
+                                                    <button value='{"idReport": "{{ report.pk }}"}' data-toggle="modal" data-target="#deleteReportConfirmation" class="btn btn-danger btnDeleteReport"><i class="fas fa-trash"></i></button>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+	                    </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="form" role="tabpanel" aria-labelledby="form-tab">
+                    <div class="card">
+                        <div class="card-body">
+                            <form method="POST">
+                                {% csrf_token %}
+                                <nav class="navbar navbar-light bg-light  ">
+                                    <a class="navbar-brand" href="#">Create report</a>
+                                </nav> <br>
+
+                                <div class="form-group">
+                                    <label for="formGroupExampleInput">Date</label>
+                                    <input type="date" name="date" class="form-control {% if form.date.errors %}is-invalid{% endif %}" id="date" placeholder="">
+                                    <div class="invalid-feedback">
+                                        {% for error in form.date.errors %}
+                                            {{ error }}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group col-xl-6">
+                                        <label for="textareaNameReport">Name</label>
+                                        <textarea placeholder="Enter the name of report" maxlength="100" style="resize: none;" name="name" id="textareaNameReport" rows="3" class="{% if form.name.errors %}is-invalid{% endif %} form-control pb-4 text-input-scroll"></textarea>
+                                        <p class="counter__words text-right"><span id="counterNameReport">0</span>/100</p>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.name.errors %}
+                                                {{ error }}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-xl-6">
+                                        <label for="textareaObjetiveReport">Objetive</label>
+                                        <textarea placeholder="Enter the objetive of report" maxlength="350" style="resize: none;" name="objetive" id="textareaObjetiveReport" rows="3" class="{% if form.objetive.errors %}is-invalid{% endif %} form-control pb-4 text-input-scroll"></textarea>
+                                        <p class="counter__words text-right"><span id="counterObjetiveReport">0</span>/350</p>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.objetive.errors %}
+                                                {{ error }}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-row">
+                                    <div class="form-group col-xl-6">
+                                        <label for="textareaDescriptionReport">Description</label>
+                                        <textarea placeholder="Enter the description of report" maxlength="350" style="resize: none;" name="description" id="textareaDescriptionReport" rows="3" class="{% if form.description.errors %}is-invalid{% endif %} form-control pb-4 text-input-scroll"></textarea>
+                                        <p class="counter__words text-right"><span id="counterDescriptionReport">0</span>/350</p>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.description.errors %}
+                                                {{ error }}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-xl-6">
+                                        <label for="textareaConditionsReport">Conditions</label>
+                                        <textarea placeholder="Enter the conditions of report" maxlength="350" style="resize: none;" name="conditions" id="textareaConditionsReport" rows="3" class="{% if form.conditions.errors %}is-invalid{% endif %} form-control pb-4 text-input-scroll"></textarea>
+                                        <p class="counter__words text-right"><span id="counterConditionsReport">0</span>/350</p>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.conditions.errors %}
+                                                {{ error }}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group col-xl-6">
+                                        <label for="textareaEspectedResultsReport">Expected Results</label>
+                                        <textarea placeholder="Enter the expected results of report" maxlength="350" style="resize: none;" name="expect_results" id="textareaEspectedResultsReport" rows="3" class="{% if form.expect_results.errors %}is-invalid{% endif %} form-control pb-4 text-input-scroll"></textarea>
+                                        <p class="counter__words text-right"><span id="counterEspectedResultsReport">0</span>/350</p>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.expect_results.errors %}
+                                                {{ error }}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-xl-6">
+                                        <label for="textareaCurrentResultsReport">Actual results</label>
+                                        <textarea placeholder="Enter the current results of report" maxlength="350" style="resize: none;" name="current_results" id="textareaCurrentResultsReport" rows="3" class="{% if form.current_results.errors  %}is-invalid{% endif %} form-control pb-4 text-input-scroll"></textarea>
+                                        <p class="counter__words text-right"><span id="counterCurrentResultsReport">0</span>/350</p>
+                                        <div class="invalid-feedback">
+                                            {% for error in form.current_results.errors %}
+                                                {{ error }}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                                <button type="submit" class="btn btn-primary text-center btn-block" title=" Guardar Report">Save</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block 'scripts' %}
+    {% load static %}
+    <script src="{% static 'js/Cookie.js' %}"></script>
+    <script src="{% static 'js/APIService.js' %}"></script>
+    <script src="{% static 'js/reports/index.js' %}"></script>
+    <script src="{% static 'js/count_words.js' %}"></script>
+    <script src="{% static 'js/Tag.js' %}"></script>
+    <script src="{% static 'js/hidden_alert.js' %}"></script>
+
+    <script>
+
+        CounterInputValue.showCountValue(Tag.get('id', 'textareaNameReport'), Tag.get('id', 'counterNameReport'))
+        CounterInputValue.showCountValue(Tag.get('id', 'textareaObjetiveReport'), Tag.get('id', 'counterObjetiveReport'))
+        CounterInputValue.showCountValue(Tag.get('id', 'textareaDescriptionReport'), Tag.get('id', 'counterDescriptionReport'))
+        CounterInputValue.showCountValue(Tag.get('id', 'textareaConditionsReport'), Tag.get('id', 'counterConditionsReport'))
+        CounterInputValue.showCountValue(Tag.get('id', 'textareaEspectedResultsReport'), Tag.get('id', 'counterEspectedResultsReport'))
+        CounterInputValue.showCountValue(Tag.get('id', 'textareaCurrentResultsReport'), Tag.get('id', 'counterCurrentResultsReport'))
+
+    </script>
+{% endblock 'scripts' %}

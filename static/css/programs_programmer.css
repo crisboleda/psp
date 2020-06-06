@@ -1,0 +1,150 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto|Sriracha&display=swap");
+
+body {
+  font-family: "Roboto", arial, sans-serif;
+  color: #222;
+}
+
+.program-container {
+  height: auto;
+  border-radius: 5px;
+  background: #fffffb;
+  position: relative;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+}
+.program-container .profile-img {
+  height: 60px;
+  width: 60px;
+  background-color: #FFF;
+  background-size: cover;
+  background-position: center;
+  position: absolute;
+  top: -25px;
+  left: -25px;
+  border-radius: 50%;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* #ffc145 */
+
+.program-container h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #2d3241;
+}
+
+.program-container .description {
+  margin-bottom: 20px;
+}
+
+.program-container .social {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: calc(100% - 40px);
+  margin: 0 auto;
+}
+
+.program-container .social a {
+  text-align: center;
+  border: solid 2px #ff6b6c;
+  width: 75px;
+  padding: 5px 0;
+  border-radius: 5px;
+}
+
+.program-container .social a:hover {
+  background: #ff6b6c;
+  color: white;
+  cursor: pointer;
+}
+
+.program-container .btn-open-program {
+  width: 80%;
+  font-size: 20px;
+  padding: 3px;
+  margin: 15px 10% 0 10%;
+  color: #fffffb;
+  border: none;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  background: linear-gradient(45deg, #ff6b6c, #ffc145, #ffc145, #ff6b6c);
+  background-size: 300% 300%;
+  outline: none;
+  margin-bottom: 30px;
+  transition: all 200ms ease-in-out;
+}
+
+.program-container .btn-open-program:hover {
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+  transform: translateY(2px);
+  -webkit-animation: gradientBG 1.5s ease-in-out forwards;
+  animation: gradientBG 1.5s ease-in-out forwards;
+  cursor: pointer;
+}
+
+.program-container .btn-open-program:active {
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
+  transform: translateY(4px);
+}
+
+.program-container footer {
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #5b5f97;
+  color: white;
+  bottom: 0;
+  height: auto;
+  padding: 0 20px;
+  margin-right: -40px;
+  width: 100%;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.program-container .content {
+    padding: 20px;
+}
+
+.descrip-project-module {
+    font-size: 18px;
+}
+
+.program-container footer div {
+  display: flex;
+}
+
+.program-container footer div .fa-heart {
+  color: #ff6b6c;
+}
+
+.program-container footer div p:first-child {
+  margin-right: 10px;
+  border-right: 4px solid white;
+  padding-right: 10px;
+}
+
+.descrip-project-module a {
+  text-decoration: none;
+  color: black;
+}
+
+
+@-webkit-keyframes gradientBG {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+@keyframes gradientBG {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}

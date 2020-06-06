@@ -1,0 +1,248 @@
+
+{% extends 'base/dashboard.html' %}
+
+{% block 'title' %}PSP | @{{ profile_user.username }}{% endblock %}
+
+{% block 'links' %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock %}
+
+{% block modals_page %}
+    {% include 'users/profile/modal_img_profile.html' %}
+    {% include 'users/profile/modal_languages.html' %}
+    {% include 'users/profile/modal_edit_years_experience.html' %}
+{% endblock %}
+
+{% block 'content' %}
+    
+    <div class="row au-card m-1">
+        <div class="col-xl-3 col-md-3 col-sm-6 col-lg-6 text-center" id="content-img-profile">
+            <div class="update-img-profile" id="container-update-img-profile" data-toggle="modal" data-target="#modalUpdateImgProfile">
+                <i class="fas fa-camera"></i>
+                <br/>
+                <p class="p-3"><b>Cambiar tu foto de perfil</b></p>
+            </div>
+            <div id="container-img-profile" height="200" width="200">
+                {% with profile=profile_user.get_profile %}
+                    {% if not profile.picture %}
+                        {% load static %}
+                        {% if profile.genere == 'masculino' %}
+                            <img src="{% static 'img/avatar_profile.png' %}" height="200" width="200" alt="Image of {{ profile_user.username }}">
+                        {% elif profile.genere == 'femenino' %}
+                            <img src="{% static 'img/avatar_profile_woman.png' %}" height="200" width="200" alt="Image of {{ profile_user.username }}">
+                        {% else %}
+                            <img src="{% static 'img/avatar_profile_indefinido.png' %}" height="200" width="200" alt="Image of {{ profile_user.username }}">
+                        {% endif %}
+                    {% else %}
+                        <img src="{{ profile_user.get_profile.picture.url }}" class="custom-img-profile" alt="Image of {{ profile_user.username }}">
+                    {% endif %}
+                {% endwith %}
+            </div>
+            <br/>
+            <div class="mt-3 mb-3">
+                <b class="text-success border border-success p-2 rounded">
+                    {% if profile_user.get_profile.type_user == 'administrador' %}
+                        <i class="fas fa-map-signs"></i>
+                    {% else %}
+                        <i class="fa fa-laptop" aria-hidden="true"></i>
+                    {% endif %}
+                    {{ profile_user.get_profile.type_user.upper }}
+                </b>
+            </div>
+        </div>
+        <div class="col-xl-9">
+            {% include 'base/form_errors.html' %}
+            
+            <form class="row" method="POST">
+
+                {% csrf_token %}
+
+                <div class="form-group col-xl-6">
+                    <label for="usernameInput">Nombre de usuario</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">@</div>
+                        </div>
+                        {{ form.username }}
+                    </div>
+                </div>
+                <div class="form-group col-xl-6">
+                    <label for="firstNameInput">Genero</label>
+                    <select disabled class="form-control input-profile" name="genere">
+                        {% with genere_user=profile_user.get_profile.genere %}
+                            <option value="{{ genere_user }}">{{ genere_user|capfirst }}</option>
+                            {% for genere in generes %}
+                                {% if genere != genere_user %}
+                                    <option value="{{ genere }}">{{ genere|capfirst }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        {% endwith %}
+                    </select>
+                </div>
+                <div class="form-group col-xl-6">
+                    <label for="lastNameInput">Nombre</label>
+                    <input disabled type="text" name="first_name" value="{{ profile_user.first_name }}" class="form-control input-profile" id="lastNameInput" placeholder="Nombre no actualizado">
+                </div>
+                <div class="form-group col-xl-6">
+                    <label for="firstNameInput">Apellido</label>
+                    <input disabled type="text" name="last_name" value="{{ profile_user.last_name }}" class="form-control input-profile" id="firstNameInput" placeholder="Apellido no actializado">
+                </div>
+                <div class="form-group col-xl-6">
+                    <label for="firstNameInput">Email</label>
+                    {{ form.email }}
+                </div>
+                <div class="text-right col-xl-6">
+                    <br/>
+                    {% if profile_user == request.user %}
+                        <button type="button" class="btn btn-primary mt-2" id="btnEditProfile">Editar</button>
+                        <button class="btn btn-success mt-2 d-none" id="btnSaveProfile">Guardar</button>
+                        <button type="button" class="btn btn-danger mt-2 d-none" id="btnCancelProfile">Cancelar</button>
+                    {% endif %}
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-lg-5 p-3">
+            <div class="au-card">
+                <div class="row position-relative">
+                    <h3 class="float-left">Experencia en lenguajes</h3>
+
+                    <!-- Button to Open the Modal -->
+                    {% if profile_user == request.user %}
+                        <button type="button" class="btn btn-secondary btn-modal-languages" data-toggle="modal" title="Editar proyecto" data-target="#modalLanguages">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                    {% endif %}
+                </div>
+                <br/>
+                <br/>
+                <div id="content-main-languages">
+                    <div class="d-none spinner-border text-info" role="status" id="loader-languages">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <div id="container-languages" class="row">
+                        {% for language in profile_languages %}
+                            <div class="col-xl-4 col-md-4 col-sm-6 col-lg-6 text-center {% if request.user == profile_user %}delete-language{% endif %}">
+                                <img src="{{ language.picture.url }}" alt="Img {{ language.name }}" height="55" width="55">
+                                <p class="h5">{{ language.name }}</p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-7 p-3">
+            <div class="au-card">
+
+                <div class="row">
+                    <div class="col">
+                        <span class="float-left"><h3>Total experience in years</h3></span>
+                        <span class="float-right">
+                            {% if profile_user == request.user %}
+                                <button value='{"id": "{{ profile_user.get_profile.pk }}"}' id="btnEditExperencieYears" class="btn btn-secondary" data-toggle="modal" data-target="#modalEditExperienceYears"><i class="fas fa-edit"></i></button>
+                            {% endif %}
+                        </span>
+                    </div>
+                </div>
+                <br/>
+
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <i class="fas fa-code pr-3"></i>Developing
+                                </td>
+                                <td>{{ profile_user.get_profile.years_development }}</td>
+                            </tr>
+
+                            <tr>
+                                <td><i class="fas fa-cog pr-3"></i>Configuration</td>
+                                <td>{{ profile_user.get_profile.years_configuration }}</td>
+                            </tr>
+
+                            <tr>
+                                <td><i class="fas fa-server pr-3"></i>Integration</td>
+                                <td>{{ profile_user.get_profile.years_integration }}</td>
+                            </tr>
+
+                            <tr>
+                                <td><i class="fas fa-puzzle-piece pr-3"></i>Requirements</td>
+                                <td>{{ profile_user.get_profile.years_requirements }}</td>
+                            </tr>
+
+                            <tr>
+                                <td><i class="fas fa-magic pr-3"></i>Designing</td>
+                                <td>{{ profile_user.get_profile.years_design }}</td>
+                            </tr>
+
+                            <tr>
+                                <td><i class="fas fa-search pr-3"></i>Testing</td>
+                                <td>{{ profile_user.get_profile.years_tests }}</td>
+                            </tr>
+
+                            <tr>
+                                <td><i class="far fa-question-circle pr-3"></i>Support</td>
+                                <td>{{ profile_user.get_profile.years_support }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block 'scripts' %}
+    {% load static %}
+    <script src="{% static 'js/formProfile.js' %}"></script>
+
+    <script>
+        const btnSaveExperencieLanguages = document.getElementById('btnUpdateProfileLanguages')
+        const inputsLanguages = document.getElementsByName('languageCheck')
+        const loader = document.getElementById('loader-languages')
+        const containerLanguages = document.getElementById('container-languages')
+        const contentMain = document.getElementById('content-main-languages')
+
+        var languages = []
+
+        btnSaveExperencieLanguages.addEventListener('click', () => {
+            languages = []
+            for (let j = 0; j < inputsLanguages.length; j++) {
+                if (inputsLanguages[j].checked){
+                    languages.push(inputsLanguages[j].value)
+                }
+            }
+
+            let data = ""
+
+            for (let i = 0; i < languages.length; i++) {
+                data += `${languages[i]},`
+            }
+
+            data = data.slice(0, data.length - 1)
+            const url = "{% url 'users:update_languages' %}" + `?languages=${data}`
+
+            containerLanguages.classList.add('d-none')
+            contentMain.classList.add('text-center')
+            loader.classList.remove('d-none')
+
+            fetch(url, {'credentials': 'include'}).then(() => {
+                location.reload()
+            })
+        })
+    </script>
+
+    {% load static %}
+    <script src="{% static 'js/Cookie.js' %}"></script>
+    <script src="{% static 'js/APIService.js' %}"></script>
+    <script src="{% static 'js/update_img_profile.js' %}"></script>
+    <script src="{% static 'js/profile/index.js' %}"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+{% endblock %}

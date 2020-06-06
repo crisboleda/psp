@@ -1,0 +1,75 @@
+<!-- Items Menu -->
+    {% comment %} <li class="active has-sub">
+        <a class="js-arrow" href="#">
+            <i class="fas fa-tachometer-alt"></i>Defectos
+        </a>
+        <ul class="list-unstyled navbar-mobile-sub__list js-sub-list">
+            <li>
+                <a href="index.html">Programadores</a>
+            </li>
+        </ul>
+    </li> {% endcomment %}
+    {% if request.user.get_profile.type_user == 'administrador' %}
+        <li>
+            <a href="{% url 'projects:list_projects' %}">
+                <i class="fas fa-chart-bar"></i>Proyectos
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'users:register' %}">
+                <i class="fas fa-user-plus"></i>Crear usuario
+            </a>
+        </li>
+    {% endif %}
+    {% if request.user.get_profile.type_user == 'programmer' %}
+        <li>
+            <a href="{% url 'programs:programs_programmer' %}">
+                <i class="fas fa-sitemap"></i>Programs
+            </a>
+        </li>
+    {% endif %}
+    {% if program_opened %}
+        <li class="has-sub">
+            <a class="js-arrow open" href="#">
+                <i class="fas fa-folder-open"></i>Program directory
+            </a>
+            <ul class="list-unstyled navbar-mobile-sub__list js-sub-list" style="display: block;">
+
+                {% url 'logs:program_time_logs' program_opened.pk as url_program_time_logs %}
+                <li class="{% if url_program_time_logs == request.path %} active {% endif %}">
+                    <a href="{% url 'logs:program_time_logs' program_opened.pk %}"><i class="far fa-clock"></i>Time Log</a>
+                </li>
+
+                {% url 'logs:program_defect_logs' program_opened.pk as url_program_defect_logs %}
+                <li class="{% if url_program_defect_logs == request.path %} active {% endif %}">
+                    <a href="{% url 'logs:program_defect_logs' program_opened.pk %}"><i class="fas fa-bug"></i>Defect Log</a>
+                </li>
+
+                {% url 'logs:list_defects_type' program_opened.pk as url_list_defects_type %}
+                <li class="{% if url_list_defects_type == request.path %} active {% endif %}">
+                    <a href="{% url 'logs:list_defects_type' program_opened.pk %}"><i class="fas fa-tag"></i>Defect Type Standard</a>   
+                </li>
+
+                {% url 'programs:list_pip_program' program_opened.pk as url_list_pip_program %}
+                <li class="{% if url_list_pip_program == request.path %} active {% endif %}">
+                    <a href="{% url 'programs:list_pip_program' program_opened.pk %}"><i class="fas fa-chart-line"></i>PIP</a>
+                </li>
+
+                {% url 'programs:create_part_program' program_opened.pk as url_create_part_program %}
+                <li class="{% if url_create_part_program == request.path %} active {% endif %}">
+                    <a href="{% url 'programs:create_part_program' program_opened.pk %}?type_part=base"><i class="fas fa-paper-plane"></i>Parts of the program</a>
+                </li>
+
+                {% url 'programs:reports_view' program_opened.pk as url_reports_view %}
+                <li class="{% if url_reports_view == request.path %} active {% endif %}">
+                    <a href="{% url 'programs:reports_view' program_opened.pk %}"><i class="fas fa-file-alt"></i>Test report</a>
+                </li>
+
+                {% url 'programs:detail_program' program_opened.pk as url_detail_program %}
+                <li class="{% if url_detail_program == request.path %} active {% endif %}">
+                    <a href="{% url 'programs:detail_program' program_opened.pk %}"><i class="fas fa-crosshairs"></i>Summary</a>
+                </li>
+            </ul>
+        </li>
+    {% endif %}
+<!-- END Items Menu -->

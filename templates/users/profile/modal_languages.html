@@ -1,0 +1,42 @@
+
+<!-- The Modal -->
+<div class="modal fade" id="modalLanguages" style="z-index: 10000;">
+    <div class="modal-dialog modal-lg">
+   
+	    <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+		        <h4 class="modal-title">Lenguages</h4>
+                <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+            <div class="modal-body choice-modal" >
+                <div class="container-fluid">
+                    <div class="row inner-scroll" >
+                        {% if languages %}
+                            {% for language in languages %}
+                                <div class="col-md-2">
+                                    <div class="gallery-card">
+                                        <div class="gallery-card-body">
+                                            <label class="block-check" name="{{ language.name }}">
+                                                <img src="{{ language.picture.url }}" class="img-responsive" />
+                                                <input name="languageCheck" type="checkbox" {% if language in profile_languages %}checked{% endif %} value="{{ language.name }}">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                            <div class="mycard-footer">
+                                                <a href="#" class="card-link">{{ language.name }}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+			        </div>
+		        </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnUpdateProfileLanguages" class="btn btn-primary" data-dismiss="modal">Actualizar</button>
+            </div>
+        </div>
+    </div>
+</div>
+  

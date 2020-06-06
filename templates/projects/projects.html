@@ -1,0 +1,80 @@
+
+{% extends 'base/dashboard.html' %}
+
+{% block 'title' %}PSP | Proyectos{% endblock %}
+
+{% block 'links' %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/projects.css' %}">
+    <link rel="stylesheet" href="{% static 'css/buttom_float.css' %}">
+{% endblock %}
+
+
+{% block 'content' %}
+    <div>
+        <h2>Proyectos {% if request.user.get_profile.type_user == 'programmer' %}en los que estas{% endif %}</h2>
+        <br/>
+        {% if not projects %}
+            {% if request.user.get_profile.type_user == 'programmer' %}
+                <p>No tienes proyectos asociados a tu cuenta :(</p>
+            {% else %}
+                <p>No se han creado proyectos hasta el momento</p>
+            {% endif %}
+        {% else %}
+            <div class="table-responsive-md">
+                <table class="table table-borderless table-striped">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Estado</th>
+                            <th>Fecha inicio</th>
+                            <th>Fecha entrega</th>
+                            <th>Fecha fin</th>
+                            <th>Cantidad programadores</th>
+                            <th>Administrador</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for project in projects %}
+                            <tr>
+                                <td>{{ project.name }}</td>
+                                <td class="pl-1 pr-1 text-center text-white text-bold">
+                                    <p class="rounded-lg p-0 {% if project.status == 'En proceso' %}bg-info{% elif project.status == 'Cancelado' %}bg-danger{% elif project.status == 'Pausado' %}bg-warning{% else %}bg-success{% endif %}">{{ project.status }}</p>
+                                </td>
+                                <td>{{ project.start_date|date }}</td>
+                                <td>{{ project.planning_date|date }}</td>
+                                <td>
+                                    {% if not project.finish_date %}
+                                        ---
+                                    {% else %}
+                                        {{ project.finish_date|date }}
+                                    {% endif %}
+                                </td>
+                                <td class="text-center">
+                                    {{ project.users.all.count}}
+                                </td>
+                                <td><a href="{% url 'users:profile_user' project.admin.username %}">@{{ project.admin.username }}</a></td>
+                                <td class="row td-actions">
+                                    <a class="btn btn-primary m-1" href="{% url 'projects:detail_project' project.pk %}" title="Preview"><i class="fas fa-eye"></i></a>
+                                    {% if request.user.get_profile.type_user == 'administrador' %}
+                                        <a href="{% url 'projects:edit_project' project.pk %}" class="btn btn-secondary m-1" title="Edit"><i class="fas fa-edit"></i></a>
+                                    {% endif %}
+                                    <a href="{% url 'projects:list_modules' project.pk %}" class="btn btn-info m-1" title="Modules"><i class="fas fa-boxes"></i></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endif %}
+    </div>
+    {% if request.user.get_profile.type_user == 'administrador' %}
+        <a href="{% url 'projects:create_project' %}" type="button" class="btn-flotante" title="Crear proyecto"><i class="fas fa-plus"></i></a>
+    {% endif %}
+{% endblock %}
+
+
+{% block 'scripts' %}
+
+{% endblock %}

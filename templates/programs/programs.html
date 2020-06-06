@@ -1,0 +1,59 @@
+
+{% extends 'base/dashboard.html' %}
+
+{% block 'title' %}PSP | Programas{% endblock %}
+
+{% block 'links' %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/projects.css' %}">
+    <link rel="stylesheet" href="{% static 'css/buttom_float.css' %}">
+{% endblock %}
+
+{% block 'content' %}
+
+    <div>
+        <h2>Programas</h2>
+        <br/>
+        <div class="table-responsive-md">
+            <table class="table table-borderless table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Programador</th>
+                        <th>Lenguage</th>
+                        <th>Fecha inicio</th>
+                        <th>Fecha planeada</th>
+                        <th>Fecha fin</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for program in programs %}
+                        <tr>
+                            <td>{{ program.name }}</td>
+                            <td>
+                                <a href="{% url 'users:profile_user' program.programmer.username %}">@{{ program.programmer.username }}</a>
+                            </td>
+                            <td>
+                                <img width="35" height="35" src="{{ program.language.picture.url }}" alt="{{ program.language.name }}">
+                                {{ program.language.name|capfirst }}
+                            </td>
+                            <td>{{ program.start_date }}</td>
+                            <td>{{ program.planning_date }}</td>
+                            <td>
+                                {% if not program.finish_date %}
+                                    ---
+                                {% else %}
+                                    {{ program.finish_date }}
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% if request.user.get_profile.type_user == 'administrador' %}
+        <a href="{% url 'programs:create_program' 25 %}" class="btn-flotante" title="Crear programa"><i class="fas fa-plus"></i></a>
+    {% endif %}
+{% endblock 'content' %}
+

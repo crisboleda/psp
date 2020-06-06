@@ -1,0 +1,123 @@
+
+<br/>
+
+<div class="p-4 border shadow-sm">
+    <h4 class="text-center">ADD BASE PART</h4>
+    <br/>
+
+    <div id="alertErrorFormCreateBasePart" class="alertNotification alert alert-danger p-2 m-2 mb-4 text-center w-100 d-none"></div>
+
+    <form id="formCreateBasePart" action="{% url 'programs:create_part_program' program_opened.pk %}?type_part=base" method="POST">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="id_base_program">Base program</label>
+            <select name="base_program" id="id_base_program" class="form-control">
+                {% for base_program in base_programs %}
+                    <option value="{{ base_program.pk }}">{{ base_program.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-xl-3">
+                <label for="id_planning_base_lines">Planning base lines</label>
+                <input type="number" max="2000000000" class="form-control" name="base_lines" placeholder="0" id="id_planning_base_lines">
+            </div>
+
+            <div class="form-group col-xl-3">
+                <label for="id_planning_edited_lines">Planning edited lines</label>
+                <input type="number" max="2000000000" class="form-control" name="edited_lines" placeholder="0" id="id_planning_edited_lines">
+            </div>
+            
+            <div class="form-group col-xl-3">
+                <label for="id_planning_deleted_lines">Planning deleted lines</label>
+                <input type="number" max="2000000000" class="form-control" name="deleted_lines" placeholder="0" id="id_planning_deleted_lines">
+            </div>
+
+            <div class="form-group col-xl-3">
+                <label for="id_planning_added_lines">Planning added lines</label>
+                <input type="number" max="2000000000" class="form-control" name="added_lines" placeholder="0" id="id_planning_added_lines">
+            </div>
+        </div>
+        <br/>
+        <div class="text-right">
+            <button type="submit" class="btn btn-primary">Add</button>
+        </div>
+    </form>
+</div>
+
+<br/>
+<br/>
+<br/>
+
+{% if not base_parts %}
+    <p class="ml-4 text-center">--- This program doesn't have base parts ---</p>
+{% else %}
+    <div class="row">
+        <div class="col">
+            <span class="float-left"><h4 class="ml-4"><b>Base Parts</b></h4></span>
+            <span class="float-right">
+                <button id="btnHiddeTotalLinesBasePart" class="btn btn-danger d-none"><i class="fas fa-times"></i></button>
+                <button id="btnShowTotalLinesBasePart" class="btn btn-primary"><i class="fas fa-calculator"></i></button>
+            </span>
+        </div>
+    </div>
+
+    <br/>
+
+    {% include 'parts_of_code/calculate_base_part_lines.html' %}
+
+{% endif %}
+
+<div class="row base-programs">
+    {% if base_parts %}
+        {% for base_part in base_parts %}
+            <div class="col-xl-6 p-4 col-md-12">
+                <div class="shadow p-4">
+                    <div class="row">
+                        <div class="col-xl-8">
+                            <h3>{{ base_part.program_base.name }}</h3>
+                        </div>
+                        <div class="col-xl-4 text-right">
+                            <button value='{"id": "{{ base_part.pk }}", "plBase": "{{ base_part.lines_planned_base }}", "plDeleted": "{{ base_part.lines_planned_deleted }}", "plAdded": "{{ base_part.lines_planned_added }}", "plEdited": "{{ base_part.lines_planned_edited }}", "currentBase": "{{ base_part.lines_current_base }}", "currentDeleted": "{{ base_part.lines_current_deleted }}", "currentAdded": "{{ base_part.lines_current_added }}", "currentEdited": "{{ base_part.lines_current_edited }}"}' type="button" class="btn btn-info btn-edit-base-program" data-toggle="modal" data-target="#editBasePartModal"><i class="fas fa-pencil-alt"></i></button>
+                            <button value='{"id": "{{ base_part.pk }}", "typePart": "base"}' class="btn btn-danger btnDeletePart" data-toggle="modal" data-target="#deletePartConfirmation"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="table-responsive-md p-1">
+                        <table class="table shadow-sm text-center">
+                            <thead class="thead-dark">
+                                <th>Lines</th>
+                                <th>Planning</th>
+                                <th>Current</th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th class="bg-light">Base</th>
+                                    <td>{{ base_part.lines_planned_base }}</td>
+                                    <td>{{ base_part.lines_current_base }}</td>
+                                </tr>
+                                <tr>
+                                    <th class="bg-light">Deleted</th>
+                                    <td>{{ base_part.lines_planned_deleted }}</td>
+                                    <td>{{ base_part.lines_current_deleted }}</td>
+                                </tr>
+                                <tr>
+                                    <th class="bg-light">Added</th>
+                                    <td>{{ base_part.lines_planned_added }}</td>
+                                    <td>{{ base_part.lines_current_added }}</td>
+                                </tr>
+                                <tr>
+                                    <th class="bg-light">Edited</th>
+                                    <td>{{ base_part.lines_planned_edited }}</td>
+                                    <td>{{ base_part.lines_current_edited }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>
