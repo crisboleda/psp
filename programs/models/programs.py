@@ -33,9 +33,10 @@ class Pip(models.Model):
     program = models.ForeignKey(Program, on_delete=models.CASCADE, related_name='list_pip_program')
     name = models.CharField(max_length=100, help_text='Pip name')
     date = models.DateTimeField()
-    problems = models.TextField()
-    proposal = models.TextField()
-    comment = models.TextField()
+    
+    problems = models.TextField(max_length=350)
+    proposal = models.TextField(max_length=350)
+    comment = models.TextField(max_length=350)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

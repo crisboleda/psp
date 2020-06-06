@@ -7,7 +7,8 @@ from programs.views import (AdminListProgramView, CreateProgramView, ProgrammerL
                             DetailProgramView, CreatePartProgramView, UpdateBaseProgramView, 
                             UpdateReusedPartView, ListPIPView, ReportView, 
                             UpdateNewPartView, DeleteReusedPartView, DeleteNewPartView,
-                            DeleteBasePartView)
+                            DeleteBasePartView, ReportRetrieveUpdateDestroyView, UpdateReportView)
+
 
 urlpatterns = [
 
@@ -28,6 +29,10 @@ urlpatterns = [
 
     # PIP
     path('programs/<int:pk_program>/pip/', ListPIPView.as_view(), name='list_pip_program'),
+
+    # Reports
     path('programs/<int:pk_program>/reports/', ReportView.as_view(), name='reports_view'),
+    path('programs/<int:pk_program>/reports/<int:pk_report>/', UpdateReportView.as_view(), name='update_report'),
+    path('reports/<int:pk_report>/', ReportRetrieveUpdateDestroyView.as_view(), name='report_delete_detail')
 
 ]

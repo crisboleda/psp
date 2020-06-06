@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="{% static 'css/buttom_float.css' %}">
 {% endblock %}
 
+{% block modals_page %}
+    {% include 'logs/modal_create.html' %}
+{% endblock %}
 
 {% block 'content' %}
     {% if program_opened.program_log_time.all %}

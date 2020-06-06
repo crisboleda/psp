@@ -8,6 +8,12 @@
     <link rel="stylesheet" href="{% static 'css/profile.css' %}">
 {% endblock %}
 
+{% block modals_page %}
+    {% include 'users/profile/modal_img_profile.html' %}
+    {% include 'users/profile/modal_languages.html' %}
+    {% include 'users/profile/modal_edit_years_experience.html' %}
+{% endblock %}
+
 {% block 'content' %}
     
     <div class="row au-card m-1">

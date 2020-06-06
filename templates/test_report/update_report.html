@@ -1,0 +1,124 @@
+
+{% extends 'base/dashboard.html' %}
+
+{% block 'title' %}PSP | Edit report{% endblock 'title' %}
+
+{% block 'links' %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/reports.css' %}">
+{% endblock %}
+
+{% block 'content' %}
+    <div class="au-card">
+        <form method="post">
+            {% csrf_token %}
+
+            <nav class="navbar navbar-light bg-light">
+                <a class="navbar-brand" href="#">Edit report</a>
+            </nav><br>
+
+            <div class="form-group">
+                <label for="formGroupExampleInput">Date</label>
+                <input value="{{ report.date|date:"yy-m-d" }}" type="date" name="date" class="form-control {% if form.date.errors %}is-invalid{% endif %}" id="date" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
+                <div class="invalid-feedback">
+                    {% for error in form.date.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-xl-6">
+                    <label for="textareaNameReport">Name</label>
+                    <textarea placeholder="Enter the name of report" maxlength="100" style="resize: none;" name="name" id="textareaNameReport" rows="3" class="{% if form.name.errors %}is-invalid{% endif %} form-control pb-4 text-input-scroll">{{ report.name }}</textarea>
+                    <p class="counter__words text-right"><span id="counterNameReport">0</span>/100</p>
+                    <div class="invalid-feedback">
+                        {% for error in form.name.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="form-group col-xl-6">
+                    <label for="textareaObjetiveReport">Objetive</label>
+                    <textarea placeholder="Enter the objetive of report" maxlength="350" style="resize: none;" name="objetive" id="textareaObjetiveReport" rows="3" class="{% if form.objetive.errors %}is-invalid{% endif %} form-control pb-4 text-input-scroll">{{ report.objetive }}</textarea>
+                    <p class="counter__words text-right"><span id="counterObjetiveReport">0</span>/350</p>
+                    <div class="invalid-feedback">
+                        {% for error in form.objetive.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group col-xl-6">
+                    <label for="textareaDescriptionReport">Description</label>
+                    <textarea placeholder="Enter the description of report" maxlength="350" style="resize: none;" name="description" id="textareaDescriptionReport" rows="3" class="{% if form.description.errors %}is-invalid{% endif %} form-control pb-4 text-input-scroll">{{ report.description }}</textarea>
+                    <p class="counter__words text-right"><span id="counterDescriptionReport">0</span>/350</p>
+                    <div class="invalid-feedback">
+                        {% for error in form.description.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="form-group col-xl-6">
+                    <label for="textareaConditionsReport">Conditions</label>
+                    <textarea placeholder="Enter the conditions of report" maxlength="350" style="resize: none;" name="conditions" id="textareaConditionsReport" rows="3" class="{% if form.conditions.errors %}is-invalid{% endif %} form-control pb-4 text-input-scroll">{{ report.conditions }}</textarea>
+                    <p class="counter__words text-right"><span id="counterConditionsReport">0</span>/350</p>
+                    <div class="invalid-feedback">
+                        {% for error in form.conditions.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-xl-6">
+                    <label for="textareaEspectedResultsReport">Expected Results</label>
+                    <textarea placeholder="Enter the expected results of report" maxlength="350" style="resize: none;" name="expect_results" id="textareaEspectedResultsReport" rows="3" class="{% if form.expect_results.errors %}is-invalid{% endif %} form-control pb-4 text-input-scroll">{{ report.expect_results }}</textarea>
+                    <p class="counter__words text-right"><span id="counterEspectedResultsReport">0</span>/350</p>
+                    <div class="invalid-feedback">
+                        {% for error in form.expect_results.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="form-group col-xl-6">
+                    <label for="textareaCurrentResultsReport">Actual results</label>
+                    <textarea placeholder="Enter the current results of report" maxlength="350" style="resize: none;" name="current_results" id="textareaCurrentResultsReport" rows="3" class="{% if form.current_results.errors  %}is-invalid{% endif %} form-control pb-4 text-input-scroll">{{ report.current_results }}</textarea>
+                    <p class="counter__words text-right"><span id="counterCurrentResultsReport">0</span>/350</p>
+                    <div class="invalid-feedback">
+                        {% for error in form.current_results.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <br/><br/>
+            <button type="submit" class="btn btn-primary btn-block text-center" title="Guardar Report">Edit report</button>
+        </form>
+    </div>
+{% endblock 'content' %}
+
+
+{% block 'scripts' %}
+    {% load static %}
+    <script src="{% static 'js/Tag.js' %}"></script>
+    <script src="{% static 'js/count_words.js' %}"></script>
+
+    <script>
+
+        CounterInputValue.showCountValue(Tag.get('id', 'textareaNameReport'), Tag.get('id', 'counterNameReport'))
+        CounterInputValue.showCountValue(Tag.get('id', 'textareaObjetiveReport'), Tag.get('id', 'counterObjetiveReport'))
+        CounterInputValue.showCountValue(Tag.get('id', 'textareaDescriptionReport'), Tag.get('id', 'counterDescriptionReport'))
+        CounterInputValue.showCountValue(Tag.get('id', 'textareaConditionsReport'), Tag.get('id', 'counterConditionsReport'))
+        CounterInputValue.showCountValue(Tag.get('id', 'textareaEspectedResultsReport'), Tag.get('id', 'counterEspectedResultsReport'))
+        CounterInputValue.showCountValue(Tag.get('id', 'textareaCurrentResultsReport'), Tag.get('id', 'counterCurrentResultsReport'))
+
+    </script>
+{% endblock 'scripts' %}

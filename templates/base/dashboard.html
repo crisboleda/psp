@@ -15,29 +15,9 @@
 <body>
 
     <!-- Modals -->
-        {% if profile_user %}
-            {% include 'users/profile/modal_img_profile.html' %}
-            {% include 'users/profile/modal_languages.html' %}
-            {% include 'users/profile/modal_edit_years_experience.html' %}
-        {% endif %}
-        
-        {% if program_opened %}
-            {% include 'logs/modal_create.html' %}
-        {% endif %}
-
-        {% if defect_logs %}
-            {% include 'defects/modal_defect_details.html' %}
-        {% endif %}
-
-        {% if base_programs %}
-            {% include 'parts_of_code/modal_edit_base_part.html' %}
-            {% include 'parts_of_code/modal_edit_reused_part.html' %}
-            {% include 'parts_of_code/modal_edit_new_part.html' %}
-
-            {% include 'parts_of_code/modal_delete_confirmation.html' %}
-        {% endif %}
-
+    {% block modals_page %}{% endblock %}
     <!-- End Modals -->
+    
     <div class="page-wrapper">
         {% include 'menus/menu_mobile.html' %}
 
