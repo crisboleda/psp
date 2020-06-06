@@ -6,6 +6,6 @@ from .parts_of_code import (CreatePartProgramView, UpdateBaseProgramView, Update
                             UpdateNewPartView, DeleteReusedPartView, DeleteNewPartView,
                             DeleteBasePartView)
 
-from .pip import (ListPIPView,)
+from .pip import (ListPIPView, UpdatePIPView, RetrieveDestroyPIPView)
 
-from .report import (ReportView, ReportRetrieveUpdateDestroyView, UpdateReportView)
+from .report import (ReportView, ReportRetrieveDestroyView, UpdateReportView)

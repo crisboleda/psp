@@ -6,7 +6,7 @@ from django.contrib import messages
 # Mixins and Permissions
 from psp.mixins import MemberUserProgramRequiredMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
-from programs.mixins import IsOwnerProgram, OwnerReportMixin
+from programs.mixins import IsOwnerProgram, OwnerReportPIPMixin
 
 # Django REST Framework
 from rest_framework.generics import RetrieveUpdateDestroyAPIView, RetrieveDestroyAPIView
@@ -44,14 +44,14 @@ class ReportView(MemberUserProgramRequiredMixin, FormView):
 
 
 
-class ReportRetrieveUpdateDestroyView(LoginRequiredMixin, RetrieveDestroyAPIView):
+class ReportRetrieveDestroyView(LoginRequiredMixin, RetrieveDestroyAPIView):
     permission_classes = [IsOwnerProgram]
     queryset = Report.objects.all()
     lookup_url_kwarg = 'pk_report'
     serializer_class = ReportModelSerializer
 
 
-class UpdateReportView(OwnerReportMixin, UpdateView):
+class UpdateReportView(OwnerReportPIPMixin, UpdateView):
     queryset = Report.objects.all()
     template_name = 'test_report/update_report.html'
     pk_url_kwarg = 'pk_report'

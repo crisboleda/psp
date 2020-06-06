@@ -16,7 +16,7 @@ class IsOwnerProgram(BasePermission):
         return True
 
 
-class OwnerReportMixin():
+class OwnerReportPIPMixin():
 
     def dispatch(self, request, *args, **kwargs):
 

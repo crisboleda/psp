@@ -3,7 +3,7 @@
 from rest_framework import serializers
 
 # Models
-from programs.models import BasePart, ReusedPart, NewPart, Estimation, TypePart, SizeEstimation, Report
+from programs.models import BasePart, ReusedPart, NewPart, Estimation, TypePart, SizeEstimation, Report, Pip
 
 
 class UpdateBaseProgramSerializer(serializers.ModelSerializer):
@@ -157,3 +157,10 @@ class ReportModelSerializer(serializers.ModelSerializer):
         model = Report
         fields = ('name', 'date', 'objetive', 'description', 'conditions', 'expect_results', 'current_results')
         
+
+
+class PIPModelSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Pip
+        fields = ('name', 'date', 'problems', 'proposal', 'comment')
