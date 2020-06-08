@@ -52,7 +52,7 @@ class ProgrammerListProgramView(LoginRequiredMixin, ListView):
 # Vista que se responde cuando se abre un programa
 class DetailProgramView(MemberUserProgramRequiredMixin, DetailView):
     model = Program
-    template_name = 'programs/program_opened.html'
+    template_name = 'programs/summary/program_opened.html'
     pk_url_kwarg = 'pk_program'
     context_object_name = 'program_opened'
 
