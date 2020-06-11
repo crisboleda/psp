@@ -49,14 +49,29 @@
                 </section>
 
                 <section id="time_in_phase" class="tab-panel p-4 shadow-sm">
+                    <div id="summaryLoaderTimePerPhase" class="text-center">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
                     {% include 'programs/summary/time_in_phase.html' %}
                 </section>
 
                 <section id="defects_injected" class="tab-panel p-4 shadow-sm">
+                    <div id="summaryLoaderDefectsInjected" class="text-center">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
                     {% include 'programs/summary/defects_injected_phase.html' %}
                 </section>
 
-                <section id="defects_removed" class="tab-panel">
+                <section id="defects_removed" class="tab-panel p-4 shadow-sm">
+                    <div id="summaryLoaderDefectsRemoved" class="text-center">
+                        <div class="text-center spinner-border text-primary" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
                     {% include 'programs/summary/defects_removed_phase.html' %}
                 </section>
             </div>
@@ -72,5 +87,8 @@
     <script src="{% static 'js/Cookie.js' %}"></script>
     <script src="{% static 'js/Tag.js' %}"></script>
     <script src="{% static 'js/APIService.js' %}"></script>
+    <script src="{% static 'js/CreatorChart.js' %}"></script>
     <script src="{% static 'js/summary/defects_injected_phase.js' %}"></script>
+    <script src="{% static 'js/summary/time_per_phase.js' %}"></script>
+    <script src="{% static 'js/summary/defects_removed_phase.js' %}"></script>
 {% endblock %}

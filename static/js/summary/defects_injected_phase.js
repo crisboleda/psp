@@ -10,12 +10,19 @@ const ctxTotalDefectsPercentage = document.getElementById('chartTotalDefectsPerc
 const spanTotalDefects = document.getElementById('spanTotalDefects')
 const spanActualDefects = document.getElementById('spanActualDefects')
 
+// Loader Tab defects Injected
+const summaryLoaderDefectsInjected = document.getElementById('summaryLoaderDefectsInjected')
+
 
 apiService.request(`/programs/${idProgram}/data_defects_injected/`, {}, 'GET').then(response => {
     response.json().then(data => setDataGraph(data))
 })
 
 function setDataGraph(data) {
+
+    summaryLoaderDefectsInjected.classList.add('d-none')
+    summaryLoaderDefectsInjected.nextElementSibling.classList.remove('d-none')
+
     let numbersTotalDefects = []
     let numbersActualDefects = []
     let numbersPercentage = []
@@ -40,81 +47,12 @@ function setDataGraph(data) {
         numbersPercentage.push(calculatePercentage(total, number))
     })
 
-    createChartBar(ctxActualDefects, labelsActualDefects, numbersActualDefects, "Number of defects injected ACTUAL-PROGRAM")
-    createChartBar(ctxTotalDefects, labelsTotalDefects, numbersTotalDefects, "Number of defects injected TO-DATE")
-    createChartDoughnut(ctxTotalDefectsPercentage, labelsTotalDefects, numbersPercentage, "Hello world")
+    CreatorChart.createChartBar(ctxActualDefects, labelsActualDefects, numbersActualDefects, "Number of defects injected ACTUAL-PROGRAM")
+    CreatorChart.createChartBar(ctxTotalDefects, labelsTotalDefects, numbersTotalDefects, "Number of defects injected TO-DATE")
+    CreatorChart.createChartDoughnut(ctxTotalDefectsPercentage, labelsTotalDefects, numbersPercentage, "Hello world")
 }
 
 function calculatePercentage(total, value) {
     return ((100 / total) * value).toFixed(2)
 }
 
-function createChartBar(ctx, labels, numbers, title) {
-    new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: title,
-                data: numbers,
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1.5
-            }]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
-            }
-        }
-    })
-}
-
-
-function createChartDoughnut(ctx, labels, numbers, title) {
-    new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: title,
-                data: numbers,
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1.5
-            }]
-        }
-    })
-}

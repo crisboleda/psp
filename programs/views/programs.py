@@ -2,10 +2,10 @@
 from django.views.generic import ListView, FormView, DetailView
 from django.http.response import Http404
 from django.urls import reverse_lazy
-from django.db.models import Count, Q
+from django.db.models import Count, Q, Sum
 
 # Models
-from programs.models import Program, ProgrammingLanguage
+from programs.models import Program, ProgrammingLanguage, BasePart
 from logs.models import Phase
 from projects.models import Module
 
@@ -59,12 +59,7 @@ class DetailProgramView(MemberUserProgramRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        number_defects_injected_phase = Phase.objects.annotate(
-            total=Count('name', filter=Q(phase_defect_found__program=self.program))
-        ).values('name', 'total')
-
-        for phase in number_defects_injected_phase:
-            context["number_defects_{}".format((phase['name'].replace(' ', '_')).lower())] = phase['total']
+        context["total_base_parts"] = BasePart.objects.filter(program=self.program).aggregate(total_planned_base_lines=Sum('lines_planned_base'), total_planned_deleted_lines=Sum('lines_planned_deleted'), total_planned_edited_lines=Sum('lines_planned_edited'), total_planned_added_lines=Sum('lines_planned_added'), total_current_base_lines=Sum('lines_current_base'), total_current_deleted_lines=Sum('lines_current_deleted'), total_current_edited_lines=Sum('lines_current_edited'), total_current_added_lines=Sum('lines_current_added'))
 
         return context
     

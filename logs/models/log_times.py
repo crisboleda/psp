@@ -37,4 +37,3 @@ class TimeLog(models.Model):
     def __str__(self):
         return "{} in {}".format(self.program, self.phase)
     
-    

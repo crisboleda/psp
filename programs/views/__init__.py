@@ -11,4 +11,4 @@ from .pip import (ListPIPView, UpdatePIPView, RetrieveDestroyPIPView)
 from .report import (ReportView, ReportRetrieveDestroyView, UpdateReportView)
 
 
-from .summary import (DataDefectInjectedView)
+from .summary import (DataDefectInjectedView, DataTimePerPhaseView, DataDefectsRemovedView)

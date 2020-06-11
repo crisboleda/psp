@@ -8,7 +8,8 @@ from programs.views import (AdminListProgramView, CreateProgramView, ProgrammerL
                             UpdateReusedPartView, ListPIPView, ReportView, 
                             UpdateNewPartView, DeleteReusedPartView, DeleteNewPartView,
                             DeleteBasePartView, ReportRetrieveDestroyView, UpdateReportView,
-                            UpdatePIPView, RetrieveDestroyPIPView, DataDefectInjectedView)
+                            UpdatePIPView, RetrieveDestroyPIPView, DataDefectInjectedView,
+                            DataTimePerPhaseView, DataDefectsRemovedView)
 
 
 urlpatterns = [
@@ -40,4 +41,6 @@ urlpatterns = [
 
     # Summary
     path('programs/<int:pk_program>/data_defects_injected/', DataDefectInjectedView.as_view(), name='data_defects_injected'),
+    path('programs/<int:pk_program>/data_time_per_phase/', DataTimePerPhaseView.as_view(), name='data_time_per_phase'),
+    path('programs/<int:pk_program>/data_defects_removed/', DataDefectsRemovedView.as_view(), name='data_defects_removed'),
 ]
