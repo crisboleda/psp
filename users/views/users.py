@@ -2,12 +2,16 @@
 # Django
 from django.views.generic import ListView, FormView, TemplateView
 from django.contrib.auth.views import LoginView
+from django.http.response import Http404
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Models
 from django.contrib.auth.models import User
 from programs.models import ProgrammingLanguage
+
+# Utils Users
+from users.utils import ANALYSIS_TOOLS
 
 # Forms
 from users.forms import UserUpdateForm, CreateUserForm
@@ -71,3 +75,30 @@ class UserProfileView(LoginRequiredMixin, FormView):
         data['profile_languages'] = user.get_profile.experience_languages.all()
 
         return data
+
+
+
+
+
+
+class AnalysisToolsProgrammerView(TemplateView):
+
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            self.user = User.objects.get(username=kwargs['username'], get_profile__type_user='programmer')
+            if request.user != self.user:
+                raise Http404("You don't have access to this page")
+
+        except User.DoesNotExist:
+            raise Http404("The user doesn't exists")
+
+        return super().dispatch(request, *args, **kwargs)
+
+    template_name = 'programs/analysis_tools/graphics.html'
+
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["analysis_tools_graphics"] = ANALYSIS_TOOLS
+        return context
+    

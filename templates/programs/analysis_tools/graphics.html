@@ -1,0 +1,36 @@
+
+
+{% extends 'base/dashboard.html' %}
+
+{% block 'title' %} PSP | Analysis Tools {% endblock 'title' %}
+
+{% block modals_page %}
+    {% include 'programs/analysis_tools/modal_graphic.html' %}
+{% endblock %}
+
+{% block 'content' %}
+    <div class="table-responsive-md shadow">
+        <table class="table table-striped table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Analysis Charts and Reports</th>
+                    <th>Graphic</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for graphic in analysis_tools_graphics %}
+                    <tr>
+                        <td><b>{{ forloop.counter }}</b></td>
+                        <td>{{ graphic|title }}</td>
+                        <td>
+                            <button class="btn btn-primary" data-toggle="modal" data-target="#modalDetailGraphic"><i class="fas fa-chart-bar"></i></button>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock 'content' %}

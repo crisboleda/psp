@@ -14,56 +14,56 @@
             <tr>
                 <td>Base (B)</td>
                 <td>{{ total_base_parts.total_planned_base_lines }}</td>
-                <td>232</td>
-                <td>232</td>
+                <td>{{ total_base_parts.total_current_base_lines }}</td>
+                <td></td>
             </tr>
             <tr>
                 <td>Deleted (D)</td>
                 <td>{{ total_base_parts.total_planned_deleted_lines }}</td>
-                <td>23</td>
-                <td>232</td>
+                <td>{{ total_base_parts.total_current_deleted_lines }}</td>
+                <td></td>
             </tr>
             <tr>
                 <td>Modified (M)</td>
                 <td>{{ total_base_parts.total_planned_edited_lines }}</td>
-                <td>232</td>
-                <td>2323</td>
+                <td>{{ total_base_parts.total_current_edited_lines }}</td>
+                <td></td>
             </tr>
             <tr>
                 <td>Added (A)</td>
+                <td>{{ plan_added_lines }}</td>
+                <td>{{ actual_added_lines }}</td>
                 <td></td>
-                <td>32</td>
-                <td>23</td>
             </tr>
             <tr>
                 <td>Reused (R)</td>
-                <td>23</td>
-                <td>232</td>
-                <td>232</td>
+                <td>{{ total_reused_parts.planning }}</td>
+                <td>{{ total_reused_parts.current }}</td>
+                <td>{{  total_reused_programs.reused }}</td>
             </tr>
             <tr>
                 <td>Added & Modified (A&M)</td>
-                <td>56.89</td>
-                <td>12.03</td>
+                <td>{{ lines_added_and_modified_plan }}</td>
+                <td>{{ lines_added_and_modified_actual }}</td>
                 <td>23.34</td>
             </tr>
             <tr>
                 <td>Total (T)</td>
-                <td>12.23</td>
-                <td>23.34</td>
-                <td>34.12</td>
+                <td>{{ total_lines_plan }}</td>
+                <td>{{ program_opened.total_lines }}</td>
+                <td>{{ total_lines_programs.total }}</td>
             </tr>
             <tr>
                 <td>New Reusable (NR)</td>
-                <td>22.00</td>
-                <td>11.05</td>
-                <td>45.23</td>
+                <td>{{ total_new_parts.planning }}</td>
+                <td>{{ total_new_parts.current }}</td>
+                <td>{{ total_new_parts_programs.total }}</td>
             </tr>
             <tr>
                 <td>Estimated Proxy Size (E)</td>
-                <td>45.23</td>
-                <td>12.0</td>
-                <td>34.12</td>
+                <td>{{ plan_added_lines }}</td>
+                <td></td>
+                <td></td>
             </tr>
         </tbody>
     </table>

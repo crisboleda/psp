@@ -9,7 +9,7 @@ from programs.views import (AdminListProgramView, CreateProgramView, ProgrammerL
                             UpdateNewPartView, DeleteReusedPartView, DeleteNewPartView,
                             DeleteBasePartView, ReportRetrieveDestroyView, UpdateReportView,
                             UpdatePIPView, RetrieveDestroyPIPView, DataDefectInjectedView,
-                            DataTimePerPhaseView, DataDefectsRemovedView)
+                            DataTimePerPhaseView, DataDefectsRemovedView, ConfigurationProgramProgrammerView)
 
 
 urlpatterns = [
@@ -19,6 +19,7 @@ urlpatterns = [
     path('modules/<int:pk_module>/programs/create/', CreateProgramView.as_view(), name='create_program'),
     path('programs/', ProgrammerListProgramView.as_view(), name='programs_programmer'),
     path('programs/<int:pk_program>/', DetailProgramView.as_view(), name='detail_program'),
+    path('programs/<int:pk_program>/settings/', ConfigurationProgramProgrammerView.as_view(), name='settings_program'),
 
     # PARTS OF CODE
     path('programs/<int:pk_program>/parts/', CreatePartProgramView.as_view(), name='create_part_program'),

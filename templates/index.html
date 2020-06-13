@@ -20,7 +20,7 @@
             {% if not request.user.is_authenticated %}
               <a href="{% url 'users:login' %}" class="btn btn-primary" style="margin-right: 3px;" type="button">Ingresar</a>
             {% else %}
-              <a href="{% url 'dashboard' %}" class="btn btn-primary" style="margin-right: 3px;" type="button">Home</a>
+              <a href="{% url 'programs:programs_programmer' %}" class="btn btn-primary" style="margin-right: 3px;" type="button">Home</a>
             {% endif %}
         </form>
     </nav>

@@ -18,6 +18,7 @@ class Program(models.Model):
     language = models.ForeignKey(ProgrammingLanguage, on_delete=models.CASCADE, related_name='program_language')
     module = models.ForeignKey(Module, on_delete=models.CASCADE, related_name='program_module')
 
+    total_lines = models.IntegerField(default=0)
     planning_date = models.DateField()
     start_date = models.DateTimeField(auto_now_add=True)
     finish_date = models.DateTimeField(null=True)

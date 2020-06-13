@@ -243,3 +243,14 @@ class CreateListPip(forms.ModelForm):
         data['program'] = program
 
         Pip.objects.create(**data)
+
+
+
+class UpdateProgramProgrammerForm(forms.ModelForm):
+    
+    total_lines = forms.IntegerField(min_value=1, max_value=200000000, required=False)
+    finish_date = forms.DateTimeField(required=False)
+
+    class Meta:
+        model = Program
+        fields = ('total_lines', 'finish_date')

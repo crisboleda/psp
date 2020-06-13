@@ -28,8 +28,9 @@
             </a>
         </li>
         
-        <li class="">
-            <a href=""><i class="fas fa-chart-pie"></i>Analysis Tools</a>
+        {% url 'users:analysis_tools' request.user.username as url_analysis_tools %}
+        <li class="{% if url_analysis_tools == request.path %} active {% endif %}">
+            <a href="{% url 'users:analysis_tools' request.user.username %}"><i class="fas fa-chart-pie"></i>Analysis Tools</a>
         </li>
     {% endif %}
     {% if program_opened %}
@@ -38,6 +39,11 @@
                 <i class="fas fa-folder-open"></i>Program directory
             </a>
             <ul class="list-unstyled navbar-mobile-sub__list js-sub-list" style="display: block;">
+
+                {% url 'programs:detail_program' program_opened.pk as url_detail_program %}
+                <li class="{% if url_detail_program == request.path %} active {% endif %}">
+                    <a href="{% url 'programs:detail_program' program_opened.pk %}"><i class="fas fa-crosshairs"></i>Summary</a>
+                </li>
 
                 {% url 'logs:program_time_logs' program_opened.pk as url_program_time_logs %}
                 <li class="{% if url_program_time_logs == request.path %} active {% endif %}">
@@ -69,9 +75,8 @@
                     <a href="{% url 'programs:reports_view' program_opened.pk %}"><i class="fas fa-file-alt"></i>Test report</a>
                 </li>
 
-                {% url 'programs:detail_program' program_opened.pk as url_detail_program %}
-                <li class="{% if url_detail_program == request.path %} active {% endif %}">
-                    <a href="{% url 'programs:detail_program' program_opened.pk %}"><i class="fas fa-crosshairs"></i>Summary</a>
+                <li>
+                    <a href="{% url 'programs:settings_program' program_opened.pk %}"><i class="fas fa-cog"></i>Settings</a>
                 </li>
             </ul>
         </li>

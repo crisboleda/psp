@@ -6,6 +6,7 @@ from django.urls import reverse_lazy
 from django.http.response import HttpResponseRedirect, Http404, HttpResponseForbidden
 from django.contrib import messages
 from django.db.models import Sum
+from django.db.models.functions import Coalesce
 from django.core.paginator import Paginator
 
 # Django REST Framework
@@ -60,19 +61,19 @@ class CreatePartProgramView(MemberUserProgramRequiredMixin, FormView):
         context["program_opened"] = self.program
 
         context["base_programs"] = Program.objects.exclude(pk=self.program.pk).filter(programmer=self.request.user)
-        context["total_base_parts"] = BasePart.objects.filter(program=self.program).aggregate(total_planned_base_lines=Sum('lines_planned_base'), total_planned_deleted_lines=Sum('lines_planned_deleted'), total_planned_edited_lines=Sum('lines_planned_edited'), total_planned_added_lines=Sum('lines_planned_added'), total_current_base_lines=Sum('lines_current_base'), total_current_deleted_lines=Sum('lines_current_deleted'), total_current_edited_lines=Sum('lines_current_edited'), total_current_added_lines=Sum('lines_current_added'))
+        context["total_base_parts"] = BasePart.objects.filter(program=self.program).aggregate(total_planned_base_lines=Coalesce(Sum('lines_planned_base'), 0), total_planned_deleted_lines=Coalesce(Sum('lines_planned_deleted'), 0), total_planned_edited_lines=Coalesce(Sum('lines_planned_edited'), 0), total_planned_added_lines=Coalesce(Sum('lines_planned_added'), 0), total_current_base_lines=Coalesce(Sum('lines_current_base'), 0), total_current_deleted_lines=Coalesce(Sum('lines_current_deleted'), 0), total_current_edited_lines=Coalesce(Sum('lines_current_edited'), 0), total_current_added_lines=Coalesce(Sum('lines_current_added'), 0))
 
         # Context Base Parts
         context["base_parts"] = BasePart.objects.filter(program=self.program).order_by('created_at')
 
         # Context Reused parts
         context["reused_parts"] = ReusedPart.objects.filter(program=self.program).order_by('created_at')
-        context["total_reused_parts"] = ReusedPart.objects.filter(program=self.program).aggregate(planning=Sum('planned_lines'), current=Sum('current_lines'))
+        context["total_reused_parts"] = ReusedPart.objects.filter(program=self.program).aggregate(planning=Coalesce(Sum('planned_lines'), 0), current=Coalesce(Sum('current_lines'), 0))
 
         # Context New parts
         context["pagination_new_parts"] = Paginator(NewPart.objects.filter(program=self.program).order_by('created_at'), 5)
         context["new_parts"] = context["pagination_new_parts"].page(self.page)
-        context["total_new_parts"] = NewPart.objects.filter(program=self.program).aggregate(planning=Sum('planning_lines'), current=Sum('current_lines'))
+        context["total_new_parts"] = NewPart.objects.filter(program=self.program).aggregate(planning=Coalesce(Sum('planning_lines'), 0), current=Coalesce(Sum('current_lines'), 0))
 
         context["type_parts"] = TypePart.objects.all()
         context["sizes_estimations"] = SizeEstimation.objects.all()
