@@ -133,6 +133,37 @@
                     </div>
                 </div>
             </div>
+            <br/>
+            <div class="au-card">
+                <div class="row position-relative">
+                    <h3 class="float-left">Experencie Companies</h3>
+                    <!-- Button to Open the Modal -->
+                    {% if profile_user == request.user %}
+                        <a href="{% url 'users:create_experencie_user' %}" class="btn btn-secondary btn-modal-languages">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                    {% endif %}
+                </div>
+
+                <div class="row">
+                    {% for experencie in experencies_companies %}
+                        <div class="shadow-sm p-3 col-md-12 mt-3 row">
+                            <div class="col-md-4 col-sm-6 col-lg-12 col-xl-4">
+                                <h5>{{ experencie.name_company }}</h5>
+                                <label for="" class="label__experencie__companies">Company</label>
+                            </div>
+                            <div class="col-md-4 col-sm-6 col-lg-12 col-xl-4">
+                                <h5>{{ experencie.position_company.name }}</h5>
+                                <label for="" class="label__experencie__companies">Position</label>
+                            </div>
+                            <div class="col-md-4 col-sm-6 col-lg-12 col-xl-4">
+                                <h5>{{ experencie.years_position }}</h5>
+                                <label for="" class="label__experencie__companies">Years position</label>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
         </div>
         <div class="col-lg-7 p-3">
             <div class="au-card">

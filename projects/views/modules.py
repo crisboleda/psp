@@ -4,6 +4,7 @@ from django.views.generic import ListView, FormView, UpdateView
 from django.http.response import Http404
 from django.urls import reverse_lazy, reverse
 from django.shortcuts import redirect
+from django.contrib import messages
 
 # Models
 from projects.models import Module, Project
@@ -48,6 +49,7 @@ class CreateModuleView(AdminRequiredMixin, FormView):
 
     def form_valid(self, form):
         form.save(self.project)
+        messages.success(self.request, "The module was created successfully")
         return super().form_valid(form)  
 
 
@@ -69,6 +71,7 @@ class UpdateModuleView(AdminRequiredMixin, UpdateView):
     form_class = UpdateModuleForm
 
     def get_success_url(self):
+        messages.info(self.request, "The module was updated successfully")
         pk_project = self.kwargs['pk_project']
         pk_module = self.kwargs['pk_module']
 

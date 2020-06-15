@@ -25,12 +25,21 @@
                         <td><b>{{ forloop.counter }}</b></td>
                         <td>{{ graphic|title }}</td>
                         <td>
-                            <button class="btn btn-primary" data-toggle="modal" data-target="#modalDetailGraphic"><i class="fas fa-chart-bar"></i></button>
+                            <button value='{"user": "{{ request.user }}", "name": "{{ graphic|slugify }}"}' class="btnGraphicAnalysis btn btn-primary" data-toggle="modal" data-target="#modalDetailGraphic"><i class="fas fa-chart-bar"></i></button>
                         </td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
-
 {% endblock 'content' %}
+
+
+{% block 'scripts' %}
+    {% load static %}
+    <script src="{% static 'js/CreatorChart.js' %}"></script>
+    <script src="{% static 'js/Cookie.js' %}"></script>
+    <script src="{% static 'js/APIService.js' %}"></script>
+    <script src="{% static 'js/analysis_tools.js' %}"></script>
+{% endblock 'scripts' %}
+

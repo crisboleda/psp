@@ -10,9 +10,11 @@
 
 {% block modals_page %}
     {% include 'logs/modal_create.html' %}
+    {% include 'logs/loader_full.html' %}
 {% endblock %}
 
 {% block 'content' %}
+
     {% if program_opened.program_log_time.all %}
         <table class="table table-striped table-hover shadow">
             <thead class="thead-dark">
@@ -83,13 +85,13 @@
     <script src="{% static 'js/count_words.js' %}"></script>
     <script src="{% static 'js/WindowPopup.js' %}"></script>
     <script src="{% static 'js/Cookie.js' %}"></script>
+    <script src="{% static 'js/Tag.js' %}"></script>
 
     <script>
         const input = document.getElementById('id_comments')
         const countWords = document.getElementById('count_words_comment_time_log')
 
         CounterInputValue.showCountValue(input, countWords)
-
     </script>
     
     <script>
@@ -104,30 +106,43 @@
         })
 
         async function createTimeLog(namePhase, comments){
-            
-            let body = {
-                name_phase: namePhase,
-                comments: comments
-            }
 
-            let init = {
-                method: 'POST',
-                credentials: 'include',
-                headers: {
-                    "X-CSRFToken": Cookie.getValueCookie('csrftoken'),
-                    "Accept": "application/json",
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(body)
-            }
+            if (inputComments.value != ""){
+                
+                document.body.classList.add('modal-open')
+                Tag.get('id', 'loaderFull').classList.add('d-block')
+                Tag.get('id', 'loaderFull').classList.add('fade')
+                Tag.get('id', 'loaderFull').classList.add('show')
 
-            document.getElementById('modalCreateTimeLog').classList.add('d-none')
-            const response = await fetch("{% url 'logs:create_time_log' program_opened.pk %}", init)
-            const data = await response.json()
+                let body = {
+                    name_phase: namePhase,
+                    comments: comments
+                }
 
-            if (response.status == 201){
-                window.location.reload()
-                WindowPopup.showWindow("{% url 'logs:current_time_log' program_opened.pk %}")
+                let init = {
+                    method: 'POST',
+                    credentials: 'include',
+                    headers: {
+                        "X-CSRFToken": Cookie.getValueCookie('csrftoken'),
+                        "Accept": "application/json",
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(body)
+                }
+
+                document.getElementById('modalCreateTimeLog').classList.add('d-none')
+                const response = await fetch("{% url 'logs:create_time_log' program_opened.pk %}", init)
+                const data = await response.json()
+
+                if (response.status == 201){
+                    window.location.reload()
+                    WindowPopup.showWindow("{% url 'logs:current_time_log' program_opened.pk %}")
+
+                }else {
+                    console.log(data)
+                }
+            } else {
+                inputComments.classList.add('is-invalid')
             }
         }
 

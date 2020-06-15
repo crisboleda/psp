@@ -1,6 +1,7 @@
 
 from .programs import (AdminListProgramView, CreateProgramView, ProgrammerListProgramView, 
-                        DetailProgramView, ConfigurationProgramProgrammerView)
+                        DetailProgramView, ConfigurationProgramProgrammerView,
+                        UpdateProgramAdminView)
 
 from .parts_of_code import (CreatePartProgramView, UpdateBaseProgramView, UpdateReusedPartView,
                             UpdateNewPartView, DeleteReusedPartView, DeleteNewPartView,

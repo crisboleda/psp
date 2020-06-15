@@ -1,0 +1,99 @@
+
+
+{% extends 'base/dashboard.html' %}
+
+{% block 'title' %}PSP | Experencie Companies{% endblock 'title' %}
+
+{% block 'links' %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/alert_hidden.css' %}">
+{% endblock 'links' %}
+
+{% block modals_page %}
+    {% include 'users/profile/modal_edit_experencie_comp.html' %}
+    {% include 'users/profile/modal_delete_confirmation.html' %}
+{% endblock modals_page %}
+
+{% block 'content' %}
+
+    {% include 'base/custom_alert.html' %}
+
+    <div class="au-card">
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-row">
+                <div class="form-group col-xl-4">
+                    <label for="">Name company</label>
+                    <input type="text" placeholder="Enter the name company" name="name_company" id="" class="form-control {% if form.name_company.errors %}is-invalid{% endif %}">
+                    <div class="invalid-feedback">
+                        {% for error in form.name_company.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="form-group col-xl-4">
+                    <label for="">Position company</label>
+                    <select name="position_company" id="" class="form-control {% if form.position_company.errors %}is-invalid{% endif %}">
+                        {% for position in positions %}
+                            <option value="{{ position }}">{{ position }}</option>
+                        {% endfor %}
+                    </select>
+                    <div class="invalid-feedback">
+                        {% for error in form.position_company.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="form-group col-xl-4">
+                    <label for="">Years position</label>
+                    <input type="number" value="0" name="years_position" id="" class="form-control {% if form.years_position.errors %}is-invalid{% endif %}">
+                    <div class="invalid-feedback">
+                        {% for error in form.years_position.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="text-right">
+                <a href="{% url 'users:profile_user' request.user.username %}" class="btn btn-secondary">Regresar a profile</a>
+                <input type="submit" value="Create experencie" class="btn btn-primary">
+            </div>
+        </form>
+        <hr/>
+        <br/>
+        <div class="table-responsive-md shadow-sm">
+            <table class="table table-striped text-center">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Name company</th>
+                        <th>Position company</th>
+                        <th>Years position</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="totalItemsExpCompany">
+                    {% for experencie in experencie_companies %}
+                        <tr>
+                            <td>{{ experencie.name_company }}</td>
+                            <td>{{ experencie.position_company.name }}</td>
+                            <td>{{ experencie.years_position }}</td>
+                            <td>
+                                <button value='{"id": "{{ experencie.pk }}"}' class="btnEditExperencieCompany btn btn-secondary" data-toggle="modal" data-target="#modalEditExperencieCompany"><i class="fas fa-edit"></i></button>
+                                <button value='{"numberRow": "{{ forloop.counter }}", "idExperencie": "{{ experencie.pk }}"}' class="btnDeleteExpCompany btn btn-danger" data-toggle="modal" data-target="#deleteExpCompanyConfirmation"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock 'content' %}
+
+
+{% block 'scripts' %}
+    {% load static %}
+    <script src="{% static 'js/hidden_alert.js' %}"></script>
+    <script src="{% static 'js/Cookie.js' %}"></script>
+    <script src="{% static 'js/APIService.js' %}"></script>
+    <script src="{% static 'js/profile/experencie_company.js' %}"></script>
+{% endblock 'scripts' %}

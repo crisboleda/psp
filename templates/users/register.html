@@ -6,14 +6,13 @@
 {% block 'links' %}
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/register.css' %}">
+    <link rel="stylesheet" href="{% static 'css/alert_hidden.css' %}">
 {% endblock %}
 
 {% block 'content' %}
-    {% if 'user_created' in request.GET %}
-        <div class="alert alert-success custom__alert ml-3 mr-3 text-center">
-            <p>El usuario se creó correctamente</p>
-        </div>
-    {% endif %}
+    
+    {% include 'base/custom_alert.html' %}
+
     <div class="jumbotron shadow row ml-3 mr-3">
         <div class="col-xl-8">
             <h1 class="pb-4">Registrar un usuario</h1>
@@ -102,12 +101,38 @@
         </div>
     </div>
 
+    <div class="au-card m-3">
+        <div class="table-responsive-md">
+            <table class="table table-striped shadow-sm">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>First name</th>
+                        <th>Last name</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th class="text-center">N° Programs assigned</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for programmer in programmers %}
+                        <tr>
+                            <td>{{ programmer.first_name }}</td>
+                            <td>{{ programmer.last_name }}</td>
+                            <td>{{ programmer.username }}</td>
+                            <td>{{ programmer.email }}</td>
+                            <td class="text-center">{{ programmer.program_user.count }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
 {% endblock %}
 
 {% block 'scripts' %}
     {% load static %}
-    <script src="{% static 'js/register.js' %}"></script>
-    <script src="{% static 'js/ocultar_alert.js' %}"></script>
+    <script src="{% static 'js/hidden_alert.js' %}"></script>
 {% endblock %}
 
 {% comment %} <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

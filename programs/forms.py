@@ -254,3 +254,11 @@ class UpdateProgramProgrammerForm(forms.ModelForm):
     class Meta:
         model = Program
         fields = ('total_lines', 'finish_date')
+
+
+
+class UpdateProgramAdminForm(forms.ModelForm):
+
+    class Meta:
+        model = Program
+        fields = ('name', 'description', 'planning_date')

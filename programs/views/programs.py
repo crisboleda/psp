@@ -13,7 +13,7 @@ from projects.models import Module
 from django.contrib.auth.models import User
 
 # Forms
-from programs.forms import CreateProgramForm, UpdateProgramProgrammerForm
+from programs.forms import CreateProgramForm, UpdateProgramProgrammerForm, UpdateProgramAdminForm
 
 # Mixins
 from psp.mixins import AdminRequiredMixin, MemberUserProgramRequiredMixin
@@ -98,6 +98,7 @@ class CreateProgramView(AdminRequiredMixin, FormView):
 
     def form_valid(self, form):
         form.save(self.module)
+        messages.success(self.request, "The program was created successfully")
         return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
@@ -130,3 +131,17 @@ class ConfigurationProgramProgrammerView(MemberUserProgramRequiredMixin, UpdateV
     def get_success_url(self):
         messages.info(self.request, "The program was updated successfully")
         return reverse_lazy('programs:settings_program', kwargs={'pk_program': self.program.pk})
+
+
+
+class UpdateProgramAdminView(AdminRequiredMixin, UpdateView):
+    template_name = 'programs/edit_program.html'
+    queryset = Program.objects.all()
+    form_class = UpdateProgramAdminForm
+    context_object_name = 'program'
+    pk_url_kwarg = 'pk_program'
+
+    def get_success_url(self):
+        messages.info(self.request, "The program was updated successfully")
+        return reverse_lazy('programs:list_programs', kwargs={'pk_module': self.get_object().module.pk})
+

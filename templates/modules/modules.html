@@ -1,31 +1,35 @@
 
 {% extends 'base/dashboard.html' %}
 
-{% block 'title' %}PSP | Módulos{% endblock %}
+{% block 'title' %}PSP | Modules{% endblock %}
 
 {% block 'links' %}
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/projects.css' %}">
     <link rel="stylesheet" href="{% static 'css/buttom_float.css' %}">
+    <link rel="stylesheet" href="{% static 'css/alert_hidden.css' %}">
 {% endblock %}
 
 {% block 'content' %}
+
+    {% include 'base/custom_alert.html' %}
+
     <div>
-        <h2>Módulos</h2>
+        <h2>Modules</h2>
         <br/>
         {% if not modules %}
             <p>No hay módulos en este proyecto todavía</p>
         {% else %}
             <div class="table-responsive-md">
-                <table class="table table-borderless table-striped">
+                <table class="table table-borderless table-striped shadow-sm">
                     <thead class="thead-dark">
                         <tr>
-                            <th>Nombre</th>
-                            <th>Descripción</th>
-                            <th>Fecha inicio</th>
-                            <th>Fecha entrega</th>
-                            <th>Fecha fin</th>
-                            <th>Acciones</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Start date</th>
+                            <th>Planning date</th>
+                            <th>Finish date</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -42,7 +46,7 @@
                                         {{ module.finish_date|date }}
                                     {% endif %}
                                 </td>
-                                <td class="row td-actions">
+                                <td>
                                     {% if request.user.get_profile.type_user == 'administrador' %}
                                         <a href="{% url 'projects:update_module' module.project.pk module.pk %}" class="btn btn-secondary m-1" title="Edit"><i class="fas fa-edit"></i></a>
                                     {% endif %}
@@ -61,6 +65,7 @@
     {% endif %}
 {% endblock %}
 
-
 {% block 'scripts' %}
+    {% load static %}
+    <script src="{% static 'js/hidden_alert.js' %}"></script>
 {% endblock %}

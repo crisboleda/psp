@@ -70,4 +70,43 @@ class CreatorChart {
             }
         })
     }
+
+    static createChartLine(ctx, labels, data, title){
+        var structuredData = {
+            labels: labels,
+            datasets: [{
+                label: title,
+                data: data,
+                lineTension: 0,
+                fill: false,
+                borderColor: 'orange',
+                backgroundColor: 'transparent',
+                borderDash: [5, 5],
+                pointBorderColor: 'orange',
+                pointBackgroundColor: 'rgba(255,150,0,0.5)',
+                pointRadius: 5,
+                pointHoverRadius: 10,
+                pointHitRadius: 30,
+                pointBorderWidth: 2,
+                pointStyle: 'rectRounded'
+            }]
+        };
+
+        var chartOptions = {
+            legend: {
+                display: true,
+                position: 'top',
+                labels: {
+                    boxWidth: 80,
+                    fontColor: 'black'
+                }
+            }
+        };
+
+        new Chart(ctx, {
+            type: 'line',
+            data: structuredData,
+            options: chartOptions
+        });
+    }
 }

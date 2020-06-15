@@ -17,7 +17,7 @@
                     </div>
                 </div>
                 <br/>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In error nemo consequuntur iusto a accusamus facere suscipit vitae, iste, provident possimus asperiores ipsum eum corporis praesentium illo tempore ea adipisci!</p>
+                <p>{{ project.description }}</p>
                 <br/>
                 <p><b>Proyecto administrado por </b><a href="{% url 'users:profile_user' project.admin.username %}">@{{ project.admin.username }}</a></p>
             </div>
@@ -49,10 +49,10 @@
             </div>
         </div>
     </div>
-    <div class="au-card col-xl-2">
+    <div class="au-card col-xl-3">
         <h4>Programadores</h4>
         {% for programmer in project.users.all %}
-            <div class="row ml-1 mt-3">
+            <div class="row mt-3 shadow-sm p-2">
                 {% if not programmer.get_profile.picture %}
                     {% load static %}
                     {% if programmer.get_profile.type_user == 'masculino' %}

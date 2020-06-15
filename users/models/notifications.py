@@ -6,8 +6,9 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
+# TODO Implementar un sistema de notificaciones en el futuro
 # This model save the notifications of the user
-class Notification(models.Model):
+'''class Notification(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_notifications')
     message = models.CharField(max_length=60, help_text='message of notification')
     was_read = models.BooleanField(default=False)
@@ -16,4 +17,4 @@ class Notification(models.Model):
 
     def __str__(self):
         return self.message
-    
+'''

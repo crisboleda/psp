@@ -33,7 +33,7 @@
             <a href="{% url 'users:analysis_tools' request.user.username %}"><i class="fas fa-chart-pie"></i>Analysis Tools</a>
         </li>
     {% endif %}
-    {% if program_opened %}
+    {% if program_opened and request.user.get_profile.type_user == 'programmer' %}
         <li class="has-sub">
             <a class="js-arrow open" href="#">
                 <i class="fas fa-folder-open"></i>Program directory

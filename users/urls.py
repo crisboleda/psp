@@ -6,7 +6,9 @@ from django.contrib.auth.views import LogoutView
 # Views
 from users.views import (LoginUserView, UserProfileView, update_experencie_languages, 
                         UpdateImageProfile, DeleteImageProfile, RegisterUserView,
-                        ListUpdateExperencieProfileView, AnalysisToolsProgrammerView)
+                        ListUpdateExperencieProfileView, AnalysisToolsProgrammerView,
+                        CreateExperencieCompanyView, ExperencieCompanyAPIView,
+                        UserAnalysisToolsView)
 
 
 urlpatterns = [
@@ -22,6 +24,12 @@ urlpatterns = [
 
     path('profiles/<int:pk_profile_user>/total-experencie/', ListUpdateExperencieProfileView.as_view(), name='update_total_experencie'),
     path('<str:username>/analysis-tools/', AnalysisToolsProgrammerView.as_view(), name='analysis_tools'),
+
+    path('<str:username>/analysis-tools/graphics/', UserAnalysisToolsView.as_view(), name='data_analysis_tools'),
+
+    # Experencies companies
+    path('experencie-companies/', CreateExperencieCompanyView.as_view(), name='create_experencie_user'),
+    path('experencie-companies/<int:pk_exp_company>/', ExperencieCompanyAPIView.as_view(), name='api_view_experencie_company'),
 ]
 
 

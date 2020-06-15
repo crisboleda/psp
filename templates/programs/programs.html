@@ -1,18 +1,21 @@
 
 {% extends 'base/dashboard.html' %}
 
-{% block 'title' %}PSP | Programas{% endblock %}
+{% block 'title' %}PSP | Programs{% endblock %}
 
 {% block 'links' %}
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/projects.css' %}">
     <link rel="stylesheet" href="{% static 'css/buttom_float.css' %}">
+    <link rel="stylesheet" href="{% static 'css/alert_hidden.css' %}">
 {% endblock %}
 
 {% block 'content' %}
 
+    {% include 'base/custom_alert.html' %}
+
     <div>
-        <h2>Programas</h2>
+        <h2>Programs</h2>
         <br/>
         <div class="table-responsive-md">
             <table class="table table-borderless table-striped">
@@ -24,6 +27,7 @@
                         <th>Fecha inicio</th>
                         <th>Fecha planeada</th>
                         <th>Fecha fin</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,7 +39,7 @@
                             </td>
                             <td>
                                 <img width="35" height="35" src="{{ program.language.picture.url }}" alt="{{ program.language.name }}">
-                                {{ program.language.name|capfirst }}
+                                <p>{{ program.language.name|capfirst }}</p>
                             </td>
                             <td>{{ program.start_date }}</td>
                             <td>{{ program.planning_date }}</td>
@@ -45,6 +49,10 @@
                                 {% else %}
                                     {{ program.finish_date }}
                                 {% endif %}
+                            </td>
+                            <td>
+                                <!--<a href="{% url 'programs:detail_program' program.pk %}" class="btn btn-secondary"><i class="fas fa-eye"></i></a>-->
+                                <a href="{% url 'programs:admin_edit_program' program.pk %}" class="btn btn-secondary"><i class="fas fa-edit"></i></a>
                             </td>
                         </tr>
                     {% endfor %}
@@ -56,4 +64,10 @@
         <a href="{% url 'programs:create_program' 25 %}" class="btn-flotante" title="Crear programa"><i class="fas fa-plus"></i></a>
     {% endif %}
 {% endblock 'content' %}
+
+
+{% block 'scripts' %}
+    {% load static %}
+    <script src="{% static 'js/hidden_alert.js' %}"></script>
+{% endblock 'scripts' %}
 

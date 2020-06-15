@@ -40,7 +40,7 @@ class IsProgrammerProgram(BasePermission):
         super().__init__()
 
     def has_permission(self, request, view):
-        if self.program.programmer == request.user:
+        if self.program.programmer == request.user or request.user.get_profile.type_user == 'administrador':
             return True
         return False
         

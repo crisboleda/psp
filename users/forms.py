@@ -4,6 +4,7 @@ from django import forms
 
 # Models
 from django.contrib.auth.models import User
+from users.models import ExperienceCompany, PositionCompany, Profile
 
 
 class UserUpdateForm(forms.ModelForm):
@@ -90,6 +91,29 @@ class CreateUserForm(forms.ModelForm):
         data = self.cleaned_data
         data.pop('confirm_password')
         
-        User.objects.create_user(**data)
+        user = User.objects.create_user(**data)
+        Profile.objects.create(user=user)
 
     
+
+
+class CreateExperencieCompanyForm(forms.Form):
+
+    name_company = forms.CharField(max_length=70)
+
+    position_company = forms.CharField(max_length=70)
+
+    years_position = forms.IntegerField(min_value=1, max_value=120)
+
+    def clean_position_company(self):
+        data = self.cleaned_data["position_company"]
+        try:
+            return PositionCompany.objects.get(name=data)
+        except PositionCompany.DoesNotExist:
+            raise forms.ValidationError("The position doesn't exists")
+    
+
+    def save(self, user):
+        data = self.cleaned_data
+        data["user"] = user
+        ExperienceCompany.objects.create(**data)

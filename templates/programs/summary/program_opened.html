@@ -19,15 +19,18 @@
     <div class="container__menu__summary">
         <div class="tabset">
             <!-- Tab 1 -->
-            <input type="radio" name="tabset" id="tab1" aria-controls="summary" checked>
-            <label for="tab1">Summary</label>
 
-            <!-- Tab 2 -->
-            <input type="radio" name="tabset" id="tab2" aria-controls="program_size">
-            <label for="tab2">Program size</label>
+            {% if request.user == program_opened.programmer %}
+                <input type="radio" name="tabset" id="tab1" aria-controls="summary" {% if request.user == program_opened.programmer %} checked {% endif %}>
+                <label for="tab1">Summary</label>
+
+                <!-- Tab 2 -->
+                <input type="radio" name="tabset" id="tab2" aria-controls="program_size">
+                <label for="tab2">Program size</label>
+            {% endif %}
 
             <!-- Tab 3 -->
-            <input type="radio" name="tabset" id="tab3" aria-controls="time_in_phase">
+            <input type="radio" name="tabset" id="tab3" aria-controls="time_in_phase" {% if request.user != program_opened.programmer %} checked {% endif %}>
             <label for="tab3">Time per phase</label>
 
             <!-- Tab 4 -->
@@ -40,13 +43,15 @@
             
             <div class="tab-panels bg-white">
 
-                <section id="summary" class="tab-panel p-4 shadow-sm">
-                    {% include 'programs/summary/summary.html' %}
-                </section>
+                {% if request.user == program_opened.programmer %}
+                    <section id="summary" class="tab-panel p-4 shadow-sm">
+                        {% include 'programs/summary/summary.html' %}
+                    </section>
 
-                <section id="program_size" class="tab-panel p-4 shadow-sm">
-                    {% include 'programs/summary/program_size_summary.html' %}
-                </section>
+                    <section id="program_size" class="tab-panel p-4 shadow-sm">
+                        {% include 'programs/summary/program_size_summary.html' %}
+                    </section>
+                {% endif %}
 
                 <section id="time_in_phase" class="tab-panel p-4 shadow-sm">
                     <div id="summaryLoaderTimePerPhase" class="text-center">

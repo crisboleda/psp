@@ -4,6 +4,7 @@ from django.views.generic import FormView, ListView, DetailView, UpdateView, For
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy, reverse
 from django.http.response import Http404
+from django.contrib import messages
 
 # Models
 from programs.models import ProgrammingLanguage
@@ -31,6 +32,7 @@ class CreateProjectView(AdminRequiredMixin, FormView):
 
     def form_valid(self, form):
         form.save(self.request.user)
+        messages.success(self.request, "The project was created successfully")
         return super().form_valid(form)
 
 

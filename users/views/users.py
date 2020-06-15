@@ -5,10 +5,12 @@ from django.contrib.auth.views import LoginView
 from django.http.response import Http404
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib import messages
+from django.db.models import F, Sum, Q, Subquery, OuterRef
 
 # Models
 from django.contrib.auth.models import User
-from programs.models import ProgrammingLanguage
+from programs.models import ProgrammingLanguage, Program, BasePart, ReusedPart
 
 # Utils Users
 from users.utils import ANALYSIS_TOOLS
@@ -25,6 +27,12 @@ class LoginUserView(LoginView):
     redirect_authenticated_user = True
     template_name = 'users/login.html'
 
+    def get_success_url(self):
+        if self.request.user.get_profile.type_user == 'programmer':
+            return reverse_lazy('programs:programs_programmer')
+        else:
+            return reverse_lazy('projects:list_projects')
+
 
 class RegisterUserView(AdminRequiredMixin, FormView):
     model = User
@@ -33,10 +41,16 @@ class RegisterUserView(AdminRequiredMixin, FormView):
 
     def form_valid(self, form):
         form.save()
+        messages.success(self.request, "The user was created successfully")
         return super().form_valid(form)
     
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["programmers"] = User.objects.filter(get_profile__type_user='programmer')
+        return context
+    
     def get_success_url(self):
-        return reverse_lazy('users:register') + '?user_created'
+        return reverse_lazy('users:register')
 
 
 # View User data Updata
@@ -72,6 +86,7 @@ class UserProfileView(LoginRequiredMixin, FormView):
         data['profile_user'] = user
         data['generes'] = ['masculino', 'femenino', 'indefinido']
         data['languages'] = ProgrammingLanguage.objects.all()
+        data["experencies_companies"] = user.experencies_companies.all()
         data['profile_languages'] = user.get_profile.experience_languages.all()
 
         return data

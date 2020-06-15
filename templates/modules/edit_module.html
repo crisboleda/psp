@@ -3,8 +3,15 @@
 
 {% block 'title' %}PSP | Editar módulo{% endblock %}
 
+{% block 'links' %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/alert_hidden.css' %}">
+{% endblock 'links' %}
 
 {% block 'content' %}
+
+    {% include 'base/custom_alert.html' %}
+
     <div class="au-card">
         <div class="card-header ml-3 mr-3">
             <h4>Editar módulo</h4>
@@ -70,6 +77,9 @@
 
 
 {% block 'scripts' %}
+    {% load static %}
+    <script src="{% static 'js/hidden_alert.js' %}"></script>
+
     <script>
         const inputNameModule = document.getElementById('id_name')
         let hasInputNameError = "{{ form.description.errors }}"
