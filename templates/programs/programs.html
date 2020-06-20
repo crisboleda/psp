@@ -21,12 +21,12 @@
             <table class="table table-borderless table-striped">
                 <thead class="thead-dark">
                     <tr>
-                        <th>Nombre</th>
-                        <th>Programador</th>
-                        <th>Lenguage</th>
-                        <th>Fecha inicio</th>
-                        <th>Fecha planeada</th>
-                        <th>Fecha fin</th>
+                        <th>Name</th>
+                        <th>Programmer</th>
+                        <th>Language</th>
+                        <th>Start date</th>
+                        <th>Planning date</th>
+                        <th>Finish date</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -60,11 +60,11 @@
             </table>
         </div>
     </div>
+
     {% if request.user.get_profile.type_user == 'administrador' %}
-        <a href="{% url 'programs:create_program' 25 %}" class="btn-flotante" title="Crear programa"><i class="fas fa-plus"></i></a>
+        <a href="{% url 'programs:create_program' 25 %}" class="btn-flotante" title="Create program"><i class="fas fa-plus"></i></a>
     {% endif %}
 {% endblock 'content' %}
-
 
 {% block 'scripts' %}
     {% load static %}

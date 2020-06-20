@@ -59,7 +59,7 @@
                 {% csrf_token %}
 
                 <div class="form-group col-xl-6">
-                    <label for="usernameInput">Nombre de usuario</label>
+                    <label for="usernameInput">Username</label>
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <div class="input-group-text">@</div>
@@ -68,7 +68,7 @@
                     </div>
                 </div>
                 <div class="form-group col-xl-6">
-                    <label for="firstNameInput">Genero</label>
+                    <label for="firstNameInput">Genere</label>
                     <select disabled class="form-control input-profile" name="genere">
                         {% with genere_user=profile_user.get_profile.genere %}
                             <option value="{{ genere_user }}">{{ genere_user|capfirst }}</option>
@@ -81,11 +81,11 @@
                     </select>
                 </div>
                 <div class="form-group col-xl-6">
-                    <label for="lastNameInput">Nombre</label>
+                    <label for="lastNameInput">First name</label>
                     <input disabled type="text" name="first_name" value="{{ profile_user.first_name }}" class="form-control input-profile" id="lastNameInput" placeholder="Nombre no actualizado">
                 </div>
                 <div class="form-group col-xl-6">
-                    <label for="firstNameInput">Apellido</label>
+                    <label for="firstNameInput">Last name</label>
                     <input disabled type="text" name="last_name" value="{{ profile_user.last_name }}" class="form-control input-profile" id="firstNameInput" placeholder="Apellido no actializado">
                 </div>
                 <div class="form-group col-xl-6">
@@ -95,8 +95,8 @@
                 <div class="text-right col-xl-6">
                     <br/>
                     {% if profile_user == request.user %}
-                        <button type="button" class="btn btn-primary mt-2" id="btnEditProfile">Editar</button>
-                        <button class="btn btn-success mt-2 d-none" id="btnSaveProfile">Guardar</button>
+                        <button type="button" class="btn btn-primary mt-2" id="btnEditProfile">Edit</button>
+                        <button class="btn btn-success mt-2 d-none" id="btnSaveProfile">Save</button>
                         <button type="button" class="btn btn-danger mt-2 d-none" id="btnCancelProfile">Cancelar</button>
                     {% endif %}
                 </div>
@@ -148,15 +148,15 @@
                 <div class="row">
                     {% for experencie in experencies_companies %}
                         <div class="shadow-sm p-3 col-md-12 mt-3 row">
-                            <div class="col-md-4 col-sm-6 col-lg-12 col-xl-4">
+                            <div class="text-center col-md-4 col-sm-6 col-lg-12 col-xl-4">
                                 <h5>{{ experencie.name_company }}</h5>
                                 <label for="" class="label__experencie__companies">Company</label>
                             </div>
-                            <div class="col-md-4 col-sm-6 col-lg-12 col-xl-4">
+                            <div class="text-center col-md-4 col-sm-6 col-lg-12 col-xl-4">
                                 <h5>{{ experencie.position_company.name }}</h5>
                                 <label for="" class="label__experencie__companies">Position</label>
                             </div>
-                            <div class="col-md-4 col-sm-6 col-lg-12 col-xl-4">
+                            <div class="text-center col-md-4 col-sm-6 col-lg-12 col-xl-4">
                                 <h5>{{ experencie.years_position }}</h5>
                                 <label for="" class="label__experencie__companies">Years position</label>
                             </div>

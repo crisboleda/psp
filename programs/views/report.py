@@ -28,20 +28,17 @@ class ReportView(MemberUserProgramRequiredMixin, FormView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["program_opened"] =  self.program
-        context["reports"] = Report.objects.all().order_by('created_at')
+        context["reports"] = Report.objects.filter(program=self.program).order_by('created_at')
         return context
-
 
     def get_success_url(self):
         return reverse_lazy('programs:reports_view', kwargs={'pk_program': self.program.pk})
-
 
     def form_valid(self, form):
         form.save(self.program)
         messages.success(self.request, "The report was created successfuly")
 
         return super().form_valid(form)
-
 
 
 class ReportRetrieveDestroyView(LoginRequiredMixin, RetrieveDestroyAPIView):

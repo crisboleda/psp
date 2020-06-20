@@ -61,7 +61,7 @@
     </div>
     
     {% if request.user.get_profile.type_user == 'administrador' %}
-        <a href="{% url 'projects:create_module' pk_project %}" class="btn-flotante" title="Crear proyecto"><i class="fas fa-plus"></i></a>
+        <a href="{% url 'projects:create_module' pk_project %}" class="btn-flotante" title="Create module"><i class="fas fa-plus"></i></a>
     {% endif %}
 {% endblock %}
 

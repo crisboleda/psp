@@ -3,13 +3,16 @@
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Graphic</h5>
+                <h4 class="modal-title" id="staticBackdropLabel">Graphic</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body text-center">
-                <canvas id="canvasGraphicAnalysisTools"></canvas>
+                <div id="loaderGraphicAnalysisTools" class="spinner-border text-secondary mt-4" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+                <canvas class="d-none" id="canvasGraphicAnalysisTools"></canvas>
             </div>
             <br/>
             <br/>
