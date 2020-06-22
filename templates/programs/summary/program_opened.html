@@ -40,6 +40,10 @@
             <!-- Tab 5 -->
             <input type="radio" name="tabset" id="tab5" aria-controls="defects_removed">
             <label for="tab5">Defects removed</label>
+
+            <!-- Tab 6 -->
+            <input type="radio" name="tabset" id="tab6" aria-controls="defect_removal_efficiency">
+            <label for="tab6">Defect removal Efficiency</label>
             
             <div class="tab-panels bg-white">
 
@@ -78,6 +82,10 @@
                         </div>
                     </div>
                     {% include 'programs/summary/defects_removed_phase.html' %}
+                </section>
+
+                <section id="defect_removal_efficiency" class="tab-panel p-4 shadow-sm">
+                    {% include 'programs/summary/defects_removal_efficiency.html' %}
                 </section>
             </div>
         </div>

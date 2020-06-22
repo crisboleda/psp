@@ -30,7 +30,7 @@ class CreateDefectLogView(MemberUserProgramRequiredMixin, FormView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["program_opened"] = self.program 
-        context["phases"] = Phase.objects.all()
+        context["phases"] = Phase.objects.all().order_by('order_index')
         context["type_defects"] = DefectType.objects.all().values('number', 'name')
         context["defect_logs"] = DefectLog.objects.filter(program=self.program)
         return context

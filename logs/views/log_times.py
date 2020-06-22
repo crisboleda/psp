@@ -38,7 +38,7 @@ class ListProgramTimeLogView(MemberUserProgramRequiredMixin, ListView):
     context_object_name = 'programs'
 
     def get_queryset(self):
-        return TimeLog.objects.filter(program=self.program)
+        return TimeLog.objects.filter(program=self.program).order_by('phase__order_index')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

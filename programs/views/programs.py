@@ -2,13 +2,13 @@
 from django.views.generic import ListView, FormView, DetailView, UpdateView
 from django.http.response import Http404
 from django.urls import reverse_lazy
-from django.db.models import Count, Q, Sum, F
-from django.db.models.functions import Coalesce
+from django.db.models import Count, Q, Sum, F, OuterRef, Subquery
+from django.db.models.functions import Coalesce, Ceil
 from django.contrib import messages
 
 # Models
 from programs.models import Program, ProgrammingLanguage, BasePart, ReusedPart, NewPart
-from logs.models import Phase
+from logs.models import Phase, TimeLog
 from projects.models import Module
 from django.contrib.auth.models import User
 
@@ -79,9 +79,34 @@ class DetailProgramView(MemberUserProgramRequiredMixin, DetailView):
         context["actual_added_lines"] = self.program.total_lines - (context["total_base_parts"]["total_current_base_lines"] - context["total_base_parts"]["total_current_deleted_lines"] + context["total_reused_parts"]["current"])
         context["lines_added_and_modified_actual"] = context["actual_added_lines"] + context["total_base_parts"]["total_current_edited_lines"]
 
+        context["total_defects_removed"] = Phase.objects.annotate(
+            total=Coalesce(Count('name', filter=Q(phase_defect_removed__program=self.program)), 0)
+        ).values('name', 'total').filter(name='Unit Test').order_by('created_at')[0]
+
+
+        base = BasePart.objects.values('program__pk').filter(program=OuterRef("pk")).annotate(total=Sum('lines_current_base'))
+        edited = BasePart.objects.values('program__pk').filter(program=OuterRef("pk")).annotate(total=Sum('lines_current_edited'))
+        deleted = BasePart.objects.values('program__pk').filter(program=OuterRef("pk")).annotate(total=Sum('lines_current_deleted'))
+        reused = ReusedPart.objects.values('program__pk').filter(program=OuterRef("pk")).annotate(total=Sum('current_lines'))
+
+        context["total_lines_added_and_modified"] = Program.objects.values('programmer__pk').filter(programmer=self.program.programmer).annotate(total=Coalesce(Sum(Coalesce((F('total_lines') - (Subquery(base.values('total')) - Subquery(deleted.values('total')) + Subquery(reused.values('total')) )) + Subquery(edited.values('total')), 0)), 0)).values('total')[0]
+
+        # Percentage Reused lines
+        context["percentage_reused_actual"] = round(100 * (context["total_reused_parts"]["current"] / self.program.total_lines), 2)
+        context["percentage_reused_to_date"] = round(100 * (context["total_reused_programs"]["reused"] / context["total_lines_programs"]["total"]), 2)
+        context["percentage_reused_planned"] = round(100 * (context["total_reused_parts"]["planning"] / context["total_lines_plan"]), 2)
+
+        # Percentage new Lines
+        context["percentage_new_lines_plan"] = round(100 * (context["total_new_parts"]["planning"] / context["lines_added_and_modified_plan"]), 2)
+        context["percentage_new_lines_actual"] = round(100 * (context["total_new_parts"]["current"] / context["lines_added_and_modified_actual"]), 2)
+        context["percentage_new_lines_to_date"] = round(100 * (context["total_new_parts_programs"]["total"] / context["total_lines_added_and_modified"]["total"]), 2)
+
+        context["summary"] = {
+            "test_defects": round(1000 * (context["total_defects_removed"]["total"] / context["lines_added_and_modified_actual"]), 2)
+        }
+
         return context
     
-
 
 # Vista para crear un programa (Solo pueden acceder administradores)
 class CreateProgramView(AdminRequiredMixin, FormView):
