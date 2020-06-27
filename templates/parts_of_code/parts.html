@@ -11,6 +11,8 @@
 
     <script>
         var estimations = JSON.parse('{{estimations}}'.replace(/&quot;/g,'"'))
+        var idProgram = "{{ program_opened.pk }}"
+        var totalProgramsUser = "{{ program_opened.programmer.program_user.all.count }}"
     </script>
 
 {% endblock %}
@@ -33,6 +35,7 @@
         <input type="radio" id="tab1" name="tab-control" checked>
         <input type="radio" id="tab2" name="tab-control">
         <input type="radio" id="tab3" name="tab-control">
+        <input type="radio" id="tab4" name="tab-control">
 
         <div class="tabs-items">
             <ul>
@@ -61,6 +64,14 @@
                         <br><span>New parts</span>
                     </label>
                 </li>
+                <li title="Shipping">
+                    <label for="tab4" role="button">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M17.431,2.156h-3.715c-0.228,0-0.413,0.186-0.413,0.413v6.973h-2.89V6.687c0-0.229-0.186-0.413-0.413-0.413H6.285c-0.228,0-0.413,0.184-0.413,0.413v6.388H2.569c-0.227,0-0.413,0.187-0.413,0.413v3.942c0,0.228,0.186,0.413,0.413,0.413h14.862c0.228,0,0.413-0.186,0.413-0.413V2.569C17.844,2.342,17.658,2.156,17.431,2.156 M5.872,17.019h-2.89v-3.117h2.89V17.019zM9.587,17.019h-2.89V7.1h2.89V17.019z M13.303,17.019h-2.89v-6.651h2.89V17.019z M17.019,17.019h-2.891V2.982h2.891V17.019z"></path>
+                        </svg>
+                        <br><span>Mini PROBE</span>
+                    </label>
+                </li>
             </ul>
         </div>
         
@@ -72,11 +83,17 @@
             <section>
                 {% include 'parts_of_code/parts_base.html' %}
             </section>
+
             <section>
                 {% include 'parts_of_code/parts_reused.html' %}
             </section>
+
             <section>
                 {% include 'parts_of_code/new_parts.html' %}
+            </section>
+
+            <section>
+                {% include 'parts_of_code/mini_probe.html' %}
             </section>
         </div>
     </div>

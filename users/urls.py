@@ -26,6 +26,7 @@ urlpatterns = [
     path('<str:username>/analysis-tools/', AnalysisToolsProgrammerView.as_view(), name='analysis_tools'),
 
     path('<str:username>/analysis-tools/graphics/', UserAnalysisToolsView.as_view(), name='data_analysis_tools'),
+    
 
     # Experencies companies
     path('experencie-companies/', CreateExperencieCompanyView.as_view(), name='create_experencie_user'),

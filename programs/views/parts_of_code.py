@@ -5,7 +5,7 @@ from django.http.response import JsonResponse
 from django.urls import reverse_lazy
 from django.http.response import HttpResponseRedirect, Http404, HttpResponseForbidden
 from django.contrib import messages
-from django.db.models import Sum
+from django.db.models import Sum, OuterRef, Subquery, F
 from django.db.models.functions import Coalesce
 from django.core.paginator import Paginator
 
@@ -39,7 +39,7 @@ class CreatePartProgramView(MemberUserProgramRequiredMixin, FormView):
 
     def get_form_class(self):
         self.type_part = self.request.GET['type_part']
-        if self.type_part and (self.type_part == 'base' or self.type_part == 'reused' or self.type_part == 'new'):
+        if self.type_part and (self.type_part == 'base' or self.type_part == 'reused' or self.type_part == 'new' or self.type_part == 'probe'):
             if self.type_part == 'base':
                 return CreateBasePartForm
             elif self.type_part == 'reused':
@@ -81,8 +81,25 @@ class CreatePartProgramView(MemberUserProgramRequiredMixin, FormView):
         serializer_estimations = EstimationModelSerializer(instance=Estimation.objects.all(), many=True)
         context["estimations"] = json.dumps(serializer_estimations.data, sort_keys=True)
 
+        base = BasePart.objects.values('program__pk').filter(program=OuterRef("pk")).annotate(total=Sum('lines_current_base'))
+        edited = BasePart.objects.values('program__pk').filter(program=OuterRef("pk")).annotate(total=Sum('lines_current_edited'))
+        deleted = BasePart.objects.values('program__pk').filter(program=OuterRef("pk")).annotate(total=Sum('lines_current_deleted'))
+        reused = ReusedPart.objects.values('program__pk').filter(program=OuterRef("pk")).annotate(total=Sum('current_lines'))
+
+        context["total_lines_added_and_modified"] = Program.objects.values('programmer__pk').filter(programmer=self.program.programmer).annotate(total=Coalesce(Sum(Coalesce((F('total_lines') - (Subquery(base.values('total')) - Subquery(deleted.values('total')) + Subquery(reused.values('total')) )) + Subquery(edited.values('total')), 0)), 0)).values('total')[0]
+        context["total_lines_probe"] = round(context["total_lines_added_and_modified"]["total"] / self.request.user.program_user.all().count(), 2)
+
+        context["plan_added_program"] = context["total_new_parts"]["planning"] + context["total_base_parts"]["total_planned_added_lines"]
+        context["lines_program_probe"] = context["total_base_parts"]["total_planned_base_lines"] - context["total_base_parts"]["total_planned_deleted_lines"] + context["plan_added_program"] + context["total_reused_parts"]["planning"]
+
         return context
-    
+
+    def div_values(self, value1, value2):
+        try:
+            return value1 / value2
+        except ZeroDivisionError:
+            return 0
+
 
     def form_valid(self, form):
         form.save(self.program)

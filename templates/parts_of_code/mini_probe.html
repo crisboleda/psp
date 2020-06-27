@@ -1,0 +1,31 @@
+
+{% if program_opened.programmer.program_user.all.count >= 3 %}
+    <div class="row">
+        <div class="col-xl-3">
+            <div>
+                <h4><span id="spanTotalLines">{{ total_lines_probe }}</span> Lines</h4>
+                <label for="">Promedio de lineas</label>
+            </div>
+            <div>
+                <h4><span id="spanTotalTime">...</span> Minutes</h4>
+                <label for="">Promedio de tiempo</label>
+            </div>
+        </div>
+        <div class="col-xl-9">
+            <div>
+                <div class="form-group">
+                    <input type="number" placeholder="Enter program size" value="{{ lines_program_probe }}" id="inputLinesEstimationPROBE" class="form-control">
+                </div>
+            </div>
+            <div>
+                <div class="form-group">
+                    <input type="number" placeholder="0" disabled id="inputResultTimePROBE" class="form-control">
+                </div>
+            </div>
+        </div>
+    </div>
+{% else %}
+    <div class="text-center">
+        <h4>Este método no está disponible por que no tienes como mínimo 3 programas desarrollados</h4>
+    </div>
+{% endif %}

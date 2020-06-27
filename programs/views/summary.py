@@ -88,7 +88,7 @@ class DataDefectsRemovedView(LoginRequiredMixin, ProgramExistMixin, APIView):
     }
 
     def get(self, request, *args, **kwargs):
-    
+        
         self.context["defects_removed"] = Phase.objects.annotate(
             total=Count('name', filter=Q(phase_defect_removed__program=self.program))
         ).values('name', 'total').order_by('order_index')
@@ -103,4 +103,5 @@ class DataDefectsRemovedView(LoginRequiredMixin, ProgramExistMixin, APIView):
 
     def get_permissions(self):
         return [IsProgrammerProgram(self.program)]
+
 

@@ -92,20 +92,26 @@ class DetailProgramView(MemberUserProgramRequiredMixin, DetailView):
         context["total_lines_added_and_modified"] = Program.objects.values('programmer__pk').filter(programmer=self.program.programmer).annotate(total=Coalesce(Sum(Coalesce((F('total_lines') - (Subquery(base.values('total')) - Subquery(deleted.values('total')) + Subquery(reused.values('total')) )) + Subquery(edited.values('total')), 0)), 0)).values('total')[0]
 
         # Percentage Reused lines
-        context["percentage_reused_actual"] = round(100 * (context["total_reused_parts"]["current"] / self.program.total_lines), 2)
-        context["percentage_reused_to_date"] = round(100 * (context["total_reused_programs"]["reused"] / context["total_lines_programs"]["total"]), 2)
-        context["percentage_reused_planned"] = round(100 * (context["total_reused_parts"]["planning"] / context["total_lines_plan"]), 2)
+        context["percentage_reused_actual"] = round(100 * (self.validate_zero_division(context["total_reused_parts"]["current"], self.program.total_lines)), 2)
+        context["percentage_reused_to_date"] = round(100 * (self.validate_zero_division(context["total_reused_programs"]["reused"], context["total_lines_programs"]["total"])), 2)
+        context["percentage_reused_planned"] = round(100 * (self.validate_zero_division(context["total_reused_parts"]["planning"], context["total_lines_plan"])), 2)
 
         # Percentage new Lines
-        context["percentage_new_lines_plan"] = round(100 * (context["total_new_parts"]["planning"] / context["lines_added_and_modified_plan"]), 2)
-        context["percentage_new_lines_actual"] = round(100 * (context["total_new_parts"]["current"] / context["lines_added_and_modified_actual"]), 2)
-        context["percentage_new_lines_to_date"] = round(100 * (context["total_new_parts_programs"]["total"] / context["total_lines_added_and_modified"]["total"]), 2)
+        context["percentage_new_lines_plan"] = round(100 * (self.validate_zero_division(context["total_new_parts"]["planning"], context["lines_added_and_modified_plan"])), 2)
+        context["percentage_new_lines_actual"] = round(100 * (self.validate_zero_division(context["total_new_parts"]["current"], context["lines_added_and_modified_actual"])), 2)
+        context["percentage_new_lines_to_date"] = round(100 * (self.validate_zero_division(context["total_new_parts_programs"]["total"], context["total_lines_added_and_modified"]["total"])), 2)
 
         context["summary"] = {
-            "test_defects": round(1000 * (context["total_defects_removed"]["total"] / context["lines_added_and_modified_actual"]), 2)
+            "test_defects": round(1000 * (self.validate_zero_division(context["total_defects_removed"]["total"], context["lines_added_and_modified_actual"])), 2)
         }
 
         return context
+
+    def validate_zero_division(self, value1, value2):
+        try:
+            return value1 / value2
+        except ZeroDivisionError:
+            return 0
     
 
 # Vista para crear un programa (Solo pueden acceder administradores)

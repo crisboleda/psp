@@ -4,6 +4,13 @@ const utilUril = new UtilUrl()
 const tabMenu1 = document.getElementById('tab1')
 const tabMenu2 = document.getElementById('tab2')
 const tabMenu3 = document.getElementById('tab3')
+const tabMenu4 = document.getElementById('tab4')
+
+const spanTotalTime = document.getElementById('spanTotalTime')
+const spanTotalLines = document.getElementById('spanTotalLines')
+
+const inputLinesEstimationPROBE = document.getElementById('inputLinesEstimationPROBE')
+const inputResultTimePROBE = document.getElementById('inputResultTimePROBE')
 
 const buttonsDeletePart = document.getElementsByClassName('btnDeletePart')
 const btnDeletePartConfirmation = document.getElementById('btnDeletePartConfirmation')
@@ -22,6 +29,10 @@ switch (paramUrl) {
         tabMenu3.checked = true
         break;
 
+    case 'probe':
+        tabMenu4.checked = true
+        break;
+
     default:
         tabMenu1.checked = true;
 }
@@ -30,8 +41,30 @@ switch (paramUrl) {
 tabMenu1.addEventListener('click', (e) => utilUril.changeUrlParam('type_part', 'base'))
 tabMenu2.addEventListener('click', (e) => utilUril.changeUrlParam('type_part', 'reused'))
 tabMenu3.addEventListener('click', (e) => utilUril.changeUrlParam('type_part', 'new'))
+tabMenu4.addEventListener('click', (e) => utilUril.changeUrlParam('type_part', 'probe'))
 
 
+apiService.request(`/programs/${idProgram}/data_time_per_phase/`, {}, 'GET').then(response => {
+    response.json().then(data => {
+        let total = 0
+        data.time_per_phase_to_date.map(time => {
+            total += time.total_time
+        })
+        spanTotalTime.textContent = (total / totalProgramsUser).toFixed(2)
+
+        inputLinesEstimationPROBE.addEventListener('keydown', (e) => calculateTimePerLinesOfCode(e.target.value))
+        inputLinesEstimationPROBE.addEventListener('keyup', (e) => calculateTimePerLinesOfCode(e.target.value))
+        
+        calculateTimePerLinesOfCode(inputLinesEstimationPROBE.value)
+    })
+})
+
+
+function calculateTimePerLinesOfCode(lines) {
+    let linesPerMinute = parseInt(spanTotalLines.textContent) / parseInt(spanTotalTime.textContent)
+
+    inputResultTimePROBE.value = (lines / linesPerMinute).toFixed(2)
+}
 
 for (let i = 0; i < buttonsDeletePart.length; i++) {
     buttonsDeletePart[i].addEventListener('click', (e) => {

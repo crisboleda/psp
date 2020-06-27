@@ -109,4 +109,14 @@ class CreatorChart {
             options: chartOptions
         });
     }
+
+    static createRadarChart(ctx, labels, datasets, title){
+        var radarChart = new Chart(ctx, {
+            type: 'radar',
+            data: {
+                labels: labels,
+                datasets: datasets
+            }
+        });
+    }
 }

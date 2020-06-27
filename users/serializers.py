@@ -7,6 +7,8 @@ from rest_framework import serializers
 
 # Models
 from users.models import Profile, ExperienceCompany, PositionCompany
+from logs.models import Phase, DefectLog
+from programs.models import Program
 
 
 class ProfileExperencieSerializer(serializers.ModelSerializer):
@@ -101,3 +103,26 @@ class ExperencieCompanySerializer(serializers.Serializer):
         experencie.save()
 
         return experencie
+
+
+class DefectLogProgramSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = DefectLog
+        fields = ('date', 'description', 'solution', 'created_at', 'updated_at')
+
+
+class DefectsRemovedPhaseSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Phase
+        fields = ('name', 'abbreviation')
+
+
+class DataProgramAnalysisTools(serializers.ModelSerializer):
+
+    get_defects = serializers.StringRelatedField(many=True)
+
+    class Meta:
+        model = Program
+        fields = ('pk', 'name', 'description', 'language', 'get_defects')
