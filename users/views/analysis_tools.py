@@ -3,11 +3,14 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 import json
 from django.db.models import OuterRef, Sum, F, Subquery, Q, Count
-from django.db.models.functions import Coalesce
+from django.db.models.functions import Coalesce, Ceil, NullIf
 
 # Models
 from programs.models import BasePart, ReusedPart, Program
-from logs.models import Phase
+from logs.models import Phase, TimeLog
+
+# Utils Constants
+from users.utils import TIME_TOTAL_BY_PROGRAM
 
 # Django REST Framework
 from rest_framework.views import APIView
@@ -26,7 +29,10 @@ class UserAnalysisToolsView(LoginRequiredMixin, UserExistMixin, AllowAccessUserP
     data = {
         'actual_size': {},
         'defects_removed': {},
-        'defects_injected': {}
+        'defects_injected': {},
+        'total_time': {},
+        'appraisal_COQ': {},
+        'total_defects': {}
     }
 
     def get(self, request, *args, **kwargs):
@@ -65,8 +71,31 @@ class UserAnalysisToolsView(LoginRequiredMixin, UserExistMixin, AllowAccessUserP
             unit_test=Count('name', Q(get_defects__phase_injected__name='Unit Test')),
             postmortem=Count('name', Q(get_defects__phase_injected__name='Postmortem'))
         ).values('pk', 'name', 'planning', 'design', 'design_review', 'codification', 'codification_review', 'compilation', 'unit_test', 'postmortem').order_by('created_at')
-
         # ------> END Defects injected <------
+
+        # -----> Total time <--------
+        self.data["total_time"] = Program.objects.filter(programmer=self.user).annotate(total=TIME_TOTAL_BY_PROGRAM).values('pk', 'name', 'total').order_by('created_at')
+        # -----> END total time <------
+
+        # -----> Failure COQ <--------
+        # Hago dos subconsultas que retornan el tiempo dedicado en la fase de compilación y de pruebas
+        timelogComp = TimeLog.objects.filter(program__pk=OuterRef("pk"), phase__name='Compilation').annotate(time=Ceil(F('delta_time') / 60.0)).values('time')[:1]
+        timelogUnit = TimeLog.objects.filter(program__pk=OuterRef("pk"), phase__name='Unit Test').annotate(time=Ceil(F('delta_time') / 60.0)).values('time')[:1]
+
+        self.data["failure_COQ"] = Program.objects.filter(programmer=self.user).annotate(total=Coalesce(100 * ((Coalesce(Subquery(timelogComp), 0) + Coalesce(Subquery(timelogUnit), 0)) / NullIf(TIME_TOTAL_BY_PROGRAM, 0)), 0)).values('pk', 'name', 'total').order_by('created_at')
+        # ------> END Failure COQ <------
+
+        # ------> Appraisal Cost Of Quality <---------
+        # Hago dos subconsultas que retornan el tiempo dedicado en la fase de revisión de diseño y revisión de código
+        timelog_design_review = TimeLog.objects.filter(program__pk=OuterRef("pk"), phase__name='Design Review').annotate(time=Ceil(F('delta_time') / 60.0)).values('time')[:1]
+        timelog_code_review = TimeLog.objects.filter(program__pk=OuterRef("pk"), phase__name='Codification Review').annotate(time=Ceil(F('delta_time') / 60.0)).values('time')[:1]
+
+        self.data["appraisal_COQ"] = Program.objects.filter(programmer=self.user).annotate(total=Coalesce(100 * ((Coalesce(Subquery(timelog_design_review), 0) + Coalesce(Subquery(timelog_code_review), 0)) / NullIf(TIME_TOTAL_BY_PROGRAM, 0)), 0)).values('pk', 'name', 'total').order_by('created_at')
+        # -------> END Total defects <-------
+
+        # ------> Total defects <---------
+        self.data["total_defects"] = Program.objects.filter(programmer=self.user).annotate(total=Count('get_defects')).values('pk', 'name', 'total')
+        # ------> END total defects <-------
 
         return Response(data=self.data, status=status.HTTP_200_OK)
 
