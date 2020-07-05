@@ -1,8 +1,9 @@
 <div class="modal fade" id="editReusedPart" tabindex="-1" role="dialog" aria-labelledby="modalLabelEditReusedPart" aria-hidden="true">
     <div class="modal-dialog">
+        {% load i18n %}
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="modalLabelEditReusedPart">Edit Reused Part</h4>
+                <h4 class="modal-title" id="modalLabelEditReusedPart">{% trans "Edit Reused Part" %}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -20,19 +21,19 @@
 
                 <form id="form-edit-reused-part">
                     <div class="form-group">
-                        <label for="reusedBaseLines" class="col-form-label">Base Current Lines</label>
+                        <label for="reusedBaseLines" class="col-form-label">{% trans "Base Current Lines" %}</label>
                         <input type="number" minLength="1" value="" class="form-control" id="reusedBaseLines">
                     </div>
                     <div class="form-group">
-                        <label for="reusedCurrentLines" class="col-form-label">Added Current Lines</label>
+                        <label for="reusedCurrentLines" class="col-form-label">{% trans "Added Current Lines" %}</label>
                         <input type="number" value="0" class="form-control" id="reusedCurrentLines">
                     </div>
 
                     <br/>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Update Part</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{% trans "Close" %}</button>
+                        <button type="submit" class="btn btn-primary">{% trans "Update Part" %}</button>
                     </div>
                 </form>
             </div>

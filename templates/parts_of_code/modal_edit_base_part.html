@@ -1,8 +1,9 @@
 <div class="modal fade" id="editBasePartModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
+        {% load i18n %}
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="exampleModalLabel">Edit Base Part</h4>
+                <h4 class="modal-title" id="exampleModalLabel">{% trans "Edit Base Part" %}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -18,19 +19,19 @@
 
                     <div class="form-row">
                         <div class="form-group col-xl-6">
-                            <label for="baseCurrentLines" class="col-form-label">Planned base lines</label>
+                            <label for="baseCurrentLines" class="col-form-label">{% trans "Planned base lines" %}</label>
                             <input type="number" min="1" max="2000000000" value="0" name="lines_planned_base" class="form-control" id="basePlannedLines">
                         </div>
                         <div class="form-group col-xl-6">
-                            <label for="addedCurrentLines" class="col-form-label">Added Planned lines</label>
+                            <label for="addedCurrentLines" class="col-form-label">{% trans "Added Planned lines" %}</label>
                             <input type="number" min="0" max="2000000000" value="0" name="lines_planned_added" class="form-control" id="addedPlannedLines">
                         </div>
                         <div class="form-group col-xl-6">
-                            <label for="editedCurrentLines" class="col-form-label">Edited Planned lines</label>
+                            <label for="editedCurrentLines" class="col-form-label">{% trans "Edited Planned lines" %}</label>
                             <input type="number" min="0" max="2000000000" value="0" name="lines_planned_edited" class="form-control" id="editedPlannedLines">
                         </div>
                         <div class="form-group col-xl-6">
-                            <label for="deletedCurrentLines" class="col-form-label">Deleted Planned lines</label>
+                            <label for="deletedCurrentLines" class="col-form-label">{% trans "Deleted Planned lines" %}</label>
                             <input type="number" min="0" max="2000000000" value="0" name="lines_planned_deleted" class="form-control" id="deletedPlannedLines">
                         </div>
                     </div>
@@ -39,19 +40,19 @@
 
                     <div class="form-row">
                         <div class="form-group col-xl-6">
-                            <label for="baseCurrentLines" class="col-form-label">Base Current Lines</label>
+                            <label for="baseCurrentLines" class="col-form-label">{% trans "Base Current Lines" %}</label>
                             <input type="number" min="0" max="2000000000" value="0" name="lines_current_base" class="form-control" id="baseCurrentLines">
                         </div>
                         <div class="form-group col-xl-6">
-                            <label for="addedCurrentLines" class="col-form-label">Added Current Lines</label>
+                            <label for="addedCurrentLines" class="col-form-label">{% trans "Added Current Lines" %}</label>
                             <input type="number" min="0" max="2000000000" value="0" name="lines_current_added" class="form-control" id="addedCurrentLines">
                         </div>
                         <div class="form-group col-xl-6">
-                            <label for="editedCurrentLines" class="col-form-label">Edited Current Lines</label>
+                            <label for="editedCurrentLines" class="col-form-label">{% trans "Edited Current Lines" %}</label>
                             <input type="number" min="0" max="2000000000" value="0" name="lines_current_edited" class="form-control" id="editedCurrentLines">
                         </div>
                         <div class="form-group col-xl-6">
-                            <label for="deletedCurrentLines" class="col-form-label">Deleted Current Lines</label>
+                            <label for="deletedCurrentLines" class="col-form-label">{% trans "Deleted Current Lines" %}</label>
                             <input type="number" min="0" max="2000000000" value="0" name="lines_current_deleted" class="form-control" id="deletedCurrentLines">
                         </div>
                     </div>
@@ -59,8 +60,8 @@
                     <br/>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" id="btnUpdateBasePart" class="btn btn-primary">Update Part</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{% trans "Close" %}</button>
+                        <button type="button" id="btnUpdateBasePart" class="btn btn-primary">{% trans "Update Part" %}</button>
                     </div>
 
                 </div>

@@ -2,6 +2,7 @@
 
 {% extends 'base/dashboard.html' %}
 
+{% load i18n %}
 {% block 'title' %} PSP | Analysis Tools {% endblock 'title' %}
 
 {% block modals_page %}
@@ -9,13 +10,14 @@
 {% endblock %}
 
 {% block 'content' %}
+    {% load i18n %}
     <div class="table-responsive-md shadow">
         <table class="table table-striped table-hover">
             <thead class="thead-dark">
                 <tr>
                     <th>#</th>
-                    <th>Analysis Charts and Reports</th>
-                    <th>Graphic</th>
+                    <th>{% trans "Analysis Charts and Reports" %}</th>
+                    <th>{% trans "Graphic" %}</th>
                 </tr>
             </thead>
 

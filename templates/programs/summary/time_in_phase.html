@@ -1,20 +1,21 @@
 
 <div class="row d-none">
+    {% load i18n %}
     <div class="col-xl-6 mt-5">
-        <h5 class="text-center">Total <span id="spanActualTime">0</span> Minutes</h5>
+        <h5 class="text-center">Total <span id="spanActualTime">0</span> {% trans "Minutes" %}</h5>
         <div>
             <canvas id="chartTimePerPhase" height="200"></canvas>
         </div>
     </div>
     
     <div class="col-xl-6 mt-5">
-        <h5 class="text-center">Total <span id="spanTotalTime">0</span> Minutes</h5>
+        <h5 class="text-center">Total <span id="spanTotalTime">0</span> {% trans "Minutes" %}</h5>
         <div>
             <canvas id="chartTotalTime" height="200"></canvas>
         </div>
     </div>
     <div class="col-xl-6 mt-5">
-        <h5 class="text-center">Total minutes TO-DATE (%)</h5>
+        <h5 class="text-center">{% trans "Total minutes TO-DATE (%)" %}</h5>
         <div>
             <canvas id="chartTimePercentage" height="200"></canvas>
         </div>

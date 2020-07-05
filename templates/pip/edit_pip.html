@@ -1,7 +1,8 @@
 
 {% extends 'base/dashboard.html' %}
 
-{% block 'title' %}PSP | Edit PIP{% endblock 'title' %}
+{% load i18n %}
+{% block 'title' %}PSP | {% trans "Edit PIP" %}{% endblock 'title' %}
 
 {% block 'links' %}
     {% load static %}
@@ -11,16 +12,17 @@
 
 
 {% block 'content' %}
+    {% load i18n %}
     <div class="au-card">
         <form method="POST">
             {% csrf_token %}
 
             <nav class="navbar navbar-light bg-light  ">
-                <a class="navbar-brand" href="#">PSP | Procces Improvent Proposal</a>
+                <a class="navbar-brand" href="#">PIP | Procces Improvent Proposal</a>
             </nav> <br>
 
             <div class="form-group">
-                <label for="inputDatePIP">Date</label>
+                <label for="inputDatePIP">{% trans "Date" %}</label>
                 <input value="{{ pip.date|date:"yy-m-d" }}" type="date" class="form-control {% if form.date.errors %}is-invalid{% endif %}" name="date" id="inputDatePIP" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
                 <div class="invalid-feedback">
                     {% for error in form.date.errors %}
@@ -31,7 +33,7 @@
             
             <div class="form-row">
                 <div class="form-group col-xl-6">
-                    <label for="inputNamePIP">Name</label>
+                    <label for="inputNamePIP">{% trans "Name" %}</label>
                     <textarea maxlength="100" style="resize: none;" class="pb-4 text-input-scroll form-control {% if form.name.errors %}is-invalid{% endif %}" name="name" id="inputNamePIP" rows="4" placeholder="Enter the name">{{ pip.name }}</textarea>
                     <p class="counter__words text-right"><span id="counterNamePIP">0</span>/100</p>
                     <div class="invalid-feedback">
@@ -42,7 +44,7 @@
                 </div>   
             
                 <div class="form-group col-xl-6">
-                    <label for="inputProblemsPIP">Problem Description</label>
+                    <label for="inputProblemsPIP">{% trans "Problem Description" %}</label>
                     <textarea maxlength="350" style="resize: none;" class="pb-4 text-input-scroll form-control {% if form.problems.errors %}is-invalid{% endif %}" name="problems" id="inputProblemsPIP" rows="4" placeholder="Describes the problem encountered">{{ pip.problems }}</textarea>
                     <p class="counter__words text-right"><span id="counterProblemPIP">0</span>/350</p>
                     <div class="invalid-feedback">
@@ -55,7 +57,7 @@
 
             <div class="form-row">
                 <div class="form-group col-xl-6">
-                    <label for="inputProposalPIP">Proposonal Description</label>
+                    <label for="inputProposalPIP">{% trans "Proposonal Description" %}</label>
                     <textarea maxlength="350" style="resize: none;" class="pb-4 text-input-scroll form-control {% if form.proposal.errors %}is-invalid{% endif %}" name="proposal" id="inputProposalPIP" rows="4" placeholder="Describe the improvements you've proposed">{{ pip.proposal }}</textarea>
                     <p class="counter__words text-right"><span id="counterProposalPIP">0</span>/350</p>
                     <div class="invalid-feeback">
@@ -66,7 +68,7 @@
                 </div>
 
                 <div class="form-group col-xl-6">
-                    <label for="inputCommentPIP">Notes and Comments</label>
+                    <label for="inputCommentPIP">{% trans "Notes and Comments" %}</label>
                     <textarea maxlength="350" style="resize: none;" class="pb-4 text-input-scroll form-control {% if form.comment.errors %}is-invalid{% endif %}" name="comment" id="inputCommentPIP" rows="4" placeholder="Note any other comments or observations that describe your experiences or improvement ideas">{{ pip.comment }}</textarea>
                     <p class="counter__words text-right"><span id="counterCommentPIP">0</span>/350</p>
                     <div class="invalid-feeback">
@@ -79,7 +81,7 @@
 
             <br/>
             <br/>
-            <button type="submit" class="btn btn-primary btn-block text-center" title="Guardar PIP">Edit PIP</button>
+            <button type="submit" class="btn btn-primary btn-block text-center" title="{% trans "Edit PIP" %}">{% trans "Edit PIP" %}</button>
         </form>
     </div>
 {% endblock 'content' %}

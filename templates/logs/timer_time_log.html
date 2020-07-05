@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% load i18n %}
     <title>PSP | Timer TimeLog</title>
 
     {% load static %}    
@@ -15,7 +17,7 @@
 <body class="p-4">
     {% if time_log %}
         <div class="m-4">
-            <p class="current_phase"><b>Phase: </b>{{ time_log.phase.name }}</p>
+            <p class="current_phase"><b>{% trans "Phase" %}: </b>{{ time_log.phase.name }}</p>
             <br/>
             <div class="au-card text-center">
                 <div class="container__time__log">
@@ -57,7 +59,7 @@
         
     {% else %}
         <div class="m-4">
-            <p class="current_phase">No hay registro de tiempo para ninguna fase</p>
+            <p class="current_phase">{% trans "There is no log time any phase" %}</p>
         </div>
     {% endif %}
 

@@ -1,7 +1,8 @@
 
 {% extends 'base/dashboard.html' %}
 
-{% block 'title' %}PSP | Detalle programa{% endblock %}
+{% load i18n %}
+{% block 'title' %}PSP | {% trans "Detail program" %}{% endblock %}
 
 {% block 'links' %}
     {% load static %}
@@ -13,7 +14,7 @@
 {% endblock 'links' %}
 
 {% block 'content' %}
-    <h2>Program Plan Summary</h2>
+    <h2>{% trans "Program Plan Summary" %}</h2>
     <br/>
 
     <div class="container__menu__summary">
@@ -22,28 +23,28 @@
 
             {% if request.user == program_opened.programmer %}
                 <input type="radio" name="tabset" id="tab1" aria-controls="summary" {% if request.user == program_opened.programmer %} checked {% endif %}>
-                <label for="tab1">Summary</label>
+                <label for="tab1">{% trans "Summary" %}</label>
 
                 <!-- Tab 2 -->
                 <input type="radio" name="tabset" id="tab2" aria-controls="program_size">
-                <label for="tab2">Program size</label>
+                <label for="tab2">{% trans "Program size" %}</label>
             {% endif %}
 
             <!-- Tab 3 -->
             <input type="radio" name="tabset" id="tab3" aria-controls="time_in_phase" {% if request.user != program_opened.programmer %} checked {% endif %}>
-            <label for="tab3">Time per phase</label>
+            <label for="tab3">{% trans "Time per phase" %}</label>
 
             <!-- Tab 4 -->
             <input type="radio" name="tabset" id="tab4" aria-controls="defects_injected">
-            <label for="tab4">Defects injected</label>
+            <label for="tab4">{% trans "Defects injected" %}</label>
 
             <!-- Tab 5 -->
             <input type="radio" name="tabset" id="tab5" aria-controls="defects_removed">
-            <label for="tab5">Defects removed</label>
+            <label for="tab5">{% trans "Defects removed" %}</label>
 
             <!-- Tab 6 -->
             <input type="radio" name="tabset" id="tab6" aria-controls="defect_removal_efficiency">
-            <label for="tab6">Defect removal Efficiency</label>
+            <label for="tab6">{% trans "Defect removal Efficiency" %}</label>
             
             <div class="tab-panels bg-white">
 

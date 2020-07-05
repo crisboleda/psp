@@ -1,8 +1,9 @@
 <div class="modal fade" id="modalEditNewPart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
+    {% load i18n %}
     <div class="modal-content">
         <div class="modal-header">
-            <h3 class="modal-title" id="exampleModalLabel">Edit Part</h3>
+            <h3 class="modal-title" id="exampleModalLabel">{% trans "Edit Part" %}</h3>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -20,13 +21,13 @@
             <div class="modal-body">
             
                 <div class="form-group">
-                    <label for="">Name part</label>
+                    <label for="">{% trans "Name part" %}</label>
                     <input type="text" id="nameNewPart" class="form-control">
                     <div class="invalid-feeback"></div>
                 </div>
 
                 <div class="form-group">
-                    <label for="">Type part</label>
+                    <label for="">{% trans "Type part" %}</label>
                     <select id="typeNewPart" class="form-control">
                         {% for type_part in type_parts %}
                             <option value="{{ type_part.name }}">{{ type_part.name }}</option>
@@ -36,7 +37,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="">Planned methods</label>
+                    <label for="">{% trans "Planned methods" %}</label>
                     <input type="number" id="plannedMethodsNewPart" class="form-control">
                     <div class="invalid-feeback"></div>
                 </div>
@@ -44,7 +45,7 @@
                 <div class="form-row">
 
                     <div class="form-group col-xl-6">
-                        <label for="">Planned Size estimation</label>
+                        <label for="">{% trans "Planned Size estimation" %}</label>
                         <select id="sizeEstimationNewPart" class="form-control">
                             {% for size in sizes_estimations %}
                                 <option value="{{ size.name }}">{{ size.name }}</option>
@@ -54,28 +55,28 @@
                     </div>
 
                     <div class="form-group col-xl-6">
-                        <label for="">Lines estimation</label>
+                        <label for="">{% trans "Lines estimation" %}</label>
                         <input disabled value="0" id="linesEstimationNewPart" class="form-control" type="text">
                     </div>
 
                 </div>
 
                 <div class="form-group">
-                    <label for="">Current methods</label>
+                    <label for="">{% trans "Current methods" %}</label>
                     <input type="number" id="currentMethodsNewPart" class="form-control" placeholder="Enter the number of methods">
                     <div class="invalid-feeback"></div>
                 </div>
 
                 <div class="form-group">
-                    <label for="">Current lines</label>
+                    <label for="">{% trans "Current lines" %}</label>
                     <input type="number" id="currentLinesNewPart" class="form-control" placeholder="Enter the number of lines">
                     <div class="invalid-feeback"></div>
                 </div>
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" id="btnEditNewPart" class="btn btn-primary">Edit</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">{% trans "Close" %}</button>
+                <button type="button" id="btnEditNewPart" class="btn btn-primary">{% trans "Edit" %}</button>
             </div>
         </div>
 

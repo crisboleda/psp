@@ -1,9 +1,10 @@
+{% load i18n %}
 <!-- Modal -->
 <div class="modal fade" id="modalCreateTimeLog" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h2 class="modal-title" id="staticBackdropLabel">Registrar un nuevo tiempo</h2>
+        <h2 class="modal-title" id="staticBackdropLabel">{% trans "Register a new time" %}</h2>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -13,7 +14,7 @@
             {% csrf_token %}
 
             <div class="form-group">
-                <label for="id_phase">Phase</label>
+                <label for="id_phase">{% trans "Phase" %}</label>
                 <select name="name_phase" class="form-control" id="id_phase">
                     {% for phase in phases_not_in_program %}
                         <option value="{{ phase.name }}">{{ phase.name }}</option>
@@ -22,14 +23,14 @@
             </div>
 
             <div class="form-group">
-                <label for="id_comments">Comentarios</label>
+                <label for="id_comments">{% trans "Comments" %}</label>
                 <textarea style="resize: none;" maxlength="100" name="comments" id="id_comments" class="form-control w-100" rows="2"></textarea>
                 <p class="text-right mt-2"><span id="count_words_comment_time_log">0</span>/100</p>
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="submit" class="btn btn-primary">Registrar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">{% trans "Cloase" %}</button>
+                <button type="submit" class="btn btn-primary">{% trans "Register" %}</button>
             </div>
         </form>
       </div>

@@ -1,28 +1,29 @@
+{% load i18n %}
 <div class="row text-center d-none" id="totalLinesBaseParts">
     <div class="col-xl-3 p-3">
         <div class="bg-light p-3 shadow-sm">
-            <p><b>Total planned base lines</b></p>
+            <p><b>{% trans "Total planned base lines" %}</b></p>
             <p>{{ total_base_parts.total_planned_base_lines }}</p>
         </div>
     </div>
     
     <div class="col-xl-3 p-3">
         <div class="bg-light p-3 shadow-sm">
-            <p><b>Total planned deleted lines</b></p>
+            <p><b>{% trans "Total planned deleted lines" %}</b></p>
             <p>{{ total_base_parts.total_planned_deleted_lines }}</p>
         </div>
     </div>
 
     <div class="col-xl-3 p-3">
         <div class="bg-light p-3 shadow-sm">
-            <p><b>Total planned edited lines</b></p>
+            <p><b>{% trans "Total planned edited lines" %}</b></p>
             <p>{{ total_base_parts.total_planned_edited_lines }}</p>
         </div>
     </div>
 
     <div class="col-xl-3 p-3">
         <div class="bg-light p-3 shadow-sm">
-            <p><b>Total planned added lines</b></p>
+            <p><b>{% trans "Total planned added lines" %}</b></p>
             <p>{{ total_base_parts.total_planned_added_lines }}</p>
         </div>
     </div>
@@ -30,28 +31,28 @@
 
     <div class="col-xl-3 p-3">
         <div class="bg-light p-3 border-pill shadow-sm">
-            <p><b>Total current base lines</b></p>
+            <p><b>{% trans "Total current base lines" %}</b></p>
             <p>{{ total_base_parts.total_current_base_lines }}</p>
         </div>
     </div>
     
     <div class="col-xl-3 p-3">
         <div class="bg-light p-3 border-pill shadow-sm">
-            <p><b>Total current deleted lines</b></p>
+            <p><b>{% trans "Total current deleted lines" %}</b></p>
             <p>{{ total_base_parts.total_current_deleted_lines }}</p>
         </div>
     </div>
 
     <div class="col-xl-3 p-3">
         <div class="bg-light p-3 border-pill shadow-sm">
-            <p><b>Total current edited lines</b></p>
+            <p><b>{% trans "Total current edited lines" %}</b></p>
             <p>{{ total_base_parts.total_current_edited_lines }}</p>
         </div>
     </div>
 
     <div class="col-xl-3 p-3">
         <div class="bg-light p-3 border-pill shadow-sm">
-            <p><b>Total current added lines</b></p>
+            <p><b>{% trans "Total current added lines" %}</b></p>
             <p>{{ total_base_parts.total_current_added_lines }}</p>
         </div>
     </div>

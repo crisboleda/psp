@@ -1,3 +1,4 @@
+{% load i18n %}
 <!-- HEADER DESKTOP-->
     <header class="header-desktop">
         <div class="section__content section__content--p30">
@@ -149,18 +150,18 @@
                                     <div class="account-dropdown__body">
                                         <div class="account-dropdown__item">
                                             <a href="{% url 'users:profile_user' request.user.username %}">
-                                                <i class="zmdi zmdi-account"></i>Cuenta
+                                                <i class="zmdi zmdi-account"></i>{% trans "Account" %}
                                             </a>
                                         </div>
                                         <div class="account-dropdown__item">
-                                            <a href="#">
-                                                <i class="zmdi zmdi-settings"></i>Ajustes
+                                            <a href="{% url 'configuration' %}">
+                                                <i class="zmdi zmdi-settings"></i>{% trans "Settings" %}
                                             </a>
                                         </div>
                                     </div>
                                     <div class="account-dropdown__footer">
                                         <a href="{% url 'users:logout' %}">
-                                            <i class="zmdi zmdi-power"></i>Logout
+                                            <i class="zmdi zmdi-power"></i>{% trans "Logout" %}
                                         </a>
                                     </div>
                                 </div>

@@ -1,22 +1,23 @@
 <div class="table-responsive-md shadow-sm">
+    {% load i18n %}
     <table class="table table-striped">
         <thead class="thead-dark">
             <tr>
                 <th></th>
                 <th>Plan</th>
                 <th>Actual</th>
-                <th>To-Date</th>
+                <th>{% trans "To-Date" %}</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td>Productivity (Size/H)</td>
+                <td>{% trans "Productivity (Size/H)" %}</td>
                 <td>0.0</td>
                 <td>0.0</td>
                 <td>0.0</td>
             </tr>
             <tr>
-                <td>Actual Time (Min)</td>
+                <td>{% trans "Actual Time (Min)" %}</td>
                 <td>0.0</td>
                 <td id="fieldActualTimeSummary">
                     <div class="spinner-border spinner-border-sm text-secondary" role="status">
@@ -36,19 +37,19 @@
                 <td>0.0</td>
             </tr>
             <tr>
-                <td>Reused (%)</td>
+                <td>{% trans "Reused (%)" %}</td>
                 <td>{{ percentage_reused_planned }}</td>
                 <td>{{ percentage_reused_actual }}</td>
                 <td>{{ percentage_reused_to_date }}</td>
             </tr>
             <tr>
-                <td>New Reusable (%)</td>
+                <td>{% trans "New Reusable (%)" %}</td>
                 <td>{{ percentage_new_lines_plan }}</td>
                 <td>{{ percentage_new_lines_actual }}</td>
                 <td>{{ percentage_new_lines_to_date }}</td>
             </tr>
             <tr>
-                <td>Test Defects/KLOC</td>
+                <td>{% trans "Test Defects/KLOC" %}</td>
                 <td>0.0</td>
                 <td>{{ summary.test_defects }}</td>
                 <td lines="{{ total_lines_added_and_modified.total }}" id="fieldTotalDefectsUT">
@@ -58,7 +59,7 @@
                 </td>
             </tr>
             <tr>
-                <td>Total Defects/KLOC</td>
+                <td>{% trans "Total Defects/KLOC" %}</td>
                 <td>0.0</td>
                 <td add-modified-lines="{{ lines_added_and_modified_actual }}" id="fieldTotalDefectsKLOC">
                     <div class="spinner-border spinner-border-sm text-secondary" role="status">
@@ -72,7 +73,7 @@
                 </td>
             </tr>
             <tr>
-                <td>Yield (%)</td>
+                <td>{% trans "Yield (%)" %}</td>
                 <td>0.0</td>
                 <td id="yieldSummaryActualProgram">
                     <div class="spinner-border spinner-border-sm text-secondary" role="status">
@@ -86,7 +87,7 @@
                 </td>
             </tr>
             <tr>
-                <td>Appraisal COQ (%)</td>
+                <td>{% trans "Appraisal COQ (%)" %}</td>
                 <td>0.0</td>
                 <td id="appraisalCOQActualProgram">
                     <div class="spinner-border spinner-border-sm text-secondary" role="status">
@@ -100,7 +101,7 @@
                 </td>
             </tr>
             <tr>
-                <td>Failure COQ (%)</td>
+                <td>{% trans "Failure COQ (%)" %}</td>
                 <td>0.0</td>
                 <td id="failureActualProgram">
                     <div class="spinner-border spinner-border-sm text-secondary" role="status">
@@ -114,7 +115,7 @@
                 </td>
             </tr>
             <tr>
-                <td>COQ A/F Ratio</td>
+                <td>{% trans "COQ A/F Ratio" %}</td>
                 <td>0.0</td>
                 <td id="ratioAFActual">
                     <div class="spinner-border spinner-border-sm text-secondary" role="status">
@@ -128,7 +129,7 @@
                 </td>
             </tr>
             <tr>
-                <td>Code Review Rate (Size/H)</td>
+                <td>{% trans "Code Review Rate (Size/H)" %}</td>
                 <td>0.0</td>
                 <td>0.0</td>
                 <td>0.0</td>

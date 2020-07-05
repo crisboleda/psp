@@ -1,13 +1,14 @@
 
 
 <div class="table-responsive-md">
+    {% load i18n %}
     <table class="table table-striped table-borderless">
         <thead class="thead-dark">
             <tr>
                 <th></th>
-                <th>Plan size</th>
-                <th>Actual size</th>
-                <th>To Date</th>
+                <th>{% trans "Plan size" %}</th>
+                <th>{% trans "Actual size" %}</th>
+                <th>{% trans "To Date" %}</th>
             </tr>
         </thead>
         <tbody>
@@ -18,31 +19,31 @@
                 <td></td>
             </tr>
             <tr>
-                <td>Deleted (D)</td>
+                <td>{% trans "Deleted (D)" %}</td>
                 <td>{{ total_base_parts.total_planned_deleted_lines }}</td>
                 <td>{{ total_base_parts.total_current_deleted_lines }}</td>
                 <td></td>
             </tr>
             <tr>
-                <td>Modified (M)</td>
+                <td>{% trans "Modified (M)" %}</td>
                 <td>{{ total_base_parts.total_planned_edited_lines }}</td>
                 <td>{{ total_base_parts.total_current_edited_lines }}</td>
                 <td></td>
             </tr>
             <tr>
-                <td>Added (A)</td>
+                <td>{% trans "Added (A)" %}</td>
                 <td>{{ plan_added_lines }}</td>
                 <td>{{ actual_added_lines }}</td>
                 <td></td>
             </tr>
             <tr>
-                <td>Reused (R)</td>
+                <td>{% trans "Reused (R)" %}</td>
                 <td>{{ total_reused_parts.planning }}</td>
                 <td>{{ total_reused_parts.current }}</td>
                 <td>{{ total_reused_programs.reused }}</td>
             </tr>
             <tr>
-                <td>Added & Modified (A&M)</td>
+                <td>{% trans "Added & Modified (A&M)" %}</td>
                 <td>{{ lines_added_and_modified_plan }}</td>
                 <td>{{ lines_added_and_modified_actual }}</td>
                 <td>{{ total_lines_added_and_modified.total }}</td>
@@ -54,13 +55,13 @@
                 <td>{{ total_lines_programs.total }}</td>
             </tr>
             <tr>
-                <td>New Reusable (NR)</td>
+                <td>{% trans "New Reusable (NR)" %}</td>
                 <td>{{ total_new_parts.planning }}</td>
                 <td>{{ total_new_parts.current }}</td>
                 <td>{{ total_new_parts_programs.total }}</td>
             </tr>
             <tr>
-                <td>Estimated Proxy Size (E)</td>
+                <td>{% trans "Estimated Proxy Size (E)" %}</td>
                 <td>{{ plan_added_lines }}</td>
                 <td></td>
                 <td></td>

@@ -1,7 +1,8 @@
 
 {% extends 'base/dashboard.html' %}
 
-{% block 'title' %}PSP | My programs{% endblock %}
+{% load i18n %}
+{% block 'title' %}PSP | {% trans "My programs" %}{% endblock %}
 
 {% block 'links' %}
     {% load static %}
@@ -9,7 +10,7 @@
 {% endblock %}
 
 {% block 'content' %}
-    <h2>Your assigned programs</h2>
+    <h2>{% trans "Your assigned programs" %}</h2>
     <br/>
     <div class="row p-4">
         {% for program in page_obj %}
@@ -23,32 +24,32 @@
                         </div>
                         <div class="descrip-project-module">
                             <a href="{% url 'projects:detail_project' program.module.project.pk %}" class="shadow-sm p-3 m-2 rounded w-100 mr-4">
-                                <p><b>Proyecto: </b>{{ program.module.project.name }}</p>
+                                <p><b>{% trans "Project" %}: </b>{{ program.module.project.name }}</p>
                             </a>
                             <div class="shadow-sm p-3 m-2 mb-4 rounded w-100 mr-4">
-                                <p><b>Módulo: </b> {{ program.module.name }}</p>
+                                <p><b>{% trans "Module" %}: </b> {{ program.module.name }}</p>
                             </div>
                         </div>
-                        <a href="{% url 'programs:detail_program' program.pk %}" class="text-center btn-open-program"><i class="fas fa-folder-open mr-2"></i>Abrir programa</a>
+                        <a href="{% url 'programs:detail_program' program.pk %}" class="text-center btn-open-program"><i class="fas fa-folder-open mr-2"></i>{% trans "Open program" %}</a>
                     </div>
                     <footer>
                         <table class="w-100">
                             <tbody>
                                 <tr class="w-100">
                                     <td class="w-100">
-                                        <b>Fecha inicio </b> {{ program.start_date|date }}
+                                        <b>{% trans "Start date" %} </b> {{ program.start_date|date }}
                                         <i class="fas fa-sort-down float-right btn-dates-down" style="font-size: 21px;"></i>
                                         <i class="fas fa-sort-up float-right btn-dates-up d-none" style="font-size: 21px;"></i>
                                     </td>
                                 </tr>
                                 <tr class="tr-date d-none">
                                     <td>
-                                        <b>Fecha planeada </b> {{ program.planning_date|date }}
+                                        <b>{% trans "Planning date" %} </b> {{ program.planning_date|date }}
                                     </td>
                                 </tr>
                                 <tr class="tr-date d-none">
                                     <td>
-                                        <b>Fecha final </b> {{ program.finish_date|date }}
+                                        <b>{% trans "Finish date" %} </b> {{ program.finish_date|date }}
                                     </td>
                                 </tr>
                             </tbody>

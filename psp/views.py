@@ -12,5 +12,9 @@ class HomeView(TemplateView):
     template_name = 'home.html'
 
 
+class DashboardConfigurationView(TemplateView, LoginRequiredMixin):
+    template_name = 'settings.html'
+
+
 class IndexView(TemplateView):
     template_name = 'index.html'

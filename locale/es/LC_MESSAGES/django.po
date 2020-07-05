@@ -1,0 +1,229 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-07-05 00:51-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\psp\settings.py:131
+msgid "English"
+msgstr ""
+
+#: .\psp\settings.py:132
+msgid "Spanish"
+msgstr ""
+
+#: .\templates\base\header.html:152
+msgid "Account"
+msgstr "Cuenta"
+
+#: .\templates\base\header.html:157 .\templates\menus\items_menu.html:80
+msgid "Settings"
+msgstr "Ajustes"
+
+#: .\templates\base\header.html:163
+msgid "Logout"
+msgstr "Salir"
+
+#: .\templates\defects\defect_type.html:10 .\templates\defects\defects.html:81
+msgid "Type"
+msgstr "Tipo"
+
+#: .\templates\defects\defect_type.html:11
+#: .\templates\modules\create_module.html:15
+msgid "Name"
+msgstr "Nombre"
+
+#: .\templates\defects\defect_type.html:12
+#: .\templates\defects\defects.html:122
+#: .\templates\defects\modal_defect_details.html:13
+#: .\templates\modules\create_module.html:27
+msgid "Description"
+msgstr "Descripción"
+
+#: .\templates\defects\defects.html:20
+msgid "DEFECT LOG"
+msgstr "Registro de defectos"
+
+#: .\templates\defects\defects.html:31
+msgid "Create new defect log"
+msgstr "Crear un nuevo registro de defectos"
+
+#: .\templates\defects\defects.html:69
+msgid "Date"
+msgstr "Fecha"
+
+#: .\templates\defects\defects.html:90
+msgid "Phase injected"
+msgstr "Fase injectada"
+
+#: .\templates\defects\defects.html:99
+msgid "Phase removed"
+msgstr "Fase removida"
+
+#: .\templates\defects\defects.html:108
+msgid "Cousing defect"
+msgstr "Defecto ocasionado"
+
+#: .\templates\defects\defects.html:110
+msgid "None"
+msgstr "Ninguno"
+
+#: .\templates\defects\defects.html:112
+msgid "Defect"
+msgstr "Defecto"
+
+#: .\templates\defects\defects.html:123
+msgid "Enter description"
+msgstr "Ingrese la descripción"
+
+#: .\templates\defects\defects.html:124 .\templates\defects\defects.html:129
+msgid "Characters"
+msgstr "Carácteres"
+
+#: .\templates\defects\defects.html:127
+#: .\templates\defects\modal_defect_details.html:17
+msgid "Solution"
+msgstr "Solución"
+
+#: .\templates\defects\defects.html:128
+msgid "Enter solution"
+msgstr "Ingrese la solución"
+
+#: .\templates\defects\defects.html:134
+msgid "Create defect"
+msgstr "Crear defecto"
+
+#: .\templates\defects\modal_defect_details.html:22
+msgid "Close"
+msgstr "Cerrar"
+
+#: .\templates\logs\modal_create.html:6
+msgid "Register a new time"
+msgstr "Registrar un nuevo tiempo"
+
+#: .\templates\logs\modal_create.html:16 .\templates\logs\time_log.html:22
+#: .\templates\logs\timer_time_log.html:18
+msgid "Phase"
+msgstr "Fase"
+
+#: .\templates\logs\modal_create.html:25 .\templates\logs\time_log.html:26
+msgid "Comments"
+msgstr "Comentarios"
+
+#: .\templates\logs\modal_create.html:31
+msgid "Cloase"
+msgstr "Cerrar"
+
+#: .\templates\logs\modal_create.html:32
+msgid "Register"
+msgstr "Registrar"
+
+#: .\templates\logs\time_log.html:23
+msgid "Start Date and Time"
+msgstr "Fecha y hora de inicio"
+
+#: .\templates\logs\time_log.html:24
+msgid "Stop Date and Time"
+msgstr "Fecha y hora de final"
+
+#: .\templates\logs\time_log.html:25
+msgid "Total time"
+msgstr "Tiempo total"
+
+#: .\templates\logs\time_log.html:50
+msgid "In progress..."
+msgstr "En progreso..."
+
+#: .\templates\logs\time_log.html:62
+msgid "No phases have been registered so far"
+msgstr "No se han registrado fases hasta el momento"
+
+#: .\templates\logs\time_log.html:74
+msgid "New time"
+msgstr "Nuevo tiempo"
+
+#: .\templates\logs\timer_time_log.html:60
+msgid "There is no log time any phase"
+msgstr "No hay registro de tiempos de ninguna fase aún"
+
+#: .\templates\menus\items_menu.html:16
+msgid "Projects"
+msgstr "Proyectos"
+
+#: .\templates\menus\items_menu.html:21
+msgid "Create user"
+msgstr "Crear usuario"
+
+#: .\templates\menus\items_menu.html:28
+msgid "Programs"
+msgstr "Programas"
+
+#: .\templates\menus\items_menu.html:34
+msgid "Analysis Tools"
+msgstr "Herramientas de análisis"
+
+#: .\templates\menus\items_menu.html:40
+msgid "Program directory"
+msgstr "Directorio del programa"
+
+#: .\templates\menus\items_menu.html:46
+msgid "Summary"
+msgstr "Resumen"
+
+#: .\templates\menus\items_menu.html:51
+msgid "Time Log"
+msgstr "Registro de tiempos"
+
+#: .\templates\menus\items_menu.html:56
+msgid "Defect Log"
+msgstr "Registro de defectos"
+
+#: .\templates\menus\items_menu.html:61
+msgid "Defect Type Standard"
+msgstr "Tipo de defecto estándar"
+
+#: .\templates\menus\items_menu.html:71
+msgid "Parts of the program"
+msgstr "Partes del programa"
+
+#: .\templates\menus\items_menu.html:76
+msgid "Test report"
+msgstr "Reporte de pruebas"
+
+#: .\templates\modules\create_module.html:9
+msgid "Create a new module"
+msgstr "Crear un nuevo modulo"
+
+#: .\templates\modules\create_module.html:16
+msgid "Enter the name of module"
+msgstr "Ingrese el nombre del modulo"
+
+#: .\templates\modules\create_module.html:28
+msgid "Enter the description of module"
+msgstr "Ingrese la descripción del modulo"
+
+#: .\templates\modules\create_module.html:39
+msgid "Delivery date"
+msgstr "Fecha de entrega"
+
+#: .\templates\modules\create_module.html:50
+msgid "Create module"
+msgstr "Crear modulo"
+
+#: .\templates\settings.html:9
+msgid "Change language"
+msgstr "Cambiar idioma"
