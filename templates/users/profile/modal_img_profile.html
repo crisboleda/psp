@@ -1,10 +1,11 @@
 
 <!-- Modal -->
 <div class="modal fade" id="modalUpdateImgProfile" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  {% load i18n %}
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="exampleModalCenterTitle">Actualizar foto de perfil</h4>
+        <h4 class="modal-title" id="exampleModalCenterTitle">{% trans "Update profile picture" %}</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -15,14 +16,14 @@
 
             <div class="custom-file" id="customFile">
                 <input type="file" name="picture" class="custom-file-input">
-                <label class="custom-file-label" for="customFile">{% if not request.user.get_profile.picture %}Buscar archivo{% else %}{{ request.user.get_profile.picture }}{% endif %}</label>
+                <label class="custom-file-label" for="customFile">{% if not request.user.get_profile.picture %}{% trans "Search file" %}{% else %}{{ request.user.get_profile.picture }}{% endif %}</label>
             </div>
             </br></br>
             <div class="modal-footer">
                 {% if request.user.get_profile.picture %}
-                    <a href="{% url 'users:delete_image_profile' request.user.get_profile.pk %}" type="button" class="btn btn-danger float-left">Eliminar imagen actual</a>
+                    <a href="{% url 'users:delete_image_profile' request.user.get_profile.pk %}" type="button" class="btn btn-danger float-left">{% trans "Delete current picture" %}</a>
                 {% endif %}
-                <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                <button type="submit" class="btn btn-primary">{% trans "Save changes" %}</button>
             </div>
         </form>
       </div>

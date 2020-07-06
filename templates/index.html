@@ -8,6 +8,7 @@
 </head>
 
 <body style="overflow-x: hidden;">
+    {% load i18n %}
     <!-- Just an image -->
     <nav class="navbar navbar-light bg-light  shadow-lg" style="z-index: 2;">
         <a class="navbar-brand" href="#">
@@ -17,7 +18,7 @@
         <h3>Personal Software Process</h3>
         <form class="form-inline">
             {% if not request.user.is_authenticated %}
-              <a href="{% url 'users:login' %}" class="btn btn-primary" style="margin-right: 3px;" type="button">Ingresar</a>
+              <a href="{% url 'users:login' %}" class="btn btn-primary" style="margin-right: 3px;" type="button">{% trans "Log In" %}</a>
             {% else %}
                 <a href="{% if request.user.get_profile.type_user == 'programmer' %}{% url 'programs:programs_programmer' %}{% else %}{% url 'projects:list_projects' %}{% endif %}" class="btn btn-primary" style="margin-right: 3px;" type="button">Dashboard</a>
             {% endif %}

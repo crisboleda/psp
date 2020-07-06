@@ -1,7 +1,8 @@
 
 {% extends 'base/dashboard.html' %}
 
-{% block 'title' %}PSP | Registrar usuario{% endblock %}
+{% load i18n %}
+{% block 'title' %}PSP | {% trans "Sign Up" %}{% endblock %}
 
 {% block 'links' %}
     {% load static %}
@@ -12,17 +13,18 @@
 {% block 'content' %}
     
     {% include 'base/custom_alert.html' %}
+    {% load i18n %}
 
     <div class="jumbotron shadow row ml-3 mr-3">
         <div class="col-xl-8">
-            <h1 class="pb-4">Registrar un usuario</h1>
+            <h1 class="pb-4">{% trans "Register a user" %}</h1>
 
             <form method="POST">
                 {% csrf_token %}
 
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <input type="text" name="first_name" value="{% if form.first_name.value %}{{ form.first_name.value }}{% endif %}" class="form-control {% if form.first_name.errors %}is-invalid{% endif %}" placeholder="First name">
+                        <input type="text" name="first_name" value="{% if form.first_name.value %}{{ form.first_name.value }}{% endif %}" class="form-control {% if form.first_name.errors %}is-invalid{% endif %}" placeholder="{% trans "First name" %}">
                         {% if form.first_name.errors %}
                             <div class="invalid-feeback">
                                 {% for error in form.first_name.errors %}
@@ -33,7 +35,7 @@
                     </div>
 
                     <div class="form-group col-md-6">
-                        <input type="text" name="last_name" value="{% if form.last_name.value %}{{ form.last_name.value }}{% endif %}" class="form-control {% if form.last_name.errors %}is-invalid{% endif %}" placeholder="Last name">
+                        <input type="text" name="last_name" value="{% if form.last_name.value %}{{ form.last_name.value }}{% endif %}" class="form-control {% if form.last_name.errors %}is-invalid{% endif %}" placeholder="{% trans "Last name" %}">
                         {% if form.last_name.errors %}
                             <div class="invalid-feeback">
                                 {% for error in form.last_name.errors %}
@@ -46,7 +48,7 @@
 
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <input type="text" name="username" value="{% if form.username.value %}{{ form.username.value }}{% endif %}" class="form-control {% if form.username.errors %}is-invalid{% endif %}" placeholder="Username">
+                        <input type="text" name="username" value="{% if form.username.value %}{{ form.username.value }}{% endif %}" class="form-control {% if form.username.errors %}is-invalid{% endif %}" placeholder="{% trans "Username" %}">
                         {% if form.username.errors %}
                             <div class="invalid-feeback">
                                 {% for error in form.username.errors %}
@@ -57,7 +59,7 @@
                     </div>
 
                     <div class="form-group col-md-6">
-                        <input type="text" name="email" value="{% if form.email.value %}{{ form.email.value }}{% endif %}" class="form-control {% if form.email.errors %}is-invalid{% endif %}" placeholder="Email Address">
+                        <input type="text" name="email" value="{% if form.email.value %}{{ form.email.value }}{% endif %}" class="form-control {% if form.email.errors %}is-invalid{% endif %}" placeholder="{% trans "Email Address" %}">
                         {% if form.email.errors %}
                             <div class="invalid-feeback">
                                 {% for error in form.email.errors %}
@@ -70,7 +72,7 @@
 
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <input type="password" name="password" value="{% if form.password.value %}{{ form.password.value }}{% endif %}" class="form-control {% if form.password.errors %}is-invalid{% endif %}" placeholder="Password">
+                        <input type="password" name="password" value="{% if form.password.value %}{{ form.password.value }}{% endif %}" class="form-control {% if form.password.errors %}is-invalid{% endif %}" placeholder="{% trans "Password" %}">
                         {% if form.password.errors %}
                             <div class="invalid-feeback">
                                 {% for error in form.password.errors %}
@@ -81,7 +83,7 @@
                     </div>
 
                     <div class="form-group col-md-6">
-                        <input type="password" name="confirm_password" value="{% if form.confirm_password.value %}{{ form.confirm_password.value }}{% endif %}" class="form-control {% if form.confirm_password.errors %}is-invalid{% endif %}" placeholder="Confirm password">
+                        <input type="password" name="confirm_password" value="{% if form.confirm_password.value %}{{ form.confirm_password.value }}{% endif %}" class="form-control {% if form.confirm_password.errors %}is-invalid{% endif %}" placeholder="{% trans "Confirm password" %}">
                         {% if form.confirm_password.errors %}
                             <div class="invalid-feeback">
                                 {% for error in form.confirm_password.errors %}
@@ -91,7 +93,7 @@
                         {% endif %}
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary mt-3">Registrar</button>
+                <button type="submit" class="btn btn-primary mt-3">{% trans "Sign Up" %}</button>
             </form>
         </div>
         
@@ -102,15 +104,17 @@
     </div>
 
     <div class="au-card m-3">
+        
         <div class="table-responsive-md">
             <table class="table table-striped shadow-sm">
                 <thead class="thead-dark">
                     <tr>
-                        <th>First name</th>
-                        <th>Last name</th>
-                        <th>Username</th>
-                        <th>Email</th>
-                        <th class="text-center">N° Programs assigned</th>
+                        {% load i18n %}
+                        <th>{% trans "First name" %}</th>
+                        <th>{% trans "Last name" %}</th>
+                        <th>{% trans "Username" %}</th>
+                        <th>{% trans "Email" %}</th>
+                        <th class="text-center">{% trans "N° Programs assigned" %}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -127,14 +131,9 @@
             </table>
         </div>
     </div>
-
 {% endblock %}
 
 {% block 'scripts' %}
     {% load static %}
     <script src="{% static 'js/hidden_alert.js' %}"></script>
 {% endblock %}
-
-{% comment %} <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script> {% endcomment %}

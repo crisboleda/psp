@@ -36,7 +36,7 @@ class LoginUserView(LoginView):
 
 class RegisterUserView(AdminRequiredMixin, FormView):
     model = User
-    template_name = 'users/register.html'
+    template_name = 'users/register_users.html'
     form_class = CreateUserForm
 
     def form_valid(self, form):

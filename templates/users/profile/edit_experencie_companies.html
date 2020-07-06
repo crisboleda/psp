@@ -2,7 +2,8 @@
 
 {% extends 'base/dashboard.html' %}
 
-{% block 'title' %}PSP | Experencie Companies{% endblock 'title' %}
+{% load i18n %}
+{% block 'title' %}PSP | {% trans "Experencie Companies" %}{% endblock 'title' %}
 
 {% block 'links' %}
     {% load static %}
@@ -16,6 +17,7 @@
 
 {% block 'content' %}
 
+    {% load i18n %}
     {% include 'base/custom_alert.html' %}
 
     <div class="au-card">
@@ -23,8 +25,8 @@
             {% csrf_token %}
             <div class="form-row">
                 <div class="form-group col-xl-4">
-                    <label for="">Name company</label>
-                    <input type="text" placeholder="Enter the name company" name="name_company" id="" class="form-control {% if form.name_company.errors %}is-invalid{% endif %}">
+                    <label for="">{% trans "Name company" %}</label>
+                    <input type="text" placeholder="{% trans "Enter the name company" %}" name="name_company" id="" class="form-control {% if form.name_company.errors %}is-invalid{% endif %}">
                     <div class="invalid-feedback">
                         {% for error in form.name_company.errors %}
                             {{ error }}
@@ -32,7 +34,7 @@
                     </div>
                 </div>
                 <div class="form-group col-xl-4">
-                    <label for="">Position company</label>
+                    <label for="">{% trans "Position company" %}</label>
                     <select name="position_company" id="" class="form-control {% if form.position_company.errors %}is-invalid{% endif %}">
                         {% for position in positions %}
                             <option value="{{ position }}">{{ position }}</option>
@@ -45,7 +47,7 @@
                     </div>
                 </div>
                 <div class="form-group col-xl-4">
-                    <label for="">Years position</label>
+                    <label for="">{% trans "Years position" %}</label>
                     <input type="number" value="0" name="years_position" id="" class="form-control {% if form.years_position.errors %}is-invalid{% endif %}">
                     <div class="invalid-feedback">
                         {% for error in form.years_position.errors %}
@@ -55,8 +57,8 @@
                 </div>
             </div>
             <div class="text-right">
-                <a href="{% url 'users:profile_user' request.user.username %}" class="btn btn-secondary">Regresar a profile</a>
-                <input type="submit" value="Create experencie" class="btn btn-primary">
+                <a href="{% url 'users:profile_user' request.user.username %}" class="btn btn-secondary">{% trans "Back to profile" %}</a>
+                <input type="submit" value="{% trans "Create experencie" %}" class="btn btn-primary">
             </div>
         </form>
         <hr/>
@@ -65,10 +67,10 @@
             <table class="table table-striped text-center">
                 <thead class="thead-dark">
                     <tr>
-                        <th>Name company</th>
-                        <th>Position company</th>
-                        <th>Years position</th>
-                        <th>Actions</th>
+                        <th>{% trans "Name company" %}</th>
+                        <th>{% trans "Position company" %}</th>
+                        <th>{% trans "Years position" %}</th>
+                        <th>{% trans "Actions" %}</th>
                     </tr>
                 </thead>
                 <tbody id="totalItemsExpCompany">

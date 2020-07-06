@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-05 00:51-0500\n"
+"POT-Creation-Date: 2020-07-05 19:01-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,181 +26,223 @@ msgstr ""
 msgid "Spanish"
 msgstr ""
 
-#: .\templates\base\header.html:152
+#: .\templates\base\header.html:153
 msgid "Account"
 msgstr "Cuenta"
 
-#: .\templates\base\header.html:157 .\templates\menus\items_menu.html:80
+#: .\templates\base\header.html:158 .\templates\menus\items_menu.html:81
+#: .\templates\programs\settings_program.html:18 .\templates\settings.html:5
 msgid "Settings"
 msgstr "Ajustes"
 
-#: .\templates\base\header.html:163
+#: .\templates\base\header.html:164
 msgid "Logout"
 msgstr "Salir"
 
-#: .\templates\defects\defect_type.html:10 .\templates\defects\defects.html:81
+#: .\templates\defects\defect_type.html:11 .\templates\defects\defects.html:82
 msgid "Type"
 msgstr "Tipo"
 
-#: .\templates\defects\defect_type.html:11
+#: .\templates\defects\defect_type.html:12
 #: .\templates\modules\create_module.html:15
+#: .\templates\modules\modules.html:28 .\templates\pip\edit_pip.html:36
+#: .\templates\pip\modal_detail_pip.html:21 .\templates\pip\pip.html:43
+#: .\templates\pip\pip.html:95 .\templates\programs\create_program.html:22
+#: .\templates\programs\programs.html:25
+#: .\templates\projects\create_project.html:18
+#: .\templates\projects\edit_project.html:28
+#: .\templates\projects\projects.html:33
+#: .\templates\test_report\modal_detail_report.html:21
+#: .\templates\test_report\reports.html:44
+#: .\templates\test_report\reports.html:98
+#: .\templates\test_report\update_report.html:34
 msgid "Name"
 msgstr "Nombre"
 
-#: .\templates\defects\defect_type.html:12
-#: .\templates\defects\defects.html:122
-#: .\templates\defects\modal_defect_details.html:13
+#: .\templates\defects\defect_type.html:13
+#: .\templates\defects\defects.html:123
+#: .\templates\defects\modal_defect_details.html:15
 #: .\templates\modules\create_module.html:27
+#: .\templates\modules\edit_module.html:38 .\templates\modules\modules.html:29
+#: .\templates\programs\create_program.html:47
+#: .\templates\programs\edit_program.html:30
+#: .\templates\projects\create_project.html:29
+#: .\templates\projects\edit_project.html:32
+#: .\templates\test_report\modal_detail_report.html:33
+#: .\templates\test_report\reports.html:46
+#: .\templates\test_report\reports.html:122
+#: .\templates\test_report\update_report.html:58
 msgid "Description"
 msgstr "Descripción"
 
-#: .\templates\defects\defects.html:20
+#: .\templates\defects\defects.html:21
 msgid "DEFECT LOG"
 msgstr "Registro de defectos"
 
-#: .\templates\defects\defects.html:31
+#: .\templates\defects\defects.html:32
 msgid "Create new defect log"
-msgstr "Crear un nuevo registro de defectos"
+msgstr "Crear un nuevo registro de defecto"
 
-#: .\templates\defects\defects.html:69
+#: .\templates\defects\defects.html:70 .\templates\pip\edit_pip.html:25
+#: .\templates\pip\modal_detail_pip.html:25 .\templates\pip\pip.html:44
+#: .\templates\pip\pip.html:84
+#: .\templates\test_report\modal_detail_report.html:25
+#: .\templates\test_report\reports.html:43
+#: .\templates\test_report\reports.html:87
+#: .\templates\test_report\update_report.html:23
 msgid "Date"
 msgstr "Fecha"
 
-#: .\templates\defects\defects.html:90
+#: .\templates\defects\defects.html:91
 msgid "Phase injected"
 msgstr "Fase injectada"
 
-#: .\templates\defects\defects.html:99
+#: .\templates\defects\defects.html:100
 msgid "Phase removed"
 msgstr "Fase removida"
 
-#: .\templates\defects\defects.html:108
+#: .\templates\defects\defects.html:109
 msgid "Cousing defect"
 msgstr "Defecto ocasionado"
 
-#: .\templates\defects\defects.html:110
+#: .\templates\defects\defects.html:111
 msgid "None"
 msgstr "Ninguno"
 
-#: .\templates\defects\defects.html:112
+#: .\templates\defects\defects.html:113
 msgid "Defect"
 msgstr "Defecto"
 
-#: .\templates\defects\defects.html:123
+#: .\templates\defects\defects.html:124
 msgid "Enter description"
 msgstr "Ingrese la descripción"
 
-#: .\templates\defects\defects.html:124 .\templates\defects\defects.html:129
+#: .\templates\defects\defects.html:125 .\templates\defects\defects.html:130
 msgid "Characters"
 msgstr "Carácteres"
 
-#: .\templates\defects\defects.html:127
-#: .\templates\defects\modal_defect_details.html:17
+#: .\templates\defects\defects.html:128
+#: .\templates\defects\modal_defect_details.html:19
 msgid "Solution"
 msgstr "Solución"
 
-#: .\templates\defects\defects.html:128
+#: .\templates\defects\defects.html:129
 msgid "Enter solution"
 msgstr "Ingrese la solución"
 
-#: .\templates\defects\defects.html:134
+#: .\templates\defects\defects.html:135
 msgid "Create defect"
 msgstr "Crear defecto"
 
-#: .\templates\defects\modal_defect_details.html:22
+#: .\templates\defects\modal_defect_details.html:24
+#: .\templates\parts_of_code\modal_edit_base_part.html:63
+#: .\templates\parts_of_code\modal_edit_new_part.html:78
+#: .\templates\parts_of_code\modal_edit_reused_part.html:35
+#: .\templates\pip\modal_detail_pip.html:43
+#: .\templates\test_report\modal_detail_report.html:51
+#: .\templates\users\profile\modal_edit_experencie_comp.html:38
+#: .\templates\users\profile\modal_edit_years_experience.html:66
 msgid "Close"
 msgstr "Cerrar"
 
-#: .\templates\logs\modal_create.html:6
+#: .\templates\index.html:21 .\templates\users\login.html:4
+#: .\templates\users\login.html:29
+msgid "Log In"
+msgstr "Ingresar"
+
+#: .\templates\logs\modal_create.html:7
 msgid "Register a new time"
 msgstr "Registrar un nuevo tiempo"
 
-#: .\templates\logs\modal_create.html:16 .\templates\logs\time_log.html:22
-#: .\templates\logs\timer_time_log.html:18
+#: .\templates\logs\modal_create.html:17 .\templates\logs\time_log.html:23
+#: .\templates\logs\timer_time_log.html:20
 msgid "Phase"
 msgstr "Fase"
 
-#: .\templates\logs\modal_create.html:25 .\templates\logs\time_log.html:26
+#: .\templates\logs\modal_create.html:26 .\templates\logs\time_log.html:27
+#: .\templates\pip\modal_detail_pip.html:37
 msgid "Comments"
 msgstr "Comentarios"
 
-#: .\templates\logs\modal_create.html:31
+#: .\templates\logs\modal_create.html:32
 msgid "Cloase"
 msgstr "Cerrar"
 
-#: .\templates\logs\modal_create.html:32
+#: .\templates\logs\modal_create.html:33
 msgid "Register"
 msgstr "Registrar"
 
-#: .\templates\logs\time_log.html:23
+#: .\templates\logs\time_log.html:24
 msgid "Start Date and Time"
 msgstr "Fecha y hora de inicio"
 
-#: .\templates\logs\time_log.html:24
-msgid "Stop Date and Time"
-msgstr "Fecha y hora de final"
-
 #: .\templates\logs\time_log.html:25
+msgid "Stop Date and Time"
+msgstr "Fecha y hora final"
+
+#: .\templates\logs\time_log.html:26
 msgid "Total time"
 msgstr "Tiempo total"
 
-#: .\templates\logs\time_log.html:50
+#: .\templates\logs\time_log.html:51
 msgid "In progress..."
 msgstr "En progreso..."
 
-#: .\templates\logs\time_log.html:62
+#: .\templates\logs\time_log.html:63
 msgid "No phases have been registered so far"
-msgstr "No se han registrado fases hasta el momento"
+msgstr "No hay fases registradas hasta el momento"
 
-#: .\templates\logs\time_log.html:74
+#: .\templates\logs\time_log.html:75
 msgid "New time"
 msgstr "Nuevo tiempo"
 
-#: .\templates\logs\timer_time_log.html:60
+#: .\templates\logs\timer_time_log.html:62
 msgid "There is no log time any phase"
-msgstr "No hay registro de tiempos de ninguna fase aún"
+msgstr "No hay registro de ninguna fase"
 
-#: .\templates\menus\items_menu.html:16
+#: .\templates\menus\items_menu.html:17 .\templates\projects\projects.html:5
 msgid "Projects"
 msgstr "Proyectos"
 
-#: .\templates\menus\items_menu.html:21
+#: .\templates\menus\items_menu.html:22
 msgid "Create user"
 msgstr "Crear usuario"
 
-#: .\templates\menus\items_menu.html:28
+#: .\templates\menus\items_menu.html:29 .\templates\modules\modules.html:54
+#: .\templates\programs\programs.html:5 .\templates\programs\programs.html:19
 msgid "Programs"
 msgstr "Programas"
 
-#: .\templates\menus\items_menu.html:34
+#: .\templates\menus\items_menu.html:35
 msgid "Analysis Tools"
 msgstr "Herramientas de análisis"
 
-#: .\templates\menus\items_menu.html:40
+#: .\templates\menus\items_menu.html:41
 msgid "Program directory"
-msgstr "Directorio del programa"
+msgstr "Directorio de programa"
 
-#: .\templates\menus\items_menu.html:46
+#: .\templates\menus\items_menu.html:47
+#: .\templates\programs\summary\program_opened.html:26
 msgid "Summary"
 msgstr "Resumen"
 
-#: .\templates\menus\items_menu.html:51
+#: .\templates\menus\items_menu.html:52
 msgid "Time Log"
 msgstr "Registro de tiempos"
 
-#: .\templates\menus\items_menu.html:56
+#: .\templates\menus\items_menu.html:57
 msgid "Defect Log"
 msgstr "Registro de defectos"
 
-#: .\templates\menus\items_menu.html:61
+#: .\templates\menus\items_menu.html:62
 msgid "Defect Type Standard"
 msgstr "Tipo de defecto estándar"
 
-#: .\templates\menus\items_menu.html:71
+#: .\templates\menus\items_menu.html:72
 msgid "Parts of the program"
 msgstr "Partes del programa"
 
-#: .\templates\menus\items_menu.html:76
+#: .\templates\menus\items_menu.html:77
 msgid "Test report"
 msgstr "Reporte de pruebas"
 
@@ -217,13 +259,1061 @@ msgid "Enter the description of module"
 msgstr "Ingrese la descripción del modulo"
 
 #: .\templates\modules\create_module.html:39
+#: .\templates\modules\edit_module.html:50
+#: .\templates\programs\create_program.html:34
+#: .\templates\projects\create_project.html:40
+#: .\templates\projects\detail_project.html:35
+#: .\templates\projects\edit_project.html:40
 msgid "Delivery date"
 msgstr "Fecha de entrega"
 
 #: .\templates\modules\create_module.html:50
+#: .\templates\modules\modules.html:65
 msgid "Create module"
 msgstr "Crear modulo"
 
-#: .\templates\settings.html:9
+#: .\templates\modules\edit_module.html:5
+#: .\templates\modules\edit_module.html:18
+msgid "Edit module"
+msgstr "Editar modulo"
+
+#: .\templates\modules\edit_module.html:62
+#: .\templates\projects\edit_project.html:45
+#: .\templates\projects\projects.html:37
+msgid "Final date"
+msgstr "Fecha final"
+
+#: .\templates\modules\edit_module.html:74
+msgid "Update module"
+msgstr "Actualizar modulo"
+
+#: .\templates\modules\modules.html:5 .\templates\modules\modules.html:19
+msgid "Modules"
+msgstr "Modulos"
+
+#: .\templates\modules\modules.html:22
+msgid "There are no modules in this project"
+msgstr "No hay modulos en este proyecto"
+
+#: .\templates\modules\modules.html:30 .\templates\programs\programs.html:28
+#: .\templates\programs\programs_programmer.html:40
+#: .\templates\projects\detail_project.html:31
+#: .\templates\projects\projects.html:35
+msgid "Start date"
+msgstr "Fecha de inicio"
+
+#: .\templates\modules\modules.html:31
+#: .\templates\programs\edit_program.html:21
+#: .\templates\programs\programs.html:29
+#: .\templates\programs\programs_programmer.html:47
+#: .\templates\projects\projects.html:36
+msgid "Planning date"
+msgstr "Fecha planeada"
+
+#: .\templates\modules\modules.html:32 .\templates\programs\programs.html:30
+#: .\templates\programs\programs_programmer.html:52
+#: .\templates\programs\settings_program.html:36
+#: .\templates\projects\detail_project.html:39
+msgid "Finish date"
+msgstr "Fecha final"
+
+#: .\templates\modules\modules.html:33
+#: .\templates\parts_of_code\new_parts.html:96
+#: .\templates\parts_of_code\parts_reused.html:46 .\templates\pip\pip.html:48
+#: .\templates\programs\programs.html:31
+#: .\templates\projects\edit_project.html:87
+#: .\templates\projects\projects.html:40
+#: .\templates\test_report\reports.html:50
+#: .\templates\users\profile\edit_experencie_companies.html:73
+msgid "Actions"
+msgstr "Acciones"
+
+#: .\templates\modules\modules.html:52
+#: .\templates\parts_of_code\modal_edit_new_part.html:79
+#: .\templates\users\profile\modal_edit_years_experience.html:67
+#: .\templates\users\profile\profile.html:98
+msgid "Edit"
+msgstr "Editar"
+
+#: .\templates\parts_of_code\calculate_base_part_lines.html:5
+msgid "Total planned base lines"
+msgstr "Total de líneas base planificadas"
+
+#: .\templates\parts_of_code\calculate_base_part_lines.html:12
+msgid "Total planned deleted lines"
+msgstr "Total de líneas eliminadas planificadas"
+
+#: .\templates\parts_of_code\calculate_base_part_lines.html:19
+msgid "Total planned edited lines"
+msgstr "Total de líneas editadas planificadas"
+
+#: .\templates\parts_of_code\calculate_base_part_lines.html:26
+msgid "Total planned added lines"
+msgstr "Total de líneas agregadas planificadas"
+
+#: .\templates\parts_of_code\calculate_base_part_lines.html:34
+msgid "Total current base lines"
+msgstr "Total de líneas base actuales"
+
+#: .\templates\parts_of_code\calculate_base_part_lines.html:41
+msgid "Total current deleted lines"
+msgstr "Total de líneas eliminadas actuales"
+
+#: .\templates\parts_of_code\calculate_base_part_lines.html:48
+msgid "Total current edited lines"
+msgstr "Total de líneas editadas actuales"
+
+#: .\templates\parts_of_code\calculate_base_part_lines.html:55
+msgid "Total current added lines"
+msgstr "Total de líneas agregadas actuales"
+
+#: .\templates\parts_of_code\mini_probe.html:7
+msgid "Lines"
+msgstr "Líneas"
+
+#: .\templates\parts_of_code\mini_probe.html:8
+msgid "Average lines"
+msgstr "Promedio líneas"
+
+#: .\templates\parts_of_code\mini_probe.html:11
+#: .\templates\programs\summary\time_in_phase.html:5
+#: .\templates\programs\summary\time_in_phase.html:12
+msgid "Minutes"
+msgstr "Minutos"
+
+#: .\templates\parts_of_code\mini_probe.html:12
+msgid "Average time"
+msgstr "Promedio de tiempo"
+
+#: .\templates\parts_of_code\mini_probe.html:18
+msgid "Enter program size"
+msgstr "Ingrese el tamaño del programa"
+
+#: .\templates\parts_of_code\mini_probe.html:31
+msgid ""
+"This method is not available because you don't have at least 3 programs "
+"developed"
+msgstr "Este método no está disponible porque no tiene al menos 3 programas desarrollados"
+
+#: .\templates\parts_of_code\modal_delete_confirmation.html:7
+msgid "Delete part confirmation"
+msgstr "Confirmación elimación de la parte"
+
+#: .\templates\parts_of_code\modal_delete_confirmation.html:21
+#: .\templates\pip\modal_delete_confirmation.html:20
+#: .\templates\test_report\modal_delete_confirmation.html:20
+msgid "Are you sure you wanna delete this part ?"
+msgstr "¿Estás seguro que quieres eliminar esta parte?"
+
+#: .\templates\parts_of_code\modal_delete_confirmation.html:25
+#: .\templates\pip\modal_delete_confirmation.html:24
+#: .\templates\test_report\modal_delete_confirmation.html:24
+#: .\templates\users\profile\modal_delete_confirmation.html:24
+#: .\templates\users\profile\profile.html:100
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: .\templates\parts_of_code\modal_delete_confirmation.html:26
+#: .\templates\pip\modal_delete_confirmation.html:25
+#: .\templates\test_report\modal_delete_confirmation.html:25
+#: .\templates\users\profile\modal_delete_confirmation.html:25
+msgid "Delete"
+msgstr "Eliminar"
+
+#: .\templates\parts_of_code\modal_edit_base_part.html:6
+msgid "Edit Base Part"
+msgstr "Editar parte base"
+
+#: .\templates\parts_of_code\modal_edit_base_part.html:22
+msgid "Planned base lines"
+msgstr "Líneas base planeadas"
+
+#: .\templates\parts_of_code\modal_edit_base_part.html:26
+msgid "Added Planned lines"
+msgstr "Líneas agregadas planeadas"
+
+#: .\templates\parts_of_code\modal_edit_base_part.html:30
+msgid "Edited Planned lines"
+msgstr "Líneas editadas planeadas"
+
+#: .\templates\parts_of_code\modal_edit_base_part.html:34
+msgid "Deleted Planned lines"
+msgstr "Líneas eliminadas planeadas"
+
+#: .\templates\parts_of_code\modal_edit_base_part.html:43
+#: .\templates\parts_of_code\modal_edit_reused_part.html:24
+msgid "Base Current Lines"
+msgstr "Líneas base actuales"
+
+#: .\templates\parts_of_code\modal_edit_base_part.html:47
+#: .\templates\parts_of_code\modal_edit_reused_part.html:28
+msgid "Added Current Lines"
+msgstr "Líneas agregadas actuales"
+
+#: .\templates\parts_of_code\modal_edit_base_part.html:51
+msgid "Edited Current Lines"
+msgstr "Líneas editadas actuales"
+
+#: .\templates\parts_of_code\modal_edit_base_part.html:55
+msgid "Deleted Current Lines"
+msgstr "Líneas eliminadas actuales"
+
+#: .\templates\parts_of_code\modal_edit_base_part.html:64
+#: .\templates\parts_of_code\modal_edit_reused_part.html:36
+msgid "Update Part"
+msgstr "Actualizar parte"
+
+#: .\templates\parts_of_code\modal_edit_new_part.html:6
+msgid "Edit Part"
+msgstr "Editar parte"
+
+#: .\templates\parts_of_code\modal_edit_new_part.html:24
+msgid "Name part"
+msgstr "Nombre de la parte"
+
+#: .\templates\parts_of_code\modal_edit_new_part.html:30
+#: .\templates\parts_of_code\new_parts.html:19
+#: .\templates\parts_of_code\new_parts.html:90
+msgid "Type part"
+msgstr "Tipo de parte"
+
+#: .\templates\parts_of_code\modal_edit_new_part.html:40
+#: .\templates\parts_of_code\new_parts.html:32
+#: .\templates\parts_of_code\new_parts.html:91
+msgid "Planned methods"
+msgstr "Métodos planeados"
+
+#: .\templates\parts_of_code\modal_edit_new_part.html:48
+#: .\templates\parts_of_code\new_parts.html:42
+msgid "Planned Size estimation"
+msgstr "Estimación del tamaño planificado"
+
+#: .\templates\parts_of_code\modal_edit_new_part.html:58
+#: .\templates\parts_of_code\new_parts.html:51
+msgid "Lines estimation"
+msgstr "Líneas estimadas"
+
+#: .\templates\parts_of_code\modal_edit_new_part.html:65
+#: .\templates\parts_of_code\new_parts.html:56
+#: .\templates\parts_of_code\new_parts.html:94
+msgid "Current methods"
+msgstr "Métodos actuales"
+
+#: .\templates\parts_of_code\modal_edit_new_part.html:71
+#: .\templates\parts_of_code\new_parts.html:95
+#: .\templates\parts_of_code\parts_reused.html:45
+msgid "Current lines"
+msgstr "Líneas actuales"
+
+#: .\templates\parts_of_code\modal_edit_reused_part.html:6
+msgid "Edit Reused Part"
+msgstr "Editar parte reusada"
+
+#: .\templates\parts_of_code\new_parts.html:9
+msgid "Name of the part"
+msgstr "Nombre de la parte"
+
+#: .\templates\parts_of_code\new_parts.html:10
+msgid "Enter name of the part"
+msgstr "Ingrese el nombre de la parte"
+
+#: .\templates\parts_of_code\new_parts.html:33
+#: .\templates\parts_of_code\new_parts.html:57
+msgid "Enter items"
+msgstr "Ingrese la cantidad de elementos"
+
+#: .\templates\parts_of_code\new_parts.html:66
+#: .\templates\parts_of_code\new_parts.html:67
+msgid "Current Size estimation"
+msgstr "Estimación del tamaño actual"
+
+#: .\templates\parts_of_code\new_parts.html:78
+#: .\templates\parts_of_code\parts_base.html:46
+#: .\templates\parts_of_code\parts_reused.html:31 .\templates\pip\pip.html:30
+msgid "Add"
+msgstr "Agregar"
+
+#: .\templates\parts_of_code\new_parts.html:89
+msgid "Part name"
+msgstr "Nombre de la parte"
+
+#: .\templates\parts_of_code\new_parts.html:92
+msgid "Size estimation"
+msgstr "Estimación del tamaño"
+
+#: .\templates\parts_of_code\new_parts.html:93
+msgid "Planned lines"
+msgstr "Líneas planeadas"
+
+#: .\templates\parts_of_code\parts.html:5
+msgid "Parts of Code"
+msgstr "Partes de código"
+
+#: .\templates\parts_of_code\parts.html:50
+msgid "Parts Base"
+msgstr "Partes base"
+
+#: .\templates\parts_of_code\parts.html:58
+msgid "Parts reused"
+msgstr "Partes reusadas"
+
+#: .\templates\parts_of_code\parts.html:66
+msgid "New parts"
+msgstr "Partes nuevas"
+
+#: .\templates\parts_of_code\parts_base.html:6
+msgid "ADD BASE PART"
+msgstr "Agregar parte base"
+
+#: .\templates\parts_of_code\parts_base.html:15
+msgid "Base program"
+msgstr "Programa base"
+
+#: .\templates\parts_of_code\parts_base.html:25
+msgid "Planning base lines"
+msgstr "Líneas base planeadas"
+
+#: .\templates\parts_of_code\parts_base.html:30
+msgid "Planning edited lines"
+msgstr "Líneas editadas planeadas"
+
+#: .\templates\parts_of_code\parts_base.html:35
+msgid "Planning deleted lines"
+msgstr "Líneas eliminadas planeadas"
+
+#: .\templates\parts_of_code\parts_base.html:40
+msgid "Planning added lines"
+msgstr "Líneas agregadas planeadas"
+
+#: .\templates\parts_of_code\parts_reused.html:11
+#: .\templates\parts_of_code\parts_reused.html:43
+msgid "Program reused"
+msgstr "Programa reusado"
+
+#: .\templates\parts_of_code\parts_reused.html:20
+msgid "Planning"
+msgstr "Planeación"
+
+#: .\templates\parts_of_code\parts_reused.html:25
+msgid "Current"
+msgstr "Actual"
+
+#: .\templates\parts_of_code\parts_reused.html:44
+msgid "Planning lines"
+msgstr "Líneas planeadas"
+
+#: .\templates\parts_of_code\parts_reused.html:70
+msgid "This program doesn't have reused parts"
+msgstr "Este programa no tiene partes reusadas"
+
+#: .\templates\pip\edit_pip.html:5 .\templates\pip\edit_pip.html:84
+msgid "Edit PIP"
+msgstr "Editar PIP"
+
+#: .\templates\pip\edit_pip.html:47 .\templates\pip\pip.html:45
+#: .\templates\pip\pip.html:106
+msgid "Problem Description"
+msgstr "Descripción del problema"
+
+#: .\templates\pip\edit_pip.html:60 .\templates\pip\pip.html:119
+msgid "Proposonal Description"
+msgstr "Descripción de la propuesta"
+
+#: .\templates\pip\edit_pip.html:71 .\templates\pip\pip.html:130
+msgid "Notes and Comments"
+msgstr "Notas y comentarios"
+
+#: .\templates\pip\modal_delete_confirmation.html:6
+msgid "Delete PIP confirmation"
+msgstr "Confirmación elimación de PIP"
+
+#: .\templates\pip\modal_detail_pip.html:8
+msgid "Detail PIP"
+msgstr "Detalle de PIP"
+
+#: .\templates\pip\modal_detail_pip.html:29
+msgid "Problems"
+msgstr "Problemas"
+
+#: .\templates\pip\modal_detail_pip.html:33
+msgid "Proposal"
+msgstr "Proposito"
+
+#: .\templates\pip\pip.html:27
+msgid "List"
+msgstr "Listar"
+
+#: .\templates\pip\pip.html:46
+msgid "Proposal Description"
+msgstr "Descripción de la propuesta"
+
+#: .\templates\pip\pip.html:47
+msgid "Other Notes and Comments"
+msgstr "Otras notas y comentarios"
+
+#: .\templates\pip\pip.html:96
+msgid "Enter the name"
+msgstr "Ingrese el nombre"
+
+#: .\templates\pip\pip.html:107
+msgid "Describes the problem encountered"
+msgstr "Describa el problema encontrado"
+
+#: .\templates\pip\pip.html:120
+msgid "Describe the improvements you've proposed"
+msgstr "Describa las mejoras que ha propuesto."
+
+#: .\templates\pip\pip.html:131
+msgid ""
+"Note any other comments or observations that describe your experiences or "
+"improvement ideas"
+msgstr "Tenga en cuenta cualquier otro comentario u observación que describa sus experiencias o ideas de mejora"
+
+#: .\templates\pip\pip.html:143
+msgid "Guardar PIP"
+msgstr "Guardar PIP"
+
+#: .\templates\pip\pip.html:143 .\templates\test_report\reports.html:168
+#: .\templates\users\profile\profile.html:99
+msgid "Save"
+msgstr "Guardar"
+
+#: .\templates\programs\analysis_tools\graphics.html:19
+msgid "Analysis Charts and Reports"
+msgstr "Herramientas de análisis y reportes"
+
+#: .\templates\programs\analysis_tools\graphics.html:20
+#: .\templates\programs\analysis_tools\modal_graphic.html:7
+msgid "Graphic"
+msgstr "Gráfica"
+
+#: .\templates\programs\create_program.html:5
+msgid "Create Program"
+msgstr "Crear programa"
+
+#: .\templates\programs\create_program.html:15
+msgid "Create a new program"
+msgstr "Crear un nuevo programa"
+
+#: .\templates\programs\create_program.html:23
+msgid "Enter the name of program"
+msgstr "Ingrese el nombre del programa"
+
+#: .\templates\programs\create_program.html:48
+msgid "Enter the description of program"
+msgstr "Ingrese la descripción del programa"
+
+#: .\templates\programs\create_program.html:60
+msgid "Programming language"
+msgstr "Lenguaje de programación"
+
+#: .\templates\programs\create_program.html:70
+#: .\templates\programs\programs.html:26
+msgid "Programmer"
+msgstr "Programador"
+
+#: .\templates\programs\create_program.html:88
+#: .\templates\projects\create_project.html:50
+msgid "Create"
+msgstr "Crear"
+
+#: .\templates\programs\edit_program.html:5
+msgid "Edit program"
+msgstr "Editar programa"
+
+#: .\templates\programs\edit_program.html:12
+msgid "Name program"
+msgstr "Nombre del programa"
+
+#: .\templates\programs\edit_program.html:40
+msgid "All programs"
+msgstr "Todos los programas"
+
+#: .\templates\programs\edit_program.html:41
+#: .\templates\programs\settings_program.html:47
+#: .\templates\projects\edit_project.html:57
+#: .\templates\users\profile\modal_languages.html:37
+msgid "Update"
+msgstr "Actualizar"
+
+#: .\templates\programs\programs.html:27
+msgid "Language"
+msgstr "Lenguaje"
+
+#: .\templates\programs\programs.html:66
+msgid "Create program"
+msgstr "Crear programa"
+
+#: .\templates\programs\programs_programmer.html:5
+msgid "My programs"
+msgstr "Mis programas"
+
+#: .\templates\programs\programs_programmer.html:13
+msgid "Your assigned programs"
+msgstr "Tus programas asignados"
+
+#: .\templates\programs\programs_programmer.html:27
+msgid "Project"
+msgstr "Proyecto"
+
+#: .\templates\programs\programs_programmer.html:30
+msgid "Module"
+msgstr "Modulo"
+
+#: .\templates\programs\programs_programmer.html:33
+msgid "Open program"
+msgstr "Abrir programa"
+
+#: .\templates\programs\settings_program.html:5
+msgid "Settings Program"
+msgstr "Ajustes del programa"
+
+#: .\templates\programs\settings_program.html:26
+msgid "Total lines"
+msgstr "Total de líneas"
+
+#: .\templates\programs\summary\defects_injected_phase.html:16
+msgid "Total defects TO-DATE (%%)"
+msgstr "Total de defectos a la FECHA (%)"
+
+#: .\templates\programs\summary\defects_removed_phase.html:4
+msgid "Total defects removed:"
+msgstr "Total de defectos removidos"
+
+#: .\templates\programs\summary\defects_removed_phase.html:10
+msgid "Total defects TO-DATE:"
+msgstr "Total de defectos a la fecha"
+
+#: .\templates\programs\summary\defects_removed_phase.html:16
+msgid "Total defects removed (%%)"
+msgstr "Total de defectos removidos (%)"
+
+#: .\templates\programs\summary\program_opened.html:5
+msgid "Detail program"
+msgstr "Detalle del programa"
+
+#: .\templates\programs\summary\program_opened.html:17
+msgid "Program Plan Summary"
+msgstr "Resumen del plan del programa"
+
+#: .\templates\programs\summary\program_opened.html:30
+msgid "Program size"
+msgstr "Tamaño del programa"
+
+#: .\templates\programs\summary\program_opened.html:35
+msgid "Time per phase"
+msgstr "Tiempo por fase"
+
+#: .\templates\programs\summary\program_opened.html:39
+msgid "Defects injected"
+msgstr "Defectos injectados"
+
+#: .\templates\programs\summary\program_opened.html:43
+msgid "Defects removed"
+msgstr "Defectos removidos"
+
+#: .\templates\programs\summary\program_opened.html:47
+msgid "Defect removal Efficiency"
+msgstr "Eficiencia de eliminación de defectos"
+
+#: .\templates\programs\summary\program_size_summary.html:9
+msgid "Plan size"
+msgstr "Tamaño planeado"
+
+#: .\templates\programs\summary\program_size_summary.html:10
+msgid "Actual size"
+msgstr "Tamaño actual"
+
+#: .\templates\programs\summary\program_size_summary.html:11
+msgid "To Date"
+msgstr "A la fecha"
+
+#: .\templates\programs\summary\program_size_summary.html:22
+msgid "Deleted (D)"
+msgstr "Elimadas (D)"
+
+#: .\templates\programs\summary\program_size_summary.html:28
+msgid "Modified (M)"
+msgstr "Modificadas (M)"
+
+#: .\templates\programs\summary\program_size_summary.html:34
+msgid "Added (A)"
+msgstr "Agregadas (A)"
+
+#: .\templates\programs\summary\program_size_summary.html:40
+msgid "Reused (R)"
+msgstr "Reusadas (R)"
+
+#: .\templates\programs\summary\program_size_summary.html:46
+msgid "Added & Modified (A&M)"
+msgstr "Agregadas y modificadas (A&M)"
+
+#: .\templates\programs\summary\program_size_summary.html:58
+msgid "New Reusable (NR)"
+msgstr "Nueva reutilizable (NR)"
+
+#: .\templates\programs\summary\program_size_summary.html:64
+msgid "Estimated Proxy Size (E)"
+msgstr "Tamaño de proxy estimado (E)"
+
+#: .\templates\programs\summary\summary.html:9
+msgid "To-Date"
+msgstr "A la fecha"
+
+#: .\templates\programs\summary\summary.html:14
+msgid "Productivity (Size/H)"
+msgstr "Productividad (Tamaño/H)"
+
+#: .\templates\programs\summary\summary.html:20
+msgid "Actual Time (Min)"
+msgstr "Tiempo actual (Min)"
+
+#: .\templates\programs\summary\summary.html:40
+#, python-format
+msgid "Reused (%%)"
+msgstr "Reusado (%%)"
+
+#: .\templates\programs\summary\summary.html:46
+#, python-format
+msgid "New Reusable (%%)"
+msgstr "Nueva reutilizable (%%)"
+
+#: .\templates\programs\summary\summary.html:52
+msgid "Test Defects/KLOC"
+msgstr "Defectos de prueba/KLOC"
+
+#: .\templates\programs\summary\summary.html:62
+msgid "Total Defects/KLOC"
+msgstr "Total de defectos/KLOC"
+
+#: .\templates\programs\summary\summary.html:76
+#, python-format
+msgid "Yield (%%)"
+msgstr "Rendimiento (%%)"
+
+#: .\templates\programs\summary\summary.html:90
+#, python-format
+msgid "Appraisal COQ (%%)"
+msgstr "Prevención COQ (%%)"
+
+#: .\templates\programs\summary\summary.html:104
+#, python-format
+msgid "Failure COQ (%%)"
+msgstr "Falla COQ (%%)"
+
+#: .\templates\programs\summary\summary.html:118
+msgid "COQ A/F Ratio"
+msgstr "COQ A/F Ratio"
+
+#: .\templates\programs\summary\summary.html:132
+msgid "Code Review Rate (Size/H)"
+msgstr "Tasa de revisión de código (Size/H)"
+
+#: .\templates\programs\summary\time_in_phase.html:18
+#, python-format
+msgid "Total minutes TO-DATE (%%)"
+msgstr "Total de minutos a la fecha (%%)"
+
+#: .\templates\projects\create_project.html:5
+msgid "Create Projec"
+msgstr "Crear proyecto"
+
+#: .\templates\projects\create_project.html:13
+msgid "Create a new project"
+msgstr "Crear nuevo proyecto"
+
+#: .\templates\projects\create_project.html:19
+msgid "Enter the name of project"
+msgstr "Ingrese el nombre del proyecto"
+
+#: .\templates\projects\create_project.html:30
+msgid "Enter the description of project"
+msgstr "Ingrese la descripción del proyecto"
+
+#: .\templates\projects\detail_project.html:5
+msgid "Detail project"
+msgstr "Detalle del proyecto"
+
+#: .\templates\projects\detail_project.html:23
+msgid "Project managed by"
+msgstr "Proyecto administrado por"
+
+#: .\templates\projects\detail_project.html:54
+#: .\templates\projects\edit_project.html:64
+msgid "Programmers"
+msgstr "Programadores"
+
+#: .\templates\projects\edit_project.html:5
+#: .\templates\projects\edit_project.html:19
+#: .\templates\users\profile\profile.html:115
+msgid "Edit project"
+msgstr "Editar proyecto"
+
+#: .\templates\projects\edit_project.html:36
+#: .\templates\projects\projects.html:34
+msgid "Status"
+msgstr "Estado"
+
+#: .\templates\projects\edit_project.html:81
+msgid "There are no programmers in this project"
+msgstr "Ho hay programadores en este proyecto"
+
+#: .\templates\projects\edit_project.html:86
+#: .\templates\users\profile\profile.html:62
+#: .\templates\users\register_users.html:51
+#: .\templates\users\register_users.html:115
+msgid "Username"
+msgstr "Nombre de usuario"
+
+#: .\templates\projects\projects.html:38
+msgid "N° programmers"
+msgstr "N° de programadores"
+
+#: .\templates\projects\projects.html:78
+msgid "Create project"
+msgstr "Crear proyecto"
+
+#: .\templates\settings.html:10
 msgid "Change language"
-msgstr "Cambiar idioma"
+msgstr "Cambiar lenguaje"
+
+#: .\templates\test_report\modal_delete_confirmation.html:6
+msgid "Delete report confirmation"
+msgstr "Confirmación eliminación de reporte"
+
+#: .\templates\test_report\modal_detail_report.html:8
+msgid "Detail report"
+msgstr "Detalle del reporte"
+
+#: .\templates\test_report\modal_detail_report.html:29
+#: .\templates\test_report\reports.html:45
+#: .\templates\test_report\reports.html:109
+#: .\templates\test_report\update_report.html:45
+msgid "Objetive"
+msgstr "Objetivo"
+
+#: .\templates\test_report\modal_detail_report.html:37
+#: .\templates\test_report\reports.html:47
+#: .\templates\test_report\reports.html:133
+#: .\templates\test_report\update_report.html:69
+msgid "Conditions"
+msgstr "Condiciones"
+
+#: .\templates\test_report\modal_detail_report.html:41
+#: .\templates\test_report\reports.html:48
+msgid "Expected results"
+msgstr "Resultados esperados"
+
+#: .\templates\test_report\modal_detail_report.html:45
+#: .\templates\test_report\reports.html:49
+#: .\templates\test_report\reports.html:157
+#: .\templates\test_report\update_report.html:93
+msgid "Actual results"
+msgstr "Resultados actuales"
+
+#: .\templates\test_report\reports.html:4
+msgid "Reports"
+msgstr "Reportes"
+
+#: .\templates\test_report\reports.html:28
+msgid "List reports"
+msgstr "Lista de reportes"
+
+#: .\templates\test_report\reports.html:31
+msgid "Add report"
+msgstr "Agregar reporte"
+
+#: .\templates\test_report\reports.html:83
+msgid "Create report"
+msgstr "Crear reporte"
+
+#: .\templates\test_report\reports.html:99
+#: .\templates\test_report\update_report.html:35
+msgid "Enter the name of report"
+msgstr "Ingrese el nombre del reporte"
+
+#: .\templates\test_report\reports.html:110
+#: .\templates\test_report\update_report.html:46
+msgid "Enter the objetive of report"
+msgstr "Ingrese el objetivo del reporte"
+
+#: .\templates\test_report\reports.html:123
+#: .\templates\test_report\update_report.html:59
+msgid "Enter the description of report"
+msgstr "Ingrese la descripción del reporte"
+
+#: .\templates\test_report\reports.html:134
+#: .\templates\test_report\update_report.html:70
+msgid "Enter the conditions of report"
+msgstr "Ingrese las condiciones del reporte"
+
+#: .\templates\test_report\reports.html:146
+#: .\templates\test_report\update_report.html:82
+msgid "Expected Results"
+msgstr "Resultados esperados"
+
+#: .\templates\test_report\reports.html:147
+#: .\templates\test_report\update_report.html:83
+msgid "Enter the expected results of report"
+msgstr "Ingrese los resultados esperados del reporte"
+
+#: .\templates\test_report\reports.html:158
+#: .\templates\test_report\update_report.html:94
+msgid "Enter the current results of report"
+msgstr "Ingrese los resultados actuales del reporte"
+
+#: .\templates\test_report\reports.html:168
+msgid "Save Report"
+msgstr "Guardar reporte"
+
+#: .\templates\test_report\update_report.html:5
+#: .\templates\test_report\update_report.html:19
+#: .\templates\test_report\update_report.html:105
+msgid "Edit report"
+msgstr "Editar reporte"
+
+#: .\templates\test_report\update_report.html:105
+msgid "Save report"
+msgstr "Guardar reporte"
+
+#: .\templates\users\login.html:10
+msgid "Username or email not match with password"
+msgstr "El nombre de usuario o el correo no concuerdan con la contraseña"
+
+#: .\templates\users\login.html:22
+msgid "Email address or Username"
+msgstr "Correo electronico o nombre de usuario"
+
+#: .\templates\users\login.html:26 .\templates\users\register_users.html:75
+msgid "Password"
+msgstr "Contraseña"
+
+#: .\templates\users\profile\edit_experencie_companies.html:6
+msgid "Experencie Companies"
+msgstr "Experencia en compañias"
+
+#: .\templates\users\profile\edit_experencie_companies.html:28
+#: .\templates\users\profile\edit_experencie_companies.html:70
+#: .\templates\users\profile\modal_edit_experencie_comp.html:20
+msgid "Name company"
+msgstr "Nombre de la compañia"
+
+#: .\templates\users\profile\edit_experencie_companies.html:29
+msgid "Enter the name company"
+msgstr "Ingrse el nombre de la compañia"
+
+#: .\templates\users\profile\edit_experencie_companies.html:37
+#: .\templates\users\profile\edit_experencie_companies.html:71
+msgid "Position company"
+msgstr "Posición dentro de la compañia"
+
+#: .\templates\users\profile\edit_experencie_companies.html:50
+#: .\templates\users\profile\edit_experencie_companies.html:72
+#: .\templates\users\profile\modal_edit_experencie_comp.html:32
+#: .\templates\users\profile\profile.html:161
+msgid "Years position"
+msgstr "Años en dicha posición"
+
+#: .\templates\users\profile\edit_experencie_companies.html:60
+msgid "Back to profile"
+msgstr "Regresar al perfil"
+
+#: .\templates\users\profile\edit_experencie_companies.html:61
+msgid "Create experencie"
+msgstr "Crear experencia"
+
+#: .\templates\users\profile\modal_delete_confirmation.html:6
+msgid "Delete experencie company confirmation"
+msgstr "Confirmación eliminación de experencia en una compañia"
+
+#: .\templates\users\profile\modal_delete_confirmation.html:20
+msgid "Are you sure you wanna delete ?"
+msgstr "¿Estás seguro que quieres eliminarla?"
+
+#: .\templates\users\profile\modal_edit_experencie_comp.html:7
+msgid "Edit Experencie Company"
+msgstr "Editar experencia en compañias"
+
+#: .\templates\users\profile\modal_edit_experencie_comp.html:24
+#: .\templates\users\profile\profile.html:157
+msgid "Position"
+msgstr "Posición"
+
+#: .\templates\users\profile\modal_edit_experencie_comp.html:39
+#: .\templates\users\profile\modal_img_profile.html:26
+msgid "Save changes"
+msgstr "Guardar cambios"
+
+#: .\templates\users\profile\modal_edit_years_experience.html:7
+msgid "Edit experencie"
+msgstr "Editar experencia"
+
+#: .\templates\users\profile\modal_edit_years_experience.html:23
+msgid "Years development"
+msgstr "Años en desarrollo"
+
+#: .\templates\users\profile\modal_edit_years_experience.html:24
+msgid "Enter years in development"
+msgstr "Ingrese los años en desarrollo"
+
+#: .\templates\users\profile\modal_edit_years_experience.html:29
+msgid "Years configuration"
+msgstr "Años en configuración"
+
+#: .\templates\users\profile\modal_edit_years_experience.html:30
+msgid "Enter years in configuration"
+msgstr "Ingrese los años en configuración"
+
+#: .\templates\users\profile\modal_edit_years_experience.html:35
+msgid "Years integration"
+msgstr "Años en integración"
+
+#: .\templates\users\profile\modal_edit_years_experience.html:36
+msgid "Enter years in integration"
+msgstr "Ingrese los años en integración"
+
+#: .\templates\users\profile\modal_edit_years_experience.html:41
+msgid "Years requirements"
+msgstr "Años en requerimientos"
+
+#: .\templates\users\profile\modal_edit_years_experience.html:42
+msgid "Enter years in requirements"
+msgstr "Ingrese los años en requerimientos"
+
+#: .\templates\users\profile\modal_edit_years_experience.html:47
+msgid "Years design"
+msgstr "Años en diseño"
+
+#: .\templates\users\profile\modal_edit_years_experience.html:48
+msgid "Enter years in design"
+msgstr "Ingrese los años en diseño"
+
+#: .\templates\users\profile\modal_edit_years_experience.html:53
+msgid "Years tests"
+msgstr "Años en pruebas"
+
+#: .\templates\users\profile\modal_edit_years_experience.html:54
+msgid "Enter years in testing"
+msgstr "Ingrese los años en pruebas"
+
+#: .\templates\users\profile\modal_edit_years_experience.html:59
+msgid "Years support"
+msgstr "Años en soporte"
+
+#: .\templates\users\profile\modal_edit_years_experience.html:60
+msgid "Enter years in support"
+msgstr "Ingrese los años en soporte"
+
+#: .\templates\users\profile\modal_img_profile.html:8
+msgid "Update profile picture"
+msgstr "Actualizar la foto de perfil"
+
+#: .\templates\users\profile\modal_img_profile.html:19
+msgid "Search file"
+msgstr "Buscar archivo"
+
+#: .\templates\users\profile\modal_img_profile.html:24
+msgid "Delete current picture"
+msgstr "Eliminar foto actual"
+
+#: .\templates\users\profile\modal_languages.html:9
+msgid "Languages"
+msgstr "Lenguajes"
+
+#: .\templates\users\profile\profile.html:24
+msgid "Change your profile picture"
+msgstr "Cambiar tu foto de perfil"
+
+#: .\templates\users\profile\profile.html:71
+msgid "Genere"
+msgstr "Genero"
+
+#: .\templates\users\profile\profile.html:84
+#: .\templates\users\register_users.html:27
+#: .\templates\users\register_users.html:113
+msgid "First name"
+msgstr "Nombre"
+
+#: .\templates\users\profile\profile.html:85
+msgid "Name not updated"
+msgstr "Nombre no actualizado"
+
+#: .\templates\users\profile\profile.html:88
+#: .\templates\users\register_users.html:38
+#: .\templates\users\register_users.html:114
+msgid "Last name"
+msgstr "Apellidos"
+
+#: .\templates\users\profile\profile.html:89
+msgid "Lastname not updated"
+msgstr "Apellidos no actualizados"
+
+#: .\templates\users\profile\profile.html:92
+#: .\templates\users\register_users.html:116
+msgid "Email"
+msgstr "Correo electronico"
+
+#: .\templates\users\profile\profile.html:111
+msgid "Language Experience"
+msgstr "Experencia en lenguajes"
+
+#: .\templates\users\profile\profile.html:139
+msgid "Experencie in companies"
+msgstr "Experencia en compañias"
+
+#: .\templates\users\profile\profile.html:153
+msgid "Company"
+msgstr "Compañia"
+
+#: .\templates\users\profile\profile.html:173
+msgid "Total experience in years"
+msgstr "Total de experiencia en años"
+
+#: .\templates\users\profile\profile.html:188
+msgid "Developing"
+msgstr "Desarrollando"
+
+#: .\templates\users\profile\profile.html:194
+msgid "Configuration"
+msgstr "Configuración"
+
+#: .\templates\users\profile\profile.html:199
+msgid "Integration"
+msgstr "Integración"
+
+#: .\templates\users\profile\profile.html:204
+msgid "Requirements"
+msgstr "Requerimientos"
+
+#: .\templates\users\profile\profile.html:209
+msgid "Designing"
+msgstr "Diseño"
+
+#: .\templates\users\profile\profile.html:214
+msgid "Testing"
+msgstr "Pruebas"
+
+#: .\templates\users\profile\profile.html:219
+msgid "Support"
+msgstr "Soporte"
+
+#: .\templates\users\register_users.html:5
+#: .\templates\users\register_users.html:96
+msgid "Sign Up"
+msgstr "Registrar"
+
+#: .\templates\users\register_users.html:20
+msgid "Register a user"
+msgstr "Registrar un usuario"
+
+#: .\templates\users\register_users.html:62
+msgid "Email Address"
+msgstr "Correo electronico"
+
+#: .\templates\users\register_users.html:86
+msgid "Confirm password"
+msgstr "Confirmación de contraseña"
+
+#: .\templates\users\register_users.html:117
+msgid "N° Programs assigned"
+msgstr "N° de programas asignados"

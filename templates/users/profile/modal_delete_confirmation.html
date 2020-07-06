@@ -1,8 +1,9 @@
 <div class="modal fade" id="deleteExpCompanyConfirmation" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    {% load i18n %}
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title" id="staticBackdropLabel">Delete experencie company confirmation</h3>
+                <h3 class="modal-title" id="staticBackdropLabel">{% trans "Delete experencie company confirmation" %}</h3>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -16,12 +17,12 @@
                 <div id="contentModalDeleteConfirmation">
                     {% load static %}
                     <img src="{% static 'img/warning.png' %}" alt="" height="32" width="32">
-                    Are you sure you wanna delete ?
+                    {% trans "Are you sure you wanna delete ?" %}
                 </div>
             </div>
             <div class="modal-footer" id="modalFooterDeleteConfirmation">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-danger" id="btnDeleteExpCompanyConfirmation">Delete</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">{% trans "Cancel" %}</button>
+                <button type="button" class="btn btn-danger" id="btnDeleteExpCompanyConfirmation">{% trans "Delete" %}</button>
             </div>
         </div>
     </div>

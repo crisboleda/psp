@@ -1,7 +1,8 @@
 
 {% extends 'base/dashboard.html' %}
 
-{% block 'title' %}PSP | Detalle Proyecto{% endblock %}
+{% load i18n %}
+{% block 'title' %}PSP | {% trans "Detail project" %}{% endblock %}
 
 {% block 'links' %}{% endblock %}
 
@@ -19,7 +20,7 @@
                 <br/>
                 <p>{{ project.description }}</p>
                 <br/>
-                <p><b>Proyecto administrado por </b><a href="{% url 'users:profile_user' project.admin.username %}">@{{ project.admin.username }}</a></p>
+                <p><b>{% trans "Project managed by" %} </b><a href="{% url 'users:profile_user' project.admin.username %}">@{{ project.admin.username }}</a></p>
             </div>
         </div>
         <div class="col-xl-6 p-3">
@@ -27,15 +28,15 @@
                 <table class="table table-striped table-bordered">
                     <tbody>
                         <tr>
-                            <th>Fecha inicio</th>
+                            <th>{% trans "Start date" %}</th>
                             <td>{{ project.start_date }}</td>
                         </tr>
                         <tr>
-                            <th>Fecha de entrega</th>
+                            <th>{% trans "Delivery date" %}</th>
                             <td>{{ project.planning_date|date }}</td>
                         </tr>
                         <tr>
-                            <th>Fecha fin</th>
+                            <th>{% trans "Finish date" %}</th>
                             <td>
                                 {% if not project.finish_date %}
                                     ---
@@ -50,7 +51,7 @@
         </div>
     </div>
     <div class="au-card col-xl-3">
-        <h4>Programadores</h4>
+        <h4>{% trans "Programmers" %}</h4>
         {% for programmer in project.users.all %}
             <div class="row mt-3 shadow-sm p-2">
                 {% if not programmer.get_profile.picture %}

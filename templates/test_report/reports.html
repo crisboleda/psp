@@ -1,6 +1,7 @@
 {% extends 'base/dashboard.html' %}
 
-{% block 'title' %}PSP | Reports{% endblock %}
+{% load i18n %}
+{% block 'title' %}PSP | {% trans "Reports" %}{% endblock %}
 
 {% block 'links' %}
     {% load static %}
@@ -17,17 +18,17 @@
 {% endblock %}
 
 {% block 'content' %}
-
+    {% load i18n %}
     {% include 'base/custom_alert.html' %}
 
     <div class="">
         <div class="" id="myTab" role="tablist">
             <ul class="nav nav-tabs justify-content-end">
                 <li class="nav-item">
-                    <a class="nav-link active" id="list-tab" data-toggle="tab" href="#Report_list" role="tab" aria-controls="list" aria-selected="false">List reports</a>
+                    <a class="nav-link active" id="list-tab" data-toggle="tab" href="#Report_list" role="tab" aria-controls="list" aria-selected="false">{% trans "List reports" %}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="form-tab" data-toggle="tab" href="#form" role="tab" aria-controls="form" aria-selected="true">Add report</a>				   	
+                    <a class="nav-link" id="form-tab" data-toggle="tab" href="#form" role="tab" aria-controls="form" aria-selected="true">{% trans "Add report" %}</a>				   	
                 </li>
             </ul>
             <div class="tab-content" id="myTabContent">
@@ -39,14 +40,14 @@
                                     <thead class="thead-dark">
                                         <tr>
                                             <th scope="col">#</th>
-                                            <th scope="col">Date</th>
-                                            <th scope="col">Name</th>
-                                            <th scope="col">Objetive</th>
-                                            <th scope="col">Description</th>
-                                            <th scope="col">Conditions</th>
-                                            <th scope="col">Expected results</th>
-                                            <th scope="col">Actual results</th>
-                                            <th scope="col">Actions</th>
+                                            <th scope="col">{% trans "Date" %}</th>
+                                            <th scope="col">{% trans "Name" %}</th>
+                                            <th scope="col">{% trans "Objetive" %}</th>
+                                            <th scope="col">{% trans "Description" %}</th>
+                                            <th scope="col">{% trans "Conditions" %}</th>
+                                            <th scope="col">{% trans "Expected results" %}</th>
+                                            <th scope="col">{% trans "Actual results" %}</th>
+                                            <th scope="col">{% trans "Actions" %}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -79,11 +80,11 @@
                             <form method="POST">
                                 {% csrf_token %}
                                 <nav class="navbar navbar-light bg-light  ">
-                                    <a class="navbar-brand" href="#">Create report</a>
+                                    <a class="navbar-brand" href="#">{% trans "Create report" %}</a>
                                 </nav> <br>
 
                                 <div class="form-group">
-                                    <label for="formGroupExampleInput">Date</label>
+                                    <label for="formGroupExampleInput">{% trans "Date" %}</label>
                                     <input type="date" name="date" class="form-control {% if form.date.errors %}is-invalid{% endif %}" id="date" placeholder="">
                                     <div class="invalid-feedback">
                                         {% for error in form.date.errors %}
@@ -94,8 +95,8 @@
 
                                 <div class="form-row">
                                     <div class="form-group col-xl-6">
-                                        <label for="textareaNameReport">Name</label>
-                                        <textarea placeholder="Enter the name of report" maxlength="100" style="resize: none;" name="name" id="textareaNameReport" rows="3" class="{% if form.name.errors %}is-invalid{% endif %} form-control pb-4 text-input-scroll"></textarea>
+                                        <label for="textareaNameReport">{% trans "Name" %}</label>
+                                        <textarea placeholder="{% trans "Enter the name of report" %}" maxlength="100" style="resize: none;" name="name" id="textareaNameReport" rows="3" class="{% if form.name.errors %}is-invalid{% endif %} form-control pb-4 text-input-scroll"></textarea>
                                         <p class="counter__words text-right"><span id="counterNameReport">0</span>/100</p>
                                         <div class="invalid-feedback">
                                             {% for error in form.name.errors %}
@@ -105,8 +106,8 @@
                                     </div>
 
                                     <div class="form-group col-xl-6">
-                                        <label for="textareaObjetiveReport">Objetive</label>
-                                        <textarea placeholder="Enter the objetive of report" maxlength="350" style="resize: none;" name="objetive" id="textareaObjetiveReport" rows="3" class="{% if form.objetive.errors %}is-invalid{% endif %} form-control pb-4 text-input-scroll"></textarea>
+                                        <label for="textareaObjetiveReport">{% trans "Objetive" %}</label>
+                                        <textarea placeholder="{% trans "Enter the objetive of report" %}" maxlength="350" style="resize: none;" name="objetive" id="textareaObjetiveReport" rows="3" class="{% if form.objetive.errors %}is-invalid{% endif %} form-control pb-4 text-input-scroll"></textarea>
                                         <p class="counter__words text-right"><span id="counterObjetiveReport">0</span>/350</p>
                                         <div class="invalid-feedback">
                                             {% for error in form.objetive.errors %}
@@ -118,8 +119,8 @@
                                 
                                 <div class="form-row">
                                     <div class="form-group col-xl-6">
-                                        <label for="textareaDescriptionReport">Description</label>
-                                        <textarea placeholder="Enter the description of report" maxlength="350" style="resize: none;" name="description" id="textareaDescriptionReport" rows="3" class="{% if form.description.errors %}is-invalid{% endif %} form-control pb-4 text-input-scroll"></textarea>
+                                        <label for="textareaDescriptionReport">{% trans "Description" %}</label>
+                                        <textarea placeholder="{% trans "Enter the description of report" %}" maxlength="350" style="resize: none;" name="description" id="textareaDescriptionReport" rows="3" class="{% if form.description.errors %}is-invalid{% endif %} form-control pb-4 text-input-scroll"></textarea>
                                         <p class="counter__words text-right"><span id="counterDescriptionReport">0</span>/350</p>
                                         <div class="invalid-feedback">
                                             {% for error in form.description.errors %}
@@ -129,8 +130,8 @@
                                     </div>
 
                                     <div class="form-group col-xl-6">
-                                        <label for="textareaConditionsReport">Conditions</label>
-                                        <textarea placeholder="Enter the conditions of report" maxlength="350" style="resize: none;" name="conditions" id="textareaConditionsReport" rows="3" class="{% if form.conditions.errors %}is-invalid{% endif %} form-control pb-4 text-input-scroll"></textarea>
+                                        <label for="textareaConditionsReport">{% trans "Conditions" %}</label>
+                                        <textarea placeholder="{% trans "Enter the conditions of report" %}" maxlength="350" style="resize: none;" name="conditions" id="textareaConditionsReport" rows="3" class="{% if form.conditions.errors %}is-invalid{% endif %} form-control pb-4 text-input-scroll"></textarea>
                                         <p class="counter__words text-right"><span id="counterConditionsReport">0</span>/350</p>
                                         <div class="invalid-feedback">
                                             {% for error in form.conditions.errors %}
@@ -142,8 +143,8 @@
 
                                 <div class="form-row">
                                     <div class="form-group col-xl-6">
-                                        <label for="textareaEspectedResultsReport">Expected Results</label>
-                                        <textarea placeholder="Enter the expected results of report" maxlength="350" style="resize: none;" name="expect_results" id="textareaEspectedResultsReport" rows="3" class="{% if form.expect_results.errors %}is-invalid{% endif %} form-control pb-4 text-input-scroll"></textarea>
+                                        <label for="textareaEspectedResultsReport">{% trans "Expected Results" %}</label>
+                                        <textarea placeholder="{% trans "Enter the expected results of report" %}" maxlength="350" style="resize: none;" name="expect_results" id="textareaEspectedResultsReport" rows="3" class="{% if form.expect_results.errors %}is-invalid{% endif %} form-control pb-4 text-input-scroll"></textarea>
                                         <p class="counter__words text-right"><span id="counterEspectedResultsReport">0</span>/350</p>
                                         <div class="invalid-feedback">
                                             {% for error in form.expect_results.errors %}
@@ -153,8 +154,8 @@
                                     </div>
 
                                     <div class="form-group col-xl-6">
-                                        <label for="textareaCurrentResultsReport">Actual results</label>
-                                        <textarea placeholder="Enter the current results of report" maxlength="350" style="resize: none;" name="current_results" id="textareaCurrentResultsReport" rows="3" class="{% if form.current_results.errors  %}is-invalid{% endif %} form-control pb-4 text-input-scroll"></textarea>
+                                        <label for="textareaCurrentResultsReport">{% trans "Actual results" %}</label>
+                                        <textarea placeholder="{% trans "Enter the current results of report" %}" maxlength="350" style="resize: none;" name="current_results" id="textareaCurrentResultsReport" rows="3" class="{% if form.current_results.errors  %}is-invalid{% endif %} form-control pb-4 text-input-scroll"></textarea>
                                         <p class="counter__words text-right"><span id="counterCurrentResultsReport">0</span>/350</p>
                                         <div class="invalid-feedback">
                                             {% for error in form.current_results.errors %}
@@ -164,7 +165,7 @@
                                     </div>
                                 </div>
                             
-                                <button type="submit" class="btn btn-primary text-center btn-block" title=" Guardar Report">Save</button>
+                                <button type="submit" class="btn btn-primary text-center btn-block" title="{% trans "Save Report" %}">{% trans "Save" %}</button>
                             </form>
                         </div>
                     </div>
