@@ -105,3 +105,14 @@ class DataDefectsRemovedView(LoginRequiredMixin, ProgramExistMixin, APIView):
         return [IsProgrammerProgram(self.program)]
 
 
+class DataDefectRemovalEfficiencyView(LoginRequiredMixin, ProgramExistMixin, APIView):
+
+    context = {
+        "defects_actual_program": {},
+        "defects_data_to_date": {}
+    }
+
+    def get(self, request, *args, **kwargs):
+        pass
+
+

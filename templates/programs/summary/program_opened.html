@@ -86,6 +86,11 @@
                 </section>
 
                 <section id="defect_removal_efficiency" class="tab-panel p-4 shadow-sm">
+                    <div id="summaryLoaderDefectsRemovalEfficiency" class="text-center">
+                        <div class="text-center spinner-border text-primary" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
                     {% include 'programs/summary/defects_removal_efficiency.html' %}
                 </section>
             </div>
@@ -105,4 +110,5 @@
     <script src="{% static 'js/summary/defects_injected_phase.js' %}"></script>
     <script src="{% static 'js/summary/time_per_phase.js' %}"></script>
     <script src="{% static 'js/summary/defects_removed_phase.js' %}"></script>
+    <script src="{% static 'js/summary/defects_removal_efficiency.js' %}"></script>
 {% endblock %}
