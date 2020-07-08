@@ -15,26 +15,22 @@ class CreateProjectModelForm(forms.ModelForm):
 
     class Meta:
         model = Project
-        fields = ('name', 'description', 'planning_date')
-        widgets = {
-            'name': forms.TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Nombre del proyecto'
-            }),
-            'description': forms.Textarea(attrs={
-                'class': 'form-control w-100',
-                'placeholder': 'Descripción del proyecto',
-                'rows': '5',
-                'style': 'resize: none'
-            })
-        }
-
+        fields = ('name', 'description', 'start_date', 'planning_date')
     
+    def clean_planning_date(self):
+        planning_date = self.cleaned_data["planning_date"]
+
+        if planning_date <= self.cleaned_data["start_date"]:
+            raise forms.ValidationError("The planning date cannot be less than the start date") 
+        return planning_date
+        
+
     def save(self, user):
         data = self.cleaned_data
         Project.objects.create(
             name=data['name'],
             description=data['description'],
+            start_date=data["start_date"],
             planning_date=data['planning_date'],
             admin=user
         )
@@ -42,11 +38,11 @@ class CreateProjectModelForm(forms.ModelForm):
 
 class UpdateProjectModelForm(forms.ModelForm):
 
-    finish_date = forms.DateTimeField(required=False)
+    finish_date = forms.DateField(required=False)
 
     class Meta:
         model = Project
-        fields = ('name', 'description', 'status', 'planning_date', 'finish_date')
+        fields = ('name', 'description', 'status', 'start_date', 'planning_date', 'finish_date')
         widgets = {
             'name': forms.TextInput(attrs={
                 'class': 'form-control'
@@ -63,6 +59,21 @@ class UpdateProjectModelForm(forms.ModelForm):
                 choices=CHOICES_STATUS_PROJECT
             ),
         }
+
+    def clean_planning_date(self):
+        planning_date = self.cleaned_data["planning_date"]
+
+        if planning_date <= self.cleaned_data["start_date"]:
+            raise forms.ValidationError("The planning date cannot be less than the start date")
+        return planning_date
+
+
+    def clean_finish_date(self):
+        finish_date = self.cleaned_data["finish_date"]
+
+        if finish_date != None and (finish_date < self.cleaned_data["start_date"] or finish_date < self.cleaned_data["planning_date"]):
+            raise forms.ValidationError("The finish date cannot be less than the start date and planning date")
+        return finish_date
 
 
 class AddProgrammerProjectForm(forms.Form):
@@ -88,7 +99,7 @@ class CreateModuleForm(forms.ModelForm):
 
     class Meta:
         model = Module
-        fields = ('name', 'description', 'planning_date')
+        fields = ('name', 'description', 'start_date', 'planning_date')
         widgets = {
             'name': forms.TextInput(attrs={
                 'class': 'form-control',
@@ -101,6 +112,13 @@ class CreateModuleForm(forms.ModelForm):
             })
         }
 
+    def clean_planning_date(self):
+        planning_date = self.cleaned_data["planning_date"]
+
+        if planning_date <= self.cleaned_data["start_date"]:
+            raise forms.ValidationError("The planning date cannot be less than the start date")
+        return planning_date
+
     def save(self, project):
         data = self.cleaned_data
 
@@ -108,17 +126,18 @@ class CreateModuleForm(forms.ModelForm):
             name=data['name'], 
             description=data['description'],
             project=project,
+            start_date=data["start_date"],
             planning_date=data['planning_date']
         )
 
 
 class UpdateModuleForm(forms.ModelForm):
 
-    finish_date = forms.DateTimeField(required=False)
+    finish_date = forms.DateField(required=False)
 
     class Meta:
         model = Module
-        fields = ('name', 'description', 'planning_date', 'finish_date')
+        fields = ('name', 'description', 'start_date', 'planning_date', 'finish_date')
         widgets = {
             'name': forms.TextInput(attrs={
                 'class': 'form-control'
@@ -129,3 +148,18 @@ class UpdateModuleForm(forms.ModelForm):
                 'style': 'resize: none'
             })
         }
+
+    def clean_planning_date(self):
+        planning_date = self.cleaned_data["planning_date"]
+
+        if planning_date <= self.cleaned_data["start_date"]:
+            raise forms.ValidationError("The planning date cannot be less than the start date")
+        return planning_date
+
+
+    def clean_finish_date(self):
+        finish_date = self.cleaned_data["finish_date"]
+
+        if finish_date != None and (finish_date < self.cleaned_data["planning_date"] or finish_date < self.cleaned_data["start_date"]):
+            raise forms.ValidationError("The finish date cannot be less than the start date and planned date")
+        return finish_date

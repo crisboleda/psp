@@ -19,9 +19,10 @@ class Program(models.Model):
     module = models.ForeignKey(Module, on_delete=models.CASCADE, related_name='program_module')
 
     total_lines = models.IntegerField(default=0)
+    
     planning_date = models.DateField()
-    start_date = models.DateTimeField(auto_now_add=True)
-    finish_date = models.DateTimeField(null=True)
+    start_date = models.DateField()
+    finish_date = models.DateField(null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

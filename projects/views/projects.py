@@ -18,6 +18,12 @@ from projects.forms import CreateProjectModelForm, UpdateProjectModelForm, AddPr
 from projects.mixins import MemberProjectRequiredMixin
 from psp.mixins import AdminRequiredMixin
 
+# Utils
+from datetime import datetime
+
+# Helpers
+from psp.helpers import FormViewDefaultValue
+
 
 class ListProjectView(AdminRequiredMixin, ListView):
     queryset = Project.objects.all()
@@ -25,7 +31,7 @@ class ListProjectView(AdminRequiredMixin, ListView):
     template_name = 'projects/projects.html'
 
 
-class CreateProjectView(AdminRequiredMixin, FormView):
+class CreateProjectView(AdminRequiredMixin, FormViewDefaultValue):
     template_name = 'projects/create_project.html'
     form_class = CreateProjectModelForm
     success_url = reverse_lazy('projects:list_projects')
@@ -34,7 +40,10 @@ class CreateProjectView(AdminRequiredMixin, FormView):
         form.save(self.request.user)
         messages.success(self.request, "The project was created successfully")
         return super().form_valid(form)
-
+    
+    def set_values_init_form(self, form):
+        form["start_date"].value = datetime.now()
+        
 
 class DetailProjectView(MemberProjectRequiredMixin, DetailView):
     model = Project

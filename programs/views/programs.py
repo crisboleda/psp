@@ -19,6 +19,12 @@ from programs.forms import CreateProgramForm, UpdateProgramProgrammerForm, Updat
 from psp.mixins import AdminRequiredMixin, MemberUserProgramRequiredMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+# Helpers
+from psp.helpers import FormViewDefaultValue
+
+# Utils
+from datetime import datetime
+
 
 class AdminListProgramView(AdminRequiredMixin, ListView):
     template_name = 'programs/programs.html'
@@ -115,7 +121,7 @@ class DetailProgramView(MemberUserProgramRequiredMixin, DetailView):
     
 
 # Vista para crear un programa (Solo pueden acceder administradores)
-class CreateProgramView(AdminRequiredMixin, FormView):
+class CreateProgramView(AdminRequiredMixin, FormViewDefaultValue):
     template_name = 'programs/create_program.html'
     form_class = CreateProgramForm
 
@@ -139,6 +145,9 @@ class CreateProgramView(AdminRequiredMixin, FormView):
         context["pk_module"] = self.module.pk
 
         return context
+
+    def set_values_init_form(self, form):
+        form["start_date"].value = datetime.now()
 
     def get_success_url(self):
         # TODO Redirigir a Detail Program

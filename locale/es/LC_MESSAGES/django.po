@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-05 19:01-0500\n"
+"POT-Creation-Date: 2020-07-08 18:27-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -44,13 +44,13 @@ msgid "Type"
 msgstr "Tipo"
 
 #: .\templates\defects\defect_type.html:12
-#: .\templates\modules\create_module.html:15
+#: .\templates\modules\create_module.html:17
 #: .\templates\modules\modules.html:28 .\templates\pip\edit_pip.html:36
 #: .\templates\pip\modal_detail_pip.html:21 .\templates\pip\pip.html:43
-#: .\templates\pip\pip.html:95 .\templates\programs\create_program.html:22
+#: .\templates\pip\pip.html:95 .\templates\programs\create_program.html:21
 #: .\templates\programs\programs.html:25
 #: .\templates\projects\create_project.html:18
-#: .\templates\projects\edit_project.html:28
+#: .\templates\projects\edit_project.html:25
 #: .\templates\projects\projects.html:33
 #: .\templates\test_report\modal_detail_report.html:21
 #: .\templates\test_report\reports.html:44
@@ -62,12 +62,12 @@ msgstr "Nombre"
 #: .\templates\defects\defect_type.html:13
 #: .\templates\defects\defects.html:123
 #: .\templates\defects\modal_defect_details.html:15
-#: .\templates\modules\create_module.html:27
+#: .\templates\modules\create_module.html:29
 #: .\templates\modules\edit_module.html:38 .\templates\modules\modules.html:29
-#: .\templates\programs\create_program.html:47
-#: .\templates\programs\edit_program.html:30
+#: .\templates\programs\create_program.html:60
+#: .\templates\programs\edit_program.html:52
 #: .\templates\projects\create_project.html:29
-#: .\templates\projects\edit_project.html:32
+#: .\templates\projects\edit_project.html:36
 #: .\templates\test_report\modal_detail_report.html:33
 #: .\templates\test_report\reports.html:46
 #: .\templates\test_report\reports.html:122
@@ -154,21 +154,21 @@ msgstr "Ingresar"
 msgid "Register a new time"
 msgstr "Registrar un nuevo tiempo"
 
-#: .\templates\logs\modal_create.html:17 .\templates\logs\time_log.html:23
+#: .\templates\logs\modal_create.html:16 .\templates\logs\time_log.html:23
 #: .\templates\logs\timer_time_log.html:20
 msgid "Phase"
 msgstr "Fase"
 
-#: .\templates\logs\modal_create.html:26 .\templates\logs\time_log.html:27
+#: .\templates\logs\modal_create.html:25 .\templates\logs\time_log.html:27
 #: .\templates\pip\modal_detail_pip.html:37
 msgid "Comments"
 msgstr "Comentarios"
 
-#: .\templates\logs\modal_create.html:32
+#: .\templates\logs\modal_create.html:31
 msgid "Cloase"
 msgstr "Cerrar"
 
-#: .\templates\logs\modal_create.html:33
+#: .\templates\logs\modal_create.html:32
 msgid "Register"
 msgstr "Registrar"
 
@@ -201,6 +201,7 @@ msgid "There is no log time any phase"
 msgstr "No hay registro de ninguna fase"
 
 #: .\templates\menus\items_menu.html:17 .\templates\projects\projects.html:5
+#: .\templates\projects\projects.html:20
 msgid "Projects"
 msgstr "Proyectos"
 
@@ -246,44 +247,63 @@ msgstr "Partes del programa"
 msgid "Test report"
 msgstr "Reporte de pruebas"
 
-#: .\templates\modules\create_module.html:9
-msgid "Create a new module"
-msgstr "Crear un nuevo modulo"
-
-#: .\templates\modules\create_module.html:16
-msgid "Enter the name of module"
-msgstr "Ingrese el nombre del modulo"
-
-#: .\templates\modules\create_module.html:28
-msgid "Enter the description of module"
-msgstr "Ingrese la descripción del modulo"
-
-#: .\templates\modules\create_module.html:39
-#: .\templates\modules\edit_module.html:50
-#: .\templates\programs\create_program.html:34
-#: .\templates\projects\create_project.html:40
-#: .\templates\projects\detail_project.html:35
-#: .\templates\projects\edit_project.html:40
-msgid "Delivery date"
-msgstr "Fecha de entrega"
-
-#: .\templates\modules\create_module.html:50
+#: .\templates\modules\create_module.html:5
+#: .\templates\modules\create_module.html:64
 #: .\templates\modules\modules.html:65
 msgid "Create module"
 msgstr "Crear modulo"
+
+#: .\templates\modules\create_module.html:11
+msgid "Create a new module"
+msgstr "Crear un nuevo modulo"
+
+#: .\templates\modules\create_module.html:18
+msgid "Enter the name of module"
+msgstr "Ingrese el nombre del modulo"
+
+#: .\templates\modules\create_module.html:30
+msgid "Enter the description of module"
+msgstr "Ingrese la descripción del modulo"
+
+#: .\templates\modules\create_module.html:41
+#: .\templates\modules\edit_module.html:50 .\templates\modules\modules.html:30
+#: .\templates\programs\create_program.html:35
+#: .\templates\programs\edit_program.html:22
+#: .\templates\programs\programs.html:28
+#: .\templates\programs\programs_programmer.html:40
+#: .\templates\projects\create_project.html:42
+#: .\templates\projects\detail_project.html:31
+#: .\templates\projects\edit_project.html:52
+#: .\templates\projects\projects.html:35
+msgid "Start date"
+msgstr "Fecha de inicio"
+
+#: .\templates\modules\create_module.html:53
+#: .\templates\modules\edit_module.html:62 .\templates\modules\modules.html:31
+#: .\templates\programs\create_program.html:47
+#: .\templates\programs\edit_program.html:32
+#: .\templates\programs\programs.html:29
+#: .\templates\programs\programs_programmer.html:47
+#: .\templates\programs\settings_program.html:36
+#: .\templates\projects\create_project.html:54
+#: .\templates\projects\detail_project.html:35
+#: .\templates\projects\edit_project.html:64
+#: .\templates\projects\projects.html:36
+msgid "Planning date"
+msgstr "Fecha planeada"
 
 #: .\templates\modules\edit_module.html:5
 #: .\templates\modules\edit_module.html:18
 msgid "Edit module"
 msgstr "Editar modulo"
 
-#: .\templates\modules\edit_module.html:62
-#: .\templates\projects\edit_project.html:45
+#: .\templates\modules\edit_module.html:74
+#: .\templates\projects\edit_project.html:76
 #: .\templates\projects\projects.html:37
 msgid "Final date"
 msgstr "Fecha final"
 
-#: .\templates\modules\edit_module.html:74
+#: .\templates\modules\edit_module.html:86
 msgid "Update module"
 msgstr "Actualizar modulo"
 
@@ -295,24 +315,9 @@ msgstr "Modulos"
 msgid "There are no modules in this project"
 msgstr "No hay modulos en este proyecto"
 
-#: .\templates\modules\modules.html:30 .\templates\programs\programs.html:28
-#: .\templates\programs\programs_programmer.html:40
-#: .\templates\projects\detail_project.html:31
-#: .\templates\projects\projects.html:35
-msgid "Start date"
-msgstr "Fecha de inicio"
-
-#: .\templates\modules\modules.html:31
-#: .\templates\programs\edit_program.html:21
-#: .\templates\programs\programs.html:29
-#: .\templates\programs\programs_programmer.html:47
-#: .\templates\projects\projects.html:36
-msgid "Planning date"
-msgstr "Fecha planeada"
-
 #: .\templates\modules\modules.html:32 .\templates\programs\programs.html:30
 #: .\templates\programs\programs_programmer.html:52
-#: .\templates\programs\settings_program.html:36
+#: .\templates\programs\settings_program.html:46
 #: .\templates\projects\detail_project.html:39
 msgid "Finish date"
 msgstr "Fecha final"
@@ -321,7 +326,7 @@ msgstr "Fecha final"
 #: .\templates\parts_of_code\new_parts.html:96
 #: .\templates\parts_of_code\parts_reused.html:46 .\templates\pip\pip.html:48
 #: .\templates\programs\programs.html:31
-#: .\templates\projects\edit_project.html:87
+#: .\templates\projects\edit_project.html:118
 #: .\templates\projects\projects.html:40
 #: .\templates\test_report\reports.html:50
 #: .\templates\users\profile\edit_experencie_companies.html:73
@@ -393,7 +398,9 @@ msgstr "Ingrese el tamaño del programa"
 msgid ""
 "This method is not available because you don't have at least 3 programs "
 "developed"
-msgstr "Este método no está disponible porque no tiene al menos 3 programas desarrollados"
+msgstr ""
+"Este método no está disponible porque no tiene al menos 3 programas "
+"desarrollados"
 
 #: .\templates\parts_of_code\modal_delete_confirmation.html:7
 msgid "Delete part confirmation"
@@ -667,7 +674,9 @@ msgstr "Describa las mejoras que ha propuesto."
 msgid ""
 "Note any other comments or observations that describe your experiences or "
 "improvement ideas"
-msgstr "Tenga en cuenta cualquier otro comentario u observación que describa sus experiencias o ideas de mejora"
+msgstr ""
+"Tenga en cuenta cualquier otro comentario u observación que describa sus "
+"experiencias o ideas de mejora"
 
 #: .\templates\pip\pip.html:143
 msgid "Guardar PIP"
@@ -695,25 +704,25 @@ msgstr "Crear programa"
 msgid "Create a new program"
 msgstr "Crear un nuevo programa"
 
-#: .\templates\programs\create_program.html:23
+#: .\templates\programs\create_program.html:22
 msgid "Enter the name of program"
 msgstr "Ingrese el nombre del programa"
 
-#: .\templates\programs\create_program.html:48
+#: .\templates\programs\create_program.html:61
 msgid "Enter the description of program"
 msgstr "Ingrese la descripción del programa"
 
-#: .\templates\programs\create_program.html:60
+#: .\templates\programs\create_program.html:73
 msgid "Programming language"
 msgstr "Lenguaje de programación"
 
-#: .\templates\programs\create_program.html:70
+#: .\templates\programs\create_program.html:83
 #: .\templates\programs\programs.html:26
 msgid "Programmer"
 msgstr "Programador"
 
-#: .\templates\programs\create_program.html:88
-#: .\templates\projects\create_project.html:50
+#: .\templates\programs\create_program.html:101
+#: .\templates\projects\create_project.html:64
 msgid "Create"
 msgstr "Crear"
 
@@ -725,13 +734,17 @@ msgstr "Editar programa"
 msgid "Name program"
 msgstr "Nombre del programa"
 
-#: .\templates\programs\edit_program.html:40
+#: .\templates\programs\edit_program.html:42
+msgid "Delivery date"
+msgstr "Fecha de entrega"
+
+#: .\templates\programs\edit_program.html:62
 msgid "All programs"
 msgstr "Todos los programas"
 
-#: .\templates\programs\edit_program.html:41
-#: .\templates\programs\settings_program.html:47
-#: .\templates\projects\edit_project.html:57
+#: .\templates\programs\edit_program.html:63
+#: .\templates\programs\settings_program.html:57
+#: .\templates\projects\edit_project.html:88
 #: .\templates\users\profile\modal_languages.html:37
 msgid "Update"
 msgstr "Actualizar"
@@ -773,18 +786,46 @@ msgid "Total lines"
 msgstr "Total de líneas"
 
 #: .\templates\programs\summary\defects_injected_phase.html:16
+#, fuzzy, python-format
+#| msgid "Total defects TO-DATE (%%)"
 msgid "Total defects TO-DATE (%%)"
 msgstr "Total de defectos a la FECHA (%)"
 
-#: .\templates\programs\summary\defects_removed_phase.html:4
+#: .\templates\programs\summary\defects_removal_efficiency.html:21
+#, fuzzy
+#| msgid "Defects removed"
+msgid "Defect removal leverage"
+msgstr "Defectos removidos"
+
+#: .\templates\programs\summary\defects_removal_efficiency.html:22
+msgid ""
+"Leverage is the defect removal efficiency of one phase relative to another, "
+"typically relative to the testing phase."
+msgstr ""
+"El apalancamiento es la eficiencia de eliminación de defectos de una fase en "
+"relación con otra, típicamente en relación con la fase de prueba."
+
+#: .\templates\programs\summary\defects_removal_efficiency.html:29
+#, fuzzy
+#| msgid "Actual size"
+msgid "Actual"
+msgstr "Tamaño actual"
+
+#: .\templates\programs\summary\defects_removal_efficiency.html:30
+msgid "TO-DATE"
+msgstr ""
+
+#: .\templates\programs\summary\defects_removed_phase.html:5
 msgid "Total defects removed:"
 msgstr "Total de defectos removidos"
 
-#: .\templates\programs\summary\defects_removed_phase.html:10
+#: .\templates\programs\summary\defects_removed_phase.html:11
 msgid "Total defects TO-DATE:"
 msgstr "Total de defectos a la fecha"
 
-#: .\templates\programs\summary\defects_removed_phase.html:16
+#: .\templates\programs\summary\defects_removed_phase.html:17
+#, fuzzy, python-format
+#| msgid "Total defects removed (%%)"
 msgid "Total defects removed (%%)"
 msgstr "Total de defectos removidos (%)"
 
@@ -923,10 +964,12 @@ msgid "Create a new project"
 msgstr "Crear nuevo proyecto"
 
 #: .\templates\projects\create_project.html:19
+#: .\templates\projects\edit_project.html:26
 msgid "Enter the name of project"
 msgstr "Ingrese el nombre del proyecto"
 
 #: .\templates\projects\create_project.html:30
+#: .\templates\projects\edit_project.html:37
 msgid "Enter the description of project"
 msgstr "Ingrese la descripción del proyecto"
 
@@ -939,7 +982,7 @@ msgid "Project managed by"
 msgstr "Proyecto administrado por"
 
 #: .\templates\projects\detail_project.html:54
-#: .\templates\projects\edit_project.html:64
+#: .\templates\projects\edit_project.html:95
 msgid "Programmers"
 msgstr "Programadores"
 
@@ -949,16 +992,16 @@ msgstr "Programadores"
 msgid "Edit project"
 msgstr "Editar proyecto"
 
-#: .\templates\projects\edit_project.html:36
+#: .\templates\projects\edit_project.html:47
 #: .\templates\projects\projects.html:34
 msgid "Status"
 msgstr "Estado"
 
-#: .\templates\projects\edit_project.html:81
+#: .\templates\projects\edit_project.html:112
 msgid "There are no programmers in this project"
 msgstr "Ho hay programadores en este proyecto"
 
-#: .\templates\projects\edit_project.html:86
+#: .\templates\projects\edit_project.html:117
 #: .\templates\users\profile\profile.html:62
 #: .\templates\users\register_users.html:51
 #: .\templates\users\register_users.html:115
@@ -976,6 +1019,10 @@ msgstr "Crear proyecto"
 #: .\templates\settings.html:10
 msgid "Change language"
 msgstr "Cambiar lenguaje"
+
+#: .\templates\settings.html:32
+msgid "Change"
+msgstr "Cambiar"
 
 #: .\templates\test_report\modal_delete_confirmation.html:6
 msgid "Delete report confirmation"
@@ -1317,3 +1364,16 @@ msgstr "Confirmación de contraseña"
 #: .\templates\users\register_users.html:117
 msgid "N° Programs assigned"
 msgstr "N° de programas asignados"
+
+#~ msgid "Planned date"
+#~ msgstr "Fecha planeada"
+
+#, fuzzy
+#~| msgid "Name of the part"
+#~ msgid "Name of project"
+#~ msgstr "Nombre de la parte"
+
+#, fuzzy
+#~| msgid "Enter the description of project"
+#~ msgid "Description of project"
+#~ msgstr "Ingrese la descripción del proyecto"

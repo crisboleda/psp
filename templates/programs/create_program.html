@@ -17,13 +17,26 @@
         <form action="{% url 'programs:create_program' pk_module %}" method="post" class="card-body">
             {% csrf_token %}
 
+            <div class="form-group">
+                <label for="id_name">{% trans "Name" %}</label>
+                <input type="text" name="name" value="{% if form.name.value %}{{ form.name.value }}{% endif %}" placeholder="{% trans "Enter the name of program" %}" id="id_name" class="form-control {% if form.name.errors %}is-invalid{% endif %}">
+                {% if form.name.errors %}
+                    <div class="invalid-feedback">
+                        {% for error in form.name.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            
             <div class="form-row">
+
                 <div class="form-group col-xl-6">
-                    <label for="id_name">{% trans "Name" %}</label>
-                    <input type="text" name="name" value="{% if form.name.value %}{{ form.name.value }}{% endif %}" placeholder="{% trans "Enter the name of program" %}" id="id_name" class="form-control {% if form.name.errors %}is-invalid{% endif %}">
-                    {% if form.name.errors %}
+                    <label for="id_start_date">{% trans "Start date" %}</label>
+                    <input value="{% if form.start_date.value %}{{ form.start_date.value|date:"yy-m-d" }}{% endif %}" type="date" name="start_date" id="id_start_date" class="form-control datepicker {% if form.start_date.errors %}is-invalid{% endif %}" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
+                    {% if form.start_date.errors %}
                         <div class="invalid-feedback">
-                            {% for error in form.name.errors %}
+                            {% for error in form.start_date.errors %}
                                 <p>{{ error }}</p>
                             {% endfor %}
                         </div>
@@ -31,7 +44,7 @@
                 </div>
 
                 <div class="form-group col-xl-6">
-                    <label for="id_planning_date">{% trans "Delivery date" %}</label>
+                    <label for="id_planning_date">{% trans "Planning date" %}</label>
                     <input type="date" name="planning_date" id="id_planning_date" class="form-control datepicker {% if form.planning_date.errors %}is-invalid{% endif %}" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
                     {% if form.planning_date.errors %}
                         <div class="invalid-feedback">

@@ -16,7 +16,15 @@ class CreateProgramForm(forms.ModelForm):
 
     class Meta:
         model = Program
-        fields = ('name', 'description', 'planning_date')
+        fields = ('name', 'description', 'start_date', 'planning_date')
+
+
+    def clean_planning_date(self):
+        planning_date = self.cleaned_data["planning_date"]
+
+        if planning_date <= self.cleaned_data["start_date"]:
+            raise forms.ValidationError("The planning date cannot be less than the start date")
+        return planning_date
 
 
     def clean_username_programmer(self):
@@ -249,16 +257,42 @@ class CreateListPip(forms.ModelForm):
 class UpdateProgramProgrammerForm(forms.ModelForm):
     
     total_lines = forms.IntegerField(min_value=1, max_value=200000000, required=False)
-    finish_date = forms.DateTimeField(required=False)
+    finish_date = forms.DateField(required=False)
 
     class Meta:
         model = Program
-        fields = ('total_lines', 'finish_date')
+        fields = ('total_lines', 'planning_date', 'finish_date')
+
+
+    def clean_finish_date(self):
+        finish_date = self.cleaned_data["finish_date"]
+
+        if finish_date != None and finish_date < self.cleaned_data["planning_date"]:
+            raise forms.ValidationError("The planning date cannot be less than the start date")
+        return finish_date
 
 
 
 class UpdateProgramAdminForm(forms.ModelForm):
 
+    finish_date = forms.DateField(required=False)
+
     class Meta:
         model = Program
-        fields = ('name', 'description', 'planning_date')
+        fields = ('name', 'description', 'start_date', 'planning_date', 'finish_date')
+
+
+    def clean_planning_date(self):
+        planning_date = self.cleaned_data["planning_date"]
+
+        if planning_date <= self.cleaned_data["start_date"]:
+            raise forms.ValidationError("The planning date cannot be less than the start date")
+        return planning_date
+
+
+    def clean_finish_date(self):
+        finish_date = self.cleaned_data["finish_date"]
+
+        if finish_date != None and (finish_date < self.cleaned_data["start_date"] or finish_date < self.cleaned_data["planning_date"]):
+            raise forms.ValidationError("The finish date cannot be less than the start date and planned date")
+        return finish_date

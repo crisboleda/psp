@@ -13,11 +13,11 @@
 
 
 {% block 'content' %}
-
+    {% load i18n %}
     {% include 'base/custom_alert.html' %}
 
     <div>
-        <h2>Projects {% if request.user.get_profile.type_user == 'programmer' %}en los que estas{% endif %}</h2>
+        <h2>{% trans "Projects" %} {% if request.user.get_profile.type_user == 'programmer' %}en los que estas{% endif %}</h2>
         <br/>
         {% if not projects %}
             {% if request.user.get_profile.type_user == 'programmer' %}

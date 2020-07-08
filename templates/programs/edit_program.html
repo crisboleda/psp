@@ -17,6 +17,17 @@
                     {% endfor %}
                 </div>
             </div>
+
+            <div class="form-group">
+                <label for="">{% trans "Start date" %}</label>
+                <input type="date" value="{{ program.start_date|date:"yy-m-d" }}" name="start_date" class="form-control {% if form.start_date.errors %}is-invalid{% endif %}" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
+                <div class="invalid-feedback">
+                    {% for error in form.start_date.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            </div>
+
             <div class="form-group">
                 <label for="">{% trans "Planning date" %}</label>
                 <input type="date" value="{{ program.planning_date|date:"yy-m-d" }}" name="planning_date" class="form-control {% if form.planning_date.errors %}is-invalid{% endif %}" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
@@ -26,6 +37,17 @@
                     {% endfor %}
                 </div>
             </div>
+
+            <div class="form-group">
+                <label for="">{% trans "Delivery date" %}</label>
+                <input type="date" value="{{ program.finish_date|date:"yy-m-d" }}" name="finish_date" class="form-control {% if form.finish_date.errors %}is-invalid{% endif %}" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
+                <div class="invalid-feedback">
+                    {% for error in form.finish_date.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            </div>
+
             <div class="form-group">
                 <label for="">{% trans "Description" %}</label>
                 <textarea class="w-100 form-control {% if form.description.errors %}is-invalid{% endif %}" name="description" rows="3" style="resize: none;">{{ program.description }}</textarea>

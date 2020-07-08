@@ -33,3 +33,11 @@
 	text-align: center;
 	transition-duration: 1s;
 }
+
+.counter__words {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    color: #7c7c7c;
+    margin-right: 22px;
+}

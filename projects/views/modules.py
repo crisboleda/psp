@@ -6,6 +6,9 @@ from django.urls import reverse_lazy, reverse
 from django.shortcuts import redirect
 from django.contrib import messages
 
+# Utils
+from datetime import datetime
+
 # Models
 from projects.models import Module, Project
 
@@ -15,6 +18,9 @@ from projects.forms import CreateModuleForm, UpdateModuleForm
 # Mixins
 from projects.mixins import MemberProjectRequiredMixin
 from psp.mixins import AdminRequiredMixin
+
+# Helpers
+from psp.helpers import FormViewDefaultValue
 
 
 class ListModuleView(AdminRequiredMixin, ListView):
@@ -35,7 +41,7 @@ class ListModuleView(AdminRequiredMixin, ListView):
         return context
         
 
-class CreateModuleView(AdminRequiredMixin, FormView):
+class CreateModuleView(AdminRequiredMixin, FormViewDefaultValue):
     template_name = 'modules/create_module.html'
     form_class = CreateModuleForm
 
@@ -45,7 +51,7 @@ class CreateModuleView(AdminRequiredMixin, FormView):
             return super().dispatch(request, *args, **kwargs)
         except Project.DoesNotExist:
             raise Http404("The project doesn't exists")
-
+    
 
     def form_valid(self, form):
         form.save(self.project)
@@ -61,6 +67,9 @@ class CreateModuleView(AdminRequiredMixin, FormView):
         context = super().get_context_data(**kwargs)
         context["pk_project"] = self.project.pk
         return context
+
+    def set_values_init_form(self, form):
+        form["start_date"].value = datetime.now()
     
         
 class UpdateModuleView(AdminRequiredMixin, UpdateView):

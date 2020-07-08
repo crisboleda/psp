@@ -20,25 +20,56 @@
                 </div>
                 <br/>
                 <div>
-                    {% if form.errors %}
-                        {{ form.errors }}
-                    {% endif %}
                     <form method="post">{% csrf_token %}
                         <div class="form-group">
                             <label for="id_nombre">{% trans "Name" %}</label>
-                            {{ form.name }}
+                            <input type="text" value="{{ form.name.value }}" name="name" class="form-control {% if form.name.errors %}is-invalid{% endif %}" placeholder="{% trans "Enter the name of project" %}">
+                            {% if form.name.errors %}
+                                <div class="invalid-feedback">
+                                    {% for error in form.name.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
                         </div>
                         <div class="form-group">
                             <label for="id_description">{% trans "Description" %}</label>
-                            {{ form.description }}
+                            <textarea style="resize: none;" name="description" id="id_description" class="form-control w-100 {% if form.description.errors %}is-invalid{% endif %}" rows="5" placeholder="{% trans "Enter the description of project" %}">{{ project.description.value }}</textarea>
+                            {% if form.description.errors %}
+                                <div class="invalid-feedback">
+                                    {% for error in form.description.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
                         </div>
                         <div class="form-group">
                             <label for="id_status">{% trans "Status" %}</label>
                             {{ form.status }}
                         </div>
+
                         <div class="form-group">
-                            <label for="id_planning_date">{% trans "Delivery date" %}</label>
-                            <input type="date" name="planning_date" class="form-control" value="{{ project.planning_date|date:"yy-m-d" }}">
+                            <label for="id_start_date">{% trans "Start date" %}</label>
+                            <input type="date" name="start_date" class="form-control {% if form.start_date.errors %}is-invalid{% endif %}" value="{{ project.start_date|date:"yy-m-d" }}">
+                            {% if form.start_date.errors %}
+                                <div class="invalid-feedback">
+                                    {% for error in form.start_date.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="id_planning_date">{% trans "Planning date" %}</label>
+                            <input type="date" name="planning_date" class="form-control {% if form.planning_date.errors %}is-invalid{% endif %}" value="{{ project.planning_date|date:"yy-m-d" }}">
+                            {% if form.planning_date.errors %}
+                                <div class="invalid-feedback">
+                                    {% for error in form.planning_date.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
                         </div>
 
                         <div class="form-group">
