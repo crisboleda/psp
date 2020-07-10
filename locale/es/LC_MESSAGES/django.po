@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-08 18:27-0500\n"
+"POT-Creation-Date: 2020-07-09 22:43-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -381,6 +381,7 @@ msgid "Average lines"
 msgstr "Promedio líneas"
 
 #: .\templates\parts_of_code\mini_probe.html:11
+#: .\templates\parts_of_code\mini_probe.html:24
 #: .\templates\programs\summary\time_in_phase.html:5
 #: .\templates\programs\summary\time_in_phase.html:12
 msgid "Minutes"
@@ -391,10 +392,16 @@ msgid "Average time"
 msgstr "Promedio de tiempo"
 
 #: .\templates\parts_of_code\mini_probe.html:18
+#, fuzzy
+#| msgid "Parts of Code"
+msgid "Lines of code"
+msgstr "Partes de código"
+
+#: .\templates\parts_of_code\mini_probe.html:19
 msgid "Enter program size"
 msgstr "Ingrese el tamaño del programa"
 
-#: .\templates\parts_of_code\mini_probe.html:31
+#: .\templates\parts_of_code\mini_probe.html:33
 msgid ""
 "This method is not available because you don't have at least 3 programs "
 "developed"
@@ -448,7 +455,6 @@ msgid "Deleted Planned lines"
 msgstr "Líneas eliminadas planeadas"
 
 #: .\templates\parts_of_code\modal_edit_base_part.html:43
-#: .\templates\parts_of_code\modal_edit_reused_part.html:24
 msgid "Base Current Lines"
 msgstr "Líneas base actuales"
 
@@ -515,6 +521,11 @@ msgstr "Líneas actuales"
 #: .\templates\parts_of_code\modal_edit_reused_part.html:6
 msgid "Edit Reused Part"
 msgstr "Editar parte reusada"
+
+#: .\templates\parts_of_code\modal_edit_reused_part.html:24
+#: .\templates\parts_of_code\parts_reused.html:44
+msgid "Planning lines"
+msgstr "Líneas planeadas"
 
 #: .\templates\parts_of_code\new_parts.html:9
 msgid "Name of the part"
@@ -604,10 +615,6 @@ msgstr "Planeación"
 #: .\templates\parts_of_code\parts_reused.html:25
 msgid "Current"
 msgstr "Actual"
-
-#: .\templates\parts_of_code\parts_reused.html:44
-msgid "Planning lines"
-msgstr "Líneas planeadas"
 
 #: .\templates\parts_of_code\parts_reused.html:70
 msgid "This program doesn't have reused parts"
@@ -988,7 +995,6 @@ msgstr "Programadores"
 
 #: .\templates\projects\edit_project.html:5
 #: .\templates\projects\edit_project.html:19
-#: .\templates\users\profile\profile.html:115
 msgid "Edit project"
 msgstr "Editar proyecto"
 
@@ -1273,7 +1279,7 @@ msgstr "Cambiar tu foto de perfil"
 
 #: .\templates\users\profile\profile.html:71
 msgid "Genere"
-msgstr "Genero"
+msgstr "Género"
 
 #: .\templates\users\profile\profile.html:84
 #: .\templates\users\register_users.html:27
@@ -1298,22 +1304,40 @@ msgstr "Apellidos no actualizados"
 #: .\templates\users\profile\profile.html:92
 #: .\templates\users\register_users.html:116
 msgid "Email"
-msgstr "Correo electronico"
+msgstr "Correo electrónico"
 
 #: .\templates\users\profile\profile.html:111
 msgid "Language Experience"
 msgstr "Experencia en lenguajes"
 
+#: .\templates\users\profile\profile.html:115
+#, fuzzy
+#| msgid "Experencie in companies"
+msgid "Edit experencie in languages"
+msgstr "Experencia en compañias"
+
 #: .\templates\users\profile\profile.html:139
 msgid "Experencie in companies"
 msgstr "Experencia en compañias"
 
+#: .\templates\users\profile\profile.html:142
+#, fuzzy
+#| msgid "Experencie in companies"
+msgid "Edit experencie in companies"
+msgstr "Experencia en compañias"
+
 #: .\templates\users\profile\profile.html:153
 msgid "Company"
-msgstr "Compañia"
+msgstr "Compañía"
 
 #: .\templates\users\profile\profile.html:173
 msgid "Total experience in years"
+msgstr "Total de experiencia en años"
+
+#: .\templates\users\profile\profile.html:176
+#, fuzzy
+#| msgid "Total experience in years"
+msgid "Edit experencie in years"
 msgstr "Total de experiencia en años"
 
 #: .\templates\users\profile\profile.html:188

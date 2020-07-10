@@ -112,7 +112,7 @@
 
                     <!-- Button to Open the Modal -->
                     {% if profile_user == request.user %}
-                        <button type="button" class="btn btn-secondary btn-modal-languages" data-toggle="modal" title="{% trans "Edit project" %}" data-target="#modalLanguages">
+                        <button type="button" class="btn btn-secondary btn-modal-languages" data-toggle="modal" title="{% trans "Edit experencie in languages" %}" data-target="#modalLanguages">
                             <i class="fas fa-edit"></i>
                         </button>
                     {% endif %}
@@ -139,7 +139,7 @@
                     <h3 class="float-left">{% trans "Experencie in companies" %}</h3>
                     <!-- Button to Open the Modal -->
                     {% if profile_user == request.user %}
-                        <a href="{% url 'users:create_experencie_user' %}" class="btn btn-secondary btn-modal-languages">
+                        <a href="{% url 'users:create_experencie_user' %}" title="{% trans "Edit experencie in companies" %}" class="btn btn-secondary btn-modal-languages">
                             <i class="fas fa-edit"></i>
                         </a>
                     {% endif %}
@@ -173,7 +173,7 @@
                         <span class="float-left"><h3>{% trans "Total experience in years" %}</h3></span>
                         <span class="float-right">
                             {% if profile_user == request.user %}
-                                <button value='{"id": "{{ profile_user.get_profile.pk }}"}' id="btnEditExperencieYears" class="btn btn-secondary" data-toggle="modal" data-target="#modalEditExperienceYears"><i class="fas fa-edit"></i></button>
+                                <button value='{"id": "{{ profile_user.get_profile.pk }}"}' title="{% trans "Edit experencie in years" %}" id="btnEditExperencieYears" class="btn btn-secondary" data-toggle="modal" data-target="#modalEditExperienceYears"><i class="fas fa-edit"></i></button>
                             {% endif %}
                         </span>
                     </div>
