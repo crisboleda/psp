@@ -11,9 +11,6 @@
 # Ignore python caché
 __pycache__
 
-# Ignore django migrations
-migrations/
-
 # Ignore database SQLite
 *.sqlite3
 
