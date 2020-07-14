@@ -1,7 +1,7 @@
 
 ENVIOROMENTS = ['local', 'production']
 
-ENV = 'production'
+ENV = 'local'
 
 
 if ENV == ENVIOROMENTS[0]:
