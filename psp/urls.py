@@ -31,6 +31,8 @@ urlpatterns = [
     # URL APP Logs
     path('', include(('logs.urls', 'logs'), namespace='logs')),
 
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
 
+if settings.ENV == 'local':
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

@@ -1,0 +1,1 @@
+web: gunicorn psp.wsgi --log-file -
