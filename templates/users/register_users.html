@@ -115,6 +115,7 @@
                         <th>{% trans "Username" %}</th>
                         <th>{% trans "Email" %}</th>
                         <th class="text-center">{% trans "N° Programs assigned" %}</th>
+                        <th>{% trans "Analysis Tools" %}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -125,6 +126,9 @@
                             <td>{{ programmer.username }}</td>
                             <td>{{ programmer.email }}</td>
                             <td class="text-center">{{ programmer.program_user.count }}</td>
+                            <td class="text-center">
+                                <a class="btn btn-primary" href="{% url 'users:analysis_tools' programmer.username %}"><i class="fas fa-chart-area"></i></a>
+                            </td>
                         </tr>
                     {% endfor %}
                 </tbody>

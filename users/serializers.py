@@ -1,6 +1,6 @@
 
 # Django
-
+from django.urls import reverse_lazy
 
 # Django REST Framework
 from rest_framework import serializers
@@ -9,6 +9,7 @@ from rest_framework import serializers
 from users.models import Profile, ExperienceCompany, PositionCompany
 from logs.models import Phase, DefectLog
 from programs.models import Program
+from projects.models import Project, Module
 
 
 class ProfileExperencieSerializer(serializers.ModelSerializer):
@@ -126,3 +127,43 @@ class DataProgramAnalysisTools(serializers.ModelSerializer):
     class Meta:
         model = Program
         fields = ('pk', 'name', 'description', 'language', 'get_defects')
+
+
+
+class CalendarProjectModelSerializer(serializers.ModelSerializer):
+
+    pk = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Project
+        fields = ('pk', 'name', 'planning_date')
+
+    def get_pk(self, obj):
+        url = reverse_lazy('projects:detail_project', kwargs={'pk_project': obj["pk"]})
+        return url
+
+
+class CalendarProgramModelSerializer(serializers.ModelSerializer):
+
+    pk = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Program
+        fields = ('pk', 'name', 'planning_date')
+
+    def get_pk(self, obj):
+        url = reverse_lazy('programs:admin_edit_program', kwargs={'pk_program': obj["pk"]})
+        return url
+
+
+class CalendarModuleModelSerializer(serializers.ModelSerializer):
+
+    pk = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Module
+        fields = ('pk', 'name', 'planning_date')
+
+    def get_pk(self, obj):
+        url = reverse_lazy('projects:update_module', kwargs={'pk_project': obj["project__pk"], 'pk_module': obj["pk"]})
+        return url

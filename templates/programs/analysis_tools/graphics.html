@@ -11,29 +11,37 @@
 
 {% block 'content' %}
     {% load i18n %}
-    <div class="table-responsive-md shadow">
-        <table class="table table-striped table-hover">
-            <thead class="thead-dark">
-                <tr>
-                    <th>#</th>
-                    <th>{% trans "Analysis Charts and Reports" %}</th>
-                    <th>{% trans "Graphic" %}</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                {% for graphic in analysis_tools_graphics %}
+    
+    {% if count_programs_finished >= 3 %}
+        <div class="table-responsive-md shadow">
+            <table class="table table-striped table-hover">
+                <thead class="thead-dark">
                     <tr>
-                        <td><b>{{ forloop.counter }}</b></td>
-                        <td>{{ graphic|title }}</td>
-                        <td>
-                            <button value='{"user": "{{ request.user }}", "name": "{{ graphic|slugify }}"}' class="btnGraphicAnalysis btn btn-primary" data-toggle="modal" data-target="#modalDetailGraphic"><i class="fas fa-chart-bar"></i></button>
-                        </td>
+                        <th>#</th>
+                        <th>{% trans "Analysis Charts and Reports" %}</th>
+                        <th>{% trans "Graphic" %}</th>
                     </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+                </thead>
+
+                <tbody>
+                    {% for graphic in analysis_tools_graphics %}
+                        <tr>
+                            <td><b>{{ forloop.counter }}</b></td>
+                            <td>{{ graphic|title }}</td>
+                            <td>
+                                <button value='{"user": "{{ programmer.username }}", "name": "{{ graphic|slugify }}"}' class="btnGraphicAnalysis btn btn-primary" data-toggle="modal" data-target="#modalDetailGraphic"><i class="fas fa-chart-bar"></i></button>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="text-center">
+            <h3>{% trans "You must have three completed programs to view the graphics" %}</h3>
+        </div>
+    {% endif %}
+    
 {% endblock 'content' %}
 
 

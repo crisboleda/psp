@@ -47,7 +47,7 @@ class UserExistMixin():
 class AllowAccessUserPageMixin():
 
     def dispatch(self, request, *args, **kwargs):
-        if self.user != request.user:
+        if self.user != request.user and request.user.get_profile.type_user != 'administrador':
             raise Http404("You don't access to this page")
 
         return super().dispatch(request, *args, **kwargs)

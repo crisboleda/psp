@@ -7,6 +7,10 @@ from django.conf.urls.static import static
 
 # Views
 from psp.views import DashboardView, IndexView, HomeView, DashboardConfigurationView
+from users.views import CalendarAdminView, DateDeliveryView
+
+# Libraries
+from decouple import config
 
 
 urlpatterns = [
@@ -18,6 +22,9 @@ urlpatterns = [
 
     path('', IndexView.as_view(), name='index'),
     
+    # Calendar Admin
+    path('calendar/', CalendarAdminView.as_view(), name='calendar'),
+    path('dates-delivery/', DateDeliveryView.as_view(), name='date_delivery'),
     
     # URL APP users
     path('users/', include(('users.urls', 'users'), namespace='users')),
@@ -33,6 +40,6 @@ urlpatterns = [
 
 ]
 
-if settings.ENV == 'local':
+if not config('DJANGO_PRODUCTION_ENV', default=False, cast=bool):
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

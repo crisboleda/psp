@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-09 22:43-0500\n"
+"POT-Creation-Date: 2020-07-15 17:02-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\psp\settings.py:131
+#: .\psp\config\base.py:100
 msgid "English"
 msgstr ""
 
-#: .\psp\settings.py:132
+#: .\psp\config\base.py:101
 msgid "Spanish"
 msgstr ""
 
@@ -30,7 +30,7 @@ msgstr ""
 msgid "Account"
 msgstr "Cuenta"
 
-#: .\templates\base\header.html:158 .\templates\menus\items_menu.html:81
+#: .\templates\base\header.html:158 .\templates\menus\items_menu.html:92
 #: .\templates\programs\settings_program.html:18 .\templates\settings.html:5
 msgid "Settings"
 msgstr "Ajustes"
@@ -200,50 +200,56 @@ msgstr "Nuevo tiempo"
 msgid "There is no log time any phase"
 msgstr "No hay registro de ninguna fase"
 
-#: .\templates\menus\items_menu.html:17 .\templates\projects\projects.html:5
-#: .\templates\projects\projects.html:20
+#: .\templates\menus\items_menu.html:19 .\templates\projects\projects.html:5
+#: .\templates\projects\projects.html:20 .\templates\users\calendar.html:17
 msgid "Projects"
 msgstr "Proyectos"
 
-#: .\templates\menus\items_menu.html:22
+#: .\templates\menus\items_menu.html:26
 msgid "Create user"
 msgstr "Crear usuario"
 
-#: .\templates\menus\items_menu.html:29 .\templates\modules\modules.html:54
+#: .\templates\menus\items_menu.html:33 .\templates\users\calendar.html:5
+msgid "Calendar"
+msgstr "Calendario"
+
+#: .\templates\menus\items_menu.html:40 .\templates\modules\modules.html:54
 #: .\templates\programs\programs.html:5 .\templates\programs\programs.html:19
+#: .\templates\users\calendar.html:27
 msgid "Programs"
 msgstr "Programas"
 
-#: .\templates\menus\items_menu.html:35
+#: .\templates\menus\items_menu.html:46
+#: .\templates\users\register_users.html:118
 msgid "Analysis Tools"
 msgstr "Herramientas de análisis"
 
-#: .\templates\menus\items_menu.html:41
+#: .\templates\menus\items_menu.html:52
 msgid "Program directory"
 msgstr "Directorio de programa"
 
-#: .\templates\menus\items_menu.html:47
+#: .\templates\menus\items_menu.html:58
 #: .\templates\programs\summary\program_opened.html:26
 msgid "Summary"
 msgstr "Resumen"
 
-#: .\templates\menus\items_menu.html:52
+#: .\templates\menus\items_menu.html:63
 msgid "Time Log"
 msgstr "Registro de tiempos"
 
-#: .\templates\menus\items_menu.html:57
+#: .\templates\menus\items_menu.html:68
 msgid "Defect Log"
 msgstr "Registro de defectos"
 
-#: .\templates\menus\items_menu.html:62
+#: .\templates\menus\items_menu.html:73
 msgid "Defect Type Standard"
 msgstr "Tipo de defecto estándar"
 
-#: .\templates\menus\items_menu.html:72
+#: .\templates\menus\items_menu.html:83
 msgid "Parts of the program"
 msgstr "Partes del programa"
 
-#: .\templates\menus\items_menu.html:77
+#: .\templates\menus\items_menu.html:88
 msgid "Test report"
 msgstr "Reporte de pruebas"
 
@@ -308,6 +314,7 @@ msgid "Update module"
 msgstr "Actualizar modulo"
 
 #: .\templates\modules\modules.html:5 .\templates\modules\modules.html:19
+#: .\templates\users\calendar.html:22
 msgid "Modules"
 msgstr "Modulos"
 
@@ -694,14 +701,18 @@ msgstr "Guardar PIP"
 msgid "Save"
 msgstr "Guardar"
 
-#: .\templates\programs\analysis_tools\graphics.html:19
+#: .\templates\programs\analysis_tools\graphics.html:21
 msgid "Analysis Charts and Reports"
 msgstr "Herramientas de análisis y reportes"
 
-#: .\templates\programs\analysis_tools\graphics.html:20
+#: .\templates\programs\analysis_tools\graphics.html:22
 #: .\templates\programs\analysis_tools\modal_graphic.html:7
 msgid "Graphic"
 msgstr "Gráfica"
+
+#: .\templates\programs\analysis_tools\graphics.html:41
+msgid "You must have three completed programs to view the graphics"
+msgstr "Se debe tener tres programas culminados para poder visualizar las gráficas"
 
 #: .\templates\programs\create_program.html:5
 msgid "Create Program"

@@ -1,10 +1,10 @@
 
-ENVIOROMENTS = ['local', 'production']
-
-ENV = 'local'
+from decouple import config
 
 
-if ENV == ENVIOROMENTS[0]:
-    from psp.config.local_env import *
-elif ENV == ENVIOROMENTS[1]:
+# Si la variable de entorno es verdadera toma las configuraciones de producción
+if config('DJANGO_PRODUCTION_ENV', default=False, cast=bool):
     from psp.config.production_env import *
+else:
+    from psp.config.local_env import *
+

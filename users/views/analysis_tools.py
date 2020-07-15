@@ -39,15 +39,15 @@ class UserAnalysisToolsView(LoginRequiredMixin, UserExistMixin, AllowAccessUserP
 
         # -----> ACTUAL SIZE <-------
         base = BasePart.objects.values('program__pk').filter(program=OuterRef("pk")).annotate(total=Sum('lines_current_base'))
-        edited = BasePart.objects.values('program__pk').filter(program=OuterRef("pk")).annotate(total=Sum('lines_current_edited'))
+        added = BasePart.objects.values('program__pk').filter(program=OuterRef("pk")).annotate(total=Sum('lines_current_added'))
         deleted = BasePart.objects.values('program__pk').filter(program=OuterRef("pk")).annotate(total=Sum('lines_current_deleted'))
         reused = ReusedPart.objects.values('program__pk').filter(program=OuterRef("pk")).annotate(total=Sum('current_lines'))
 
-        self.data["actual_size"] = Program.objects.values('pk', 'name').filter(programmer=self.user).annotate(total=Coalesce((F('total_lines') - (Subquery(base.values('total')) - Subquery(deleted.values('total')) + Subquery(reused.values('total')) )) + Subquery(edited.values('total')), 0))
+        self.data["actual_size"] = Program.objects.values('pk', 'name').filter(programmer=self.user, finish_date__isnull=False).annotate(total=Coalesce(Subquery(base.values('total')) - Subquery(deleted.values('total')) + Subquery(reused.values('total')) + Subquery(added.values('total')), 0))
         # -----> END ACTUAL SIZE <------
 
         # -----> Defects Removed <--------
-        self.data["defects_removed"] = Program.objects.filter(programmer=self.user).annotate(
+        self.data["defects_removed"] = Program.objects.filter(programmer=self.user, finish_date__isnull=False).annotate(
             planning=Count('name', Q(get_defects__phase_removed__name='Planning')),
             design=Count('name', Q(get_defects__phase_removed__name='Design')),
             design_review=Count('name', Q(get_defects__phase_removed__name='Design Review')),
@@ -61,7 +61,7 @@ class UserAnalysisToolsView(LoginRequiredMixin, UserExistMixin, AllowAccessUserP
 
 
         # -----> Defects Injected <-------
-        self.data["defects_injected"] = Program.objects.filter(programmer=self.user).annotate(
+        self.data["defects_injected"] = Program.objects.filter(programmer=self.user, finish_date__isnull=False).annotate(
             planning=Count('name', Q(get_defects__phase_injected__name='Planning')),
             design=Count('name', Q(get_defects__phase_injected__name='Design')),
             design_review=Count('name', Q(get_defects__phase_injected__name='Design Review')),
@@ -74,7 +74,7 @@ class UserAnalysisToolsView(LoginRequiredMixin, UserExistMixin, AllowAccessUserP
         # ------> END Defects injected <------
 
         # -----> Total time <--------
-        self.data["total_time"] = Program.objects.filter(programmer=self.user).annotate(total=TIME_TOTAL_BY_PROGRAM).values('pk', 'name', 'total').order_by('created_at')
+        self.data["total_time"] = Program.objects.filter(programmer=self.user, finish_date__isnull=False).annotate(total=TIME_TOTAL_BY_PROGRAM).values('pk', 'name', 'total').order_by('created_at')
         # -----> END total time <------
 
         # -----> Failure COQ <--------
@@ -82,7 +82,7 @@ class UserAnalysisToolsView(LoginRequiredMixin, UserExistMixin, AllowAccessUserP
         timelogComp = TimeLog.objects.filter(program__pk=OuterRef("pk"), phase__name='Compilation').annotate(time=Ceil(F('delta_time') / 60.0)).values('time')[:1]
         timelogUnit = TimeLog.objects.filter(program__pk=OuterRef("pk"), phase__name='Unit Test').annotate(time=Ceil(F('delta_time') / 60.0)).values('time')[:1]
 
-        self.data["failure_COQ"] = Program.objects.filter(programmer=self.user).annotate(total=Coalesce(100 * ((Coalesce(Subquery(timelogComp), 0) + Coalesce(Subquery(timelogUnit), 0)) / NullIf(TIME_TOTAL_BY_PROGRAM, 0)), 0)).values('pk', 'name', 'total').order_by('created_at')
+        self.data["failure_COQ"] = Program.objects.filter(programmer=self.user, finish_date__isnull=False).annotate(total=Coalesce(100 * ((Coalesce(Subquery(timelogComp), 0) + Coalesce(Subquery(timelogUnit), 0)) / NullIf(TIME_TOTAL_BY_PROGRAM, 0)), 0)).values('pk', 'name', 'total').order_by('created_at')
         # ------> END Failure COQ <------
 
         # ------> Appraisal Cost Of Quality <---------
@@ -90,11 +90,11 @@ class UserAnalysisToolsView(LoginRequiredMixin, UserExistMixin, AllowAccessUserP
         timelog_design_review = TimeLog.objects.filter(program__pk=OuterRef("pk"), phase__name='Design Review').annotate(time=Ceil(F('delta_time') / 60.0)).values('time')[:1]
         timelog_code_review = TimeLog.objects.filter(program__pk=OuterRef("pk"), phase__name='Codification Review').annotate(time=Ceil(F('delta_time') / 60.0)).values('time')[:1]
 
-        self.data["appraisal_COQ"] = Program.objects.filter(programmer=self.user).annotate(total=Coalesce(100 * ((Coalesce(Subquery(timelog_design_review), 0) + Coalesce(Subquery(timelog_code_review), 0)) / NullIf(TIME_TOTAL_BY_PROGRAM, 0)), 0)).values('pk', 'name', 'total').order_by('created_at')
+        self.data["appraisal_COQ"] = Program.objects.filter(programmer=self.user, finish_date__isnull=False).annotate(total=Coalesce(100 * ((Coalesce(Subquery(timelog_design_review), 0) + Coalesce(Subquery(timelog_code_review), 0)) / NullIf(TIME_TOTAL_BY_PROGRAM, 0)), 0)).values('pk', 'name', 'total').order_by('created_at')
         # -------> END Total defects <-------
 
         # ------> Total defects <---------
-        self.data["total_defects"] = Program.objects.filter(programmer=self.user).annotate(total=Count('get_defects')).values('pk', 'name', 'total')
+        self.data["total_defects"] = Program.objects.filter(programmer=self.user, finish_date__isnull=False).annotate(total=Count('get_defects')).values('pk', 'name', 'total')
         # ------> END total defects <-------
 
         return Response(data=self.data, status=status.HTTP_200_OK)
