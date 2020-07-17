@@ -1,0 +1,13 @@
+
+{% extends 'base/base_http_error.html' %}
+
+{% load i18n %}
+{% block 'title' %}400 - {% trans "Bad Request" %}{% endblock 'title' %}
+
+
+{% block title_error %}400 - {% trans "Bad Request" %}{% endblock %}
+
+
+{% block 'error_description' %}
+    {% trans "A bad request has been made, please check the details or contact an administrator" %}
+{% endblock 'error_description' %}

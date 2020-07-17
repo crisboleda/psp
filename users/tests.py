@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate
 
 # Models
 from django.contrib.auth.models import User
+from users.models import PositionCompany, ExperienceCompany
 
 
 class UserAuthenticateTest(TestCase):

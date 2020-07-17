@@ -101,7 +101,7 @@ class UserProfileView(LoginRequiredMixin, FormView):
         return data
 
 
-class CalendarAdminView(TemplateView):
+class CalendarAdminView(AdminRequiredMixin, TemplateView):
     template_name = 'users/calendar.html'
 
 

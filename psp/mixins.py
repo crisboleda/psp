@@ -1,6 +1,6 @@
 
 # Django
-from django.http.response import HttpResponseRedirect, Http404
+from django.http.response import HttpResponseRedirect, Http404, HttpResponseForbidden
 from django.urls import reverse_lazy
 
 # Models
@@ -16,7 +16,7 @@ class AdminRequiredMixin:
             return HttpResponseRedirect(reverse_lazy('users:login'))
 
         if request.user.get_profile.type_user != 'administrador':
-            raise Http404("You aren't an Admin, only Admins can create projects")
+            return HttpResponseForbidden("You aren't an Admin, only Admins can create projects")
 
         return super().dispatch(request, *args, **kwargs)
 
