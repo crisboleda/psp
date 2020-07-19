@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-15 17:02-0500\n"
+"POT-Creation-Date: 2020-07-18 21:57-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,6 +25,48 @@ msgstr ""
 #: .\psp\config\base.py:101
 msgid "Spanish"
 msgstr ""
+
+#: .\templates\400.html:5 .\templates\400.html:8
+msgid "Bad Request"
+msgstr "Petición mala"
+
+#: .\templates\400.html:12
+msgid ""
+"A bad request has been made, please check the details or contact an "
+"administrator"
+msgstr "Se hizo una mala petición, por favor valide los datos o contactar a un administrador"
+
+#: .\templates\403.html:5 .\templates\403.html:8
+msgid "Unauthorized Access"
+msgstr "Acceso no autorizado"
+
+#: .\templates\403.html:12
+msgid ""
+"You do not have access to this resource, please validate credentials or "
+"contact an administrator"
+msgstr "No tienes acceso a este recurso, por favor valide credenciales o contactar a un administrador"
+
+#: .\templates\404.html:6 .\templates\404.html:9
+msgid "Page Not Found"
+msgstr "Recurso no encontrado"
+
+#: .\templates\404.html:13
+msgid ""
+"The page you are looking for might have been removed had its name changed or "
+"is temporarily unavailable."
+msgstr "La página que está buscando podría haberse eliminado si se cambia su nombre o no está disponible temporalmente."
+
+#: .\templates\500.html:6 .\templates\500.html:9
+msgid "Internal Server Error"
+msgstr "Error interno en el servidor"
+
+#: .\templates\500.html:13
+msgid "An internal error has occurred, please contact an administrator"
+msgstr "Un error interno ha ocurrido, por favor contactar a un administrator"
+
+#: .\templates\base\base_http_error.html:40
+msgid "Go To Homepage"
+msgstr "Volver a la página de inicio"
 
 #: .\templates\base\header.html:153
 msgid "Account"
@@ -145,7 +187,7 @@ msgstr "Crear defecto"
 msgid "Close"
 msgstr "Cerrar"
 
-#: .\templates\index.html:21 .\templates\users\login.html:4
+#: .\templates\index.html:26 .\templates\users\login.html:4
 #: .\templates\users\login.html:29
 msgid "Log In"
 msgstr "Ingresar"
@@ -201,7 +243,7 @@ msgid "There is no log time any phase"
 msgstr "No hay registro de ninguna fase"
 
 #: .\templates\menus\items_menu.html:19 .\templates\projects\projects.html:5
-#: .\templates\projects\projects.html:20 .\templates\users\calendar.html:17
+#: .\templates\projects\projects.html:20 .\templates\users\calendar.html:24
 msgid "Projects"
 msgstr "Proyectos"
 
@@ -215,7 +257,7 @@ msgstr "Calendario"
 
 #: .\templates\menus\items_menu.html:40 .\templates\modules\modules.html:54
 #: .\templates\programs\programs.html:5 .\templates\programs\programs.html:19
-#: .\templates\users\calendar.html:27
+#: .\templates\users\calendar.html:34
 msgid "Programs"
 msgstr "Programas"
 
@@ -314,7 +356,7 @@ msgid "Update module"
 msgstr "Actualizar modulo"
 
 #: .\templates\modules\modules.html:5 .\templates\modules\modules.html:19
-#: .\templates\users\calendar.html:22
+#: .\templates\users\calendar.html:29
 msgid "Modules"
 msgstr "Modulos"
 
@@ -712,7 +754,8 @@ msgstr "Gráfica"
 
 #: .\templates\programs\analysis_tools\graphics.html:41
 msgid "You must have three completed programs to view the graphics"
-msgstr "Se debe tener tres programas culminados para poder visualizar las gráficas"
+msgstr ""
+"Se debe tener tres programas culminados para poder visualizar las gráficas"
 
 #: .\templates\programs\create_program.html:5
 msgid "Create Program"

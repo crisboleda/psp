@@ -3,6 +3,7 @@
 from django.test import TestCase
 
 
+# Dividir segundos a horas, minutos y segundos
 class ConvertTimeTestCase(TestCase):
 
     def setUp(self):
@@ -12,18 +13,21 @@ class ConvertTimeTestCase(TestCase):
         self.minutes = 2
         self.seconds = 32
 
+    # Calculare hours
     def test_calculate_hours(self):
         hours = int(self.total_time / 3600)
 
         self.assertEquals(hours, self.hours)
 
 
+    # Calculate minutes
     def test_calculate_minutes(self):
         minutes = int((self.total_time % 3600) / 60)
 
         self.assertEquals(minutes, self.minutes)
 
     
+    # Calculate seconds
     def test_calculate_seconds(self):
         seconds = int((self.total_time % 60) % 60)
 
