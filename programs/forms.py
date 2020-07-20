@@ -244,7 +244,7 @@ class CreateListPip(forms.ModelForm):
 
     class Meta:
         model = Pip
-        fields = ('name','date','problems','proposal','comment')
+        fields = ('name', 'date', 'problems', 'proposal', 'comment')
 
     def save(self, program):
         data = self.cleaned_data

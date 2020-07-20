@@ -2,9 +2,11 @@
 # Django
 from django.test import TestCase, Client
 from django.contrib.auth import authenticate
+from django.urls import reverse_lazy
 
 # Models
 from django.contrib.auth.models import User
+from users.models import Profile
 from users.models import PositionCompany, ExperienceCompany, Profile
 from programs.models import ProgrammingLanguage
 
@@ -66,3 +68,49 @@ class ExperencieLanguageProfileTest(TestCase):
         self.assertEquals(self.profile.experience_languages.count(), 1)
         
 
+
+# Validate Access and Response the endpoint of calendar
+class AdminCalendarViewTestCase(TestCase):
+
+    def setUp(self):
+
+        self.admin = User.objects.create_user(
+            username='admin', 
+            email='email@gmail.com', 
+            password='admin123'
+        )
+        self.profile_administrador = Profile.objects.create(user=self.admin, type_user='administrador')
+
+        self.programmer = User.objects.create_user(
+            username='programmer', 
+            email='pro@gmail.com', 
+            password='pro123'
+        )
+        self.profile_programmer = Profile.objects.create(user=self.programmer)
+
+        self.url_calendar = reverse_lazy('calendar')
+
+    
+    # Validate that admin can get template of calendar
+    def test_calendar_GET(self):
+        self.client.force_login(user=self.admin)
+        response = self.client.get(self.url_calendar)
+
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response=response, template_name='users/calendar.html')
+
+
+    # Validate that user not authenticated can't access the endpoint
+    def test_user_not_authenticated(self):
+        response = self.client.get(self.url_calendar)
+
+        self.assertEquals(response.status_code, 302)
+        self.assertEquals(response.url, reverse_lazy('users:login'))
+
+
+    # Validate that a programmer can't access the endpoint
+    def test_user_is_programmer(self):
+        self.client.force_login(user=self.programmer)
+        response = self.client.get(self.url_calendar)
+
+        self.assertEquals(response.status_code, 403)

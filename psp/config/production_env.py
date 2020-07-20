@@ -12,7 +12,7 @@ DEBUG = False
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config('SECRET_KEY')
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['www.psp-adsi.site', 'psp-adsi.site']
 
 INSTALLED_APPS += [
     'storages'
@@ -42,3 +42,8 @@ STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
 
 AWS_MEDIA_LOCATION = 'media'
 DEFAULT_FILE_STORAGE = 'psp.storage_backends.MediaStorage'
+
+
+PREPEND_WWW = True
+BASE_URL = "https://psp-adsi.site"
+SECURE_SSL_REDIRECT = True
