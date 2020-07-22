@@ -11,7 +11,7 @@ from django.contrib.auth.models import User
 
 class CreateProgramForm(forms.ModelForm):
 
-    username_programmer = forms.CharField(max_length=15, min_length=4)
+    username_programmer = forms.CharField(max_length=15, min_length=3)
     name_programming_language = forms.CharField(max_length=100)
 
     class Meta:
@@ -56,6 +56,7 @@ class CreateProgramForm(forms.ModelForm):
             programmer=self.programmer,
             language=self.programming_language,
             module=module,
+            start_date=data['start_date'],
             planning_date=data['planning_date']
         )
 

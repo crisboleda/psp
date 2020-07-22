@@ -68,9 +68,9 @@ class DetailProgramView(MemberUserProgramRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        context["total_reused_programs"] = ReusedPart.objects.filter(program__programmer=self.program.programmer).aggregate(reused=Sum('current_lines'))
-        context["total_lines_programs"] = Program.objects.filter(programmer=self.program.programmer).aggregate(total=Sum('total_lines'))
-        context["total_new_parts_programs"] = NewPart.objects.filter(program__programmer=self.program.programmer).aggregate(total=Sum('current_lines'))
+        context["total_reused_programs"] = ReusedPart.objects.filter(program__programmer=self.program.programmer).aggregate(reused=Coalesce(Sum('current_lines'), 0))
+        context["total_lines_programs"] = Program.objects.filter(programmer=self.program.programmer).aggregate(total=Coalesce(Sum('total_lines'), 0))
+        context["total_new_parts_programs"] = NewPart.objects.filter(program__programmer=self.program.programmer).aggregate(total=Coalesce(Sum('current_lines'), 0))
 
         context["total_base_parts"] = BasePart.objects.filter(program=self.program).aggregate(total_planned_base_lines=Coalesce(Sum('lines_planned_base'), 0), total_planned_deleted_lines=Coalesce(Sum('lines_planned_deleted'), 0), total_planned_edited_lines=Coalesce(Sum('lines_planned_edited'), 0), total_planned_added_lines=Coalesce(Sum('lines_planned_added'), 0), total_current_base_lines=Coalesce(Sum('lines_current_base'), 0), total_current_deleted_lines=Coalesce(Sum('lines_current_deleted'), 0), total_current_edited_lines=Coalesce(Sum('lines_current_edited'), 0), total_current_added_lines=Coalesce(Sum('lines_current_added'), 0))
         context["total_reused_parts"] = ReusedPart.objects.filter(program=self.program).aggregate(planning=Coalesce(Sum('planned_lines'), 0), current=Coalesce(Sum('current_lines'), 0))
@@ -114,10 +114,19 @@ class DetailProgramView(MemberUserProgramRequiredMixin, DetailView):
         return context
 
     def validate_zero_division(self, value1, value2):
+        
         try:
             return value1 / value2
         except ZeroDivisionError:
             return 0
+        except TypeError:
+            return 0
+
+    def convert_to_zero_is_none(self, value):
+        result = value
+        if value == None:
+            result = 0
+        return result
     
 
 # Vista para crear un programa (Solo pueden acceder administradores)

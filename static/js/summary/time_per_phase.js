@@ -46,16 +46,16 @@ apiService.request(`/programs/${idProgram}/data_time_per_phase/`, {}, 'GET').the
             totalTimeActualProgram += phase.total_time
         })
 
-        let resultAppraisalActual = (100 * (data.time_per_phase.find(phase => phase.name == 'Design Review').total_time + data.time_per_phase.find(phase => phase.name == 'Codification Review').total_time) / totalTimeActualProgram).toFixed(2)
+        let resultAppraisalActual = convertToZeroIsNaN((100 * (data.time_per_phase.find(phase => phase.name == 'Design Review').total_time + data.time_per_phase.find(phase => phase.name == 'Codification Review').total_time) / totalTimeActualProgram).toFixed(2))
         appraisalCOQActualProgram.textContent = resultAppraisalActual
 
         spanActualTime.textContent = `${totalTimeActualProgram}`
         fieldActualTimeSummary.textContent = `${totalTimeActualProgram}`
 
-        let resultFailureActual = (100 * ((data.time_per_phase.find(phase => phase.name == 'Compilation').total_time + data.time_per_phase.find(phase => phase.name == 'Unit Test').total_time) / totalTimeActualProgram)).toFixed(2)
+        let resultFailureActual = convertToZeroIsNaN((100 * ((data.time_per_phase.find(phase => phase.name == 'Compilation').total_time + data.time_per_phase.find(phase => phase.name == 'Unit Test').total_time) / totalTimeActualProgram)).toFixed(2))
         failureActualProgram.textContent = resultFailureActual
 
-        ratioAFActual.textContent = (resultAppraisalActual / resultFailureActual).toFixed(2)
+        ratioAFActual.textContent = convertToZeroIsNaN((resultAppraisalActual / resultFailureActual).toFixed(2))
 
         // Time per phase to date
         data.time_per_phase_to_date.map(phase => {
@@ -66,15 +66,15 @@ apiService.request(`/programs/${idProgram}/data_time_per_phase/`, {}, 'GET').the
             totalTime += phase.total_time
         })
 
-        let resultAppraisalToDate = (100 * (data.time_per_phase_to_date.find(phase => phase.name == 'Design Review').total_time + data.time_per_phase_to_date.find(phase => phase.name == 'Codification Review').total_time) / totalTime).toFixed(2)
+        let resultAppraisalToDate = convertToZeroIsNaN((100 * (data.time_per_phase_to_date.find(phase => phase.name == 'Design Review').total_time + data.time_per_phase_to_date.find(phase => phase.name == 'Codification Review').total_time) / totalTime).toFixed(2))
         appraisalCOQToDate.textContent = resultAppraisalToDate
 
         fieldTimeToDate.textContent = totalTime
 
-        let resultFailureToDate = (100 * ((data.time_per_phase_to_date.find(phase => phase.name == 'Compilation').total_time + data.time_per_phase_to_date.find(phase => phase.name == 'Unit Test').total_time) / totalTime)).toFixed(2)
+        let resultFailureToDate = convertToZeroIsNaN((100 * ((data.time_per_phase_to_date.find(phase => phase.name == 'Compilation').total_time + data.time_per_phase_to_date.find(phase => phase.name == 'Unit Test').total_time) / totalTime)).toFixed(2))
         failureToDate.textContent = resultFailureToDate
 
-        ratioAFToDate.textContent = (resultAppraisalToDate / resultFailureToDate).toFixed(2)
+        ratioAFToDate.textContent = convertToZeroIsNaN((resultAppraisalToDate / resultFailureToDate).toFixed(2))
 
         minutesTotalTime.map(value => {
             dataPercentage.push(calculatePercentageTime(value, totalTime))
@@ -88,6 +88,10 @@ apiService.request(`/programs/${idProgram}/data_time_per_phase/`, {}, 'GET').the
 
 function calculatePercentageTime(value, total) {
     return ((100 / total) * value ).toFixed(2)
+}
+
+function convertToZeroIsNaN(value) {
+    return isNaN(value) ? 0 : value
 }
 
 

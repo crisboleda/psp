@@ -97,7 +97,7 @@
                     {% csrf_token %}
                     <div class="row">
                         <div class="p-0 pr-2 col-xl-12 mt-2">
-                            <input type="text" name="username_programmer" list="programmers" placeholder="Nombre de usuario" class="form-control">
+                            <input type="text" name="username_programmer" list="programmers" placeholder="Nombre de usuario" class="form-control" autocomplete="off">
                             <datalist id="programmers">
                                 {% for programmer in programmers %}
                                     <option value="{{ programmer.username }}">{{ programmer.username }}</option>

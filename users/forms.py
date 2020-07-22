@@ -64,6 +64,7 @@ class UserUpdateForm(forms.ModelForm):
 class CreateUserForm(forms.ModelForm):
 
     confirm_password = forms.CharField(max_length=55)
+    username = forms.CharField(min_length=3, max_length=15)
 
     class Meta:
         model = User

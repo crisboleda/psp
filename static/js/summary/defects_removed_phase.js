@@ -22,7 +22,7 @@ const summaryLoaderDefectsRemoved = document.getElementById('summaryLoaderDefect
 
 apiService.request(`/programs/${idProgram}/data_defects_removed/`, {}, 'GET').then(response => {
     response.json().then(data => {
-
+        console.log(data)
         summaryLoaderDefectsRemoved.classList.add('d-none')
         summaryLoaderDefectsRemoved.nextElementSibling.classList.remove('d-none')
         
@@ -53,7 +53,7 @@ apiService.request(`/programs/${idProgram}/data_defects_removed/`, {}, 'GET').th
         })
         
         spanActualDefectsRemoved.textContent = `${totalDefectsActualProgram}`
-        fieldTotalDefectsKLOC.textContent = `${(1000 * (totalDefectsActualProgram / parseInt(fieldTotalDefectsKLOC.getAttribute('add-modified-lines')))).toFixed(2)}`
+        fieldTotalDefectsKLOC.textContent = `${convertToZeroIsNaN((1000 * (totalDefectsActualProgram / parseInt(fieldTotalDefectsKLOC.getAttribute('add-modified-lines')))).toFixed(2))}`
         //------------------->
 
         // Estructurar y manipulación de los defectos removidos a la fecha actual
@@ -69,8 +69,8 @@ apiService.request(`/programs/${idProgram}/data_defects_removed/`, {}, 'GET').th
         })
 
         spanTotalDefectsRemoved.textContent = totalDefects
-        fieldTotalDefectsUT.textContent = `${(1000 * (data.defects_removed_to_date.find(defect => defect.name == 'Unit Test').total / parseInt(fieldTotalDefectsUT.getAttribute('lines')))).toFixed(2)}`
-        fieldTotalDefectsToDate.textContent = `${(1000 * (totalDefects / parseInt(fieldTotalDefectsToDate.getAttribute('lines')))).toFixed(2)}`
+        fieldTotalDefectsUT.textContent = `${convertToZeroIsNaN((1000 * (data.defects_removed_to_date.find(defect => defect.name == 'Unit Test').total / parseInt(fieldTotalDefectsUT.getAttribute('lines')))).toFixed(2))}`
+        fieldTotalDefectsToDate.textContent = `${convertToZeroIsNaN((1000 * (totalDefects / parseInt(fieldTotalDefectsToDate.getAttribute('lines')))).toFixed(2))}`
         //------------------->
 
         calculateYieldSummary(totalDefectsBeforeCompileActual, totalDefectsBeforeCompileToDate)
@@ -111,11 +111,16 @@ function calculateYieldSummary(defectsRemovedBeforeCompileActual, defectsRemoved
                 }
             })
             
-            let resultYieldActual = (100 * (defectsRemovedBeforeCompileActual / defectsInjectedBeforeCompileActual)).toFixed(2)
-            let resultYieldToDate = (100 * (defectsRemovedBeforeCompileToDate / defectsInjectedBeforeCompileToDate)).toFixed(2)
+            let resultYieldActual = convertToZeroIsNaN((100 * (defectsRemovedBeforeCompileActual / defectsInjectedBeforeCompileActual)).toFixed(2))
+            let resultYieldToDate = convertToZeroIsNaN((100 * (defectsRemovedBeforeCompileToDate / defectsInjectedBeforeCompileToDate)).toFixed(2))
 
             yieldSummaryActualProgram.textContent = resultYieldActual
             yieldSummaryToDate.textContent = resultYieldToDate
         })
     })
+}
+
+
+function convertToZeroIsNaN(value) {
+    return isNaN(value) ? 0 : value
 }

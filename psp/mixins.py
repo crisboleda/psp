@@ -34,6 +34,6 @@ class MemberUserProgramRequiredMixin(object):
             raise Http404("The program doesn't exists")
 
         if request.user.get_profile.type_user == 'programmer' and self.program.programmer != request.user:
-            raise Http404("You don't have access to this program")
+            return HttpResponseForbidden("You don't have access to this program")
 
         return super().dispatch(request, *args, **kwargs)
