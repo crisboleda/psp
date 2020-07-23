@@ -5,6 +5,7 @@ from django.http.response import JsonResponse
 from django.http.response import Http404, HttpResponseBadRequest
 from django.urls import reverse_lazy
 from django.utils import timezone
+from django.utils.translation import gettext as _
 
 # Django REST Framework
 from rest_framework.generics import UpdateAPIView, CreateAPIView

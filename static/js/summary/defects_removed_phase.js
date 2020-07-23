@@ -10,6 +10,8 @@ const spanTotalDefectsRemoved = document.getElementById('spanTotalDefectsRemoved
 
 // Fields Summary
 const fieldTotalDefectsKLOC = document.getElementById('fieldTotalDefectsKLOC')
+const fieldTotalDefectsPlan = document.getElementById('fieldTotalDefectsPlan')
+const fieldTotalDefectsUTPlan = document.getElementById('fieldTotalDefectsUTPlan')
 const fieldTotalDefectsUT = document.getElementById('fieldTotalDefectsUT')
 const fieldTotalDefectsToDate = document.getElementById('fieldTotalDefectsToDate')
 const yieldSummaryActualProgram = document.getElementById('yieldSummaryActualProgram')
@@ -51,7 +53,7 @@ apiService.request(`/programs/${idProgram}/data_defects_removed/`, {}, 'GET').th
 
             totalDefectsActualProgram += defect.total
         })
-        
+
         spanActualDefectsRemoved.textContent = `${totalDefectsActualProgram}`
         fieldTotalDefectsKLOC.textContent = `${convertToZeroIsNaN((1000 * (totalDefectsActualProgram / parseInt(fieldTotalDefectsKLOC.getAttribute('add-modified-lines')))).toFixed(2))}`
         //------------------->
@@ -69,6 +71,9 @@ apiService.request(`/programs/${idProgram}/data_defects_removed/`, {}, 'GET').th
         })
 
         spanTotalDefectsRemoved.textContent = totalDefects
+
+        fieldTotalDefectsPlan.textContent = `${convertToZeroIsNaN((1000 * (totalDefects / parseInt(fieldTotalDefectsPlan.getAttribute('lines')))).toFixed(2))}`
+        fieldTotalDefectsUTPlan.textContent = `${convertToZeroIsNaN((1000 * (data.defects_removed_to_date.find(defect => defect.name == 'Unit Test').total / parseInt(fieldTotalDefectsUTPlan.getAttribute('data-lines')))).toFixed(2))}`
         fieldTotalDefectsUT.textContent = `${convertToZeroIsNaN((1000 * (data.defects_removed_to_date.find(defect => defect.name == 'Unit Test').total / parseInt(fieldTotalDefectsUT.getAttribute('lines')))).toFixed(2))}`
         fieldTotalDefectsToDate.textContent = `${convertToZeroIsNaN((1000 * (totalDefects / parseInt(fieldTotalDefectsToDate.getAttribute('lines')))).toFixed(2))}`
         //------------------->

@@ -8,6 +8,7 @@ from django.contrib import messages
 from django.db.models import Sum, OuterRef, Subquery, F
 from django.db.models.functions import Coalesce
 from django.core.paginator import Paginator
+from django.utils.translation import gettext as _
 
 # Django REST Framework
 from rest_framework.generics import UpdateAPIView, ListAPIView, DestroyAPIView
@@ -92,6 +93,8 @@ class CreatePartProgramView(MemberUserProgramRequiredMixin, FormView):
         context["plan_added_program"] = context["total_new_parts"]["planning"] + context["total_base_parts"]["total_planned_added_lines"]
         context["lines_program_probe"] = context["total_base_parts"]["total_planned_base_lines"] - context["total_base_parts"]["total_planned_deleted_lines"] + context["plan_added_program"] + context["total_reused_parts"]["planning"]
 
+        context["total_programs_finished"] = self.request.user.program_user.filter(finish_date__isnull=False).count()
+
         return context
 
     def div_values(self, value1, value2):
@@ -103,8 +106,8 @@ class CreatePartProgramView(MemberUserProgramRequiredMixin, FormView):
 
     def form_valid(self, form):
         form.save(self.program)
-
-        messages.success(self.request, "The {} part was created successfully".format(self.type_part))
+        
+        messages.success(self.request, _("The %(type_part)s part was created successfully") % {'type_part': self.type_part})
         return super().form_valid(form)
 
 

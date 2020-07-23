@@ -1,7 +1,6 @@
 
 # Django
 from django.contrib.auth.mixins import LoginRequiredMixin
-import json
 from django.db.models import OuterRef, Sum, F, Subquery, Q, Count
 from django.db.models.functions import Coalesce, Ceil, NullIf
 
@@ -9,8 +8,9 @@ from django.db.models.functions import Coalesce, Ceil, NullIf
 from programs.models import BasePart, ReusedPart, Program
 from logs.models import Phase, TimeLog
 
-# Utils Constants
+# Utils and Constants
 from users.utils import TIME_TOTAL_BY_PROGRAM
+import json
 
 # Django REST Framework
 from rest_framework.views import APIView

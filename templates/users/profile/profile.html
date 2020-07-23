@@ -18,12 +18,14 @@
     {% load i18n %}
     <div class="row au-card m-1">
         <div class="col-xl-3 col-md-3 col-sm-6 col-lg-6 text-center" id="content-img-profile">
-            <div class="update-img-profile" id="container-update-img-profile" data-toggle="modal" data-target="#modalUpdateImgProfile">
-                <i class="fas fa-camera"></i>
-                <br/>
-                <p class="p-3"><b>{% trans "Change your profile picture" %}</b></p>
-            </div>
-            <div id="container-img-profile" height="200" width="200">
+            {% if profile_user == request.user %}
+                <div class="update-img-profile" id="container-update-img-profile" data-toggle="modal" data-target="#modalUpdateImgProfile">
+                    <i class="fas fa-camera"></i>
+                    <br/>
+                    <p class="p-3"><b>{% trans "Change your profile picture" %}</b></p>
+                </div>
+            {% endif %}
+            <div id="{% if request.user == profile_user %}container-img-profile{% endif %}" height="200" width="200">
                 {% with profile=profile_user.get_profile %}
                     {% if not profile.picture %}
                         {% load static %}
@@ -52,7 +54,6 @@
             </div>
         </div>
         <div class="col-xl-9">
-            {% include 'base/form_errors.html' %}
             
             <form class="row" method="POST">
 
@@ -64,12 +65,19 @@
                         <div class="input-group-prepend">
                             <div class="input-group-text">@</div>
                         </div>
-                        {{ form.username }}
+                        <input type="text" name="username" value="{% if form.username %}{{ form.username.value }}{% endif %}" class="form-control input-profile {% if form.username.errors %}is-invalid{% endif %}" id="usernameInput" disabled>
+                        {% if form.username.errors %}
+                            <div class="invalid-feedback">
+                                {% for error in form.username.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
                 <div class="form-group col-xl-6">
                     <label for="firstNameInput">{% trans "Genere" %}</label>
-                    <select disabled class="form-control input-profile" name="genere">
+                    <select disabled class="form-control input-profile {% if form.genere.errors %}is-invalid{% endif %}" name="genere">
                         {% with genere_user=profile_user.get_profile.genere %}
                             <option value="{{ genere_user }}">{{ genere_user|capfirst }}</option>
                             {% for genere in generes %}
@@ -79,18 +87,46 @@
                             {% endfor %}
                         {% endwith %}
                     </select>
+                    {% if form.genere.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.genere.errors %}
+                                {{ error }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
                 </div>
                 <div class="form-group col-xl-6">
                     <label for="lastNameInput">{% trans "First name" %}</label>
-                    <input disabled type="text" name="first_name" value="{{ profile_user.first_name }}" class="form-control input-profile" id="lastNameInput" placeholder="{% trans "Name not updated" %}">
+                    <input disabled type="text" name="first_name" value="{{ profile_user.first_name }}" class="form-control input-profile {% if form.first_name.errors %}is-invalid{% endif %}" id="lastNameInput" placeholder="{% trans "Name not updated" %}">
+                    {% if form.first_name.errors %}
+                        <div class="invalid-feeback">
+                            {% for error in form.first_name.errors %}
+                                {{ error }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
                 </div>
                 <div class="form-group col-xl-6">
                     <label for="firstNameInput">{% trans "Last name" %}</label>
-                    <input disabled type="text" name="last_name" value="{{ profile_user.last_name }}" class="form-control input-profile" id="firstNameInput" placeholder="{% trans "Lastname not updated" %}">
+                    <input disabled type="text" name="last_name" value="{{ profile_user.last_name }}" class="form-control input-profile {% if form.last_name.errors %}is-invalid{% endif %}" id="firstNameInput" placeholder="{% trans "Lastname not updated" %}">
+                    {% if form.last_name.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.last_name.errors %}
+                                {{ error }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
                 </div>
                 <div class="form-group col-xl-6">
                     <label for="firstNameInput">{% trans "Email" %}</label>
-                    {{ form.email }}
+                    <input type="email" value="{% if form.email %}{{ form.email.value }}{% endif %}" name="email" id="emailInput" class="form-control input-profile {% if form.email.errors %}is-invalid{% endif %}" disabled>
+                    {% if form.email.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.email.errors %}
+                                {{ error }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
                 </div>
                 <div class="text-right col-xl-6">
                     <br/>

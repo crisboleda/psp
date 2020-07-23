@@ -6,25 +6,30 @@ const btnCancelProfile = document.getElementById('btnCancelProfile')
 
 const inputsProfile = document.getElementsByClassName('input-profile')
 
-btnEditProfile.addEventListener('click', () => {
-    for (let i = 0; i < inputsProfile.length; i++) {
-        inputsProfile[i].removeAttribute('disabled')
-    }
 
-    btnEditProfile.classList.add('d-none')
-    btnSaveProfile.classList.remove('d-none')
-    btnCancelProfile.classList.remove('d-none')
-})
+if (btnEditProfile){
+    btnEditProfile.addEventListener('click', () => {
+        for (let i = 0; i < inputsProfile.length; i++) {
+            inputsProfile[i].removeAttribute('disabled')
+        }
+    
+        btnEditProfile.classList.add('d-none')
+        btnSaveProfile.classList.remove('d-none')
+        btnCancelProfile.classList.remove('d-none')
+    })
+}
 
+if (btnCancelProfile){
+    btnCancelProfile.addEventListener('click', () => {
 
-btnCancelProfile.addEventListener('click', () => {
+        for (let i = 0; i < inputsProfile.length; i++) {
+            inputsProfile[i].setAttribute('disabled', true)
+        }
+    
+        btnEditProfile.classList.remove('d-none')
+    
+        btnSaveProfile.classList.add('d-none')
+        btnCancelProfile.classList.add('d-none')
+    })
+}
 
-    for (let i = 0; i < inputsProfile.length; i++) {
-        inputsProfile[i].setAttribute('disabled', true)
-    }
-
-    btnEditProfile.classList.remove('d-none')
-
-    btnSaveProfile.classList.add('d-none')
-    btnCancelProfile.classList.add('d-none')
-})

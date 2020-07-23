@@ -5,6 +5,7 @@ from django.urls import reverse_lazy
 from django.db.models import Count, Q, Sum, F, OuterRef, Subquery
 from django.db.models.functions import Coalesce, Ceil
 from django.contrib import messages
+from django.utils.translation import gettext as _
 
 # Models
 from programs.models import Program, ProgrammingLanguage, BasePart, ReusedPart, NewPart
@@ -144,7 +145,7 @@ class CreateProgramView(AdminRequiredMixin, FormViewDefaultValue):
 
     def form_valid(self, form):
         form.save(self.module)
-        messages.success(self.request, "The program was created successfully")
+        messages.success(self.request, _("The program was created successfully"))
         return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
@@ -178,7 +179,7 @@ class ConfigurationProgramProgrammerView(MemberUserProgramRequiredMixin, UpdateV
         return context
 
     def get_success_url(self):
-        messages.info(self.request, "The program was updated successfully")
+        messages.info(self.request, _("The program was updated successfully"))
         return reverse_lazy('programs:settings_program', kwargs={'pk_program': self.program.pk})
 
 
@@ -191,6 +192,6 @@ class UpdateProgramAdminView(AdminRequiredMixin, UpdateView):
     pk_url_kwarg = 'pk_program'
 
     def get_success_url(self):
-        messages.info(self.request, "The program was updated successfully")
+        messages.info(self.request, _("The program was updated successfully"))
         return reverse_lazy('programs:list_programs', kwargs={'pk_module': self.get_object().module.pk})
 

@@ -1,8 +1,8 @@
 
 # Django
 from django import forms
+from django.utils.translation import gettext as _
 
-from django.contrib.sessions.middleware import SessionMiddleware
 
 # Models
 from programs.models import Program, ProgrammingLanguage, BasePart, ReusedPart, NewPart, TypePart, SizeEstimation, Estimation, Report, Pip
@@ -23,7 +23,7 @@ class CreateProgramForm(forms.ModelForm):
         planning_date = self.cleaned_data["planning_date"]
 
         if planning_date <= self.cleaned_data["start_date"]:
-            raise forms.ValidationError("The planning date cannot be less than the start date")
+            raise forms.ValidationError(_("The planning date cannot be less than the start date"))
         return planning_date
 
 
@@ -32,7 +32,7 @@ class CreateProgramForm(forms.ModelForm):
         try:
             self.programmer = User.objects.get(username=username_programmer)
         except User.DoesNotExist:
-            raise forms.ValidationError("The programmer doesn't exists")
+            raise forms.ValidationError(_("The programmer doesn't exists"))
 
         return username_programmer
 
@@ -42,7 +42,7 @@ class CreateProgramForm(forms.ModelForm):
         try:
             self.programming_language = ProgrammingLanguage.objects.get(name=name_programming_language)
         except ProgrammingLanguage.DoesNotExist:
-            raise forms.ValidationError("The programming language doesn't exists")
+            raise forms.ValidationError(_("The programming language doesn't exists"))
 
         return name_programming_language
 
@@ -80,7 +80,7 @@ class CreateBasePartForm(forms.Form):
         try:
             return Program.objects.get(pk=int(pk_program))
         except Program.DoesNotExist:
-            raise forms.ValidationError("The program doesn't exists")
+            raise forms.ValidationError(_("The program doesn't exists"))
 
     def clean_edited_lines(self) -> int:
         return self.is_null(self.cleaned_data['edited_lines'])
@@ -100,7 +100,7 @@ class CreateBasePartForm(forms.Form):
     def clean(self):
         data = self.cleaned_data
         if data['deleted_lines'] > data['base_lines'] or data['edited_lines'] > (data['base_lines'] - data['deleted_lines']):
-            raise forms.ValidationError("There is no base lines")
+            raise forms.ValidationError(_("There is no base lines"))
 
         return data
     
@@ -134,7 +134,7 @@ class CreateReusedPartForm(forms.Form):
         try:
             return Program.objects.get(pk=pk_program)
         except Program.DoesNotExist:
-            raise forms.ValidationError("The program doesn't exists")
+            raise forms.ValidationError(_("The program doesn't exists"))
 
     
     def clean_lines_current(self):
@@ -174,7 +174,7 @@ class CreateNewPartForm(forms.Form):
         try:
             return TypePart.objects.get(name=type_part)
         except TypePart.DoesNotExist:
-            raise forms.ValidationError("The type part doesn't exists")
+            raise forms.ValidationError(_("The type part doesn't exists"))
     
     
     def clean_current_methods(self):
@@ -195,7 +195,7 @@ class CreateNewPartForm(forms.Form):
         try:
             return SizeEstimation.objects.get(name=size_estimation)
         except SizeEstimation.DoesNotExist:
-            raise forms.ValidationError("The size estimation doesn't exists")
+            raise forms.ValidationError(_("The size estimation doesn't exists"))
 
 
     def clean(self):
@@ -205,7 +205,7 @@ class CreateNewPartForm(forms.Form):
             self.estimation = Estimation.objects.get(type_part=data['type_part'], size_estimation=data['size_estimation'])
             self.planning_lines = data['planning_methods'] * self.estimation.lines_of_code
         except Estimation.DoesNotExist:
-            raise forms.ValidationError("The estimation doesn't exists")
+            raise forms.ValidationError(_("The estimation doesn't exists"))
 
         return data
 
@@ -269,7 +269,7 @@ class UpdateProgramProgrammerForm(forms.ModelForm):
         finish_date = self.cleaned_data["finish_date"]
 
         if finish_date != None and finish_date < self.cleaned_data["planning_date"]:
-            raise forms.ValidationError("The planning date cannot be less than the start date")
+            raise forms.ValidationError(_("The planning date cannot be less than the start date"))
         return finish_date
 
 
@@ -287,7 +287,7 @@ class UpdateProgramAdminForm(forms.ModelForm):
         planning_date = self.cleaned_data["planning_date"]
 
         if planning_date <= self.cleaned_data["start_date"]:
-            raise forms.ValidationError("The planning date cannot be less than the start date")
+            raise forms.ValidationError(_("The planning date cannot be less than the start date"))
         return planning_date
 
 
@@ -295,5 +295,5 @@ class UpdateProgramAdminForm(forms.ModelForm):
         finish_date = self.cleaned_data["finish_date"]
 
         if finish_date != None and (finish_date < self.cleaned_data["start_date"] or finish_date < self.cleaned_data["planning_date"]):
-            raise forms.ValidationError("The finish date cannot be less than the start date and planned date")
+            raise forms.ValidationError(_("The finish date cannot be less than the start date and planned date"))
         return finish_date

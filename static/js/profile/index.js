@@ -23,31 +23,33 @@ const inputsYears = [inputYearsDevelopment, inputYearsConfiguration, inputYearsI
 var profile = {}
 
 
-btnEditExperencieYears.addEventListener('click', (e) => {
-    profile = e.target.value
-    if (profile == undefined) profile = e.target.parentElement.value
-
-    profile = JSON.parse(profile)
-
-    let apiService = new APIService()
-
-    apiService.request(`/users/profiles/${profile.id}/total-experencie/`, {}, 'GET').then(response => {
-        if (response.status == 200){
-            loaderFormEditExperencie.classList.add('d-none')
-            containerInputs.classList.remove('d-none')
-
-            response.json().then(data => {
-                inputYearsDevelopment.value = data.years_development
-                inputYearsConfiguration.value = data.years_configuration
-                inputYearsIntegration.value = data.years_integration
-                inputYearRequirements.value = data.years_requirements
-                inputYearsDesign.value = data.years_design
-                inputYearsTesting.value = data.years_tests
-                inputYearsSupport.value = data.years_support
-            })
-        }
+if (btnEditExperencieYears){
+    btnEditExperencieYears.addEventListener('click', (e) => {
+        profile = e.target.value
+        if (profile == undefined) profile = e.target.parentElement.value
+    
+        profile = JSON.parse(profile)
+    
+        let apiService = new APIService()
+    
+        apiService.request(`/users/profiles/${profile.id}/total-experencie/`, {}, 'GET').then(response => {
+            if (response.status == 200){
+                loaderFormEditExperencie.classList.add('d-none')
+                containerInputs.classList.remove('d-none')
+    
+                response.json().then(data => {
+                    inputYearsDevelopment.value = data.years_development
+                    inputYearsConfiguration.value = data.years_configuration
+                    inputYearsIntegration.value = data.years_integration
+                    inputYearRequirements.value = data.years_requirements
+                    inputYearsDesign.value = data.years_design
+                    inputYearsTesting.value = data.years_tests
+                    inputYearsSupport.value = data.years_support
+                })
+            }
+        })
     })
-})
+}
 
 
 btnModalEditExperienceYears.addEventListener('click', async (e) => {

@@ -7,6 +7,7 @@ from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.db.models import F, Sum, Q, Subquery, OuterRef
+from django.utils.translation import gettext as _
 
 # Django REST Framework
 from rest_framework.views import APIView
@@ -50,7 +51,7 @@ class RegisterUserView(AdminRequiredMixin, FormView):
 
     def form_valid(self, form):
         form.save()
-        messages.success(self.request, "The user was created successfully")
+        messages.success(self.request, _("The user was created successfully"))
         return super().form_valid(form)
     
     def get_context_data(self, **kwargs):

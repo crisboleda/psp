@@ -10,15 +10,18 @@
             </tr>
         </thead>
         <tbody>
+            <!--
+            Esperando información para saber si se elimina
             <tr>
                 <td>{% trans "Productivity (Size/H)" %}</td>
                 <td>0.0</td>
                 <td>0.0</td>
                 <td>0.0</td>
             </tr>
+            -->
             <tr>
                 <td>{% trans "Actual Time (Min)" %}</td>
-                <td>0.0</td>
+                <td>--</td>
                 <td id="fieldActualTimeSummary">
                     <div class="spinner-border spinner-border-sm text-secondary" role="status">
                         <span class="sr-only">Loading...</span>
@@ -30,12 +33,15 @@
                     </div>
                 </td>
             </tr>
+            <!--
+            Esperando información para saber si se elimina
             <tr>
                 <td>CPI</td>
                 <td>0.0</td>
                 <td>0.0</td>
                 <td>0.0</td>
             </tr>
+            -->
             <tr>
                 <td>{% trans "Reused (%)" %}</td>
                 <td>{{ percentage_reused_planned }}</td>
@@ -50,7 +56,11 @@
             </tr>
             <tr>
                 <td>{% trans "Test Defects/KLOC" %}</td>
-                <td>0.0</td>
+                <td data-lines="{{ total_lines_plan }}" id="fieldTotalDefectsUTPlan">
+                    <div class="spinner-border spinner-border-sm text-secondary" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </td>
                 <td>{{ summary.test_defects }}</td>
                 <td lines="{{ total_lines_added_and_modified.total }}" id="fieldTotalDefectsUT">
                     <div class="spinner-border spinner-border-sm text-secondary" role="status">
@@ -60,7 +70,11 @@
             </tr>
             <tr>
                 <td>{% trans "Total Defects/KLOC" %}</td>
-                <td>0.0</td>
+                <td lines="{{ total_lines_plan }}" id="fieldTotalDefectsPlan">
+                    <div class="spinner-border spinner-border-sm text-secondary" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </td>
                 <td add-modified-lines="{{ lines_added_and_modified_actual }}" id="fieldTotalDefectsKLOC">
                     <div class="spinner-border spinner-border-sm text-secondary" role="status">
                         <span class="sr-only">Loading...</span>
@@ -74,7 +88,7 @@
             </tr>
             <tr>
                 <td>{% trans "Yield (%)" %}</td>
-                <td>0.0</td>
+                <td>--</td>
                 <td id="yieldSummaryActualProgram">
                     <div class="spinner-border spinner-border-sm text-secondary" role="status">
                         <span class="sr-only">Loading...</span>
@@ -88,7 +102,7 @@
             </tr>
             <tr>
                 <td>{% trans "Appraisal COQ (%)" %}</td>
-                <td>0.0</td>
+                <td>--</td>
                 <td id="appraisalCOQActualProgram">
                     <div class="spinner-border spinner-border-sm text-secondary" role="status">
                         <span class="sr-only">Loading...</span>
@@ -102,7 +116,7 @@
             </tr>
             <tr>
                 <td>{% trans "Failure COQ (%)" %}</td>
-                <td>0.0</td>
+                <td>--</td>
                 <td id="failureActualProgram">
                     <div class="spinner-border spinner-border-sm text-secondary" role="status">
                         <span class="sr-only">Loading...</span>
@@ -116,7 +130,7 @@
             </tr>
             <tr>
                 <td>{% trans "COQ A/F Ratio" %}</td>
-                <td>0.0</td>
+                <td>--</td>
                 <td id="ratioAFActual">
                     <div class="spinner-border spinner-border-sm text-secondary" role="status">
                         <span class="sr-only">Loading...</span>
@@ -128,12 +142,15 @@
                     </div>
                 </td>
             </tr>
+            <!--
+            Esperando información para saber si se elimina
             <tr>
                 <td>{% trans "Code Review Rate (Size/H)" %}</td>
                 <td>0.0</td>
                 <td>0.0</td>
                 <td>0.0</td>
             </tr>
+            -->
         </tbody>
     </table>
 </div>

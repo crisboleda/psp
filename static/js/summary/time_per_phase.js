@@ -57,14 +57,17 @@ apiService.request(`/programs/${idProgram}/data_time_per_phase/`, {}, 'GET').the
 
         ratioAFActual.textContent = convertToZeroIsNaN((resultAppraisalActual / resultFailureActual).toFixed(2))
 
+
+
         // Time per phase to date
         data.time_per_phase_to_date.map(phase => {
             labelsTotalTime.push(phase.name)
             minutesTotalTime.push(phase.total_time)
 
-            spanTotalTime.textContent = parseInt(spanTotalTime.textContent) + phase.total_time
             totalTime += phase.total_time
         })
+
+        spanTotalTime.textContent = totalTime
 
         let resultAppraisalToDate = convertToZeroIsNaN((100 * (data.time_per_phase_to_date.find(phase => phase.name == 'Design Review').total_time + data.time_per_phase_to_date.find(phase => phase.name == 'Codification Review').total_time) / totalTime).toFixed(2))
         appraisalCOQToDate.textContent = resultAppraisalToDate

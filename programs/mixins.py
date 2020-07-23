@@ -2,6 +2,7 @@
 # Django
 from django.http.response import Http404, HttpResponseForbidden, HttpResponseNotAllowed, HttpResponseRedirect, HttpResponseBadRequest
 from django.urls import reverse_lazy
+from django.core.exceptions import PermissionDenied
 
 # Models
 from programs.models import Program
@@ -27,7 +28,7 @@ class OwnerReportPIPMixin():
             return HttpResponseRedirect(reverse_lazy('users:login'))
 
         if self.get_object().program.programmer != request.user:
-            return HttpResponseForbidden("You don't access to this")
+            raise PermissionDenied()
 
         return super().dispatch(request, *args, **kwargs)
 
@@ -53,6 +54,6 @@ class ProgramExistMixin(object):
         try:
             self.program = Program.objects.get(pk=kwargs['pk_program'])
         except Program.DoesNotExist:
-            return HttpResponseBadRequest("The program doesn't exists")
+            raise Http404("The program doesn't exists")
 
         return super().dispatch(request, *args, **kwargs)

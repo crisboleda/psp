@@ -24,3 +24,6 @@ ANALYSIS_TOOLS = ["actual size", "defects removed", "defects injected", "total t
 
 
 TIME_TOTAL_BY_PROGRAM = Coalesce(Sum(Ceil(F('program_log_time__delta_time') / 60.0)), 0)
+
+
+GENERES = ['masculino', 'femenino', 'indefinido']

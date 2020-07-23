@@ -176,3 +176,76 @@ class AccessProgramProgrammerTestCase(TestCase):
         response = self.client.get(self.url_program)
 
         self.assertEqual(response.status_code, 403)
+
+
+
+class CreateReportTestCase(TestCase):
+
+    def setUp(self):
+        
+        self.admin = User.objects.create_user(
+            username='admin',
+            email='admin@gmail.com',
+            password='admin123'
+        )
+
+        self.programmer = User.objects.create_user(
+            username='programmer',
+            email='programmer@gmail.com',
+            password='programmer123' 
+        )
+
+        Profile.objects.create(user=self.admin, type_user='administrador')
+        Profile.objects.create(user=self.programmer)
+
+        self.project = Project.objects.create(
+            name='Project 1',
+            description='This projects is a test and description must be greater 30 characteres',
+            start_date=date(2020, 7, 20),
+            planning_date=date(2020, 7, 25),
+            admin=self.admin
+        )
+
+        self.project.users.add(self.programmer)
+
+        self.module = Module.objects.create(
+            name='Module 1',
+            description='This module is a test and this description must be greater that 30 characteres',
+            project=self.project,
+            start_date=date(2020, 7, 21),
+            planning_date=date(2020, 7, 23)
+        )
+
+        self.language = ProgrammingLanguage.objects.create(name='Python')
+
+        self.program = Program.objects.create(
+            name='Program 1',
+            description='This program is a test and this description must be greater that 30 characteres',
+            programmer=self.programmer,
+            module=self.module,
+            start_date=date(2020, 7, 21),
+            planning_date=date(2020, 7, 22),
+            language=self.language
+        )
+
+        self.url_create_report = reverse_lazy(
+            'programs:reports_view',
+            kwargs={'pk_program': self.program.pk}
+        )
+
+    
+    def test_create_test_report(self):
+        self.client.force_login(user=self.programmer)
+
+        response = self.client.post(self.url_create_report, data={
+            'date': datetime(2020, 7, 21, 8, 30, 30),
+            'name': 'This is test name',
+            'description': 'This is test description',
+            'objetive': 'This is test objetive',
+            'conditions': 'This is test conditions',
+            'expect_results': 'This is test expect results',
+            'current_results': 'This is test current results'
+        })
+
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(self.program.reports_view.all().count(), 1)

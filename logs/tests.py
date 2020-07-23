@@ -3,7 +3,7 @@
 from django.test import TestCase
 
 # Models
-from logs.models import Phase
+from logs.models import Phase, TimeLog, DefectLog
 
 # Forms
 from logs.forms import CreateLogProgramForm
@@ -25,14 +25,12 @@ class ConvertTimeTestCase(TestCase):
 
         self.assertEquals(hours, self.hours)
 
-
     # Calculate minutes
     def test_calculate_minutes(self):
         minutes = int((self.total_time % 3600) / 60)
 
         self.assertEquals(minutes, self.minutes)
 
-    
     # Calculate seconds
     def test_calculate_seconds(self):
         seconds = int((self.total_time % 60) % 60)
@@ -41,13 +39,13 @@ class ConvertTimeTestCase(TestCase):
 
 
 
-# Form for Create Time Log 
+# Form for Create Time Log
 class FormCreateTimeLogTestCase(TestCase):
 
     def setUp(self):
         self.phase = Phase.objects.create(
-            name='Codification', 
-            abbreviation='CD', 
+            name='Codification',
+            abbreviation='CD',
             description='Phase of code',
             order_index=4
         )
@@ -70,3 +68,18 @@ class FormCreateTimeLogTestCase(TestCase):
         self.assertEqual(self.form2.errors['comments'][0], 'This field is required.')
         self.assertEqual(self.form2.errors['__all__'][0], "The phase doesn't exists")
         self.assertEqual(len(self.form2.errors), 2)
+
+
+
+
+class CreateTimeLogTestCase(TestCase):
+
+    def setUp(self):
+       pass
+
+
+
+class CreateDefectLogTestCase(TestCase):
+
+    def setUp(self):
+        pass

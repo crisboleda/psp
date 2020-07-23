@@ -2,6 +2,7 @@
 # Django
 from django import forms
 from django.http.response import Http404
+from django.utils.translation import gettext as _
 
 # Models
 from projects.models import Project, Module
@@ -21,7 +22,7 @@ class CreateProjectModelForm(forms.ModelForm):
         planning_date = self.cleaned_data["planning_date"]
 
         if planning_date <= self.cleaned_data["start_date"]:
-            raise forms.ValidationError("The planning date cannot be less than the start date") 
+            raise forms.ValidationError(_("The planning date cannot be less than the start date")) 
         return planning_date
         
 
@@ -64,7 +65,7 @@ class UpdateProjectModelForm(forms.ModelForm):
         planning_date = self.cleaned_data["planning_date"]
 
         if planning_date <= self.cleaned_data["start_date"]:
-            raise forms.ValidationError("The planning date cannot be less than the start date")
+            raise forms.ValidationError(_("The planning date cannot be less than the start date"))
         return planning_date
 
 
@@ -72,7 +73,7 @@ class UpdateProjectModelForm(forms.ModelForm):
         finish_date = self.cleaned_data["finish_date"]
 
         if finish_date != None and (finish_date < self.cleaned_data["start_date"] or finish_date < self.cleaned_data["planning_date"]):
-            raise forms.ValidationError("The finish date cannot be less than the start date and planning date")
+            raise forms.ValidationError(_("The finish date cannot be less than the start date and planning date"))
         return finish_date
 
 
@@ -116,7 +117,7 @@ class CreateModuleForm(forms.ModelForm):
         planning_date = self.cleaned_data["planning_date"]
 
         if planning_date <= self.cleaned_data["start_date"]:
-            raise forms.ValidationError("The planning date cannot be less than the start date")
+            raise forms.ValidationError(_("The planning date cannot be less than the start date"))
         return planning_date
 
     def save(self, project):
@@ -153,7 +154,7 @@ class UpdateModuleForm(forms.ModelForm):
         planning_date = self.cleaned_data["planning_date"]
 
         if planning_date <= self.cleaned_data["start_date"]:
-            raise forms.ValidationError("The planning date cannot be less than the start date")
+            raise forms.ValidationError(_("The planning date cannot be less than the start date"))
         return planning_date
 
 
@@ -161,5 +162,5 @@ class UpdateModuleForm(forms.ModelForm):
         finish_date = self.cleaned_data["finish_date"]
 
         if finish_date != None and (finish_date < self.cleaned_data["planning_date"] or finish_date < self.cleaned_data["start_date"]):
-            raise forms.ValidationError("The finish date cannot be less than the start date and planned date")
+            raise forms.ValidationError(_("The finish date cannot be less than the start date and planned date"))
         return finish_date

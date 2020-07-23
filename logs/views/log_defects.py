@@ -4,6 +4,7 @@ from django.views.generic import ListView, FormView
 from django.urls import reverse_lazy
 from django.http import HttpResponse
 from django.contrib import messages
+from django.utils.translation import gettext as _
 
 # Models
 from logs.models import DefectLog, DefectType, Phase
@@ -23,7 +24,7 @@ class CreateDefectLogView(MemberUserProgramRequiredMixin, FormView):
         form.save(self.program)
 
         # Message defect created
-        messages.success(self.request, "The defect was created successfully")
+        messages.success(self.request, _("The defect was created successfully"))
         
         return super().form_valid(form)
 

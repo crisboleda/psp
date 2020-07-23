@@ -2,6 +2,7 @@
 from django.views.generic import TemplateView, ListView, CreateView, UpdateView, FormView
 from django.urls import reverse_lazy
 from django.contrib import messages
+from django.utils.translation import gettext as _
 
 # Django REST Framework
 from rest_framework.generics import RetrieveDestroyAPIView
@@ -38,7 +39,7 @@ class ListPIPView(MemberUserProgramRequiredMixin, FormView):
 
     def form_valid(self, form):
         form.save(self.program)
-        messages.success(self.request, "The PIP was created successfuly")
+        messages.success(self.request, _("The PIP was created successfuly"))
         return super().form_valid(form)
 
 
