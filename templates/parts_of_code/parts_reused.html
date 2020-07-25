@@ -9,21 +9,42 @@
         <div class="form-row">
             <div class="form-group col-xl-4 p-2">
                 <label for="id_reused_program">{% trans "Program reused" %}</label>
-                <select name="reused_program" id="id_reused_program" class="form-control">
+                <select name="reused_program" id="id_reused_program" class="form-control {% if form.reused_program and form.reused_program.errors %}is-invalid{% endif %}">
                     {% for base_program in base_programs %}
                         <option value="{{ base_program.pk }}">{{ base_program.name }}</option>
                     {% endfor %}
                 </select>
+                {% if form.reused_program and form.reused_program.errors %}
+                    <div class="invalid-feedback">
+                        {% for error in form.reused_program.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
             </div>
 
             <div class="form-group col-xl-4 p-2">
                 <label for="id_lines_planning">{% trans "Planning" %}</label>
-                <input type="number" minLength="1" placeholder="0" name="lines_planning" id="id_lines_planning" class="form-control">
+                <input type="number" minLength="1" placeholder="0" name="lines_planning" id="id_lines_planning" class="form-control {% if form.lines_planning and form.lines_planning.errors %}is-invalid{% endif %}">
+                {% if form.lines_planning and form.lines_planning.errors %}
+                    <div class="invalid-feedback">
+                        {% for error in form.lines_planning.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
             </div>
 
             <div class="form-group col-xl-4 p-2">
                 <label for="id_lines_current">{% trans "Current" %}</label>
-                <input type="number" name="lines_current" placeholder="0" id="id_lines_current" class="form-control">
+                <input type="number" name="lines_current" placeholder="0" id="id_lines_current" class="form-control {% if form.lines_current and form.lines_current.errors %}is-invalid{% endif %}">
+                {% if form.lines_current and form.lines_current.errors %}
+                    <div class="invalid-feedback">
+                        {% for error in form.lines_current.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
             </div>
         </div>
 

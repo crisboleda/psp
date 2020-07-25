@@ -33,8 +33,10 @@
             </a>
         </li>
     {% endif %}
+
     {% if request.user.get_profile.type_user == 'programmer' %}
-        <li>
+        {% url 'programs:programs_programmer' as url_programs_programmer %}
+        <li class="{% if url_programs_programmer == request.path %} active {% endif %}">
             <a href="{% url 'programs:programs_programmer' %}">
                 <i class="fas fa-sitemap"></i>{% trans "Programs" %}
             </a>
@@ -45,6 +47,7 @@
             <a href="{% url 'users:analysis_tools' request.user.username %}"><i class="fas fa-chart-pie"></i>{% trans "Analysis Tools" %}</a>
         </li>
     {% endif %}
+
     {% if program_opened and request.user.get_profile.type_user == 'programmer' %}
         <li class="has-sub">
             <a class="js-arrow open" href="#">
@@ -87,7 +90,8 @@
                     <a href="{% url 'programs:reports_view' program_opened.pk %}"><i class="fas fa-file-alt"></i>{% trans "Test report" %}</a>
                 </li>
 
-                <li>
+                {% url 'programs:settings_program' program_opened.pk as url_settings_programs %}
+                <li class="{% if url_settings_programs == request.path %} active {% endif %}">
                     <a href="{% url 'programs:settings_program' program_opened.pk %}"><i class="fas fa-cog"></i>{% trans "Settings" %}</a>
                 </li>
             </ul>

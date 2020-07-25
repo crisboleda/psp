@@ -34,7 +34,7 @@
                         </div>
                         <div class="form-group">
                             <label for="id_description">{% trans "Description" %}</label>
-                            <textarea style="resize: none;" name="description" id="id_description" class="form-control w-100 {% if form.description.errors %}is-invalid{% endif %}" rows="5" placeholder="{% trans "Enter the description of project" %}">{{ project.description.value }}</textarea>
+                            <textarea style="resize: none;" name="description" id="id_description" class="form-control w-100 {% if form.description.errors %}is-invalid{% endif %}" rows="5" placeholder="{% trans "Enter the description of project" %}">{{ form.description.value }}</textarea>
                             {% if form.description.errors %}
                                 <div class="invalid-feedback">
                                     {% for error in form.description.errors %}
@@ -120,7 +120,7 @@
                             <tbody>
                                 {% for programmer in project.users.all %}
                                     <tr>
-                                        <td><a href="{% url 'users:profile_user' request.user.username %}">@{{ programmer.username }}</a></td>
+                                        <td><a href="{% url 'users:profile_user' programmer.username %}">@{{ programmer.username }}</a></td>
                                         <td>
                                             <a href="{% url 'projects:remove_programmer_to_project' project.pk programmer.username %}" class="btn btn-danger"><i class="fas fa-trash"></i></button>
                                         </td>

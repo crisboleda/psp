@@ -12,10 +12,10 @@ SECRET_KEY = 'zevowaa8l@qk%h+267i3lroj*j1r3-&%71b@zlx4#ww(2emly+'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
+        'NAME': 'psp',
         'USER': 'postgres',
-        'PASSWORD': 'adsi2020',
-        'HOST': 'project-psp-instance-1.cbcxwm6sojcc.us-west-1.rds.amazonaws.com',
+        'PASSWORD': 'toor',
+        'HOST': '127.0.0.1',
         'PORT': '5432',
     }
 }
