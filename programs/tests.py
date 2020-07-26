@@ -249,3 +249,84 @@ class CreateReportTestCase(TestCase):
 
         self.assertEqual(response.status_code, 302)
         self.assertEqual(self.program.reports_view.all().count(), 1)
+
+
+
+class AssignProgramToProgrammerTestCase(TestCase):
+
+    def setUp(self):
+
+        self.language = ProgrammingLanguage.objects.create(name='Go')
+
+        self.user1 = User.objects.create(
+            username='user1',
+            password='user123',
+            email='user@gmail.com'
+        )
+        self.profile_user1 = Profile.objects.create(user=self.user1)
+
+        self.user2 = User.objects.create(
+            username='user2',
+            password='user456',
+            email='user2@gmail.com'
+        )
+        self.profile_user2 = Profile.objects.create(user=self.user2)
+
+        self.admin = User.objects.create(
+            username='admin',
+            password='admin123',
+            email='admin@gmail.com'
+        )
+        self.profile = Profile.objects.create(user=self.admin, type_user='administrador')
+
+        self.project = Project.objects.create(
+            name='Project #1',
+            description='This is a description of project must be greater to 50 characters',
+            start_date=date(2020, 7, 25),
+            planning_date=date(2020, 7, 31),
+            admin=self.admin
+        )
+
+        self.project.users.add(self.user1)
+
+        self.module = Module.objects.create(
+            name='Module #1',
+            project=self.project,
+            description='This is a description of module must be greater to 50 characters',
+            start_date=date(2020, 7, 26),
+            planning_date=date(2020, 7, 29)
+        )
+
+        self.url_create_program = reverse_lazy('programs:create_program', kwargs={'pk_module': self.module.pk})
+
+    
+    def test_assign_program_to_user1(self):
+        self.client.force_login(user=self.admin)
+
+        response = self.client.post(self.url_create_program, data={
+            'name': 'Cola de mensajes usando Python',
+            'start_date': date(2020, 7, 27),
+            'planning_date': date(2020, 7, 28),
+            'description': 'Este programa es un servicio de distribuidor de mensajes a distintos microservices en cual se debe hacer con RabbitMQ usando Celery (Python)',
+            'username_programmer': 'user1',
+            'name_programming_language': 'Go'
+        })
+
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(self.module.program_module.all().count(), 1)
+
+
+    def test_assign_program_to_user2(self):
+        self.client.force_login(user=self.admin)
+
+        response = self.client.post(self.url_create_program, data={
+            'name': 'Cola de mensajes usando Python',
+            'start_date': date(2020, 7, 27),
+            'planning_date': date(2020, 7, 28),
+            'description': 'Este programa es un servicio de distribuidor de mensajes a distintos microservices en cual se debe hacer con RabbitMQ usando Celery (Python)',
+            'username_programmer': 'user2',
+            'name_programming_language': 'Go'
+        })
+
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(self.module.program_module.all().count(), 0)

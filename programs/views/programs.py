@@ -144,8 +144,11 @@ class CreateProgramView(AdminRequiredMixin, FormViewDefaultValue):
         return super().dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
-        form.save(self.module)
-        messages.success(self.request, _("The program was created successfully"))
+        if form.save(self.module):
+            messages.success(self.request, _("The program was created successfully"))
+        else:
+            messages.error(self.request, _("The programmer doesn't belog to current project"))
+
         return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
@@ -160,7 +163,6 @@ class CreateProgramView(AdminRequiredMixin, FormViewDefaultValue):
         form["start_date"].value = datetime.now()
 
     def get_success_url(self):
-        # TODO Redirigir a Detail Program
         return reverse_lazy('programs:list_programs', kwargs={'pk_module': self.module.pk})
 
 

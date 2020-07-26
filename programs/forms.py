@@ -7,6 +7,7 @@ from django.utils.translation import gettext as _
 # Models
 from programs.models import Program, ProgrammingLanguage, BasePart, ReusedPart, NewPart, TypePart, SizeEstimation, Estimation, Report, Pip
 from django.contrib.auth.models import User
+from projects.models import Project, Module
 
 
 class CreateProgramForm(forms.ModelForm):
@@ -49,16 +50,21 @@ class CreateProgramForm(forms.ModelForm):
 
     def save(self, module):
         data = self.cleaned_data
+        was_program_created = False
 
-        Program.objects.create(
-            name=data['name'],
-            description=data['description'],
-            programmer=self.programmer,
-            language=self.programming_language,
-            module=module,
-            start_date=data['start_date'],
-            planning_date=data['planning_date']
-        )
+        if self.programmer in module.project.users.all():
+            Program.objects.create(
+                name=data['name'],
+                description=data['description'],
+                programmer=self.programmer,
+                language=self.programming_language,
+                module=module,
+                start_date=data['start_date'],
+                planning_date=data['planning_date']
+            )
+            was_program_created = True
+        
+        return was_program_created
 
 
 class CreateBasePartForm(forms.Form):

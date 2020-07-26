@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-23 01:11-0500\n"
+"POT-Creation-Date: 2020-07-25 21:27-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,41 +34,41 @@ msgstr "El registro de defecto no existe"
 msgid "The defect was created successfully"
 msgstr "El programa fue actualizado satisfactoriamente"
 
-#: .\programs\forms.py:26 .\programs\forms.py:272 .\programs\forms.py:290
+#: .\programs\forms.py:27 .\programs\forms.py:278 .\programs\forms.py:296
 #: .\projects\forms.py:25 .\projects\forms.py:68 .\projects\forms.py:120
 #: .\projects\forms.py:157
 msgid "The planning date cannot be less than the start date"
 msgstr "La fecha planeada no puede ser menor a la fecha de inicio"
 
-#: .\programs\forms.py:35
+#: .\programs\forms.py:36
 msgid "The programmer doesn't exists"
 msgstr "El programador no existe"
 
-#: .\programs\forms.py:45
+#: .\programs\forms.py:46
 msgid "The programming language doesn't exists"
 msgstr "El lenguaje de programación no existe"
 
-#: .\programs\forms.py:83 .\programs\forms.py:137
+#: .\programs\forms.py:89 .\programs\forms.py:143
 msgid "The program doesn't exists"
 msgstr "El programa no existe"
 
-#: .\programs\forms.py:103
+#: .\programs\forms.py:109
 msgid "There is no base lines"
 msgstr "No hay lines base"
 
-#: .\programs\forms.py:177
+#: .\programs\forms.py:183
 msgid "The type part doesn't exists"
 msgstr "El tipo de parte no existe"
 
-#: .\programs\forms.py:198
+#: .\programs\forms.py:204
 msgid "The size estimation doesn't exists"
 msgstr "El tamaño estimado no existe"
 
-#: .\programs\forms.py:208
+#: .\programs\forms.py:214
 msgid "The estimation doesn't exists"
 msgstr "La estimación no existe"
 
-#: .\programs\forms.py:298 .\projects\forms.py:165
+#: .\programs\forms.py:304 .\projects\forms.py:165
 msgid "The finish date cannot be less than the start date and planned date"
 msgstr ""
 "La fecha final no puede ser menor a la fecha de inicio y la fecha de "
@@ -87,7 +87,11 @@ msgstr "El PIP fue creado satisfactoriamente"
 msgid "The program was created successfully"
 msgstr "El programa fue creado satisfactoriamente"
 
-#: .\programs\views\programs.py:182 .\programs\views\programs.py:195
+#: .\programs\views\programs.py:150
+msgid "The programmer doesn't belog to current project"
+msgstr "El programador no pertenece al proyecto actual"
+
+#: .\programs\views\programs.py:185 .\programs\views\programs.py:198
 msgid "The program was updated successfully"
 msgstr "El programa fue actualizado satisfactoriamente"
 
@@ -177,7 +181,7 @@ msgstr "Volver a la página de inicio"
 msgid "Account"
 msgstr "Cuenta"
 
-#: .\templates\base\header.html:158 .\templates\menus\items_menu.html:92
+#: .\templates\base\header.html:158 .\templates\menus\items_menu.html:96
 #: .\templates\programs\settings_program.html:18 .\templates\settings.html:5
 msgid "Settings"
 msgstr "Ajustes"
@@ -360,43 +364,43 @@ msgstr "Crear usuario"
 msgid "Calendar"
 msgstr "Calendario"
 
-#: .\templates\menus\items_menu.html:40 .\templates\modules\modules.html:54
+#: .\templates\menus\items_menu.html:42 .\templates\modules\modules.html:54
 #: .\templates\programs\programs.html:5 .\templates\programs\programs.html:19
 #: .\templates\users\calendar.html:34
 msgid "Programs"
 msgstr "Programas"
 
-#: .\templates\menus\items_menu.html:46
+#: .\templates\menus\items_menu.html:48
 #: .\templates\users\register_users.html:118
 msgid "Analysis Tools"
 msgstr "Herramientas de análisis"
 
-#: .\templates\menus\items_menu.html:52
+#: .\templates\menus\items_menu.html:55
 msgid "Program directory"
 msgstr "Directorio de programa"
 
-#: .\templates\menus\items_menu.html:58
+#: .\templates\menus\items_menu.html:61
 #: .\templates\programs\summary\program_opened.html:26
 msgid "Summary"
 msgstr "Resumen"
 
-#: .\templates\menus\items_menu.html:63
+#: .\templates\menus\items_menu.html:66
 msgid "Time Log"
 msgstr "Registro de tiempos"
 
-#: .\templates\menus\items_menu.html:68
+#: .\templates\menus\items_menu.html:71
 msgid "Defect Log"
 msgstr "Registro de defectos"
 
-#: .\templates\menus\items_menu.html:73
+#: .\templates\menus\items_menu.html:76
 msgid "Defect Type Standard"
 msgstr "Tipo de defecto estándar"
 
-#: .\templates\menus\items_menu.html:83
+#: .\templates\menus\items_menu.html:86
 msgid "Parts of the program"
 msgstr "Partes del programa"
 
-#: .\templates\menus\items_menu.html:88
+#: .\templates\menus\items_menu.html:91
 msgid "Test report"
 msgstr "Reporte de pruebas"
 
@@ -478,7 +482,7 @@ msgstr "Fecha final"
 
 #: .\templates\modules\modules.html:33
 #: .\templates\parts_of_code\new_parts.html:96
-#: .\templates\parts_of_code\parts_reused.html:46 .\templates\pip\pip.html:48
+#: .\templates\parts_of_code\parts_reused.html:67 .\templates\pip\pip.html:48
 #: .\templates\programs\programs.html:32
 #: .\templates\projects\edit_project.html:118
 #: .\templates\projects\projects.html:40
@@ -490,7 +494,7 @@ msgstr "Acciones"
 #: .\templates\modules\modules.html:52
 #: .\templates\parts_of_code\modal_edit_new_part.html:79
 #: .\templates\users\profile\modal_edit_years_experience.html:67
-#: .\templates\users\profile\profile.html:100
+#: .\templates\users\profile\profile.html:134
 msgid "Edit"
 msgstr "Editar"
 
@@ -577,7 +581,7 @@ msgstr "¿Estás seguro que quieres eliminar esta parte?"
 #: .\templates\pip\modal_delete_confirmation.html:24
 #: .\templates\test_report\modal_delete_confirmation.html:24
 #: .\templates\users\profile\modal_delete_confirmation.html:24
-#: .\templates\users\profile\profile.html:102
+#: .\templates\users\profile\profile.html:136
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -668,7 +672,7 @@ msgstr "Métodos actuales"
 
 #: .\templates\parts_of_code\modal_edit_new_part.html:71
 #: .\templates\parts_of_code\new_parts.html:95
-#: .\templates\parts_of_code\parts_reused.html:45
+#: .\templates\parts_of_code\parts_reused.html:66
 msgid "Current lines"
 msgstr "Líneas actuales"
 
@@ -677,7 +681,7 @@ msgid "Edit Reused Part"
 msgstr "Editar parte reusada"
 
 #: .\templates\parts_of_code\modal_edit_reused_part.html:24
-#: .\templates\parts_of_code\parts_reused.html:44
+#: .\templates\parts_of_code\parts_reused.html:65
 msgid "Planning lines"
 msgstr "Líneas planeadas"
 
@@ -700,8 +704,8 @@ msgid "Current Size estimation"
 msgstr "Estimación del tamaño actual"
 
 #: .\templates\parts_of_code\new_parts.html:78
-#: .\templates\parts_of_code\parts_base.html:46
-#: .\templates\parts_of_code\parts_reused.html:31 .\templates\pip\pip.html:30
+#: .\templates\parts_of_code\parts_base.html:81
+#: .\templates\parts_of_code\parts_reused.html:52 .\templates\pip\pip.html:30
 msgid "Add"
 msgstr "Agregar"
 
@@ -741,36 +745,36 @@ msgstr "Agregar parte base"
 msgid "Base program"
 msgstr "Programa base"
 
-#: .\templates\parts_of_code\parts_base.html:25
+#: .\templates\parts_of_code\parts_base.html:32
 msgid "Planning base lines"
 msgstr "Líneas base planeadas"
 
-#: .\templates\parts_of_code\parts_base.html:30
+#: .\templates\parts_of_code\parts_base.html:44
 msgid "Planning edited lines"
 msgstr "Líneas editadas planeadas"
 
-#: .\templates\parts_of_code\parts_base.html:35
+#: .\templates\parts_of_code\parts_base.html:56
 msgid "Planning deleted lines"
 msgstr "Líneas eliminadas planeadas"
 
-#: .\templates\parts_of_code\parts_base.html:40
+#: .\templates\parts_of_code\parts_base.html:68
 msgid "Planning added lines"
 msgstr "Líneas agregadas planeadas"
 
 #: .\templates\parts_of_code\parts_reused.html:11
-#: .\templates\parts_of_code\parts_reused.html:43
+#: .\templates\parts_of_code\parts_reused.html:64
 msgid "Program reused"
 msgstr "Programa reusado"
 
-#: .\templates\parts_of_code\parts_reused.html:20
+#: .\templates\parts_of_code\parts_reused.html:27
 msgid "Planning"
 msgstr "Planeación"
 
-#: .\templates\parts_of_code\parts_reused.html:25
+#: .\templates\parts_of_code\parts_reused.html:39
 msgid "Current"
 msgstr "Actual"
 
-#: .\templates\parts_of_code\parts_reused.html:70
+#: .\templates\parts_of_code\parts_reused.html:91
 msgid "This program doesn't have reused parts"
 msgstr "Este programa no tiene partes reusadas"
 
@@ -844,7 +848,7 @@ msgid "Guardar PIP"
 msgstr "Guardar PIP"
 
 #: .\templates\pip\pip.html:143 .\templates\test_report\reports.html:168
-#: .\templates\users\profile\profile.html:101
+#: .\templates\users\profile\profile.html:135
 msgid "Save"
 msgstr "Guardar"
 
@@ -1171,7 +1175,7 @@ msgid "There are no programmers in this project"
 msgstr "Ho hay programadores en este proyecto"
 
 #: .\templates\projects\edit_project.html:117
-#: .\templates\users\profile\profile.html:64
+#: .\templates\users\profile\profile.html:63
 #: .\templates\users\register_users.html:51
 #: .\templates\users\register_users.html:115
 msgid "Username"
@@ -1326,7 +1330,7 @@ msgstr "Posición dentro de la compañia"
 #: .\templates\users\profile\edit_experencie_companies.html:50
 #: .\templates\users\profile\edit_experencie_companies.html:72
 #: .\templates\users\profile\modal_edit_experencie_comp.html:32
-#: .\templates\users\profile\profile.html:163
+#: .\templates\users\profile\profile.html:197
 msgid "Years position"
 msgstr "Años en dicha posición"
 
@@ -1351,7 +1355,7 @@ msgid "Edit Experencie Company"
 msgstr "Editar experencia en compañias"
 
 #: .\templates\users\profile\modal_edit_experencie_comp.html:24
-#: .\templates\users\profile\profile.html:159
+#: .\templates\users\profile\profile.html:193
 msgid "Position"
 msgstr "Posición"
 
@@ -1440,94 +1444,94 @@ msgstr "Lenguajes"
 msgid "Change your profile picture"
 msgstr "Cambiar tu foto de perfil"
 
-#: .\templates\users\profile\profile.html:73
+#: .\templates\users\profile\profile.html:79
 msgid "Genere"
 msgstr "Género"
 
-#: .\templates\users\profile\profile.html:86
+#: .\templates\users\profile\profile.html:99
 #: .\templates\users\register_users.html:27
 #: .\templates\users\register_users.html:113
 msgid "First name"
 msgstr "Nombre"
 
-#: .\templates\users\profile\profile.html:87
+#: .\templates\users\profile\profile.html:100
 msgid "Name not updated"
 msgstr "Nombre no actualizado"
 
-#: .\templates\users\profile\profile.html:90
+#: .\templates\users\profile\profile.html:110
 #: .\templates\users\register_users.html:38
 #: .\templates\users\register_users.html:114
 msgid "Last name"
 msgstr "Apellidos"
 
-#: .\templates\users\profile\profile.html:91
+#: .\templates\users\profile\profile.html:111
 msgid "Lastname not updated"
 msgstr "Apellidos no actualizados"
 
-#: .\templates\users\profile\profile.html:94
+#: .\templates\users\profile\profile.html:121
 #: .\templates\users\register_users.html:116
 msgid "Email"
 msgstr "Correo electrónico"
 
-#: .\templates\users\profile\profile.html:113
+#: .\templates\users\profile\profile.html:147
 msgid "Language Experience"
 msgstr "Experencia en lenguajes"
 
-#: .\templates\users\profile\profile.html:117
+#: .\templates\users\profile\profile.html:151
 #, fuzzy
 #| msgid "Experencie in companies"
 msgid "Edit experencie in languages"
 msgstr "Experencia en compañias"
 
-#: .\templates\users\profile\profile.html:141
+#: .\templates\users\profile\profile.html:175
 msgid "Experencie in companies"
 msgstr "Experencia en compañias"
 
-#: .\templates\users\profile\profile.html:144
+#: .\templates\users\profile\profile.html:178
 #, fuzzy
 #| msgid "Experencie in companies"
 msgid "Edit experencie in companies"
 msgstr "Experencia en compañias"
 
-#: .\templates\users\profile\profile.html:155
+#: .\templates\users\profile\profile.html:189
 msgid "Company"
 msgstr "Compañía"
 
-#: .\templates\users\profile\profile.html:175
+#: .\templates\users\profile\profile.html:209
 msgid "Total experience in years"
 msgstr "Total de experiencia en años"
 
-#: .\templates\users\profile\profile.html:178
+#: .\templates\users\profile\profile.html:212
 #, fuzzy
 #| msgid "Total experience in years"
 msgid "Edit experencie in years"
 msgstr "Total de experiencia en años"
 
-#: .\templates\users\profile\profile.html:190
+#: .\templates\users\profile\profile.html:224
 msgid "Developing"
 msgstr "Desarrollando"
 
-#: .\templates\users\profile\profile.html:196
+#: .\templates\users\profile\profile.html:230
 msgid "Configuration"
 msgstr "Configuración"
 
-#: .\templates\users\profile\profile.html:201
+#: .\templates\users\profile\profile.html:235
 msgid "Integration"
 msgstr "Integración"
 
-#: .\templates\users\profile\profile.html:206
+#: .\templates\users\profile\profile.html:240
 msgid "Requirements"
 msgstr "Requerimientos"
 
-#: .\templates\users\profile\profile.html:211
+#: .\templates\users\profile\profile.html:245
 msgid "Designing"
 msgstr "Diseño"
 
-#: .\templates\users\profile\profile.html:216
+#: .\templates\users\profile\profile.html:250
 msgid "Testing"
 msgstr "Pruebas"
 
-#: .\templates\users\profile\profile.html:221
+#: .\templates\users\profile\profile.html:255
 msgid "Support"
 msgstr "Soporte"
 
@@ -1552,27 +1556,27 @@ msgstr "Confirmación de contraseña"
 msgid "N° Programs assigned"
 msgstr "N° de programas asignados"
 
-#: .\users\forms.py:39
+#: .\users\forms.py:33
 msgid "The genere isn't allowed"
 msgstr "El género no está permitido"
 
-#: .\users\forms.py:47
+#: .\users\forms.py:41
 msgid "The username already exists"
 msgstr "El nombre de usuario ya existe"
 
-#: .\users\forms.py:55
+#: .\users\forms.py:49
 msgid "The email already exists"
 msgstr "The correo electrónico ya existe"
 
-#: .\users\forms.py:89
+#: .\users\forms.py:83
 msgid "The email you are trying to register is already in use"
 msgstr "El correo electrónico que estás intentando registrar ya está en uso"
 
-#: .\users\forms.py:99
+#: .\users\forms.py:93
 msgid "Passwords do not match"
 msgstr "Las contraseñas no coinciden"
 
-#: .\users\forms.py:125
+#: .\users\forms.py:119
 msgid "The position doesn't exists"
 msgstr "La posición no existe"
 
