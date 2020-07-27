@@ -9,6 +9,9 @@ from users.models import ExperienceCompany, PositionCompany, Profile
 
 # Utils
 from users.utils import GENERES
+from services.email import EmailService
+import threading
+import random
 
 
 class UserUpdateForm(forms.ModelForm):
@@ -99,8 +102,18 @@ class CreateUserForm(forms.ModelForm):
         
         user = User.objects.create_user(**data)
         Profile.objects.create(user=user)
-
-    
+        
+        thread = threading.Thread(target=EmailService.send_email, args=(
+            user,
+            'Welcome to PSP',
+            'users/registered_user.html',
+            {
+                'user': user,
+                'password_user': data['password']
+            }
+        ))
+        
+        thread.start()
 
 
 class CreateExperencieCompanyForm(forms.Form):

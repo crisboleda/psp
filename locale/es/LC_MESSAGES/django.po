@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-25 21:27-0500\n"
+"POT-Creation-Date: 2020-07-26 22:24-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -91,7 +91,7 @@ msgstr "El programa fue creado satisfactoriamente"
 msgid "The programmer doesn't belog to current project"
 msgstr "El programador no pertenece al proyecto actual"
 
-#: .\programs\views\programs.py:185 .\programs\views\programs.py:198
+#: .\programs\views\programs.py:184 .\programs\views\programs.py:197
 msgid "The program was updated successfully"
 msgstr "El programa fue actualizado satisfactoriamente"
 
@@ -1556,27 +1556,27 @@ msgstr "Confirmación de contraseña"
 msgid "N° Programs assigned"
 msgstr "N° de programas asignados"
 
-#: .\users\forms.py:33
+#: .\users\forms.py:36
 msgid "The genere isn't allowed"
 msgstr "El género no está permitido"
 
-#: .\users\forms.py:41
+#: .\users\forms.py:44
 msgid "The username already exists"
 msgstr "El nombre de usuario ya existe"
 
-#: .\users\forms.py:49
+#: .\users\forms.py:52
 msgid "The email already exists"
 msgstr "The correo electrónico ya existe"
 
-#: .\users\forms.py:83
+#: .\users\forms.py:86
 msgid "The email you are trying to register is already in use"
 msgstr "El correo electrónico que estás intentando registrar ya está en uso"
 
-#: .\users\forms.py:93
+#: .\users\forms.py:96
 msgid "Passwords do not match"
 msgstr "Las contraseñas no coinciden"
 
-#: .\users\forms.py:119
+#: .\users\forms.py:132
 msgid "The position doesn't exists"
 msgstr "La posición no existe"
 
@@ -1591,6 +1591,10 @@ msgstr "La experencia en una compañia fue actualizada satisfactoriamente"
 #: .\users\views\users.py:54
 msgid "The user was created successfully"
 msgstr "El usuario fue creado satisfactoriamente"
+
+#: .\users\views\users.py:55
+msgid "It was sent a email to programmer with the credentials"
+msgstr "Se envió un correo al programador con las credenciales"
 
 #~ msgid "Planned date"
 #~ msgstr "Fecha planeada"

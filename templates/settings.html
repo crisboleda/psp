@@ -4,6 +4,11 @@
 {% load i18n %}
 {% block 'title' %}PSP | {% trans "Settings" %}{% endblock 'title' %}
 
+{% block 'links' %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/global_styles.css' %}">
+{% endblock 'links' %}
+
 {% block 'content' %}
     {% load i18n %}
     <div class="au-card">
@@ -17,11 +22,11 @@
             {% load static %}
             {% for lang in LANGUAGES %}
                 <div class="form-check">
-                    <input {% if LANGUAGE_CODE == lang.0 %}checked{% endif %} class="form-check-input mt-3" type="radio" name="language" id="exampleRadios1" value="{{ lang.0 }}">
+                    <input {% if LANGUAGE_CODE == lang.0 %}checked{% endif %} class="form-check-input mt-3 cursor-pointer" type="radio" name="language" id="itemLanguage{{ forloop.counter0 }}" value="{{ lang.0 }}">
 
-                    <label class="form-check-label" for="exampleRadios1">
+                    <label class="form-check-label cursor-pointer" for="itemLanguage{{ forloop.counter0 }}">
                         {% with URL="img/flag-"|add:lang.0|add:".png" %}
-                            <img src="{% static URL %}" alt="" width="50" height="50">
+                            <img src="{% static URL %}" alt="Image language" width="50" height="50">
                             {{ lang.1 }}
                         {% endwith %}
                     </label>

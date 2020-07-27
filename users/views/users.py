@@ -52,6 +52,7 @@ class RegisterUserView(AdminRequiredMixin, FormView):
     def form_valid(self, form):
         form.save()
         messages.success(self.request, _("The user was created successfully"))
+        messages.info(self.request, _("It was sent a email to programmer with the credentials"))
         return super().form_valid(form)
     
     def get_context_data(self, **kwargs):

@@ -104,36 +104,41 @@
     </div>
 
     <div class="au-card m-3">
-        
-        <div class="table-responsive-md">
-            <table class="table table-striped shadow-sm">
-                <thead class="thead-dark">
-                    <tr>
-                        {% load i18n %}
-                        <th>{% trans "First name" %}</th>
-                        <th>{% trans "Last name" %}</th>
-                        <th>{% trans "Username" %}</th>
-                        <th>{% trans "Email" %}</th>
-                        <th class="text-center">{% trans "N° Programs assigned" %}</th>
-                        <th>{% trans "Analysis Tools" %}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for programmer in programmers %}
+        {% if programmers %}
+            <div class="table-responsive-md">
+                <table class="table table-striped shadow-sm">
+                    <thead class="thead-dark">
                         <tr>
-                            <td>{{ programmer.first_name }}</td>
-                            <td>{{ programmer.last_name }}</td>
-                            <td>{{ programmer.username }}</td>
-                            <td>{{ programmer.email }}</td>
-                            <td class="text-center">{{ programmer.program_user.count }}</td>
-                            <td class="text-center">
-                                <a class="btn btn-primary" href="{% url 'users:analysis_tools' programmer.username %}"><i class="fas fa-chart-area"></i></a>
-                            </td>
+                            {% load i18n %}
+                            <th>{% trans "First name" %}</th>
+                            <th>{% trans "Last name" %}</th>
+                            <th>{% trans "Username" %}</th>
+                            <th>{% trans "Email" %}</th>
+                            <th class="text-center">{% trans "N° Programs assigned" %}</th>
+                            <th>{% trans "Analysis Tools" %}</th>
                         </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
+                    </thead>
+                    <tbody>
+                        {% for programmer in programmers %}
+                            <tr>
+                                <td>{{ programmer.first_name }}</td>
+                                <td>{{ programmer.last_name }}</td>
+                                <td>{{ programmer.username }}</td>
+                                <td>{{ programmer.email }}</td>
+                                <td class="text-center">{{ programmer.program_user.count }}</td>
+                                <td class="text-center">
+                                    <a class="btn btn-primary" href="{% url 'users:analysis_tools' programmer.username %}"><i class="fas fa-chart-area"></i></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <div class="text-center">
+                <p>{% trans "There are no programmers currently" %}</p>
+            </div>
+        {% endif %}
     </div>
 {% endblock %}
 
