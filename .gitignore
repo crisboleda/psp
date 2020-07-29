@@ -19,3 +19,6 @@ __pycache__
 local_emails/
 
 
+# Ignore file parameters of local configuration to database
+varlocal.py
+
