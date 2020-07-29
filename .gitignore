@@ -18,4 +18,5 @@ __pycache__
 # Ignore local emails
 local_emails/
 
-
+# Ignore the file of local variables configurations
+varlocal.py

@@ -8,8 +8,19 @@
 ### Dependencies
 - Python > 3.0
 - Django >= 3.0
+- Database: PostgreSQL
 
 ### Installation
+
+Remember to create and configure the parameters to access the database in ```varlocal.py```:
+
+```sh
+DB_NAME = ''
+DB_USER = ''
+DB_PASSWORD = ''
+DB_HOST = ''
+DB_PORT = ''
+```
 
 #### Linux:
 ```sh
