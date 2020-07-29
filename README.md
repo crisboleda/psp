@@ -12,21 +12,21 @@
 
 ### Installation
 
-Remember to create and configure the parameters to access the database in ```varlocal.py```:
+Remember to create and configure the parameters of access to the database in the file ```varlocal.py```:
 
 ```sh
-DB_NAME = ''
-DB_USER = ''
-DB_PASSWORD = ''
-DB_HOST = ''
-DB_PORT = ''
+DB_NAME = ""
+DB_USER = ""
+DB_PASSWORD = ""
+DB_HOST = ""
+DB_PORT = ""
 ```
 
 #### Linux:
 ```sh
 1. python3 -m venv .env
 2. source .env/bin/activate
-3. pip install -r requirements.txt
+3. pip install -r requirements.txt 
 4. python manage.py migrate
 5. python manage.py runserver
 ```
