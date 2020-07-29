@@ -1,6 +1,7 @@
 
 # Base configurations
 from psp.config.base import *
+from varlocal import DB_NAME, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT
 
 
 DEBUG = True
@@ -12,11 +13,11 @@ SECRET_KEY = 'zevowaa8l@qk%h+267i3lroj*j1r3-&%71b@zlx4#ww(2emly+'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'psp',
-        'USER': 'postgres',
-        'PASSWORD': 'toor',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+        'NAME': DB_NAME,
+        'USER': DB_USER,
+        'PASSWORD': DB_PASSWORD,
+        'HOST': DB_HOST,
+        'PORT': DB_PORT,
     }
 }
 
