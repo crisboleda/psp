@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-26 22:24-0500\n"
+"POT-Creation-Date: 2020-07-27 23:53-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -198,14 +198,14 @@ msgstr "Tipo"
 #: .\templates\modules\create_module.html:17
 #: .\templates\modules\modules.html:28 .\templates\pip\edit_pip.html:36
 #: .\templates\pip\modal_detail_pip.html:21 .\templates\pip\pip.html:43
-#: .\templates\pip\pip.html:95 .\templates\programs\create_program.html:21
+#: .\templates\pip\pip.html:98 .\templates\programs\create_program.html:21
 #: .\templates\programs\programs.html:26
 #: .\templates\projects\create_project.html:18
 #: .\templates\projects\edit_project.html:25
 #: .\templates\projects\projects.html:33
 #: .\templates\test_report\modal_detail_report.html:21
-#: .\templates\test_report\reports.html:44
-#: .\templates\test_report\reports.html:98
+#: .\templates\test_report\reports.html:45
+#: .\templates\test_report\reports.html:102
 #: .\templates\test_report\update_report.html:34
 msgid "Name"
 msgstr "Nombre"
@@ -220,8 +220,8 @@ msgstr "Nombre"
 #: .\templates\projects\create_project.html:29
 #: .\templates\projects\edit_project.html:36
 #: .\templates\test_report\modal_detail_report.html:33
-#: .\templates\test_report\reports.html:46
-#: .\templates\test_report\reports.html:122
+#: .\templates\test_report\reports.html:47
+#: .\templates\test_report\reports.html:126
 #: .\templates\test_report\update_report.html:58
 msgid "Description"
 msgstr "Descripción"
@@ -236,10 +236,10 @@ msgstr "Crear un nuevo registro de defecto"
 
 #: .\templates\defects\defects.html:70 .\templates\pip\edit_pip.html:25
 #: .\templates\pip\modal_detail_pip.html:25 .\templates\pip\pip.html:44
-#: .\templates\pip\pip.html:84
+#: .\templates\pip\pip.html:87
 #: .\templates\test_report\modal_detail_report.html:25
-#: .\templates\test_report\reports.html:43
-#: .\templates\test_report\reports.html:87
+#: .\templates\test_report\reports.html:44
+#: .\templates\test_report\reports.html:91
 #: .\templates\test_report\update_report.html:23
 msgid "Date"
 msgstr "Fecha"
@@ -427,7 +427,7 @@ msgstr "Ingrese la descripción del modulo"
 #: .\templates\programs\create_program.html:35
 #: .\templates\programs\edit_program.html:22
 #: .\templates\programs\programs.html:29
-#: .\templates\programs\programs_programmer.html:40
+#: .\templates\programs\programs_programmer.html:42
 #: .\templates\projects\create_project.html:42
 #: .\templates\projects\detail_project.html:31
 #: .\templates\projects\edit_project.html:52
@@ -440,7 +440,7 @@ msgstr "Fecha de inicio"
 #: .\templates\programs\create_program.html:47
 #: .\templates\programs\edit_program.html:32
 #: .\templates\programs\programs.html:30
-#: .\templates\programs\programs_programmer.html:47
+#: .\templates\programs\programs_programmer.html:49
 #: .\templates\programs\settings_program.html:36
 #: .\templates\projects\create_project.html:54
 #: .\templates\projects\detail_project.html:35
@@ -474,7 +474,7 @@ msgid "There are no modules in this project"
 msgstr "No hay modulos en este proyecto"
 
 #: .\templates\modules\modules.html:32 .\templates\programs\programs.html:31
-#: .\templates\programs\programs_programmer.html:52
+#: .\templates\programs\programs_programmer.html:54
 #: .\templates\programs\settings_program.html:46
 #: .\templates\projects\detail_project.html:39
 msgid "Finish date"
@@ -486,8 +486,8 @@ msgstr "Fecha final"
 #: .\templates\programs\programs.html:32
 #: .\templates\projects\edit_project.html:118
 #: .\templates\projects\projects.html:40
-#: .\templates\test_report\reports.html:50
-#: .\templates\users\profile\edit_experencie_companies.html:73
+#: .\templates\test_report\reports.html:51
+#: .\templates\users\profile\edit_experencie_companies.html:74
 msgid "Actions"
 msgstr "Acciones"
 
@@ -783,15 +783,15 @@ msgid "Edit PIP"
 msgstr "Editar PIP"
 
 #: .\templates\pip\edit_pip.html:47 .\templates\pip\pip.html:45
-#: .\templates\pip\pip.html:106
+#: .\templates\pip\pip.html:109
 msgid "Problem Description"
 msgstr "Descripción del problema"
 
-#: .\templates\pip\edit_pip.html:60 .\templates\pip\pip.html:119
+#: .\templates\pip\edit_pip.html:60 .\templates\pip\pip.html:122
 msgid "Proposonal Description"
 msgstr "Descripción de la propuesta"
 
-#: .\templates\pip\edit_pip.html:71 .\templates\pip\pip.html:130
+#: .\templates\pip\edit_pip.html:71 .\templates\pip\pip.html:133
 msgid "Notes and Comments"
 msgstr "Notas y comentarios"
 
@@ -823,19 +823,25 @@ msgstr "Descripción de la propuesta"
 msgid "Other Notes and Comments"
 msgstr "Otras notas y comentarios"
 
-#: .\templates\pip\pip.html:96
+#: .\templates\pip\pip.html:71
+#, fuzzy
+#| msgid "The program doesn't exists"
+msgid "The program doesn't PIP currently"
+msgstr "El programa no existe"
+
+#: .\templates\pip\pip.html:99
 msgid "Enter the name"
 msgstr "Ingrese el nombre"
 
-#: .\templates\pip\pip.html:107
+#: .\templates\pip\pip.html:110
 msgid "Describes the problem encountered"
 msgstr "Describa el problema encontrado"
 
-#: .\templates\pip\pip.html:120
+#: .\templates\pip\pip.html:123
 msgid "Describe the improvements you've proposed"
 msgstr "Describa las mejoras que ha propuesto."
 
-#: .\templates\pip\pip.html:131
+#: .\templates\pip\pip.html:134
 msgid ""
 "Note any other comments or observations that describe your experiences or "
 "improvement ideas"
@@ -843,11 +849,11 @@ msgstr ""
 "Tenga en cuenta cualquier otro comentario u observación que describa sus "
 "experiencias o ideas de mejora"
 
-#: .\templates\pip\pip.html:143
+#: .\templates\pip\pip.html:146
 msgid "Guardar PIP"
 msgstr "Guardar PIP"
 
-#: .\templates\pip\pip.html:143 .\templates\test_report\reports.html:168
+#: .\templates\pip\pip.html:146 .\templates\test_report\reports.html:172
 #: .\templates\users\profile\profile.html:135
 msgid "Save"
 msgstr "Guardar"
@@ -939,17 +945,21 @@ msgstr "Mis programas"
 msgid "Your assigned programs"
 msgstr "Tus programas asignados"
 
-#: .\templates\programs\programs_programmer.html:27
+#: .\templates\programs\programs_programmer.html:29
 msgid "Project"
 msgstr "Proyecto"
 
-#: .\templates\programs\programs_programmer.html:30
+#: .\templates\programs\programs_programmer.html:32
 msgid "Module"
 msgstr "Modulo"
 
-#: .\templates\programs\programs_programmer.html:33
+#: .\templates\programs\programs_programmer.html:35
 msgid "Open program"
 msgstr "Abrir programa"
+
+#: .\templates\programs\programs_programmer.html:65
+msgid "You don't have assigned programs"
+msgstr "No tienes programas asignados"
 
 #: .\templates\programs\settings_program.html:5
 msgid "Settings Program"
@@ -1189,11 +1199,11 @@ msgstr "N° de programadores"
 msgid "Create project"
 msgstr "Crear proyecto"
 
-#: .\templates\settings.html:10
+#: .\templates\settings.html:15
 msgid "Change language"
 msgstr "Cambiar lenguaje"
 
-#: .\templates\settings.html:32
+#: .\templates\settings.html:37
 msgid "Change"
 msgstr "Cambiar"
 
@@ -1206,27 +1216,27 @@ msgid "Detail report"
 msgstr "Detalle del reporte"
 
 #: .\templates\test_report\modal_detail_report.html:29
-#: .\templates\test_report\reports.html:45
-#: .\templates\test_report\reports.html:109
+#: .\templates\test_report\reports.html:46
+#: .\templates\test_report\reports.html:113
 #: .\templates\test_report\update_report.html:45
 msgid "Objetive"
 msgstr "Objetivo"
 
 #: .\templates\test_report\modal_detail_report.html:37
-#: .\templates\test_report\reports.html:47
-#: .\templates\test_report\reports.html:133
+#: .\templates\test_report\reports.html:48
+#: .\templates\test_report\reports.html:137
 #: .\templates\test_report\update_report.html:69
 msgid "Conditions"
 msgstr "Condiciones"
 
 #: .\templates\test_report\modal_detail_report.html:41
-#: .\templates\test_report\reports.html:48
+#: .\templates\test_report\reports.html:49
 msgid "Expected results"
 msgstr "Resultados esperados"
 
 #: .\templates\test_report\modal_detail_report.html:45
-#: .\templates\test_report\reports.html:49
-#: .\templates\test_report\reports.html:157
+#: .\templates\test_report\reports.html:50
+#: .\templates\test_report\reports.html:161
 #: .\templates\test_report\update_report.html:93
 msgid "Actual results"
 msgstr "Resultados actuales"
@@ -1243,46 +1253,52 @@ msgstr "Lista de reportes"
 msgid "Add report"
 msgstr "Agregar reporte"
 
-#: .\templates\test_report\reports.html:83
+#: .\templates\test_report\reports.html:76
+#, fuzzy
+#| msgid "This program doesn't have reused parts"
+msgid "This program doesn't have test reports currently"
+msgstr "Este programa no tiene partes reusadas"
+
+#: .\templates\test_report\reports.html:87
 msgid "Create report"
 msgstr "Crear reporte"
 
-#: .\templates\test_report\reports.html:99
+#: .\templates\test_report\reports.html:103
 #: .\templates\test_report\update_report.html:35
 msgid "Enter the name of report"
 msgstr "Ingrese el nombre del reporte"
 
-#: .\templates\test_report\reports.html:110
+#: .\templates\test_report\reports.html:114
 #: .\templates\test_report\update_report.html:46
 msgid "Enter the objetive of report"
 msgstr "Ingrese el objetivo del reporte"
 
-#: .\templates\test_report\reports.html:123
+#: .\templates\test_report\reports.html:127
 #: .\templates\test_report\update_report.html:59
 msgid "Enter the description of report"
 msgstr "Ingrese la descripción del reporte"
 
-#: .\templates\test_report\reports.html:134
+#: .\templates\test_report\reports.html:138
 #: .\templates\test_report\update_report.html:70
 msgid "Enter the conditions of report"
 msgstr "Ingrese las condiciones del reporte"
 
-#: .\templates\test_report\reports.html:146
+#: .\templates\test_report\reports.html:150
 #: .\templates\test_report\update_report.html:82
 msgid "Expected Results"
 msgstr "Resultados esperados"
 
-#: .\templates\test_report\reports.html:147
+#: .\templates\test_report\reports.html:151
 #: .\templates\test_report\update_report.html:83
 msgid "Enter the expected results of report"
 msgstr "Ingrese los resultados esperados del reporte"
 
-#: .\templates\test_report\reports.html:158
+#: .\templates\test_report\reports.html:162
 #: .\templates\test_report\update_report.html:94
 msgid "Enter the current results of report"
 msgstr "Ingrese los resultados actuales del reporte"
 
-#: .\templates\test_report\reports.html:168
+#: .\templates\test_report\reports.html:172
 msgid "Save Report"
 msgstr "Guardar reporte"
 
@@ -1313,7 +1329,7 @@ msgid "Experencie Companies"
 msgstr "Experencia en compañias"
 
 #: .\templates\users\profile\edit_experencie_companies.html:28
-#: .\templates\users\profile\edit_experencie_companies.html:70
+#: .\templates\users\profile\edit_experencie_companies.html:71
 #: .\templates\users\profile\modal_edit_experencie_comp.html:20
 msgid "Name company"
 msgstr "Nombre de la compañia"
@@ -1323,12 +1339,12 @@ msgid "Enter the name company"
 msgstr "Ingrse el nombre de la compañia"
 
 #: .\templates\users\profile\edit_experencie_companies.html:37
-#: .\templates\users\profile\edit_experencie_companies.html:71
+#: .\templates\users\profile\edit_experencie_companies.html:72
 msgid "Position company"
 msgstr "Posición dentro de la compañia"
 
 #: .\templates\users\profile\edit_experencie_companies.html:50
-#: .\templates\users\profile\edit_experencie_companies.html:72
+#: .\templates\users\profile\edit_experencie_companies.html:73
 #: .\templates\users\profile\modal_edit_experencie_comp.html:32
 #: .\templates\users\profile\profile.html:197
 msgid "Years position"
@@ -1341,6 +1357,10 @@ msgstr "Regresar al perfil"
 #: .\templates\users\profile\edit_experencie_companies.html:61
 msgid "Create experencie"
 msgstr "Crear experencia"
+
+#: .\templates\users\profile\edit_experencie_companies.html:94
+msgid "There are no experencies in companies currently"
+msgstr "No hay experiencia en compañias actualmente"
 
 #: .\templates\users\profile\modal_delete_confirmation.html:6
 msgid "Delete experencie company confirmation"
@@ -1555,6 +1575,10 @@ msgstr "Confirmación de contraseña"
 #: .\templates\users\register_users.html:117
 msgid "N° Programs assigned"
 msgstr "N° de programas asignados"
+
+#: .\templates\users\register_users.html:139
+msgid "There are no programmers currently"
+msgstr "No hay programadores actualmente"
 
 #: .\users\forms.py:36
 msgid "The genere isn't allowed"

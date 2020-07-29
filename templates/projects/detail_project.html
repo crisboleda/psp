@@ -13,8 +13,8 @@
             <div class="au-card">
                 <div class="row">
                     <div class="col">
+                        <span class="float-right border p-1 pl-2 pr-2 mb-2 font-weight-bold rounded-lg {% if project.status == 'En proceso' %}border-primary text-primary{% elif project.status == 'Cancelado' %}border-danger text-danger{% elif project.status == 'Pausado' %}border-warning text-warning{% else %}border-success text-success{% endif %}">{{ project.status }}</span>
                         <span class="float-left"><h3>{{ project.name }}</h3></span>
-                        <span class="float-right border p-1 pl-2 pr-2 font-weight-bold rounded-lg {% if project.status == 'En proceso' %}border-primary text-primary{% elif project.status == 'Cancelado' %}border-danger text-danger{% elif project.status == 'Pausado' %}border-warning text-warning{% else %}border-success text-success{% endif %}">{{ project.status }}</span>
                     </div>
                 </div>
                 <br/>

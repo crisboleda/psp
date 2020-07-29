@@ -35,42 +35,46 @@
                 <div class="tab-pane fade show active" id="Report_list" role="tabpanel" aria-labelledby="list-tab">
                     <div class="card">  
 	                    <div class="card-body">
-		                    <div class ="table-responsive">
-                                <table class="table table-borderless table-striped shadow">
-                                    <thead class="thead-dark">
-                                        <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">{% trans "Date" %}</th>
-                                            <th scope="col">{% trans "Name" %}</th>
-                                            <th scope="col">{% trans "Objetive" %}</th>
-                                            <th scope="col">{% trans "Description" %}</th>
-                                            <th scope="col">{% trans "Conditions" %}</th>
-                                            <th scope="col">{% trans "Expected results" %}</th>
-                                            <th scope="col">{% trans "Actual results" %}</th>
-                                            <th scope="col">{% trans "Actions" %}</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {% for report in  reports %}
+                            {% if reports %}
+                                <div class ="table-responsive">
+                                    <table class="table table-borderless table-striped shadow">
+                                        <thead class="thead-dark">
                                             <tr>
-                                                <td><b>{{ forloop.counter }}</b></td>
-                                                <td>{{ report.date|date }}</td>
-                                                <td>{{ report.name|truncatechars:25 }}</td>
-                                                <td>{{ report.objetive|truncatechars:25 }}</td>
-                                                <td>{{ report.description|truncatechars:25 }}</td>
-                                                <td>{{ report.conditions|truncatechars:25 }}</td>
-                                                <td>{{ report.expect_results|truncatechars:25 }}</td>
-                                                <td>{{ report.current_results|truncatechars:25 }}</td>
-                                                <td>
-                                                    <button value='{"idReport": "{{ report.pk }}"}' data-toggle="modal" data-target="#modalDetailReport" class="btn btn-info btnPreviewDetailReport"><i class="fas fa-eye"></i></button>
-                                                    <a href="{% url 'programs:update_report' pk_program=program_opened.pk pk_report=report.pk %}" class="btn btn-secondary"><i class="fas fa-pencil-alt"></i></a>
-                                                    <button value='{"idReport": "{{ report.pk }}"}' data-toggle="modal" data-target="#deleteReportConfirmation" class="btn btn-danger btnDeleteReport"><i class="fas fa-trash"></i></button>
-                                                </td>
+                                                <th scope="col">#</th>
+                                                <th scope="col">{% trans "Date" %}</th>
+                                                <th scope="col">{% trans "Name" %}</th>
+                                                <th scope="col">{% trans "Objetive" %}</th>
+                                                <th scope="col">{% trans "Description" %}</th>
+                                                <th scope="col">{% trans "Conditions" %}</th>
+                                                <th scope="col">{% trans "Expected results" %}</th>
+                                                <th scope="col">{% trans "Actual results" %}</th>
+                                                <th scope="col">{% trans "Actions" %}</th>
                                             </tr>
-                                        {% endfor %}
-                                    </tbody>
-                                </table>
-                            </div>
+                                        </thead>
+                                        <tbody>
+                                            {% for report in reports %}
+                                                <tr>
+                                                    <td><b>{{ forloop.counter }}</b></td>
+                                                    <td>{{ report.date|date }}</td>
+                                                    <td>{{ report.name|truncatechars:25 }}</td>
+                                                    <td>{{ report.objetive|truncatechars:25 }}</td>
+                                                    <td>{{ report.description|truncatechars:25 }}</td>
+                                                    <td>{{ report.conditions|truncatechars:25 }}</td>
+                                                    <td>{{ report.expect_results|truncatechars:25 }}</td>
+                                                    <td>{{ report.current_results|truncatechars:25 }}</td>
+                                                    <td>
+                                                        <button value='{"idReport": "{{ report.pk }}"}' data-toggle="modal" data-target="#modalDetailReport" class="btn btn-info btnPreviewDetailReport"><i class="fas fa-eye"></i></button>
+                                                        <a href="{% url 'programs:update_report' pk_program=program_opened.pk pk_report=report.pk %}" class="btn btn-secondary"><i class="fas fa-pencil-alt"></i></a>
+                                                        <button value='{"idReport": "{{ report.pk }}"}' data-toggle="modal" data-target="#deleteReportConfirmation" class="btn btn-danger btnDeleteReport"><i class="fas fa-trash"></i></button>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            {% else %}
+                                <p>{% trans "This program doesn't have test reports currently" %}</p>
+                            {% endif %}
 	                    </div>
                     </div>
                 </div>

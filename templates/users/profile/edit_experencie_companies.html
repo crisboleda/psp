@@ -63,31 +63,37 @@
         </form>
         <hr/>
         <br/>
-        <div class="table-responsive-md shadow-sm">
-            <table class="table table-striped text-center">
-                <thead class="thead-dark">
-                    <tr>
-                        <th>{% trans "Name company" %}</th>
-                        <th>{% trans "Position company" %}</th>
-                        <th>{% trans "Years position" %}</th>
-                        <th>{% trans "Actions" %}</th>
-                    </tr>
-                </thead>
-                <tbody id="totalItemsExpCompany">
-                    {% for experencie in experencie_companies %}
+        {% if experencie_companies %}
+            <div class="table-responsive-md shadow-sm">
+                <table class="table table-striped text-center">
+                    <thead class="thead-dark">
                         <tr>
-                            <td>{{ experencie.name_company }}</td>
-                            <td>{{ experencie.position_company.name }}</td>
-                            <td>{{ experencie.years_position }}</td>
-                            <td>
-                                <button value='{"id": "{{ experencie.pk }}"}' class="btnEditExperencieCompany btn btn-secondary" data-toggle="modal" data-target="#modalEditExperencieCompany"><i class="fas fa-edit"></i></button>
-                                <button value='{"numberRow": "{{ forloop.counter }}", "idExperencie": "{{ experencie.pk }}"}' class="btnDeleteExpCompany btn btn-danger" data-toggle="modal" data-target="#deleteExpCompanyConfirmation"><i class="fas fa-trash"></i></button>
-                            </td>
+                            <th>{% trans "Name company" %}</th>
+                            <th>{% trans "Position company" %}</th>
+                            <th>{% trans "Years position" %}</th>
+                            <th>{% trans "Actions" %}</th>
                         </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
+                    </thead>
+                    <tbody id="totalItemsExpCompany">
+                        {% for experencie in experencie_companies %}
+                            <tr>
+                                <td>{{ experencie.name_company }}</td>
+                                <td>{{ experencie.position_company.name }}</td>
+                                <td>{{ experencie.years_position }}</td>
+                                <td>
+                                    <button value='{"id": "{{ experencie.pk }}"}' class="btnEditExperencieCompany btn btn-secondary" data-toggle="modal" data-target="#modalEditExperencieCompany"><i class="fas fa-edit"></i></button>
+                                    <button value='{"numberRow": "{{ forloop.counter }}", "idExperencie": "{{ experencie.pk }}"}' class="btnDeleteExpCompany btn btn-danger" data-toggle="modal" data-target="#deleteExpCompanyConfirmation"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <div class="text-center">
+                <p>{% trans "There are no experencies in companies currently" %}</p>
+            </div>
+        {% endif %}
     </div>
 {% endblock 'content' %}
 

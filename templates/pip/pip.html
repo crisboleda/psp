@@ -34,39 +34,42 @@
                 <div class="tab-pane fade show active" id="pip_list" role="tabpanel" aria-labelledby="list-tab">
                     <div class="card">
 	                    <div class="card-body">
-                            <div class ="table-responsive">
-                                <table class="table table-borderless table-striped table-hover shadow">
-
-                                    <thead class="thead-dark">
-                                        <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">{% trans "Name" %}</th>
-                                            <th scope="col">{% trans "Date" %}</th>
-                                            <th scope="col">{% trans "Problem Description" %}</th>
-                                            <th scope="col">{% trans "Proposal Description" %}</th>
-                                            <th scope="col">{% trans "Other Notes and Comments" %}</th>
-                                            <th scope="col">{% trans "Actions" %}</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {% for pip in all_pip %}
+                            {% if all_pip %}
+                                <div class ="table-responsive">
+                                    <table class="table table-borderless table-striped table-hover shadow">
+                                        <thead class="thead-dark">
                                             <tr>
-                                                <td><b>{{ forloop.counter }}</b></td>
-                                                <td>{{ pip.name|truncatechars:25 }}</td>
-                                                <td>{{ pip.date|date }}</td>
-                                                <td>{{ pip.problems|truncatechars:25 }}</td>
-                                                <td>{{ pip.proposal|truncatechars:25 }}</td>
-                                                <td>{{ pip.comment|truncatechars:25 }}</td>
-                                                <td>
-                                                    <button value='{"idPIP": "{{ pip.pk }}"}' data-toggle="modal" data-target="#modalDetailPIP" class="btn btn-info btnPreviewDetailPIP"><i class="fas fa-eye"></i></button>
-                                                    <a href="{% url 'programs:update_pip' pk_program=program_opened.pk pk_pip=pip.pk %}" class="btn btn-secondary"><i class="fas fa-pencil-alt"></i></a>
-                                                    <button value='{"idPIP": "{{ pip.pk }}"}' data-toggle="modal" data-target="#deletePIPConfirmation" class="btn btn-danger btnDeletePIP"><i class="fas fa-trash"></i></button>
-                                                </td>
+                                                <th scope="col">#</th>
+                                                <th scope="col">{% trans "Name" %}</th>
+                                                <th scope="col">{% trans "Date" %}</th>
+                                                <th scope="col">{% trans "Problem Description" %}</th>
+                                                <th scope="col">{% trans "Proposal Description" %}</th>
+                                                <th scope="col">{% trans "Other Notes and Comments" %}</th>
+                                                <th scope="col">{% trans "Actions" %}</th>
                                             </tr>
-                                        {% endfor %}
-                                    </tbody>
-                                </table>
-                            </div>
+                                        </thead>
+                                        <tbody>
+                                            {% for pip in all_pip %}
+                                                <tr>
+                                                    <td><b>{{ forloop.counter }}</b></td>
+                                                    <td>{{ pip.name|truncatechars:25 }}</td>
+                                                    <td>{{ pip.date|date }}</td>
+                                                    <td>{{ pip.problems|truncatechars:25 }}</td>
+                                                    <td>{{ pip.proposal|truncatechars:25 }}</td>
+                                                    <td>{{ pip.comment|truncatechars:25 }}</td>
+                                                    <td>
+                                                        <button value='{"idPIP": "{{ pip.pk }}"}' data-toggle="modal" data-target="#modalDetailPIP" class="btn btn-info btnPreviewDetailPIP"><i class="fas fa-eye"></i></button>
+                                                        <a href="{% url 'programs:update_pip' pk_program=program_opened.pk pk_pip=pip.pk %}" class="btn btn-secondary"><i class="fas fa-pencil-alt"></i></a>
+                                                        <button value='{"idPIP": "{{ pip.pk }}"}' data-toggle="modal" data-target="#deletePIPConfirmation" class="btn btn-danger btnDeletePIP"><i class="fas fa-trash"></i></button>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            {% else %}
+                                <p>{% trans "The program doesn't PIP currently" %}</p>
+                            {% endif %}
 	                    </div>
                     </div>
                 </div>
