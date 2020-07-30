@@ -43,7 +43,7 @@
                     <tbody>
                         {% for project in projects %}
                             <tr>
-                                <td>{{ project.name }}</td>
+                                <td class="text-break">{{ project.name }}</td>
                                 <td class="pl-1 pr-1 text-center text-white text-bold">
                                     <p class="rounded-lg p-0 {% if project.status == 'En proceso' %}bg-info{% elif project.status == 'Cancelado' %}bg-danger{% elif project.status == 'Pausado' %}bg-warning{% else %}bg-success{% endif %}">{{ project.status }}</p>
                                 </td>

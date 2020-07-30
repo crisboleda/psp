@@ -127,5 +127,5 @@ function calculateYieldSummary(defectsRemovedBeforeCompileActual, defectsRemoved
 
 
 function convertToZeroIsNaN(value) {
-    return isNaN(value) ? 0 : value
+    return isNaN(value) || value == Infinity ? 0 : value
 }

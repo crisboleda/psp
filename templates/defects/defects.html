@@ -22,8 +22,6 @@
     <br/>
 
     {% include 'base/custom_alert.html' %}
-    
-    {{ form.errors }}
 
     <div class="au-card rounded-pill card__new__defect__log p-0" id="containerFormDefectLog">
         <div class="card__new__defect__log__header row">
@@ -72,7 +70,14 @@
                                     <div class="input-group-prepend">
                                         <div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
                                     </div>
-                                    <input type="date" name="date" class="form-control bg-white" id="flatpickr" placeholder="YYYY-MM-DD">
+                                    <input type="date" name="date" class="form-control bg-white {% if form.date.errors %}is-invalid{% endif %}" id="flatpickr" placeholder="YYYY-MM-DD">
+                                    {% if form.date.errors %}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.date.errors %}
+                                                {{ error }}
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
                                 </div>
                             </div>
 
@@ -80,39 +85,67 @@
 
                             <div class="form-group col-xl-3">
                                 <label for="id_defect_type">{% trans "Type" %}</label>
-                                <select class="form-control" name="defect_type" id="id_defect_type">
+                                <select class="form-control {% if form.defect_type.errors %}is-invalid{% endif %}" name="defect_type" id="id_defect_type">
                                     {% for defect_type in type_defects %}
                                         <option value="{{ defect_type.number }}">{{ defect_type.number }} - {{ defect_type.name }}</option>
                                     {% endfor %}
                                 </select>
+                                {% if form.defect_type.errors %}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.defect_type.errors %}
+                                            {{ error }}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
                             </div>
 
                             <div class="form-group col-xl-2">
                                 <label for="id_phase_injected">{% trans "Phase injected" %}</label>
-                                <select class="form-control" name="phase_injected" id="id_phase_injected">
+                                <select class="form-control {% if form.phase_injected.errors %}is-invalid{% endif %}" name="phase_injected" id="id_phase_injected">
                                     {% for phase in phases %}
                                         <option value="{{ phase.abbreviation }}">{{ phase.abbreviation }} ({{ phase.name }})</option>
                                     {% endfor %}
                                 </select>
+                                {% if form.phase_injected.errors %}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.phase_injected.errors %}
+                                            {{ error }}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
                             </div>
 
                             <div class="form-group col-xl-2">
                                 <label for="id_phase_removed">{% trans "Phase removed" %}</label>
-                                <select class="form-control" name="phase_removed" id="id_phase_removed">
+                                <select class="form-control {% if form.phase_removed.errors %}is-invalid{% endif %}" name="phase_removed" id="id_phase_removed">
                                     {% for phase in phases %}
                                         <option value="{{ phase.abbreviation }}">{{ phase.abbreviation }} ({{ phase.name }})</option>
                                     {% endfor %}
                                 </select>
+                                {% if form.phase_removed.errors %}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.phase_removed.errors %}
+                                            {{ error }}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
                             </div>
 
                             <div class="form-group col-xl-2">
                                 <label for="id_chained_defect">{% trans "Cousing defect" %}</label><i class="far fa-question-circle float-right tip-help" id="tip-help-cousing-input"></i>
-                                <select name="cousing_defect" id="input-cousing" class="form-control">
+                                <select name="cousing_defect {% if form.cousing_defect.errors %}is-invalid{% endif %}" id="input-cousing" class="form-control">
                                     <option value="">{% trans "None" %}</option>
                                     {% for defect in defect_logs %}
                                         <option value="{{ defect.pk }}">{% trans "Defect" %} <b> #{{ forloop.counter }}</b></option>
                                     {% endfor %}
                                 </select>
+                                {% if form.cousing_defect.errors %}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.cousing_defect.errors %}
+                                            {{ error }}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
                                 <div class="bg-light p-2 shadow-sm d-none" id="tip-help-cousing-defect">
                                     <p>Si este defecto fue ocasionado por otro defecto, se debe especificar el <b>indice</b> del defecto que lo ocasionó</p>
                                 </div>
@@ -121,12 +154,26 @@
                         <div class="form-row">
                             <div class="form-group col-xl-6">
                                 <label for="id_description">{% trans "Description" %}</label>
-                                <textarea style="resize: none;" maxlength="500" class="form-control w-100" name="description" id="id_description" rows="4" placeholder="{% trans "Enter description" %}"></textarea>
+                                <textarea style="resize: none;" maxlength="500" class="form-control w-100 {% if form.description.errors %}is-invalid{% endif %}" name="description" id="id_description" rows="4" placeholder="{% trans "Enter description" %}"></textarea>
+                                {% if form.description.errors %}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.description.errors %}
+                                            {{ error }}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
                                 <p>{% trans "Characters" %} <b><span id="counterDescription">0</span>/500</b></p>
                             </div>
                             <div class="form-group col-xl-6">
                                 <label for="id_solution">{% trans "Solution" %}</label>
-                                <textarea style="resize: none;" maxlength="500" class="form-control w-100" name="solution" id="id_solution" rows="4" placeholder="{% trans "Enter solution" %}"></textarea>
+                                <textarea style="resize: none;" maxlength="500" class="form-control w-100 {% if form.solution.errors %}is-invalid{% endif %}" name="solution" id="id_solution" rows="4" placeholder="{% trans "Enter solution" %}"></textarea>
+                                {% if form.solution.errors %}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.solution.errors %}
+                                            {{ error }}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
                                 <p>{% trans "Characters" %} <b><span id="counterSolution">0</span>/500</b></p>
                             </div>
                         </div>

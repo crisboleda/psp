@@ -20,16 +20,16 @@
                     <div class="program-container">
                         <div class="content">
                             <div class="profile-img" style="background-image: url('{{ program.language.picture.url }}')"></div>
-                            <h3 class="ml-4 mt-2">{{ program.name }}</h3>
+                            <h3 class="ml-4 mt-2 text-break">{{ program.name }}</h3>
                             <div class="description mt-2">
-                                {{ program.description }}
+                                <p class="text-break">{{ program.description }}</p>
                             </div>
                             <div class="descrip-project-module">
                                 <a href="{% url 'projects:detail_project' program.module.project.pk %}" class="shadow-sm p-3 m-2 rounded w-100 mr-4">
-                                    <p><b>{% trans "Project" %}: </b>{{ program.module.project.name }}</p>
+                                    <p class="text-break"><b>{% trans "Project" %}: </b>{{ program.module.project.name }}</p>
                                 </a>
                                 <div class="shadow-sm p-3 m-2 mb-4 rounded w-100 mr-4">
-                                    <p><b>{% trans "Module" %}: </b> {{ program.module.name }}</p>
+                                    <p class="text-break"><b>{% trans "Module" %}: </b> {{ program.module.name }}</p>
                                 </div>
                             </div>
                             <a href="{% url 'programs:detail_program' program.pk %}" class="text-center btn-open-program"><i class="fas fa-folder-open mr-2"></i>{% trans "Open program" %}</a>

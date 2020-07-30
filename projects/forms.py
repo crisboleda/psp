@@ -79,20 +79,21 @@ class UpdateProjectModelForm(forms.ModelForm):
 
 class AddProgrammerProjectForm(forms.Form):
 
-    username_programmer = forms.CharField(max_length=50)
+    username_programmer = forms.CharField(max_length=50, required=True)
 
-    def clean(self):
+    def clean_username_programmer(self):
+        username = self.cleaned_data['username_programmer']
         try:
             self.programmer = User.objects.get(username=self.cleaned_data['username_programmer'])
         except User.DoesNotExist:
-            raise Http404("The programmer doesn't exists")
+            raise forms.ValidationError(_("The programmer doesn't exists"))
+
+        return username
 
 
     def save(self, project):
         if not self.programmer in project.users.all():
             project.users.add(self.programmer)
-        else:
-            raise Http404("The programmer already belongs to the project")
 
 
 

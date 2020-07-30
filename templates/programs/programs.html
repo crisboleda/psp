@@ -35,7 +35,7 @@
                     <tbody>
                         {% for program in programs %}
                             <tr>
-                                <td>{{ program.name }}</td>
+                                <td class="text-break">{{ program.name }}</td>
                                 <td>
                                     <a href="{% url 'users:profile_user' program.programmer.username %}">@{{ program.programmer.username }}</a>
                                 </td>

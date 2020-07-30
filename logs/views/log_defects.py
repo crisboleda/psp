@@ -20,10 +20,13 @@ class CreateDefectLogView(MemberUserProgramRequiredMixin, FormView):
     form_class = CreateDefectLogForm
     template_name = 'defects/defects.html'
 
+    def form_invalid(self, form):
+        messages.error(self.request, _("The defect could not be registered correctly"))
+        
+        return super().form_invalid(form)
+
     def form_valid(self, form):
         form.save(self.program)
-
-        # Message defect created
         messages.success(self.request, _("The defect was created successfully"))
         
         return super().form_valid(form)

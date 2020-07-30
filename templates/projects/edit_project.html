@@ -97,7 +97,14 @@
                     {% csrf_token %}
                     <div class="row">
                         <div class="p-0 pr-2 col-xl-12 mt-2">
-                            <input type="text" name="username_programmer" list="programmers" placeholder="Nombre de usuario" class="form-control" autocomplete="off">
+                            <input type="text" name="username_programmer" list="programmers" placeholder="Nombre de usuario" class="form-control {% if form.username_programmer.errors %}is-invalid{% endif %}" autocomplete="off">
+                            {% if form.username_programmer.errors %}
+                                <div class="invalid-feedback">
+                                    {% for error in form.username_programmer.errors %}
+                                        {{ error }}
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
                             <datalist id="programmers">
                                 {% for programmer in programmers %}
                                     <option value="{{ programmer.username }}">{{ programmer.username }}</option>

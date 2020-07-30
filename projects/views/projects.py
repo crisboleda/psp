@@ -3,7 +3,7 @@
 from django.views.generic import FormView, ListView, DetailView, UpdateView, FormView, RedirectView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy, reverse
-from django.http.response import Http404
+from django.http.response import Http404, HttpResponseRedirect, HttpResponse
 from django.contrib import messages
 from django.utils.translation import gettext as _
 
@@ -71,12 +71,20 @@ class UpdateProjectView(AdminRequiredMixin, UpdateView):
 class AddProgrammerProjectView(AdminRequiredMixin, FormView):
     form_class = AddProgrammerProjectForm
 
-    def form_valid(self, form):
+    def dispatch(self, request, *args, **kwargs):
         try:
             self.project = Project.objects.get(pk=self.kwargs['pk_project'])
-            form.save(self.project)
         except Project.DoesNotExist:
             raise Http404("The project doesn't exists")
+        return super().dispatch(request, *args, **kwargs)
+    
+    def form_invalid(self, form):
+        return HttpResponseRedirect(
+            redirect_to=reverse_lazy('projects:edit_project', kwargs={'pk_project': self.project.pk}) 
+        )
+        
+    def form_valid(self, form):
+        form.save(self.project)
         return super().form_valid(form)
     
     def get_success_url(self):

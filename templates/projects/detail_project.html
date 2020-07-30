@@ -14,11 +14,11 @@
                 <div class="row">
                     <div class="col">
                         <span class="float-right border p-1 pl-2 pr-2 mb-2 font-weight-bold rounded-lg {% if project.status == 'En proceso' %}border-primary text-primary{% elif project.status == 'Cancelado' %}border-danger text-danger{% elif project.status == 'Pausado' %}border-warning text-warning{% else %}border-success text-success{% endif %}">{{ project.status }}</span>
-                        <span class="float-left"><h3>{{ project.name }}</h3></span>
+                        <span class="float-left"><h3 class="text-break">{{ project.name }}</h3></span>
                     </div>
                 </div>
                 <br/>
-                <p>{{ project.description }}</p>
+                <p class="text-break">{{ project.description }}</p>
                 <br/>
                 <p><b>{% trans "Project managed by" %} </b><a href="{% url 'users:profile_user' project.admin.username %}">@{{ project.admin.username }}</a></p>
             </div>

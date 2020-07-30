@@ -18,6 +18,7 @@ class UserUpdateForm(forms.ModelForm):
 
     genere = forms.CharField(max_length=12)
     username = forms.CharField(max_length=15, min_length=3)
+    email = forms.EmailField(max_length=50, required=True)
 
     class Meta:
         model = User
@@ -73,6 +74,7 @@ class CreateUserForm(forms.ModelForm):
 
     confirm_password = forms.CharField(max_length=55)
     username = forms.CharField(min_length=3, max_length=15)
+    email = forms.EmailField(max_length=55, required=True)
 
     class Meta:
         model = User
@@ -118,7 +120,7 @@ class CreateUserForm(forms.ModelForm):
 
 class CreateExperencieCompanyForm(forms.Form):
 
-    name_company = forms.CharField(max_length=70)
+    name_company = forms.CharField(max_length=30)
 
     position_company = forms.CharField(max_length=70)
 
