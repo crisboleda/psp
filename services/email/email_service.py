@@ -38,8 +38,7 @@ class EmailService:
             ]
         }
 
-        thread = threading.Thread(target=mailjet.send.create, args=(data))
-        thread.start()
+        response = mailjet.send.create(data=data)
 
     
     @classmethod
