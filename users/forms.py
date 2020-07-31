@@ -112,7 +112,7 @@ class CreateUserForm(forms.ModelForm):
             'template_name': 'users/registered_user.html',
             'context': {
                 'user': user,
-                'password': data['password']
+                'password_user': data['password']
             }
         }
 
