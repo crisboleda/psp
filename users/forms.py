@@ -2,6 +2,7 @@
 # Django
 from django import forms
 from django.utils.translation import gettext as _
+from django.conf import settings
 
 # Models
 from django.contrib.auth.models import User
@@ -104,18 +105,21 @@ class CreateUserForm(forms.ModelForm):
         
         user = User.objects.create_user(**data)
         Profile.objects.create(user=user)
-        
-        thread = threading.Thread(target=EmailService.send_email, args=(
-            user,
-            'Welcome to PSP',
-            'users/registered_user.html',
-            {
+
+        data_email = {
+            'to_user': user,
+            'subject': 'Welcome to PSP',
+            'template_name': 'users/registered_user.html',
+            'context': {
                 'user': user,
-                'password_user': data['password']
+                'password': data['password']
             }
-        ))
-        
-        thread.start()
+        }
+
+        if settings.DEBUG:
+            EmailService.send_email_local(**data_email)
+        else:
+            EmailService.send_email_production(**data_email)
 
 
 class CreateExperencieCompanyForm(forms.Form):
