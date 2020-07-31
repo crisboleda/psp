@@ -50,6 +50,5 @@ BASE_URL = "https://psp-adsi.site"
 SECURE_SSL_REDIRECT = True
 
 
-EMAIL_BACKEND = 'django_mailjet.backends.MailjetBackend'
 MAILJET_API_KEY = config('MAILJET_API_KEY')
 MAILJET_API_SECRET = config('MAILJET_API_SECRET')
