@@ -92,7 +92,7 @@ function createTd(tr, value) {
 
 // Si un data es NaN retorno un cero, de lo contrario retorno el mismo número
 function convertZeroIsNaN(value) {
-    return isNaN(value) ? 0 : value
+    return isNaN(value) || value == Infinity ? 0 : value
 }
 
 

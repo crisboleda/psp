@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-30 00:47-0500\n"
+"POT-Creation-Date: 2020-07-31 23:17-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1584,27 +1584,31 @@ msgstr "N° de programas asignados"
 msgid "There are no programmers currently"
 msgstr "No hay programadores actualmente"
 
-#: .\users\forms.py:37
+#: .\users\forms.py:38
 msgid "The genere isn't allowed"
 msgstr "El género no está permitido"
 
-#: .\users\forms.py:45
+#: .\users\forms.py:46
 msgid "The username already exists"
 msgstr "El nombre de usuario ya existe"
 
-#: .\users\forms.py:53
+#: .\users\forms.py:48
+msgid "The username can't have spaces in black"
+msgstr "El nombre de usuario no puede tener espacios en blanco"
+
+#: .\users\forms.py:56
 msgid "The email already exists"
 msgstr "The correo electrónico ya existe"
 
-#: .\users\forms.py:88
+#: .\users\forms.py:91
 msgid "The email you are trying to register is already in use"
 msgstr "El correo electrónico que estás intentando registrar ya está en uso"
 
-#: .\users\forms.py:98
+#: .\users\forms.py:101
 msgid "Passwords do not match"
 msgstr "Las contraseñas no coinciden"
 
-#: .\users\forms.py:134
+#: .\users\forms.py:140
 msgid "The position doesn't exists"
 msgstr "La posición no existe"
 
