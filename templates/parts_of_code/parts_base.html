@@ -13,7 +13,7 @@
 
         <div class="form-group">
             <label for="id_base_program">{% trans "Base program" %}</label>
-            <select name="base_program" id="id_base_program" class="form-control {% if form.base_program and form.base_program.errors %}is-invalid{% endif %}">
+            <select required name="base_program" id="id_base_program" class="form-control {% if form.base_program and form.base_program.errors %}is-invalid{% endif %}">
                 {% for base_program in base_programs %}
                     <option value="{{ base_program.pk }}">{{ base_program.name }}</option>
                 {% endfor %}
@@ -30,7 +30,7 @@
         <div class="form-row">
             <div class="form-group col-xl-3">
                 <label for="id_planning_base_lines">{% trans "Planning base lines" %}</label>
-                <input type="number" max="2000000000" class="form-control {% if form.base_lines and form.base_lines.errors %}is-invalid{% endif %}" name="base_lines" placeholder="0" id="id_planning_base_lines">
+                <input required min="1" type="number" max="2000000000" class="form-control {% if form.base_lines and form.base_lines.errors %}is-invalid{% endif %}" name="base_lines" placeholder="0" id="id_planning_base_lines">
                 {% if form.base_lines and form.base_lines.errors %}
                     <div class="invalid-feedback">
                         {% for error in form.base_lines.errors %}

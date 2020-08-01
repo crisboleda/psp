@@ -44,6 +44,8 @@ class UserUpdateForm(forms.ModelForm):
         if 'username' in self.changed_data:
             if User.objects.filter(username=username).exists():
                 raise forms.ValidationError(_('The username already exists'))
+            if ' ' in username:
+                raise forms.ValidationError(_("The username can't have spaces in black"))
         return username
 
 
@@ -80,6 +82,14 @@ class CreateUserForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('username', 'email', 'first_name', 'last_name', 'password')
+
+    def clean_username(self):
+        username = self.cleaned_data['username']
+
+        if ' ' in username:
+            raise forms.ValidationError(_("The username can't have spaces in black"))
+
+        return username
 
 
     def clean_email(self):

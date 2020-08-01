@@ -30,7 +30,7 @@
 
             <div class="form-group col-xl-4">
                 <label for="">{% trans "Planned methods" %}</label>
-                <input type="number" name="planning_methods" id="plannedItemsNewPart" placeholder="{% trans "Enter items" %}" class="form-control {% if form.planning_methods.errors %}is-invalid{% endif %}">
+                <input required type="number" name="planning_methods" id="plannedItemsNewPart" placeholder="{% trans "Enter items" %}" class="form-control {% if form.planning_methods.errors %}is-invalid{% endif %}">
                 <div class="invalid-feedback">
                     {% for error in form.planning_methods.errors %}
                         {{ error }}
