@@ -30,7 +30,7 @@ STATICFILES_DIRS = [
 ]
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'static', 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'staticfiles', 'media')
 
 MAILJET_API_KEY = config('MAILJET_API_KEY')
 MAILJET_API_SECRET = config('MAILJET_API_SECRET')
