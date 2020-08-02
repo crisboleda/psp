@@ -47,7 +47,7 @@ DEFAULT_FILE_STORAGE = 'psp.storage_backends.MediaStorage'
 
 PREPEND_WWW = True
 BASE_URL = "https://psp-adsi.site"
-SECURE_SSL_REDIRECT = True
+SECURE_SSL_REDIRECT = config('SECURE_SSL_REDIRECT')
 
 
 MAILJET_API_KEY = config('MAILJET_API_KEY')

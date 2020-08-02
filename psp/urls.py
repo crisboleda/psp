@@ -41,6 +41,8 @@ urlpatterns = [
 
 ]
 
+
 if not config('DJANGO_PRODUCTION_ENV', default=False, cast=bool):
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
