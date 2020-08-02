@@ -23,9 +23,9 @@ class Project(models.Model):
         help_text='This atributte allows to save the project status'
     )
     
-    start_date = models.DateTimeField(auto_now_add=True)
-    finish_date = models.DateTimeField(blank=True, null=True)
-    planning_date = models.DateTimeField()
+    start_date = models.DateField()
+    finish_date = models.DateField(blank=True, null=True)
+    planning_date = models.DateField()
 
     users = models.ManyToManyField(User, related_name='project_users')
     admin = models.ForeignKey(User, on_delete=models.CASCADE, related_name='admin_project')

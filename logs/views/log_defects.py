@@ -4,6 +4,7 @@ from django.views.generic import ListView, FormView
 from django.urls import reverse_lazy
 from django.http import HttpResponse
 from django.contrib import messages
+from django.utils.translation import gettext as _
 
 # Models
 from logs.models import DefectLog, DefectType, Phase
@@ -19,18 +20,21 @@ class CreateDefectLogView(MemberUserProgramRequiredMixin, FormView):
     form_class = CreateDefectLogForm
     template_name = 'defects/defects.html'
 
+    def form_invalid(self, form):
+        messages.error(self.request, _("The defect could not be registered correctly"))
+        
+        return super().form_invalid(form)
+
     def form_valid(self, form):
         form.save(self.program)
-
-        # Message defect created
-        messages.success(self.request, "The defect was created successfully")
+        messages.success(self.request, _("The defect was created successfully"))
         
         return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["program_opened"] = self.program 
-        context["phases"] = Phase.objects.all()
+        context["phases"] = Phase.objects.all().order_by('order_index')
         context["type_defects"] = DefectType.objects.all().values('number', 'name')
         context["defect_logs"] = DefectLog.objects.filter(program=self.program)
         return context

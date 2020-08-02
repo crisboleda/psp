@@ -1,0 +1,37 @@
+
+
+
+<div id="sectionDefectsRemovalEfficiency" class="d-none">
+    <div class="row">
+        <div class="col-xl-6">
+            <div>
+                <canvas id="chartDefectsRemovalEfficiencyActual"></canvas>
+            </div>
+        </div>
+        <div class="col-xl-6">
+            <div>
+                <canvas id="chartDefectsRemovalEfficiencyToDate"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <br/><hr/><br/>
+
+    {% load i18n %}
+    <h4>DRL {% trans "Defect removal leverage" %}</h4>
+    <p>{% trans "Leverage is the defect removal efficiency of one phase relative to another, typically relative to the testing phase." %}</p>
+    <br/>
+
+    <table class="table table-striped table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th></th>
+                <th>{% trans "Actual" %}</th>
+                <th>{% trans "TO-DATE" %}</th>
+            </tr>
+        </thead>
+        <tbody id="tableBodyDRL">
+            
+        </tbody>
+    </table>
+</div>

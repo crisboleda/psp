@@ -1,12 +1,15 @@
 
 # Django
-
+from django.urls import reverse_lazy
 
 # Django REST Framework
 from rest_framework import serializers
 
 # Models
-from users.models import Profile
+from users.models import Profile, ExperienceCompany, PositionCompany
+from logs.models import Phase, DefectLog
+from programs.models import Program
+from projects.models import Project, Module
 
 
 class ProfileExperencieSerializer(serializers.ModelSerializer):
@@ -56,3 +59,111 @@ class ProfileExperencieSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
         fields = ('years_development', 'years_configuration', 'years_integration', 'years_requirements', 'years_design', 'years_tests', 'years_support')
+
+
+
+class PositionCompanySerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = PositionCompany
+        fields = ('name', 'created_at', 'updated_at')
+
+
+class ExperencieCompanyModelSerializer(serializers.ModelSerializer):
+
+    position_company = PositionCompanySerializer()
+
+    class Meta:
+        model = ExperienceCompany
+        fields = ('name_company', 'position_company', 'years_position')
+
+
+class ExperencieCompanySerializer(serializers.Serializer):
+
+    name_company = serializers.CharField(max_length=70)
+
+    position_company = serializers.CharField(max_length=70)
+
+    years_position = serializers.IntegerField(min_value=1, max_value=20000000)
+
+
+    def validate_position_company(self, position_name):
+        try:
+            return PositionCompany.objects.get(name=position_name)
+        except PositionCompany.DoesNotExist:
+            raise serializers.ValidationError("The position doesn't exists")
+
+
+    def save(self, experencie):
+        data = self.validated_data
+
+        experencie.name_company = data["name_company"]
+        experencie.position_company = data["position_company"]
+        experencie.years_position = data["years_position"]
+
+        experencie.save()
+
+        return experencie
+
+
+class DefectLogProgramSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = DefectLog
+        fields = ('date', 'description', 'solution', 'created_at', 'updated_at')
+
+
+class DefectsRemovedPhaseSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Phase
+        fields = ('name', 'abbreviation')
+
+
+class DataProgramAnalysisTools(serializers.ModelSerializer):
+
+    get_defects = serializers.StringRelatedField(many=True)
+
+    class Meta:
+        model = Program
+        fields = ('pk', 'name', 'description', 'language', 'get_defects')
+
+
+
+class CalendarProjectModelSerializer(serializers.ModelSerializer):
+
+    pk = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Project
+        fields = ('pk', 'name', 'planning_date')
+
+    def get_pk(self, obj):
+        url = reverse_lazy('projects:detail_project', kwargs={'pk_project': obj["pk"]})
+        return url
+
+
+class CalendarProgramModelSerializer(serializers.ModelSerializer):
+
+    pk = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Program
+        fields = ('pk', 'name', 'planning_date')
+
+    def get_pk(self, obj):
+        url = reverse_lazy('programs:admin_edit_program', kwargs={'pk_program': obj["pk"]})
+        return url
+
+
+class CalendarModuleModelSerializer(serializers.ModelSerializer):
+
+    pk = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Module
+        fields = ('pk', 'name', 'planning_date')
+
+    def get_pk(self, obj):
+        url = reverse_lazy('projects:update_module', kwargs={'pk_project': obj["project__pk"], 'pk_module': obj["pk"]})
+        return url

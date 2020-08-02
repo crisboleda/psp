@@ -1,6 +1,7 @@
 
 from .programs import (AdminListProgramView, CreateProgramView, ProgrammerListProgramView, 
-                        DetailProgramView)
+                        DetailProgramView, ConfigurationProgramProgrammerView,
+                        UpdateProgramAdminView)
 
 from .parts_of_code import (CreatePartProgramView, UpdateBaseProgramView, UpdateReusedPartView,
                             UpdateNewPartView, DeleteReusedPartView, DeleteNewPartView,
@@ -9,3 +10,6 @@ from .parts_of_code import (CreatePartProgramView, UpdateBaseProgramView, Update
 from .pip import (ListPIPView, UpdatePIPView, RetrieveDestroyPIPView)
 
 from .report import (ReportView, ReportRetrieveDestroyView, UpdateReportView)
+
+
+from .summary import (DataDefectInjectedView, DataTimePerPhaseView, DataDefectsRemovedView)

@@ -1,10 +1,11 @@
 
 <!-- Modal -->
 <div class="modal fade" id="modalDetailReport" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    {% load i18n %}
     <div class="modal-dialog modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title" id="exampleModalLabel">Detail report</h3>
+                <h3 class="modal-title" id="exampleModalLabel">{% trans "Detail report" %}</h3>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -17,37 +18,37 @@
             </div>
 
             <div class="modal-body d-none" id="containerDetailReport">
-                <p><b>Name</b></p>
+                <p><b>{% trans "Name" %}</b></p>
                 <p id="modalDetailNameReport"></p>
                 <br/>
 
-                <p><b>Date</b></p>
+                <p><b>{% trans "Date" %}</b></p>
                 <p id="modalDetailDateReport"></p>
                 <br/>
 
-                <p><b>Objetive</b></p>
+                <p><b>{% trans "Objetive" %}</b></p>
                 <p id="modalDetailObjetiveReport"></p>
                 <br/>
 
-                <p><b>Description</b></p>
+                <p><b>{% trans "Description" %}</b></p>
                 <p id="modalDetailDescriptionReport"></p>
                 <br/>
 
-                <p><b>Conditions</b></p>
+                <p><b>{% trans "Conditions" %}</b></p>
                 <p id="modalDetailConditionsReport"></p>
                 <br/>
 
-                <p><b>Expected results</b></p>
+                <p><b>{% trans "Expected results" %}</b></p>
                 <p id="modalDetailExpectedResultsReport"></p>
                 <br/>
                 
-                <p><b>Actual results</b></p>
+                <p><b>{% trans "Actual results" %}</b></p>
                 <p id="modalDetailActualResultsReport"></p>
                 <br/>
             </div>
 
             <div class="modal-footer d-none">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">{% trans "Close" %}</button>
             </div>
         </div>
     </div>

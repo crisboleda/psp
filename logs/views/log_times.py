@@ -5,6 +5,7 @@ from django.http.response import JsonResponse
 from django.http.response import Http404, HttpResponseBadRequest
 from django.urls import reverse_lazy
 from django.utils import timezone
+from django.utils.translation import gettext as _
 
 # Django REST Framework
 from rest_framework.generics import UpdateAPIView, CreateAPIView
@@ -38,13 +39,13 @@ class ListProgramTimeLogView(MemberUserProgramRequiredMixin, ListView):
     context_object_name = 'programs'
 
     def get_queryset(self):
-        return TimeLog.objects.filter(program=self.program)
+        return TimeLog.objects.filter(program=self.program).order_by('phase__order_index')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["program_opened"] = self.program
 
-        context["phases_not_in_program"] = Phase.objects.exclude(id__in=TimeLog.objects.filter(program=self.program).values('phase__pk')).values('name')
+        context["phases_not_in_program"] = Phase.objects.exclude(id__in=TimeLog.objects.filter(program=self.program).values('phase__pk')).values('name').order_by('order_index')
         context["is_active_phase"] = self.program.program_log_time.filter(finish_date=None).exists()
 
         if context["is_active_phase"]:

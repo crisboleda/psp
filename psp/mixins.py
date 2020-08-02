@@ -1,7 +1,8 @@
 
 # Django
-from django.http.response import HttpResponseRedirect, Http404
+from django.http.response import HttpResponseRedirect, Http404, HttpResponseForbidden
 from django.urls import reverse_lazy
+from django.core.exceptions import PermissionDenied
 
 # Models
 from programs.models import Program
@@ -16,7 +17,7 @@ class AdminRequiredMixin:
             return HttpResponseRedirect(reverse_lazy('users:login'))
 
         if request.user.get_profile.type_user != 'administrador':
-            raise Http404("You aren't an Admin, only Admins can create projects")
+            raise PermissionDenied()
 
         return super().dispatch(request, *args, **kwargs)
 
@@ -34,6 +35,6 @@ class MemberUserProgramRequiredMixin(object):
             raise Http404("The program doesn't exists")
 
         if request.user.get_profile.type_user == 'programmer' and self.program.programmer != request.user:
-            raise Http404("You don't have access to this program")
+            raise PermissionDenied()
 
         return super().dispatch(request, *args, **kwargs)

@@ -1,0 +1,14 @@
+
+
+{% extends 'base/base_http_error.html' %}
+
+{% load i18n %}
+{% block 'title' %}500 - {% trans "Internal Server Error" %}{% endblock 'title' %}
+
+
+{% block title_error %}500 - {% trans "Internal Server Error" %}{% endblock %}
+
+
+{% block 'error_description' %}
+    {% trans "An internal error has occurred, please contact an administrator" %}
+{% endblock 'error_description' %}

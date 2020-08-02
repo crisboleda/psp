@@ -16,8 +16,8 @@ class Module(models.Model):
     description = models.CharField(max_length=200, help_text='Module description', validators=[validate_min_length_description])
 
     planning_date = models.DateField()
-    start_date = models.DateTimeField(auto_now_add=True)
-    finish_date = models.DateTimeField(null=True)
+    start_date = models.DateField()
+    finish_date = models.DateField(null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

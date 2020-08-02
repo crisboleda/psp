@@ -1,0 +1,14 @@
+
+
+{% extends 'base/base_http_error.html' %}
+
+{% load i18n %}
+{% block 'title' %}404 - {% trans "Page Not Found" %}{% endblock 'title' %}
+
+
+{% block title_error %}404 - {% trans "Page Not Found" %}{% endblock %}
+
+
+{% block 'error_description' %}
+    {% trans "The page you are looking for might have been removed had its name changed or is temporarily unavailable." %}
+{% endblock 'error_description' %}

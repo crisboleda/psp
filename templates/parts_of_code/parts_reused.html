@@ -1,34 +1,55 @@
 
 
 <div class="shadow-sm border p-3">
-
+    {% load i18n %}
     <div id="alert-error-create-reused-part" class="alert alert-danger text-center d-none p-2 mt-3 mb-3 w-100"></div>
 
     <form id="form-create-reused-part" action="{% url 'programs:create_part_program' program_opened.pk %}?type_part=reused" method="post">
         {% csrf_token %}
         <div class="form-row">
             <div class="form-group col-xl-4 p-2">
-                <label for="id_reused_program">Program reused</label>
-                <select name="reused_program" id="id_reused_program" class="form-control">
+                <label for="id_reused_program">{% trans "Program reused" %}</label>
+                <select name="reused_program" id="id_reused_program" class="form-control {% if form.reused_program and form.reused_program.errors %}is-invalid{% endif %}">
                     {% for base_program in base_programs %}
                         <option value="{{ base_program.pk }}">{{ base_program.name }}</option>
                     {% endfor %}
                 </select>
+                {% if form.reused_program and form.reused_program.errors %}
+                    <div class="invalid-feedback">
+                        {% for error in form.reused_program.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
             </div>
 
             <div class="form-group col-xl-4 p-2">
-                <label for="id_lines_planning">Planning</label>
-                <input type="number" minLength="1" placeholder="0" name="lines_planning" id="id_lines_planning" class="form-control">
+                <label for="id_lines_planning">{% trans "Planning" %}</label>
+                <input type="number" minLength="1" placeholder="0" name="lines_planning" id="id_lines_planning" class="form-control {% if form.lines_planning and form.lines_planning.errors %}is-invalid{% endif %}">
+                {% if form.lines_planning and form.lines_planning.errors %}
+                    <div class="invalid-feedback">
+                        {% for error in form.lines_planning.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
             </div>
 
             <div class="form-group col-xl-4 p-2">
-                <label for="id_lines_current">Current</label>
-                <input type="number" name="lines_current" placeholder="0" id="id_lines_current" class="form-control">
+                <label for="id_lines_current">{% trans "Current" %}</label>
+                <input type="number" name="lines_current" placeholder="0" id="id_lines_current" class="form-control {% if form.lines_current and form.lines_current.errors %}is-invalid{% endif %}">
+                {% if form.lines_current and form.lines_current.errors %}
+                    <div class="invalid-feedback">
+                        {% for error in form.lines_current.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
             </div>
         </div>
 
         <div class="text-right">
-            <button type="submit" class="btn btn-primary"><i class="fas fa-plus"> Add</i></button>
+            <button type="submit" class="btn btn-primary"><i class="fas fa-plus"> {% trans "Add" %}</i></button>
         </div>
     </form>
 </div>
@@ -40,10 +61,10 @@
         <table class="table text-center shadow-sm table-striped table-hover">
             <thead class="thead-dark">
                 <tr>
-                    <th>Program reused</th>
-                    <th>Planning lines</th>
-                    <th>Current lines</th>
-                    <th>Actions</th>
+                    <th>{% trans "Program reused" %}</th>
+                    <th>{% trans "Planning lines" %}</th>
+                    <th>{% trans "Current lines" %}</th>
+                    <th>{% trans "Actions" %}</th>
                 </tr>
             </thead>
             <tbody>
@@ -67,5 +88,5 @@
         </table>
     </div>
 {% else %}
-    <p class="text-center">This program doesn't have reused parts</p>
+    <p class="text-center">{% trans "This program doesn't have reused parts" %}</p>
 {% endif %}

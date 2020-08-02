@@ -4,6 +4,11 @@ from django.views.generic import ListView, FormView, UpdateView
 from django.http.response import Http404
 from django.urls import reverse_lazy, reverse
 from django.shortcuts import redirect
+from django.contrib import messages
+from django.utils.translation import gettext as _
+
+# Utils
+from datetime import datetime
 
 # Models
 from projects.models import Module, Project
@@ -14,6 +19,9 @@ from projects.forms import CreateModuleForm, UpdateModuleForm
 # Mixins
 from projects.mixins import MemberProjectRequiredMixin
 from psp.mixins import AdminRequiredMixin
+
+# Helpers
+from psp.helpers import FormViewDefaultValue
 
 
 class ListModuleView(AdminRequiredMixin, ListView):
@@ -34,7 +42,7 @@ class ListModuleView(AdminRequiredMixin, ListView):
         return context
         
 
-class CreateModuleView(AdminRequiredMixin, FormView):
+class CreateModuleView(AdminRequiredMixin, FormViewDefaultValue):
     template_name = 'modules/create_module.html'
     form_class = CreateModuleForm
 
@@ -44,10 +52,11 @@ class CreateModuleView(AdminRequiredMixin, FormView):
             return super().dispatch(request, *args, **kwargs)
         except Project.DoesNotExist:
             raise Http404("The project doesn't exists")
-
+    
 
     def form_valid(self, form):
         form.save(self.project)
+        messages.success(self.request, _("The module was created successfully"))
         return super().form_valid(form)  
 
 
@@ -59,6 +68,9 @@ class CreateModuleView(AdminRequiredMixin, FormView):
         context = super().get_context_data(**kwargs)
         context["pk_project"] = self.project.pk
         return context
+
+    def set_values_init_form(self, form):
+        form["start_date"].value = datetime.now()
     
         
 class UpdateModuleView(AdminRequiredMixin, UpdateView):
@@ -69,6 +81,7 @@ class UpdateModuleView(AdminRequiredMixin, UpdateView):
     form_class = UpdateModuleForm
 
     def get_success_url(self):
+        messages.info(self.request, _("The module was updated successfully"))
         pk_project = self.kwargs['pk_project']
         pk_module = self.kwargs['pk_module']
 

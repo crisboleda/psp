@@ -1,11 +1,13 @@
 {% extends 'base/base_sign.html' %}
 
-{% block title %}PSP | SignIn{% endblock %}
+{% load i18n %}
+{% block title %}PSP | {% trans "Log In" %}{% endblock %}
 
 {% block container %}
 
+    {% load i18n %}
     {% if form.errors %}
-        <div class="alert alert-danger">Username or email not match with password</div>
+        <div class="alert alert-danger">{% trans "Username or email not match with password" %}</div>
     {% endif %}
 
     <form method="POST" class="mt-3" action="{% url "users:login" %}">
@@ -17,14 +19,14 @@
         </div>
 
         <div class="form-group mt-4">
-            <input type="text" class="form-control" placeholder="Email address or Username" name="username"/>
+            <input type="text" class="form-control" placeholder="{% trans "Email address or Username" %}" name="username"/>
         </div>
 
         <div class="form-group">
-            <input type="password" class="form-control" placeholder="Password" name="password"/>
+            <input type="password" class="form-control" placeholder="{% trans "Password" %}" name="password"/>
         </div>
 
-        <button class="btn btn-primary btn-block mt-5" type="submit">Entrar</button>
+        <button class="btn btn-primary btn-block mt-5" type="submit">{% trans "Log In" %}</button>
 
     </form>
 {% endblock %}

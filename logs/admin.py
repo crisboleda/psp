@@ -7,8 +7,8 @@ from logs.models import Phase, TimeLog, DefectType
 
 @admin.register(Phase)
 class PhaseAdmin(admin.ModelAdmin):
-    fields = ('name', 'abbreviation', 'description')
-    list_display = ('name', 'abbreviation', 'description')
+    fields = ('order_index', 'name', 'abbreviation', 'description')
+    list_display = ('order_index', 'name', 'abbreviation', 'description')
 
 
 @admin.register(DefectType)

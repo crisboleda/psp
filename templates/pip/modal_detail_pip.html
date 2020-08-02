@@ -1,10 +1,11 @@
 
 <!-- Modal -->
 <div class="modal fade" id="modalDetailPIP" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    {% load i18n %}
     <div class="modal-dialog modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title" id="exampleModalLabel">Detail PIP</h3>
+                <h3 class="modal-title" id="exampleModalLabel">{% trans "Detail PIP" %}</h3>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -17,30 +18,29 @@
             </div>
 
             <div class="modal-body d-none" id="containerDetailPIP">
-                <p><b>Name</b></p>
+                <p><b>{% trans "Name" %}</b></p>
                 <p id="modalDetailNamePIP"></p>
                 <br/>
 
-                <p><b>Date</b></p>
+                <p><b>{% trans "Date" %}</b></p>
                 <p id="modalDetailDatePIP"></p>
                 <br/>
 
-                <p><b>Problems</b></p>
+                <p><b>{% trans "Problems" %}</b></p>
                 <p id="modalDetailProblemsPIP"></p>
                 <br/>
 
-                <p><b>Proposal</b></p>
+                <p><b>{% trans "Proposal" %}</b></p>
                 <p id="modalDetailProposalPIP"></p>
                 <br/>
 
-                <p><b>Comments</b></p>
+                <p><b>{% trans "Comments" %}</b></p>
                 <p id="modalDetailCommentsPIP"></p>
                 <br/>
-
             </div>
 
             <div class="modal-footer d-none">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">{% trans "Close" %}</button>
             </div>
         </div>
     </div>

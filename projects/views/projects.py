@@ -3,7 +3,9 @@
 from django.views.generic import FormView, ListView, DetailView, UpdateView, FormView, RedirectView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy, reverse
-from django.http.response import Http404
+from django.http.response import Http404, HttpResponseRedirect, HttpResponse
+from django.contrib import messages
+from django.utils.translation import gettext as _
 
 # Models
 from programs.models import ProgrammingLanguage
@@ -17,6 +19,12 @@ from projects.forms import CreateProjectModelForm, UpdateProjectModelForm, AddPr
 from projects.mixins import MemberProjectRequiredMixin
 from psp.mixins import AdminRequiredMixin
 
+# Utils
+from datetime import datetime
+
+# Helpers
+from psp.helpers import FormViewDefaultValue
+
 
 class ListProjectView(AdminRequiredMixin, ListView):
     queryset = Project.objects.all()
@@ -24,15 +32,19 @@ class ListProjectView(AdminRequiredMixin, ListView):
     template_name = 'projects/projects.html'
 
 
-class CreateProjectView(AdminRequiredMixin, FormView):
+class CreateProjectView(AdminRequiredMixin, FormViewDefaultValue):
     template_name = 'projects/create_project.html'
     form_class = CreateProjectModelForm
     success_url = reverse_lazy('projects:list_projects')
 
     def form_valid(self, form):
         form.save(self.request.user)
+        messages.success(self.request, _("The project was created successfully"))
         return super().form_valid(form)
-
+    
+    def set_values_init_form(self, form):
+        form["start_date"].value = datetime.now()
+        
 
 class DetailProjectView(MemberProjectRequiredMixin, DetailView):
     model = Project
@@ -59,12 +71,20 @@ class UpdateProjectView(AdminRequiredMixin, UpdateView):
 class AddProgrammerProjectView(AdminRequiredMixin, FormView):
     form_class = AddProgrammerProjectForm
 
-    def form_valid(self, form):
+    def dispatch(self, request, *args, **kwargs):
         try:
             self.project = Project.objects.get(pk=self.kwargs['pk_project'])
-            form.save(self.project)
         except Project.DoesNotExist:
             raise Http404("The project doesn't exists")
+        return super().dispatch(request, *args, **kwargs)
+    
+    def form_invalid(self, form):
+        return HttpResponseRedirect(
+            redirect_to=reverse_lazy('projects:edit_project', kwargs={'pk_project': self.project.pk}) 
+        )
+        
+    def form_valid(self, form):
+        form.save(self.project)
         return super().form_valid(form)
     
     def get_success_url(self):

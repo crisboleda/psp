@@ -164,3 +164,5 @@ class PIPModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pip
         fields = ('name', 'date', 'problems', 'proposal', 'comment')
+
+

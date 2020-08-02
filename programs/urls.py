@@ -8,16 +8,21 @@ from programs.views import (AdminListProgramView, CreateProgramView, ProgrammerL
                             UpdateReusedPartView, ListPIPView, ReportView, 
                             UpdateNewPartView, DeleteReusedPartView, DeleteNewPartView,
                             DeleteBasePartView, ReportRetrieveDestroyView, UpdateReportView,
-                            UpdatePIPView, RetrieveDestroyPIPView)
+                            UpdatePIPView, RetrieveDestroyPIPView, DataDefectInjectedView,
+                            DataTimePerPhaseView, DataDefectsRemovedView, ConfigurationProgramProgrammerView,
+                            UpdateProgramAdminView)
 
 
 urlpatterns = [
 
     # Programs
     path('modules/<int:pk_module>/programs/', AdminListProgramView.as_view(), name='list_programs'),
+    path('admin/programs/<int:pk_program>/edit/', UpdateProgramAdminView.as_view(), name='admin_edit_program'),
     path('modules/<int:pk_module>/programs/create/', CreateProgramView.as_view(), name='create_program'),
     path('programs/', ProgrammerListProgramView.as_view(), name='programs_programmer'),
     path('programs/<int:pk_program>/', DetailProgramView.as_view(), name='detail_program'),
+    path('programs/<int:pk_program>/settings/', ConfigurationProgramProgrammerView.as_view(), name='settings_program'),
+
 
     # PARTS OF CODE
     path('programs/<int:pk_program>/parts/', CreatePartProgramView.as_view(), name='create_part_program'),
@@ -36,6 +41,10 @@ urlpatterns = [
     # Reports
     path('programs/<int:pk_program>/reports/', ReportView.as_view(), name='reports_view'),
     path('programs/<int:pk_program>/reports/<int:pk_report>/', UpdateReportView.as_view(), name='update_report'),
-    path('reports/<int:pk_report>/', ReportRetrieveDestroyView.as_view(), name='report_delete_detail')
+    path('reports/<int:pk_report>/', ReportRetrieveDestroyView.as_view(), name='report_delete_detail'),
 
+    # Summary
+    path('programs/<int:pk_program>/data_defects_injected/', DataDefectInjectedView.as_view(), name='data_defects_injected'),
+    path('programs/<int:pk_program>/data_time_per_phase/', DataTimePerPhaseView.as_view(), name='data_time_per_phase'),
+    path('programs/<int:pk_program>/data_defects_removed/', DataDefectsRemovedView.as_view(), name='data_defects_removed'),
 ]

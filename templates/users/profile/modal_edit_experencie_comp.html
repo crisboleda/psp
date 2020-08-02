@@ -1,0 +1,43 @@
+<!-- Modal -->
+<div class="modal fade" id="modalEditExperencieCompany" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    {% load i18n %}
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel">{% trans "Edit Experencie Company" %}</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center" id="loaderExperencieCompany">
+                    <div class="spinner-border text-secondary" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+                <form id="formEditExperencieCompany" class="d-none">
+                    <div class="form-group">
+                        <label for="inputNameCompany">{% trans "Name company" %}</label>
+                        <input type="text" id="inputNameCompany" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="">{% trans "Position" %}</label>
+                        <select id="inputPositions" class="form-control">
+                            {% for position in positions %}
+                                <option value="{{ position }}">{{ position }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputYearsPosition">{% trans "Years position" %}</label>
+                        <input type="number" id="inputYearsPosition" class="form-control">
+                    </div>
+                </form>
+            </div>
+            <div id="footerModalEditExperencieCompany" class="modal-footer d-none">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">{% trans "Close" %}</button>
+                <button type="button" class="btn btn-primary" id="btnSaveChangesEditExperencieCompany">{% trans "Save changes" %}</button>
+            </div>
+        </div>
+    </div>
+</div>

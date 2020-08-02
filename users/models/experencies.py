@@ -16,17 +16,6 @@ class PositionCompany(models.Model):
         return self.name
 
 
-class Company(models.Model):
-    name = models.CharField(max_length=100, help_text='Name company', unique=True)
-
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return self.name
-    
-
-
 class ExperienceCompany(models.Model):
     user = models.ForeignKey(
         User, 
@@ -35,7 +24,7 @@ class ExperienceCompany(models.Model):
         help_text='User experencie'
     )
     
-    name_company = models.ForeignKey(Company, related_name='company_experience', on_delete=models.CASCADE)
+    name_company = models.CharField(max_length=70, help_text='Name company')
 
     position_company = models.ForeignKey(
         PositionCompany,
@@ -48,7 +37,6 @@ class ExperienceCompany(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-
 
     def __str__(self):
         return "{} was as {} in {} company".format(self.user, self.position_company, self.name_company)

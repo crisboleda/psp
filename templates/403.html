@@ -1,0 +1,13 @@
+
+{% extends 'base/base_http_error.html' %}
+
+{% load i18n %}
+{% block 'title' %}403 - {% trans "Unauthorized Access" %}{% endblock 'title' %}
+
+
+{% block title_error %}403 - {% trans "Unauthorized Access" %}{% endblock %}
+
+
+{% block 'error_description' %}
+    {% trans "You do not have access to this resource, please validate credentials or contact an administrator" %}
+{% endblock 'error_description' %}

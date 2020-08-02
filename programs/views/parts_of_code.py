@@ -5,8 +5,10 @@ from django.http.response import JsonResponse
 from django.urls import reverse_lazy
 from django.http.response import HttpResponseRedirect, Http404, HttpResponseForbidden
 from django.contrib import messages
-from django.db.models import Sum
+from django.db.models import Sum, OuterRef, Subquery, F
+from django.db.models.functions import Coalesce
 from django.core.paginator import Paginator
+from django.utils.translation import gettext as _
 
 # Django REST Framework
 from rest_framework.generics import UpdateAPIView, ListAPIView, DestroyAPIView
@@ -38,7 +40,7 @@ class CreatePartProgramView(MemberUserProgramRequiredMixin, FormView):
 
     def get_form_class(self):
         self.type_part = self.request.GET['type_part']
-        if self.type_part and (self.type_part == 'base' or self.type_part == 'reused' or self.type_part == 'new'):
+        if self.type_part and (self.type_part == 'base' or self.type_part == 'reused' or self.type_part == 'new' or self.type_part == 'probe'):
             if self.type_part == 'base':
                 return CreateBasePartForm
             elif self.type_part == 'reused':
@@ -60,19 +62,19 @@ class CreatePartProgramView(MemberUserProgramRequiredMixin, FormView):
         context["program_opened"] = self.program
 
         context["base_programs"] = Program.objects.exclude(pk=self.program.pk).filter(programmer=self.request.user)
-        context["total_base_parts"] = BasePart.objects.filter(program=self.program).aggregate(total_planned_base_lines=Sum('lines_planned_base'), total_planned_deleted_lines=Sum('lines_planned_deleted'), total_planned_edited_lines=Sum('lines_planned_edited'), total_planned_added_lines=Sum('lines_planned_added'), total_current_base_lines=Sum('lines_current_base'), total_current_deleted_lines=Sum('lines_current_deleted'), total_current_edited_lines=Sum('lines_current_edited'), total_current_added_lines=Sum('lines_current_added'))
+        context["total_base_parts"] = BasePart.objects.filter(program=self.program).aggregate(total_planned_base_lines=Coalesce(Sum('lines_planned_base'), 0), total_planned_deleted_lines=Coalesce(Sum('lines_planned_deleted'), 0), total_planned_edited_lines=Coalesce(Sum('lines_planned_edited'), 0), total_planned_added_lines=Coalesce(Sum('lines_planned_added'), 0), total_current_base_lines=Coalesce(Sum('lines_current_base'), 0), total_current_deleted_lines=Coalesce(Sum('lines_current_deleted'), 0), total_current_edited_lines=Coalesce(Sum('lines_current_edited'), 0), total_current_added_lines=Coalesce(Sum('lines_current_added'), 0))
 
         # Context Base Parts
         context["base_parts"] = BasePart.objects.filter(program=self.program).order_by('created_at')
 
         # Context Reused parts
         context["reused_parts"] = ReusedPart.objects.filter(program=self.program).order_by('created_at')
-        context["total_reused_parts"] = ReusedPart.objects.filter(program=self.program).aggregate(planning=Sum('planned_lines'), current=Sum('current_lines'))
+        context["total_reused_parts"] = ReusedPart.objects.filter(program=self.program).aggregate(planning=Coalesce(Sum('planned_lines'), 0), current=Coalesce(Sum('current_lines'), 0))
 
         # Context New parts
         context["pagination_new_parts"] = Paginator(NewPart.objects.filter(program=self.program).order_by('created_at'), 5)
         context["new_parts"] = context["pagination_new_parts"].page(self.page)
-        context["total_new_parts"] = NewPart.objects.filter(program=self.program).aggregate(planning=Sum('planning_lines'), current=Sum('current_lines'))
+        context["total_new_parts"] = NewPart.objects.filter(program=self.program).aggregate(planning=Coalesce(Sum('planning_lines'), 0), current=Coalesce(Sum('current_lines'), 0))
 
         context["type_parts"] = TypePart.objects.all()
         context["sizes_estimations"] = SizeEstimation.objects.all()
@@ -80,13 +82,32 @@ class CreatePartProgramView(MemberUserProgramRequiredMixin, FormView):
         serializer_estimations = EstimationModelSerializer(instance=Estimation.objects.all(), many=True)
         context["estimations"] = json.dumps(serializer_estimations.data, sort_keys=True)
 
+        base = BasePart.objects.values('program__pk').filter(program=OuterRef("pk")).annotate(total=Sum('lines_current_base'))
+        edited = BasePart.objects.values('program__pk').filter(program=OuterRef("pk")).annotate(total=Sum('lines_current_edited'))
+        deleted = BasePart.objects.values('program__pk').filter(program=OuterRef("pk")).annotate(total=Sum('lines_current_deleted'))
+        reused = ReusedPart.objects.values('program__pk').filter(program=OuterRef("pk")).annotate(total=Sum('current_lines'))
+
+        context["total_lines_added_and_modified"] = Program.objects.values('programmer__pk').filter(programmer=self.program.programmer).annotate(total=Coalesce(Sum(Coalesce((F('total_lines') - (Subquery(base.values('total')) - Subquery(deleted.values('total')) + Subquery(reused.values('total')) )) + Subquery(edited.values('total')), 0)), 0)).values('total')[0]
+        context["total_lines_probe"] = round(context["total_lines_added_and_modified"]["total"] / self.request.user.program_user.all().count(), 2)
+
+        context["plan_added_program"] = context["total_new_parts"]["planning"] + context["total_base_parts"]["total_planned_added_lines"]
+        context["lines_program_probe"] = context["total_base_parts"]["total_planned_base_lines"] - context["total_base_parts"]["total_planned_deleted_lines"] + context["plan_added_program"] + context["total_reused_parts"]["planning"]
+
+        context["total_programs_finished"] = self.request.user.program_user.filter(finish_date__isnull=False).count()
+
         return context
-    
+
+    def div_values(self, value1, value2):
+        try:
+            return value1 / value2
+        except ZeroDivisionError:
+            return 0
+
 
     def form_valid(self, form):
         form.save(self.program)
-
-        messages.success(self.request, "The {} part was created successfully".format(self.type_part))
+        
+        messages.success(self.request, _("The %(type_part)s part was created successfully") % {'type_part': self.type_part})
         return super().form_valid(form)
 
 

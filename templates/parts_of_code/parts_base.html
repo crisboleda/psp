@@ -1,8 +1,9 @@
 
 <br/>
 
+{% load i18n %}
 <div class="p-4 border shadow-sm">
-    <h4 class="text-center">ADD BASE PART</h4>
+    <h4 class="text-center">{% trans "ADD BASE PART" %}</h4>
     <br/>
 
     <div id="alertErrorFormCreateBasePart" class="alertNotification alert alert-danger p-2 m-2 mb-4 text-center w-100 d-none"></div>
@@ -11,38 +12,73 @@
         {% csrf_token %}
 
         <div class="form-group">
-            <label for="id_base_program">Base program</label>
-            <select name="base_program" id="id_base_program" class="form-control">
+            <label for="id_base_program">{% trans "Base program" %}</label>
+            <select required name="base_program" id="id_base_program" class="form-control {% if form.base_program and form.base_program.errors %}is-invalid{% endif %}">
                 {% for base_program in base_programs %}
                     <option value="{{ base_program.pk }}">{{ base_program.name }}</option>
                 {% endfor %}
             </select>
+            {% if form.base_program and form.base_program.errors %}
+                <div class="invalid-feedback">
+                    {% for error in form.base_program.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %}
         </div>
 
         <div class="form-row">
             <div class="form-group col-xl-3">
-                <label for="id_planning_base_lines">Planning base lines</label>
-                <input type="number" max="2000000000" class="form-control" name="base_lines" placeholder="0" id="id_planning_base_lines">
+                <label for="id_planning_base_lines">{% trans "Planning base lines" %}</label>
+                <input required min="1" type="number" max="2000000000" class="form-control {% if form.base_lines and form.base_lines.errors %}is-invalid{% endif %}" name="base_lines" placeholder="0" id="id_planning_base_lines">
+                {% if form.base_lines and form.base_lines.errors %}
+                    <div class="invalid-feedback">
+                        {% for error in form.base_lines.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
             </div>
 
             <div class="form-group col-xl-3">
-                <label for="id_planning_edited_lines">Planning edited lines</label>
-                <input type="number" max="2000000000" class="form-control" name="edited_lines" placeholder="0" id="id_planning_edited_lines">
+                <label for="id_planning_edited_lines">{% trans "Planning edited lines" %}</label>
+                <input type="number" max="2000000000" class="form-control {% if form.edited_lines and form.edited_lines.errors %}is-invalid{% endif %}" name="edited_lines" placeholder="0" id="id_planning_edited_lines">
+                {% if form.edited_lines and form.edited_lines.errors %}
+                    <div class="invalid-feedback">
+                        {% for error in form.edited_lines.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
             </div>
             
             <div class="form-group col-xl-3">
-                <label for="id_planning_deleted_lines">Planning deleted lines</label>
-                <input type="number" max="2000000000" class="form-control" name="deleted_lines" placeholder="0" id="id_planning_deleted_lines">
+                <label for="id_planning_deleted_lines">{% trans "Planning deleted lines" %}</label>
+                <input type="number" max="2000000000" class="form-control {% if form.deleted_lines and form.deleted_lines.errors %}is-invalid{% endif %}" name="deleted_lines" placeholder="0" id="id_planning_deleted_lines">
+                {% if form.deleted_lines and form.deleted_lines.errors %}
+                    <div class="invalid-feedback">
+                        {% for error in form.deleted_lines.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
             </div>
 
             <div class="form-group col-xl-3">
-                <label for="id_planning_added_lines">Planning added lines</label>
-                <input type="number" max="2000000000" class="form-control" name="added_lines" placeholder="0" id="id_planning_added_lines">
+                <label for="id_planning_added_lines">{% trans "Planning added lines" %}</label>
+                <input type="number" max="2000000000" class="form-control {% if form.added_lines and form.added_lines.errors %}is-invalid{% endif %}" name="added_lines" placeholder="0" id="id_planning_added_lines">
+                {% if form.added_lines and form.added_lines.errors %}
+                    <div class="invalid-feedback">
+                        {% for error in form.added_lines.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
             </div>
         </div>
         <br/>
         <div class="text-right">
-            <button type="submit" class="btn btn-primary">Add</button>
+            <button type="submit" class="btn btn-primary">{% trans "Add" %}</button>
         </div>
     </form>
 </div>

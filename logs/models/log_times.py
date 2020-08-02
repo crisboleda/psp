@@ -12,6 +12,8 @@ class Phase(models.Model):
     abbreviation = models.CharField(max_length=20)
     description = models.TextField()
 
+    order_index = models.IntegerField(unique=True, null=False, blank=False)
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -34,7 +36,9 @@ class TimeLog(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        ordering = ['phase__order_index']
+
     def __str__(self):
         return "{} in {}".format(self.program, self.phase)
-    
     

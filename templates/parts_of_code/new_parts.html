@@ -1,13 +1,13 @@
 
-
+{% load i18n %}
 <div class="shadow-sm border p-4">
     <form action="{% url 'programs:create_part_program' program_opened.pk %}?type_part=new" method="POST">
         {% csrf_token %}
         <div class="form-row">
 
             <div class="form-group col-xl-6">
-                <label for="">Name of the part</label>
-                <input type="text" name="name_part" placeholder="Enter name of the part" class="form-control {% if form.name_part.errors %}is-invalid{% endif %}">
+                <label for="">{% trans "Name of the part" %}</label>
+                <input type="text" name="name_part" placeholder="{% trans "Enter name of the part" %}" class="form-control {% if form.name_part.errors %}is-invalid{% endif %}">
                 <div class="invalid-feeback">
                     {% for error in form.name_part.errors %}
                         {{ error }}
@@ -16,7 +16,7 @@
             </div>
 
             <div class="form-group col-xl-6">
-                <label for="">Type part</label>
+                <label for="">{% trans "Type part" %}</label>
                 <select name="type_part" id="typeNewPartFormCreate" class="form-control">
                     {% for type_part in type_parts %}
                         <option value="{{ type_part.name }}">{{ type_part.name }}</option>
@@ -28,9 +28,9 @@
 
         <div class="form-row">
 
-            <div class="form-group col-xl-3">
-                <label for="">Planned methods</label>
-                <input type="number" name="planning_methods" id="plannedItemsNewPart" placeholder="Enter items" class="form-control {% if form.planning_methods.errors %}is-invalid{% endif %}">
+            <div class="form-group col-xl-4">
+                <label for="">{% trans "Planned methods" %}</label>
+                <input required type="number" name="planning_methods" id="plannedItemsNewPart" placeholder="{% trans "Enter items" %}" class="form-control {% if form.planning_methods.errors %}is-invalid{% endif %}">
                 <div class="invalid-feedback">
                     {% for error in form.planning_methods.errors %}
                         {{ error }}
@@ -38,8 +38,8 @@
                 </div>
             </div>
 
-            <div class="form-group col-xl-2">
-                <label for="">Planned Size estimation</label>
+            <div class="form-group col-xl-4">
+                <label for="">{% trans "Planned Size estimation" %}</label>
                 <select name="size_estimation" id="inputSizeEstimation" class="form-control">
                     {% for size_estimation in sizes_estimations %}
                         <option value="{{ size_estimation.name }}">{{ size_estimation.name }}</option>
@@ -47,14 +47,14 @@
                 </select>
             </div>
 
-            <div class="form-group col-xl-2">
-                <label for="">Lines estimation</label>
+            <div class="form-group col-xl-4">
+                <label for="">{% trans "Lines estimation" %}</label>
                 <input disabled type="text" id="inputLinesEstimation" class="form-control" value="0">
             </div>
 
-            <div class="form-group col-xl-3">
-                <label for="">Current methods</label>
-                <input type="number" name="current_methods" placeholder="Enter items" class="form-control {% if form.current_methods.errors %}is-invalid{% endif %}">
+            <div class="form-group col-xl-6">
+                <label for="">{% trans "Current methods" %}</label>
+                <input type="number" name="current_methods" placeholder="{% trans "Enter items" %}" class="form-control {% if form.current_methods.errors %}is-invalid{% endif %}">
                 <div class="invalid-feedback">
                     {% for error in form.current_methods.errors %}
                         {{ error }}
@@ -62,9 +62,9 @@
                 </div>
             </div>
 
-            <div class="form-group col-xl-2">
-                <label for="">Current Size estimation</label>
-                <input type="number" name="current_lines" placeholder="Current lines" class="form-control {% if form.current_lines.errors %}is-invalid{% endif %}">
+            <div class="form-group col-xl-6">
+                <label for="">{% trans "Current Size estimation" %}</label>
+                <input type="number" name="current_lines" placeholder="{% trans "Current Size estimation" %}" class="form-control {% if form.current_lines.errors %}is-invalid{% endif %}">
                 <div class="invalid-feedback">
                     {% for error in form.current_lines.errors %}
                         {{ error }}
@@ -75,7 +75,7 @@
         </div>
 
         <div class="text-right">
-            <input type="submit" value="Add" class="btn btn-info">
+            <input type="submit" value="{% trans "Add" %}" class="btn btn-info">
         </div>
     </form>
 </div>
@@ -86,14 +86,14 @@
     <table class="table table-hover table-striped">
         <thead class="thead-dark">
             <tr>
-                <th>Part name</th>
-                <th>Type part</th>
-                <th>Planned methods</th>
-                <th>Size estimation</th>
-                <th>Planned lines</th>
-                <th>Current methods</th>
-                <th>Current lines</th>
-                <th>Actions</th>
+                <th>{% trans "Part name" %}</th>
+                <th>{% trans "Type part" %}</th>
+                <th>{% trans "Planned methods" %}</th>
+                <th>{% trans "Size estimation" %}</th>
+                <th>{% trans "Planned lines" %}</th>
+                <th>{% trans "Current methods" %}</th>
+                <th>{% trans "Current lines" %}</th>
+                <th>{% trans "Actions" %}</th>
             </tr>
         </thead>
 

@@ -2,6 +2,7 @@
 from django.views.generic import TemplateView, ListView, CreateView, UpdateView, FormView
 from django.urls import reverse_lazy
 from django.contrib import messages
+from django.utils.translation import gettext as _
 
 # Mixins and Permissions
 from psp.mixins import MemberUserProgramRequiredMixin
@@ -28,20 +29,17 @@ class ReportView(MemberUserProgramRequiredMixin, FormView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["program_opened"] =  self.program
-        context["reports"] = Report.objects.all().order_by('created_at')
+        context["reports"] = Report.objects.filter(program=self.program).order_by('created_at')
         return context
-
 
     def get_success_url(self):
         return reverse_lazy('programs:reports_view', kwargs={'pk_program': self.program.pk})
 
-
     def form_valid(self, form):
         form.save(self.program)
-        messages.success(self.request, "The report was created successfuly")
+        messages.success(self.request, _("The report was created successfuly"))
 
         return super().form_valid(form)
-
 
 
 class ReportRetrieveDestroyView(LoginRequiredMixin, RetrieveDestroyAPIView):
@@ -59,7 +57,7 @@ class UpdateReportView(OwnerReportPIPMixin, UpdateView):
     fields = ('name', 'date', 'objetive', 'description', 'conditions', 'expect_results', 'current_results')
 
     def get_success_url(self):
-        messages.info(self.request, "The report was updated successfuly")
+        messages.info(self.request, _("The report was updated successfuly"))
         return reverse_lazy('programs:reports_view', kwargs={'pk_program': self.get_object().program.pk})
 
     def get_context_data(self, **kwargs):

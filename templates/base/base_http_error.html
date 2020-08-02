@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+	<title>{% block 'title' %}{% endblock 'title' %}</title>
+
+	<!-- Google font -->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,900" rel="stylesheet">
+
+	<!-- Custom stlylesheet -->
+    {% load static %}
+    <style>
+        .notfound .notfound-404 h1 {
+            background: url('{% static 'img/img_galaxi.jpg' %}') no-repeat;
+        }
+    </style>
+
+	{% load static %}
+	<link rel="shortcut icon" href="{% static 'img/icon_tab.ico' %}" type="image/x-icon">
+	<link type="text/css" rel="stylesheet" href="{% static 'css/styles_404.css' %}" />
+
+</head>
+
+<body>
+
+	<div id="notfound">
+		<div class="notfound">
+			<div class="notfound-404">
+                {% load static %}
+				<h1>Oops!</h1>
+			</div>
+			<h2>{% block title_error %}{% endblock title_error %}</h2>
+			<p>{% block 'error_description' %}{% endblock 'error_description' %}</p>
+
+            {% load i18n %}
+			<a href="{% url 'index' %}">{% trans "Go To Homepage" %}</a>
+		</div>
+	</div>
+
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+
+</html>

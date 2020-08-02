@@ -1,6 +1,7 @@
 
 # Django
 from django import forms
+from django.utils.translation import gettext as _
 
 # Models
 from logs.models import Phase, TimeLog, DefectType, DefectLog
@@ -15,9 +16,9 @@ class CreateLogProgramForm(forms.Form):
         try:
             self.phase = Phase.objects.get(name=self.cleaned_data['name_phase'])
         except Phase.DoesNotExist:
-            forms.ValidationError("The phase doesn't exists")
+            raise forms.ValidationError(_("The phase doesn't exists"))
 
-    
+
     def save(self, program):
         data = self.cleaned_data
         TimeLog.objects.create(phase=self.phase, program=program, comments=data['comments'])
@@ -47,14 +48,14 @@ class CreateDefectLogForm(forms.Form):
         try:
             return DefectType.objects.get(number=int(self.cleaned_data['defect_type']))
         except DefectType.DoesNotExist:
-            raise forms.ValidationError("The defect type doesn't exists")
+            raise forms.ValidationError(_("The defect type doesn't exists"))
 
     
     def clean_phase_injected(self):
         try:
             return Phase.objects.get(abbreviation=self.cleaned_data['phase_injected'])
         except Phase.DoesNotExist:
-            raise forms.ValidationError("The phase doesn't exists")
+            raise forms.ValidationError(_("The phase doesn't exists"))
 
         return phase
 
@@ -63,7 +64,7 @@ class CreateDefectLogForm(forms.Form):
         try:
             return Phase.objects.get(abbreviation=self.cleaned_data['phase_removed'])
         except Phase.DoesNotExist:
-            raise forms.ValidationError("The phase doesn't exists")
+            raise forms.ValidationError(_("The phase doesn't exists"))
 
 
     def clean_cousing_defect(self):
@@ -72,7 +73,7 @@ class CreateDefectLogForm(forms.Form):
                 return DefectLog.objects.get(pk=int(self.cleaned_data['cousing_defect']))
             return None
         except DefectLog.DoesNotExist:
-            raise forms.ValidationError("The defect log doesn't exists")
+            raise forms.ValidationError(_("The defect log doesn't exists"))
 
     
     def save(self, program):

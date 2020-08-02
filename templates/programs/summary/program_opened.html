@@ -1,0 +1,114 @@
+
+{% extends 'base/dashboard.html' %}
+
+{% load i18n %}
+{% block 'title' %}PSP | {% trans "Detail program" %}{% endblock %}
+
+{% block 'links' %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/summary/menu_tab.css' %}">
+
+    <script>
+        var idProgram = "{{ program_opened.pk }}"
+    </script>
+{% endblock 'links' %}
+
+{% block 'content' %}
+    <h2>{% trans "Program Plan Summary" %}</h2>
+    <br/>
+
+    <div class="container__menu__summary">
+        <div class="tabset">
+            <!-- Tab 1 -->
+
+            {% if request.user == program_opened.programmer %}
+                <input type="radio" name="tabset" id="tab1" aria-controls="summary" {% if request.user == program_opened.programmer %} checked {% endif %}>
+                <label for="tab1">{% trans "Summary" %}</label>
+
+                <!-- Tab 2 -->
+                <input type="radio" name="tabset" id="tab2" aria-controls="program_size">
+                <label for="tab2">{% trans "Program size" %}</label>
+            {% endif %}
+
+            <!-- Tab 3 -->
+            <input type="radio" name="tabset" id="tab3" aria-controls="time_in_phase" {% if request.user != program_opened.programmer %} checked {% endif %}>
+            <label for="tab3">{% trans "Time per phase" %}</label>
+
+            <!-- Tab 4 -->
+            <input type="radio" name="tabset" id="tab4" aria-controls="defects_injected">
+            <label for="tab4">{% trans "Defects injected" %}</label>
+
+            <!-- Tab 5 -->
+            <input type="radio" name="tabset" id="tab5" aria-controls="defects_removed">
+            <label for="tab5">{% trans "Defects removed" %}</label>
+
+            <!-- Tab 6 -->
+            <input type="radio" name="tabset" id="tab6" aria-controls="defect_removal_efficiency">
+            <label for="tab6">{% trans "Defect removal Efficiency" %}</label>
+            
+            <div class="tab-panels bg-white">
+
+                {% if request.user == program_opened.programmer %}
+                    <section id="summary" class="tab-panel p-4 shadow-sm">
+                        {% include 'programs/summary/summary.html' %}
+                    </section>
+
+                    <section id="program_size" class="tab-panel p-4 shadow-sm">
+                        {% include 'programs/summary/program_size_summary.html' %}
+                    </section>
+                {% endif %}
+
+                <section id="time_in_phase" class="tab-panel p-4 shadow-sm">
+                    <div id="summaryLoaderTimePerPhase" class="text-center">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                    {% include 'programs/summary/time_in_phase.html' %}
+                </section>
+
+                <section id="defects_injected" class="tab-panel p-4 shadow-sm">
+                    <div id="summaryLoaderDefectsInjected" class="text-center">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                    {% include 'programs/summary/defects_injected_phase.html' %}
+                </section>
+
+                <section id="defects_removed" class="tab-panel p-4 shadow-sm">
+                    <div id="summaryLoaderDefectsRemoved" class="text-center">
+                        <div class="text-center spinner-border text-primary" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                    {% include 'programs/summary/defects_removed_phase.html' %}
+                </section>
+
+                <section id="defect_removal_efficiency" class="tab-panel p-4 shadow-sm">
+                    <div id="summaryLoaderDefectsRemovalEfficiency" class="text-center">
+                        <div class="text-center spinner-border text-primary" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                    {% include 'programs/summary/defects_removal_efficiency.html' %}
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <br/><br/>
+{% endblock %}
+
+
+{% block 'scripts' %}
+    {% load static %}
+    <script src="{% static 'js/Cookie.js' %}"></script>
+    <script src="{% static 'js/Tag.js' %}"></script>
+    <script src="{% static 'js/APIService.js' %}"></script>
+    <script src="{% static 'js/CreatorChart.js' %}"></script>
+    <script src="{% static 'js/summary/defects_injected_phase.js' %}"></script>
+    <script src="{% static 'js/summary/time_per_phase.js' %}"></script>
+    <script src="{% static 'js/summary/defects_removed_phase.js' %}"></script>
+    <script src="{% static 'js/summary/defects_removal_efficiency.js' %}"></script>
+{% endblock %}

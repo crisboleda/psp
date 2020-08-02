@@ -1,0 +1,40 @@
+
+{% extends 'base/dashboard.html' %}
+
+{% load i18n %}
+{% block 'title' %}PSP | {% trans "Settings" %}{% endblock 'title' %}
+
+{% block 'links' %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/global_styles.css' %}">
+{% endblock 'links' %}
+
+{% block 'content' %}
+    {% load i18n %}
+    <div class="au-card">
+        <h3>{% trans "Change language" %}</h3>
+        <br/>
+        <form action="{% url 'set_language' %}" method="POST">
+            {% csrf_token %}
+            {% get_current_language as LANGUAGE_CODE %}
+            {% get_available_languages as LANGUAGES %}
+
+            {% load static %}
+            {% for lang in LANGUAGES %}
+                <div class="form-check">
+                    <input {% if LANGUAGE_CODE == lang.0 %}checked{% endif %} class="form-check-input mt-3 cursor-pointer" type="radio" name="language" id="itemLanguage{{ forloop.counter0 }}" value="{{ lang.0 }}">
+
+                    <label class="form-check-label cursor-pointer" for="itemLanguage{{ forloop.counter0 }}">
+                        {% with URL="img/flag-"|add:lang.0|add:".png" %}
+                            <img src="{% static URL %}" alt="Image language" width="50" height="50">
+                            {{ lang.1 }}
+                        {% endwith %}
+                    </label>
+                </div>
+            {% endfor %}
+
+            <br/>
+            <input class="btn btn-primary" type="submit" value="{% trans "Change" %}">
+        </form>
+    </div>
+{% endblock 'content' %}
