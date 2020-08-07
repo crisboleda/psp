@@ -12,7 +12,7 @@ DEBUG = False
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config('SECRET_KEY')
 
-ALLOWED_HOSTS = ['www.psp-adsi.site', 'psp-adsi.site']
+ALLOWED_HOSTS = ['*']
 
 MIDDLEWARE += [
     'whitenoise.middleware.WhiteNoiseMiddleware'
